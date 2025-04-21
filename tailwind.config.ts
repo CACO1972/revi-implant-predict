@@ -52,6 +52,23 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				dental: {
+					blue: {
+						light: '#3498DB',
+						DEFAULT: '#2C3E50',
+						dark: '#1a2530'
+					},
+					green: {
+						light: '#4AC29A',
+						DEFAULT: '#368f76',
+						dark: '#276657'
+					},
+					gray: {
+						light: '#f8fafc',
+						DEFAULT: '#e2e8f0',
+						dark: '#94a3b8'
+					}
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
