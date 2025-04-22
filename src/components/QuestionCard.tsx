@@ -89,13 +89,13 @@ export default function QuestionCard({
   };
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white p-6 rounded-xl shadow-md transition-all duration-300">
+    <div className="w-full max-w-md mx-auto bg-button-dark/30 backdrop-blur-sm p-8 rounded-3xl shadow-soft border border-white/10 transition-all duration-300">
       <div className="mb-4">
-        <span className="text-sm text-dental-blue-dark font-medium">
+        <span className="text-sm text-gold font-medium">
           Pregunta {question.id} de 11
         </span>
-        <h2 className="text-xl font-bold text-dental-blue mt-1 mb-2">{question.title}</h2>
-        <p className="text-gray-600 text-sm mb-4">{question.explanation}</p>
+        <h2 className="text-2xl font-bold text-primary mt-2 mb-3">{question.title}</h2>
+        <p className="text-white/80 text-sm mb-4">{question.explanation}</p>
       </div>
 
       <div className="mb-6">
@@ -109,10 +109,11 @@ export default function QuestionCard({
                   onCheckedChange={(checked) => {
                     handleMultiSelect(option.value, checked === true);
                   }}
+                  className="border-white/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                 />
                 <Label
                   htmlFor={`option-${option.value}`}
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                  className="text-sm font-medium text-white/90 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                 >
                   {option.label}
                 </Label>
@@ -129,11 +130,12 @@ export default function QuestionCard({
               <div key={option.value.toString()} className="flex items-center space-x-2">
                 <RadioGroupItem 
                   value={option.value.toString()} 
-                  id={`option-${option.value}`} 
+                  id={`option-${option.value}`}
+                  className="border-white/20 text-primary" 
                 />
                 <Label
                   htmlFor={`option-${option.value}`}
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                  className="text-sm font-medium text-white/90 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                 >
                   {option.label}
                 </Label>
@@ -143,33 +145,33 @@ export default function QuestionCard({
         )}
         
         {error && (
-          <p className="text-red-500 text-xs mt-2">
+          <p className="text-red-400 text-xs mt-2">
             Por favor, selecciona al menos una opción
           </p>
         )}
       </div>
       
-      <div className="mt-2 mb-6 p-3 bg-dental-gray-light rounded-lg">
-        <p className="text-sm text-dental-blue-dark">
-          <span className="font-semibold">Recomendación: </span>
+      <div className="mt-2 mb-6 p-4 bg-white/5 rounded-xl border border-white/10">
+        <p className="text-sm text-white/80">
+          <span className="font-semibold text-gold">Recomendación: </span>
           {question.recommendation}
         </p>
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-4">
         <Button
           type="button"
           variant="outline"
           onClick={onPrevious}
           disabled={isFirst}
-          className="border-dental-blue text-dental-blue hover:bg-dental-blue-light hover:text-white"
+          className="flex-1 border-white/20 text-white hover:bg-white/5 disabled:opacity-30"
         >
           Anterior
         </Button>
         <Button
           type="button"
           onClick={handleNext}
-          className="bg-dental-blue hover:bg-dental-blue-dark"
+          className="flex-1 bg-primary hover:bg-primary-dark text-white shadow-glow"
         >
           {isLast ? "Ver resultados" : "Siguiente"}
         </Button>
