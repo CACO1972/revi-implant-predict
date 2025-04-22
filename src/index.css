@@ -1,14 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&family=Open+Sans:wght@300;400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-background text-foreground font-montserrat;
+    @apply bg-background text-foreground font-inter;
+    background-image: url('/stars-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-poppins font-bold;
+    @apply font-playfair font-bold;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-background/30 backdrop-blur-md border border-white/10 rounded-3xl shadow-soft;
+  }
+  
+  .primary-button {
+    @apply bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-xl shadow-glow transition-all duration-300 border border-gold/30;
+  }
+  
+  .secondary-button {
+    @apply bg-transparent hover:bg-white/5 text-white px-6 py-3 rounded-xl border border-white/20 transition-all duration-300;
+  }
+  
+  .animated-bg {
+    @apply relative overflow-hidden;
+  }
+  
+  .animated-bg::before {
+    content: '';
+    @apply absolute inset-0 bg-stars bg-cover animate-background-move;
+    z-index: -1;
   }
 }
 

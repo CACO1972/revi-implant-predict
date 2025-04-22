@@ -41,9 +41,9 @@ export default {
         },
       },
       fontFamily: {
-        'formula': ['Formula1', 'Poppins', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
+        'playfair': ['Playfair Display', 'serif'],
+        'inter': ['Inter', 'sans-serif'],
+        'opensans': ['Open Sans', 'sans-serif'],
       },
       borderRadius: {
         xl: "1rem",
@@ -53,6 +53,28 @@ export default {
       boxShadow: {
         soft: "0 8px 30px rgba(0, 0, 0, 0.12)",
         glow: "0 0 20px rgba(23, 133, 130, 0.15)",
+      },
+      animation: {
+        "float": "float 6s ease-in-out infinite",
+        "star-glow": "star-glow 3s ease-in-out infinite alternate",
+        "background-move": "background-move 60s linear infinite",
+      },
+      keyframes: {
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "star-glow": {
+          "0%": { opacity: "0.3" },
+          "100%": { opacity: "0.8" },
+        },
+        "background-move": {
+          "0%": { backgroundPosition: "50% 0%" },
+          "100%": { backgroundPosition: "50% 100%" },
+        },
+      },
+      backgroundImage: {
+        "stars": "url('/stars-background.jpg')",
       },
     },
   },

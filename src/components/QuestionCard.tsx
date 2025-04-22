@@ -6,6 +6,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Question, Answer } from "@/types/implant";
 import { getScoreFromOptions } from "@/utils/assessmentUtils";
+import DentalIcon from "@/components/DentalIcon";
+import { motion } from "framer-motion";
 
 interface QuestionCardProps {
   question: Question;
@@ -89,16 +91,28 @@ export default function QuestionCard({
   };
 
   return (
-    <div className="w-full max-w-md mx-auto bg-button-dark/30 backdrop-blur-sm p-8 rounded-3xl shadow-soft border border-white/10 transition-all duration-300">
-      <div className="mb-4">
-        <span className="text-sm text-gold font-medium">
-          Pregunta {question.id} de 11
-        </span>
-        <h2 className="text-2xl font-bold text-primary mt-2 mb-3">{question.title}</h2>
-        <p className="text-white/80 text-sm mb-4">{question.explanation}</p>
+    <motion.div 
+      key={question.id}
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -20 }}
+      transition={{ duration: 0.4 }}
+      className="w-full max-w-md mx-auto glass-panel p-8 transition-all duration-300"
+    >
+      <div className="flex items-start mb-6">
+        <div className="w-10 h-10 rounded-full bg-primary/20 flex-shrink-0 flex items-center justify-center mr-4">
+          <DentalIcon className="text-primary" size={20} />
+        </div>
+        <div>
+          <span className="text-sm text-gold font-medium">
+            Pregunta {question.id} de 11
+          </span>
+          <h2 className="text-2xl font-bold text-gold mt-1 mb-2">{question.title}</h2>
+          <p className="text-white/80 text-sm mb-4 font-light">{question.explanation}</p>
+        </div>
       </div>
 
-      <div className="mb-6">
+      <div className="mb-6 pl-14">
         {question.multiSelect ? (
           <div className="space-y-3">
             {question.options.map((option) => (
@@ -113,7 +127,7 @@ export default function QuestionCard({
                 />
                 <Label
                   htmlFor={`option-${option.value}`}
-                  className="text-sm font-medium text-white/90 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                  className="text-sm font-light text-white/90 leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                 >
                   {option.label}
                 </Label>
@@ -135,7 +149,7 @@ export default function QuestionCard({
                 />
                 <Label
                   htmlFor={`option-${option.value}`}
-                  className="text-sm font-medium text-white/90 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                  className="text-sm font-light text-white/90 leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                 >
                   {option.label}
                 </Label>
@@ -152,8 +166,8 @@ export default function QuestionCard({
       </div>
       
       <div className="mt-2 mb-6 p-4 bg-white/5 rounded-xl border border-white/10">
-        <p className="text-sm text-white/80">
-          <span className="font-semibold text-gold">Recomendación: </span>
+        <p className="text-sm text-white/80 font-light">
+          <span className="font-medium text-gold">Recomendación: </span>
           {question.recommendation}
         </p>
       </div>
@@ -171,11 +185,11 @@ export default function QuestionCard({
         <Button
           type="button"
           onClick={handleNext}
-          className="flex-1 bg-primary hover:bg-primary-dark text-white shadow-glow"
+          className="flex-1 bg-primary hover:bg-primary-dark text-white shadow-glow border border-gold/30"
         >
           {isLast ? "Ver resultados" : "Siguiente"}
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 }

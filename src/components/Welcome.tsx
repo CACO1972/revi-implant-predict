@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PatientInfo } from "@/types/implant";
+import DentalIcon from "@/components/DentalIcon";
+import { motion } from "framer-motion";
 
 interface WelcomeProps {
   onStart: (patientInfo: PatientInfo) => void;
@@ -42,11 +44,21 @@ export default function Welcome({ onStart }: WelcomeProps) {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] text-center px-4">
-      <div className="w-full max-w-md bg-button-dark/30 backdrop-blur-sm p-8 rounded-3xl shadow-soft border border-white/10">
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-md glass-panel p-8"
+      >
         <div className="mb-8">
-          <h1 className="text-5xl font-bold text-primary mb-3">¡Hola! Soy Revi</h1>
-          <h2 className="text-2xl font-semibold text-gold mb-4">tu asistente IA</h2>
-          <p className="text-white/80 mb-6">
+          <div className="flex justify-center mb-4">
+            <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+              <DentalIcon className="text-primary" size={28} />
+            </div>
+          </div>
+          <h1 className="text-4xl font-bold text-gold mb-3">¡Hola!</h1>
+          <h2 className="text-xl font-light text-primary mb-4">Soy tu asistente IA</h2>
+          <p className="text-white/80 mb-6 font-light">
             Te ayudaré a estimar tus probabilidades de éxito si estás pensando en 
             rehabilitar tu sonrisa con implantes dentales.
           </p>
@@ -91,12 +103,12 @@ export default function Welcome({ onStart }: WelcomeProps) {
           
           <Button 
             type="submit" 
-            className="w-full bg-primary hover:bg-primary-dark text-white font-medium shadow-glow transition-all duration-300"
+            className="w-full bg-primary hover:bg-primary-dark text-white font-medium shadow-glow transition-all duration-300 border border-gold/30"
           >
             Comenzar evaluación
           </Button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }
