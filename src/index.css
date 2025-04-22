@@ -7,7 +7,7 @@
 @layer base {
   body {
     @apply bg-background text-foreground font-inter;
-    background-image: url('/stars-background.jpg');
+    background-image: url('/lovable-uploads/66ccd790-e473-47c0-be73-43e7824a09e3.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

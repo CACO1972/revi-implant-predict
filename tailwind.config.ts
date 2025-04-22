@@ -74,7 +74,7 @@ export default {
         },
       },
       backgroundImage: {
-        "stars": "url('/stars-background.jpg')",
+        "stars": "url('/lovable-uploads/66ccd790-e473-47c0-be73-43e7824a09e3.png')",
       },
     },
   },
