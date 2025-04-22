@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -25,9 +26,9 @@ export default {
         background: "#0A1828",
         foreground: "#FFFFFF",
         primary: {
-          DEFAULT: "#11ACC0",
-          dark: "#0D8A9A",
-          light: "#13C2D8",
+          DEFAULT: "#178582",
+          dark: "#126E6B",
+          light: "#1C9C98",
           foreground: "#FFFFFF"
         },
         gold: {
@@ -40,8 +41,9 @@ export default {
         },
       },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        montserrat: ["Montserrat", "sans-serif"],
+        'formula': ['Formula1', 'Poppins', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
       },
       borderRadius: {
         xl: "1rem",
@@ -50,7 +52,7 @@ export default {
       },
       boxShadow: {
         soft: "0 8px 30px rgba(0, 0, 0, 0.12)",
-        glow: "0 0 20px rgba(17, 172, 192, 0.15)",
+        glow: "0 0 20px rgba(23, 133, 130, 0.15)",
       },
     },
   },

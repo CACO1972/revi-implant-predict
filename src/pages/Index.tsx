@@ -1,6 +1,6 @@
-
 import { useState } from "react";
 import Welcome from "@/components/Welcome";
+import LandingPage from "@/components/LandingPage";
 import QuestionCard from "@/components/QuestionCard";
 import ResultsCard from "@/components/ResultsCard";
 import DentalIcon from "@/components/DentalIcon";
@@ -9,13 +9,14 @@ import { questions } from "@/data/questions";
 import { calculateScore, evaluateResult } from "@/utils/assessmentUtils";
 
 enum AppState {
+  LANDING,
   WELCOME,
   QUESTIONS,
   RESULTS
 }
 
 export default function Index() {
-  const [appState, setAppState] = useState<AppState>(AppState.WELCOME);
+  const [appState, setAppState] = useState<AppState>(AppState.LANDING);
   const [patientInfo, setPatientInfo] = useState<PatientInfo>({ name: "", age: null });
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
@@ -27,16 +28,13 @@ export default function Index() {
   };
   
   const handleAnswer = (answer: Answer) => {
-    // Update or add new answer
     const existingIndex = answers.findIndex(a => a.questionId === answer.questionId);
     
     if (existingIndex >= 0) {
-      // Update existing answer
       const newAnswers = [...answers];
       newAnswers[existingIndex] = answer;
       setAnswers(newAnswers);
     } else {
-      // Add new answer
       setAnswers([...answers, answer]);
     }
   };
@@ -45,7 +43,6 @@ export default function Index() {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      // Calculate final result
       const totalScore = calculateScore(answers);
       const assessmentResult = evaluateResult(totalScore);
       setResult(assessmentResult);
@@ -71,18 +68,26 @@ export default function Index() {
     return answers.find(a => a.questionId === questions[currentQuestionIndex].id);
   };
   
+  const handleLandingComplete = () => {
+    setAppState(AppState.WELCOME);
+  };
+  
   return (
-    <div className="min-h-screen bg-gradient-to-b from-dental-gray-light to-white py-8 px-4">
+    <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <header className="mb-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <DentalIcon className="text-dental-blue" size={36} />
-            <h1 className="text-3xl font-bold text-dental-blue">ImplantDX</h1>
+            <DentalIcon className="text-primary" size={36} />
+            <h1 className="text-3xl font-formula font-bold text-primary">ImplantDX</h1>
           </div>
-          <p className="text-dental-blue-dark">Predictor de éxito en implantes dentales</p>
+          <p className="text-white/85">Predictor de éxito en implantes dentales</p>
         </header>
         
         <main>
+          {appState === AppState.LANDING && (
+            <LandingPage onStart={handleLandingComplete} />
+          )}
+          
           {appState === AppState.WELCOME && (
             <Welcome onStart={handleStart} />
           )}
@@ -119,7 +124,7 @@ export default function Index() {
           )}
         </main>
         
-        <footer className="mt-12 text-center text-sm text-gray-500">
+        <footer className="mt-12 text-center text-sm text-white/50">
           <p>© 2025 ImplantDX - Evaluación clínica basada en IA</p>
           <p className="mt-1">Este es un sistema de predicción y no reemplaza la evaluación profesional</p>
         </footer>
