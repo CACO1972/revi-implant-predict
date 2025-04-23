@@ -9,13 +9,13 @@ interface WelcomeScreenProps {
 export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center min-h-screen text-center px-4">
-      {/* Background with animation */}
+      {/* Fondo con logo oficial */}
       <div 
         className="fixed inset-0 bg-cover bg-center z-0 animate-background-move"
         style={{ 
           backgroundImage: "url('/lovable-uploads/d0a74c34-c7ab-4c0a-8c33-eed6e57baaaa.png')" 
         }}
-      ></div>
+      />
       
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -59,3 +59,4 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
     </div>
   );
 }
+
