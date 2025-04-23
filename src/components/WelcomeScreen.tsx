@@ -8,12 +8,20 @@ interface WelcomeScreenProps {
 
 export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-center px-4 relative">
+    <div className="fixed inset-0 flex flex-col items-center justify-center min-h-screen text-center px-4">
+      {/* Background with animation */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center z-0 animate-background-move"
+        style={{ 
+          backgroundImage: "url('/lovable-uploads/d0a74c34-c7ab-4c0a-8c33-eed6e57baaaa.png')" 
+        }}
+      ></div>
+      
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="w-full max-w-2xl space-y-8 z-10 relative"
+        className="w-full max-w-2xl space-y-8 z-10 relative mt-32"
       >
         <motion.div 
           className="space-y-6"

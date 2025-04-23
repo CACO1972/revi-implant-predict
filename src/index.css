@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&family=Open+Sans:wght@300;400&display=swap');
 
 @tailwind base;
@@ -7,10 +8,6 @@
 @layer base {
   body {
     @apply bg-background text-foreground font-inter;
-    background-image: url('/lovable-uploads/66ccd790-e473-47c0-be73-43e7824a09e3.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -37,7 +34,7 @@
   
   .animated-bg::before {
     content: '';
-    @apply absolute inset-0 bg-stars bg-cover animate-background-move;
+    @apply absolute inset-0 bg-cover bg-center animate-background-move;
     z-index: -1;
   }
 }
