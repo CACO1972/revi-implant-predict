@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -39,6 +38,10 @@ export default {
         button: {
           dark: "#1A202C",
         },
+        starry: {
+          DEFAULT: "#0A1828",
+          darker: "#061018",
+        }
       },
       fontFamily: {
         'playfair': ['Playfair Display', 'serif'],
@@ -58,6 +61,8 @@ export default {
         "float": "float 6s ease-in-out infinite",
         "star-glow": "star-glow 3s ease-in-out infinite alternate",
         "background-move": "background-move 60s linear infinite",
+        "star-float": "star-float 15s ease-in-out infinite",
+        "background-pan": "background-pan 30s linear infinite",
       },
       keyframes: {
         "float": {
@@ -68,9 +73,13 @@ export default {
           "0%": { opacity: "0.3" },
           "100%": { opacity: "0.8" },
         },
-        "background-move": {
-          "0%": { backgroundPosition: "50% 0%" },
-          "100%": { backgroundPosition: "50% 100%" },
+        "star-float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        "background-pan": {
+          "0%": { backgroundPosition: "0% 0%" },
+          "100%": { backgroundPosition: "0% 100%" },
         },
       },
       backgroundImage: {
