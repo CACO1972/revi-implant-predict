@@ -1,35 +1,30 @@
 import { Button } from "@/components/ui/button";
-import DentalIcon from "@/components/DentalIcon";
 import { motion } from "framer-motion";
+
 interface LandingPageProps {
   onStart: () => void;
 }
-export default function LandingPage({
-  onStart
-}: LandingPageProps) {
-  return <div className="flex flex-col items-center justify-center min-h-[80vh] text-center px-4 animated-bg">
-      <motion.div initial={{
-      opacity: 0,
-      y: 20
-    }} animate={{
-      opacity: 1,
-      y: 0
-    }} transition={{
-      duration: 0.8
-    }} className="w-full max-w-2xl space-y-8">
-        <motion.div className="space-y-6" initial={{
-        opacity: 0
-      }} animate={{
-        opacity: 1
-      }} transition={{
-        delay: 0.3,
-        duration: 0.8
-      }}>
-          
-          
-          <h1 className="text-4xl md:text-5xl font-bold text-gold">
-            Bienvenido a ImplantDX
-          </h1>
+
+export default function LandingPage({ onStart }: LandingPageProps) {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[80vh] text-center px-4 animated-bg">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-2xl space-y-8"
+      >
+        <motion.div 
+          className="space-y-6" 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          <img 
+            src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png"
+            alt="ImplantDX Logo"
+            className="w-48 h-auto mx-auto mb-6"
+          />
           
           <h2 className="text-xl md:text-2xl text-primary font-light max-w-xl mx-auto">
             Una herramienta clínica predictiva basada en IA
@@ -40,14 +35,7 @@ export default function LandingPage({
           </p>
         </motion.div>
 
-        <motion.div className="space-y-6" initial={{
-        opacity: 0
-      }} animate={{
-        opacity: 1
-      }} transition={{
-        delay: 0.6,
-        duration: 0.8
-      }}>
+        <motion.div className="space-y-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.8 }}>
           <Button onClick={onStart} className="bg-primary hover:bg-primary-dark text-white px-8 py-6 rounded-xl text-lg shadow-glow transition-all duration-300 border border-gold/30">
             Comenzar evaluación
           </Button>
@@ -57,5 +45,6 @@ export default function LandingPage({
           </p>
         </motion.div>
       </motion.div>
-    </div>;
+    </div>
+  );
 }

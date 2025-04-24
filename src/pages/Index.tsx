@@ -4,7 +4,6 @@ import Welcome from "@/components/Welcome";
 import LandingPage from "@/components/LandingPage";
 import QuestionCard from "@/components/QuestionCard";
 import ResultsCard from "@/components/ResultsCard";
-import DentalIcon from "@/components/DentalIcon";
 import { PatientInfo, Answer, AssessmentResult } from "@/types/implant";
 import { questions } from "@/data/questions";
 import { calculateScore, evaluateResult } from "@/utils/assessmentUtils";
@@ -75,13 +74,14 @@ export default function Index() {
   };
   
   return (
-    <div className="min-h-screen bg-background py-8 px-4 animated-bg">
+    <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <header className="mb-8 text-center">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <DentalIcon className="text-gold animate-star-glow" size={36} />
-            <h1 className="text-3xl font-playfair font-bold text-primary">ImplantDX</h1>
-          </div>
+          <img 
+            src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png"
+            alt="ImplantDX Logo"
+            className="h-16 mx-auto mb-2"
+          />
           <p className="text-white/85 font-light">Predictor de éxito en implantes dentales</p>
         </header>
         

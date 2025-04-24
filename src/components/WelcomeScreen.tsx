@@ -8,12 +8,14 @@ interface WelcomeScreenProps {
 
 export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center min-h-screen text-center px-4 bg-starry overflow-hidden">
+    <div className="fixed inset-0 flex flex-col items-center justify-center min-h-screen text-center px-4 bg-background overflow-hidden">
       {/* Fondo animado con estrellas */}
       <div 
-        className="fixed inset-0 bg-stars bg-cover bg-center z-0 animate-background-pan opacity-80"
+        className="fixed inset-0 bg-starry opacity-20"
         style={{ 
-          backgroundSize: "150% 150%"
+          backgroundImage: "url('/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center"
         }}
       />
       
@@ -25,7 +27,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
       >
         {/* Logo animado */}
         <motion.div 
-          className="mb-8"
+          className="mb-12"
           animate={{ y: [0, -10, 0] }}
           transition={{
             duration: 4,
@@ -34,9 +36,9 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           }}
         >
           <img 
-            src="/lovable-uploads/19481b4c-abe4-45b5-849c-180b7603e111.png"
+            src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png"
             alt="ImplantDX Logo"
-            className="w-64 h-64 mx-auto"
+            className="w-72 h-auto mx-auto"
           />
         </motion.div>
 
