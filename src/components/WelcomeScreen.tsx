@@ -11,10 +11,9 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
     <div className="fixed inset-0 flex flex-col items-center justify-center min-h-screen text-center px-4 bg-starry overflow-hidden">
       {/* Fondo animado con estrellas */}
       <div 
-        className="fixed inset-0 bg-cover bg-center z-0 animate-background-pan opacity-30"
+        className="fixed inset-0 bg-stars bg-cover bg-center z-0 animate-background-pan opacity-80"
         style={{ 
-          backgroundImage: "url('/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png')",
-          backgroundSize: "200% 200%"
+          backgroundSize: "150% 150%"
         }}
       />
       
@@ -35,9 +34,9 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           }}
         >
           <img 
-            src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png"
+            src="/lovable-uploads/19481b4c-abe4-45b5-849c-180b7603e111.png"
             alt="ImplantDX Logo"
-            className="w-48 h-48 mx-auto"
+            className="w-64 h-64 mx-auto"
           />
         </motion.div>
 

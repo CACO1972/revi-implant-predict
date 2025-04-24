@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -22,7 +23,7 @@ export default {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        background: "#0A1828",
+        background: "#030711", // Color más oscuro para coincidir con el logo
         foreground: "#FFFFFF",
         primary: {
           DEFAULT: "#178582",
@@ -39,8 +40,8 @@ export default {
           dark: "#1A202C",
         },
         starry: {
-          DEFAULT: "#0A1828",
-          darker: "#061018",
+          DEFAULT: "#030711", // Color más oscuro para coincidir con el logo
+          darker: "#020509",
         }
       },
       fontFamily: {
@@ -83,7 +84,7 @@ export default {
         },
       },
       backgroundImage: {
-        "stars": "url('/lovable-uploads/66ccd790-e473-47c0-be73-43e7824a09e3.png')",
+        "stars": "url('/lovable-uploads/19481b4c-abe4-45b5-849c-180b7603e111.png')",
       },
     },
   },
