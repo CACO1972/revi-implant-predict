@@ -1,14 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+
 interface LandingPageProps {
   onStart: () => void;
 }
-export default function LandingPage({
-  onStart
-}: LandingPageProps) {
-  return <div className="flex flex-col items-center justify-center min-h-[85vh] text-center px-4 relative">
-      {/* Estrellas brillantes animadas */}
+
+export default function LandingPage({ onStart }: LandingPageProps) {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[85vh] text-center px-4 relative">
+      {/* Animated stars background */}
       {[...Array(5)].map((_, i) => <motion.div key={i} className="absolute" animate={{
       scale: [1, 1.5, 1],
       opacity: [0.5, 1, 0.5]
@@ -28,33 +29,34 @@ export default function LandingPage({
       boxShadow: "0 0 10px 2px rgba(255,255,255,0.7)"
     }} />)}
 
-      <motion.div initial={{
-      opacity: 0,
-      y: 20
-    }} animate={{
-      opacity: 1,
-      y: 0
-    }} transition={{
-      duration: 0.8
-    }} className="w-full max-w-2xl space-y-12 relative z-10">
-        <motion.div className="space-y-8" initial={{
-        opacity: 0
-      }} animate={{
-        opacity: 1
-      }} transition={{
-        delay: 0.3,
-        duration: 0.8
-      }}>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-2xl space-y-12 relative z-10"
+      >
+        <motion.div 
+          className="space-y-8" 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
           <div className="relative mx-auto w-72 h-72 mb-6">
-            <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-gold/30 rounded-full blur-2xl opacity-70" animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.5, 0.7, 0.5]
-          }} transition={{
-            duration: 4,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }} />
+            {/* Planetary animation background */}
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-br from-primary/30 to-gold/30 rounded-full blur-2xl opacity-70"
+              animate={{
+                scale: [1, 1.1, 1],
+                opacity: [0.5, 0.7, 0.5]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+            />
             
+            {/* Rotating orbital ring */}
             <motion.div className="absolute inset-0 rounded-full" animate={{
             rotate: 360
           }} transition={{
@@ -75,22 +77,31 @@ export default function LandingPage({
             }} />)}
             </motion.div>
 
-            <motion.div animate={{
-            y: [0, -10, 0],
-            filter: ["drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))", "drop-shadow(0 0 25px rgba(23, 133, 130, 0.5))", "drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))"]
-          }} transition={{
-            duration: 4,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }} className="relative w-full h-full flex items-center justify-center">
-              
-              
-              {/* Efecto de brillo detrás del logo */}
-              <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-transparent rounded-full blur-xl -z-10"></div>
+            {/* Logo and title container */}
+            <motion.div 
+              animate={{
+                y: [0, -10, 0],
+                filter: ["drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))", "drop-shadow(0 0 25px rgba(23, 133, 130, 0.5))", "drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))"]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+              className="relative w-full h-full flex items-center justify-center flex-col"
+            >
+              <img 
+                src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png"
+                alt="ImplantDX Logo"
+                className="w-32 h-auto mb-2"
+              />
+              <h1 className="text-3xl font-bold text-gold tracking-wider">
+                ImplantDX
+              </h1>
             </motion.div>
           </div>
           
-          <h2 className="text-3xl md:text-4xl gold-gradient-text font-light tracking-wider text-amber-500">
+          <h2 className="text-3xl md:text-4xl gold-gradient-text font-light tracking-wider">
             Una herramienta clínica predictiva <br /> basada en IA
           </h2>
           
@@ -130,5 +141,6 @@ export default function LandingPage({
           </motion.p>
         </motion.div>
       </motion.div>
-    </div>;
+    </div>
+  );
 }

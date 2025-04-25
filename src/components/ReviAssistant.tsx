@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Bot, Sparkles } from 'lucide-react';
 import { Button } from './ui/button';
+
 interface ReviAssistantProps {
   messages?: string[];
   currentStep?: number;
   totalSteps?: number;
   onClose?: () => void;
 }
+
 export default function ReviAssistant({
   messages = ["¡Hola! Soy Revi, tu asistente IA dental. Estoy aquí para guiarte en tu evaluación de implantes."],
   currentStep = 0,
@@ -18,7 +20,18 @@ export default function ReviAssistant({
   const [currentMessage, setCurrentMessage] = useState(0);
   const [typing, setTyping] = useState(false);
   const [typedText, setTypedText] = useState('');
+
   const toggleOpen = () => setIsOpen(!isOpen);
+
+  const getQuestionPrompts = () => {
+    return [
+      "¿Te quedó clara esta pregunta? Puedo explicártela mejor si lo necesitas.",
+      "¿Quieres saber más sobre este tema?",
+      "¿Necesitas ayuda para responder esta pregunta?",
+      "¿Te gustaría ver información adicional sobre este aspecto?"
+    ];
+  };
+
   useEffect(() => {
     if (isOpen && messages.length > 0) {
       setTyping(true);
@@ -36,8 +49,16 @@ export default function ReviAssistant({
       return () => clearInterval(typingInterval);
     }
   }, [isOpen, currentMessage, messages]);
+
+  useEffect(() => {
+    if (currentStep > 0) {
+      const prompts = getQuestionPrompts();
+      const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+      messages = [...messages, randomPrompt];
+    }
+  }, [currentStep]);
+
   return <>
-      {/* Botón flotante para abrir el asistente */}
       <div className="fixed bottom-6 right-6 z-50">
         <AnimatePresence>
           {!isOpen && <motion.div initial={{
@@ -63,7 +84,6 @@ export default function ReviAssistant({
         </AnimatePresence>
       </div>
 
-      {/* Panel del asistente */}
       <AnimatePresence>
         {isOpen && <motion.div initial={{
         opacity: 0,
