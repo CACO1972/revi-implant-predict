@@ -1,18 +1,17 @@
+import React from 'react';
+import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
+import { Sparkles } from "lucide-react";
+
+import DentalIcon from "@/components/DentalIcon";
+import ResultSummaryBlock from "./ResultSummaryBlock";
+import RecommendationList from "./RecommendationList";
+import ContactForm from "./ContactForm";
+import FeedbackForm from "./FeedbackForm";
+import FeedbackSubmittedScreen from "./FeedbackSubmittedScreen";
+import RequestSubmittedScreen from "./RequestSubmittedScreen";
+
 import { PatientInfo, AssessmentResult } from "@/types/implant";
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import DentalIcon from "./DentalIcon";  // Updated import path
-import { motion } from "framer-motion";
-import ResultSummaryBlock from "./results/ResultSummaryBlock";
-import RecommendationList from "./results/RecommendationList";
-import ContactForm from "./results/ContactForm";
-import FeedbackForm from "./results/FeedbackForm";
-import FeedbackSubmittedScreen from "./results/FeedbackSubmittedScreen";
-import RequestSubmittedScreen from "./results/RequestSubmittedScreen";
-import ScoreBreakdown from "./ScoreBreakdown";
 
 interface ResultsCardProps {
   patientInfo: PatientInfo;
@@ -20,192 +19,107 @@ interface ResultsCardProps {
   onRestart: () => void;
 }
 
-export default function ResultsCard({ patientInfo, result, onRestart }: ResultsCardProps) {
-  const [showContactForm, setShowContactForm] = useState(false);
-  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [feedback, setFeedback] = useState<string | null>(null);
-  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
-  
-  const getColorByLevel = () => {
-    switch (result.level) {
-      case 1: return "text-emerald-400";
-      case 2: return "text-primary";
-      case 3: return "text-gold";
-      case 4: return "text-red-400";
-      default: return "text-primary";
-    }
-  };
-  
-  const getBgColorByLevel = () => {
-    switch (result.level) {
-      case 1: return "bg-emerald-400/10";
-      case 2: return "bg-primary/10";
-      case 3: return "bg-gold/10";
-      case 4: return "bg-red-400/10";
-      default: return "bg-primary/10";
-    }
-  };
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Enviando datos de contacto:", { name: patientInfo.name, email, phone, message });
-    setSubmitted(true);
+export default function ResultsCard({ 
+  patientInfo, 
+  result,
+  onRestart 
+}: ResultsCardProps) {
+  const [showContactForm, setShowContactForm] = React.useState(false);
+  const [showFeedbackForm, setShowFeedbackForm] = React.useState(false);
+  const [feedbackSubmitted, setFeedbackSubmitted] = React.useState(false);
+  const [requestSubmitted, setRequestSubmitted] = React.useState(false);
+
+  const handleContactClick = () => {
+    setShowContactForm(true);
   };
 
-  const handleFeedbackSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Enviando feedback:", { rating: feedback });
+  const handleFeedbackClick = () => {
+    setShowFeedbackForm(true);
+  };
+
+  const closeContactForm = () => {
+    setShowContactForm(false);
+    setRequestSubmitted(true);
+  };
+
+  const closeFeedbackForm = () => {
+    setShowFeedbackForm(false);
     setFeedbackSubmitted(true);
   };
 
-  const renderFeedbackEmoji = (value: string) => {
-    switch (value) {
-      case "5": return "😁";
-      case "4": return "🙂";
-      case "3": return "😐";
-      case "2": return "😕";
-      case "1": return "😖";
-      default: return "";
-    }
-  };
-
-  const renderFeedbackLabel = (value: string) => {
-    switch (value) {
-      case "5": return "Muy útil";
-      case "4": return "Útil";
-      case "3": return "Neutral";
-      case "2": return "Poco útil";
-      case "1": return "Para nada útil";
-      default: return "";
-    }
-  };
-
-  const factors = [
-    { name: "Tabaquismo", score: -2 },
-    { name: "Bruxismo", score: -1 },
-    { name: "Buena higiene", score: 2 },
-    // Add more factors based on your scoring system
-  ];
-  
-  if (feedbackSubmitted) {
-    return (
-      <motion.div 
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md mx-auto"
-      >
-        <FeedbackSubmittedScreen onRestart={onRestart} />
-      </motion.div>
-    );
-  }
-  
-  if (submitted) {
-    if (!showFeedbackForm) {
-      return (
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-md mx-auto"
-        >
-          <RequestSubmittedScreen
-            patientName={patientInfo.name}
-            onRestart={onRestart}
-            onShowFeedback={() => setShowFeedbackForm(true)}
-          />
-        </motion.div>
-      );
-    } else {
-      return (
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-md mx-auto"
-        >
-          <div className="glass-panel p-8 text-center">
-            <FeedbackForm
-              feedback={feedback}
-              setFeedback={setFeedback}
-              onSubmit={handleFeedbackSubmit}
-              onCancel={() => setShowFeedbackForm(false)}
-              renderFeedbackEmoji={renderFeedbackEmoji}
-              renderFeedbackLabel={renderFeedbackLabel}
-            />
-          </div>
-        </motion.div>
-      )
-    }
-  }
-  
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="w-full max-w-md mx-auto"
-    >
-      <div className="glass-panel p-8">
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-gold">Resultados de tu evaluación</h2>
-          <p className="text-white/80 mt-2 font-light">
-            Hola {patientInfo.name}, basado en tus respuestas hemos generado tu predicción de éxito clínico.
+    <div className="relative flex flex-col items-center justify-center min-h-[85vh] text-center px-4">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-3xl space-y-8 relative z-10"
+      >
+        <motion.div 
+          className="space-y-6" 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          <div className="relative mx-auto w-64 h-64 mb-6">
+            <DentalIcon score={result.score} />
+          </div>
+          
+          <h2 className="text-3xl md:text-4xl gold-gradient-text font-light tracking-wider">
+            {patientInfo.name}, este es tu resultado
+          </h2>
+          
+          <p className="text-[17px] text-white/85 max-w-lg mx-auto font-light leading-relaxed">
+            Basado en tus respuestas, esta es la probabilidad de éxito de un implante dental.
           </p>
-        </div>
-        
-        <ResultSummaryBlock 
-          result={result} 
-          getColorByLevel={getColorByLevel} 
-          getBgColorByLevel={getBgColorByLevel}
-        />
+        </motion.div>
 
-        <ScoreBreakdown factors={factors} />
-
+        <ResultSummaryBlock result={result} />
         <RecommendationList recommendations={result.recommendations} />
 
-        {!showContactForm ? (
-          <div className="space-y-4">
-            <Button 
-              onClick={() => setShowContactForm(true)}
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-glow border border-emerald-500/30"
-            >
-              Recibir evaluación profesional
-            </Button>
-            <Button 
-              variant="outline"
-              className="w-full border-white/20 text-white hover:bg-white/5"
-            >
-              Descargar eBook
-            </Button>
-            <Button 
-              variant="outline" 
-              onClick={onRestart}
-              className="w-full border-white/20 text-white hover:bg-white/5"
-            >
-              Volver a empezar
-            </Button>
-          </div>
-        ) : (
-          <ContactForm
-            patientName={patientInfo.name}
-            email={email}
-            phone={phone}
-            message={message}
-            setEmail={setEmail}
-            setPhone={setPhone}
-            setMessage={setMessage}
-            onSubmit={handleSubmit}
-            onCancel={() => setShowContactForm(false)}
-          />
-        )}
-        
-        <div className="mt-8 pt-4 border-t border-white/10 text-center">
-          <p className="text-xs text-white/50">
-            ImplantDX — desarrollado por The Human Upgrade
-          </p>
-        </div>
-      </div>
-    </motion.div>
+        <motion.div className="space-y-6" initial={{
+        opacity: 0
+      }} animate={{
+        opacity: 1
+      }} transition={{
+        delay: 0.6,
+        duration: 0.8
+      }}>
+        {requestSubmitted ? (
+            <FeedbackSubmittedScreen />
+          ) : showContactForm ? (
+            <ContactForm onClose={closeContactForm} />
+          ) : feedbackSubmitted ? (
+            <RequestSubmittedScreen />
+          ) : showFeedbackForm ? (
+            <FeedbackForm onClose={closeFeedbackForm} />
+          ) : (
+            <>
+              <div className="flex justify-center space-x-4">
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                  <Button onClick={handleContactClick} className="group text-starry px-8 py-5 rounded-xl text-lg font-medium shadow-gold-glow transition-all duration-300 border border-gold/30 bg-amber-500 hover:bg-amber-400">
+                    <Sparkles className="w-5 h-5 mr-2 group-hover:animate-sparkle" />
+                    Solicitar consulta
+                  </Button>
+                </motion.div>
+                
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                  <Button onClick={handleFeedbackClick} className="group text-starry px-8 py-5 rounded-xl text-lg font-medium shadow-gold-glow transition-all duration-300 border border-gold/30 bg-amber-500 hover:bg-amber-400">
+                    <Sparkles className="w-5 h-5 mr-2 group-hover:animate-sparkle" />
+                    Enviar feedback
+                  </Button>
+                </motion.div>
+              </div>
+
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                <Button variant="secondary" onClick={onRestart} className="w-full">
+                  Realizar nueva evaluación
+                </Button>
+              </motion.div>
+            </>
+          )}
+        </motion.div>
+      </motion.div>
+    </div>
   );
 }
