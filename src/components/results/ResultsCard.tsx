@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ export default function ResultsCard({
   const [showFeedbackForm, setShowFeedbackForm] = React.useState(false);
   const [feedbackSubmitted, setFeedbackSubmitted] = React.useState(false);
   const [requestSubmitted, setRequestSubmitted] = React.useState(false);
+  const [feedback, setFeedback] = React.useState<string | null>(null);
 
   const handleContactClick = () => {
     setShowContactForm(true);
@@ -47,6 +49,56 @@ export default function ResultsCard({
     setFeedbackSubmitted(true);
   };
 
+  // Functions for ResultSummaryBlock
+  const getColorByLevel = () => {
+    switch (result.level) {
+      case 1: return "text-emerald-400";
+      case 2: return "text-primary";
+      case 3: return "text-gold";
+      case 4: return "text-red-400";
+      default: return "text-primary";
+    }
+  };
+  
+  const getBgColorByLevel = () => {
+    switch (result.level) {
+      case 1: return "bg-emerald-400/10";
+      case 2: return "bg-primary/10";
+      case 3: return "bg-gold/10";
+      case 4: return "bg-red-400/10";
+      default: return "bg-primary/10";
+    }
+  };
+  
+  // Helper functions for FeedbackForm
+  const renderFeedbackEmoji = (value: string) => {
+    switch (value) {
+      case "5": return "😁";
+      case "4": return "🙂";
+      case "3": return "😐";
+      case "2": return "😕";
+      case "1": return "😖";
+      default: return "";
+    }
+  };
+
+  const renderFeedbackLabel = (value: string) => {
+    switch (value) {
+      case "5": return "Muy útil";
+      case "4": return "Útil";
+      case "3": return "Neutral";
+      case "2": return "Poco útil";
+      case "1": return "Para nada útil";
+      default: return "";
+    }
+  };
+
+  const handleFeedbackSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Enviando feedback:", { rating: feedback });
+    setFeedbackSubmitted(true);
+  };
+
   return (
     <div className="relative flex flex-col items-center justify-center min-h-[85vh] text-center px-4">
       <motion.div 
@@ -62,7 +114,7 @@ export default function ResultsCard({
           transition={{ delay: 0.3, duration: 0.8 }}
         >
           <div className="relative mx-auto w-64 h-64 mb-6">
-            <DentalIcon score={result.score} />
+            <DentalIcon score={result.totalScore} />
           </div>
           
           <h2 className="text-3xl md:text-4xl gold-gradient-text font-light tracking-wider">
@@ -74,7 +126,12 @@ export default function ResultsCard({
           </p>
         </motion.div>
 
-        <ResultSummaryBlock result={result} />
+        <ResultSummaryBlock 
+          result={result} 
+          getColorByLevel={getColorByLevel} 
+          getBgColorByLevel={getBgColorByLevel} 
+        />
+        
         <RecommendationList recommendations={result.recommendations} />
 
         <motion.div className="space-y-6" initial={{
@@ -86,13 +143,37 @@ export default function ResultsCard({
         duration: 0.8
       }}>
         {requestSubmitted ? (
-            <FeedbackSubmittedScreen />
+            <RequestSubmittedScreen 
+              patientName={patientInfo.name}
+              onRestart={onRestart}
+              onShowFeedback={() => setShowFeedbackForm(true)}
+            />
           ) : showContactForm ? (
-            <ContactForm onClose={closeContactForm} />
+            <ContactForm 
+              patientName={patientInfo.name}
+              email=""
+              phone=""
+              message=""
+              setEmail={() => {}}
+              setPhone={() => {}}
+              setMessage={() => {}}
+              onSubmit={(e) => {
+                e.preventDefault();
+                closeContactForm();
+              }}
+              onCancel={closeContactForm}
+            />
           ) : feedbackSubmitted ? (
-            <RequestSubmittedScreen />
+            <FeedbackSubmittedScreen onRestart={onRestart} />
           ) : showFeedbackForm ? (
-            <FeedbackForm onClose={closeFeedbackForm} />
+            <FeedbackForm
+              feedback={feedback}
+              setFeedback={setFeedback}
+              onSubmit={handleFeedbackSubmit}
+              onCancel={closeFeedbackForm}
+              renderFeedbackEmoji={renderFeedbackEmoji}
+              renderFeedbackLabel={renderFeedbackLabel}
+            />
           ) : (
             <>
               <div className="flex justify-center space-x-4">
