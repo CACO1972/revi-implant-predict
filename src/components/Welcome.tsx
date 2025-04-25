@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PatientInfo } from "@/types/implant";
-import DentalIcon from "@/components/DentalIcon";
+import DentalIcon from "./DentalIcon";  // Updated import path
 import { motion } from "framer-motion";
 
 interface WelcomeProps {

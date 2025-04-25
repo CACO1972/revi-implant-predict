@@ -6,7 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Question, Answer } from "@/types/implant";
 import { getScoreFromOptions } from "@/utils/assessmentUtils";
-import DentalIcon from "@/components/DentalIcon";
+import DentalIcon from "./DentalIcon";  // Updated import path
 import { motion } from "framer-motion";
 
 interface QuestionCardProps {

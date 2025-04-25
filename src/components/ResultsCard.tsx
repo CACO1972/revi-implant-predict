@@ -1,10 +1,11 @@
+
 import { Button } from "@/components/ui/button";
 import { PatientInfo, AssessmentResult } from "@/types/implant";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import DentalIcon from "@/components/DentalIcon";
+import DentalIcon from "./DentalIcon";  // Updated import path
 import { motion } from "framer-motion";
 import ResultSummaryBlock from "./results/ResultSummaryBlock";
 import RecommendationList from "./results/RecommendationList";
