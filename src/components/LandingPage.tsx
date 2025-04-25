@@ -24,7 +24,7 @@ export default function LandingPage({
         delay: 0.3,
         duration: 0.8
       }}>
-          <img src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png" alt="ImplantDX Logo" className="w-48 h-auto mx-auto mb-6 object-contain" />
+          <img src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png" alt="ImplantDX Logo" className="w-48 h-auto mx-auto mb-6 object-fill" />
           
           <h2 className="text-xl md:text-2xl text-primary font-light max-w-xl mx-auto">
             Una herramienta clínica predictiva basada en IA
