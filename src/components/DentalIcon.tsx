@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Tooth } from "lucide-react";
+import { Activity } from "lucide-react";
 
 interface DentalIconProps {
   className?: string;
@@ -9,7 +9,7 @@ interface DentalIconProps {
 
 const DentalIcon: React.FC<DentalIconProps> = ({ className = "", size = 24 }) => {
   return (
-    <Tooth className={className} size={size} />
+    <Activity className={className} size={size} />
   );
 };
 
