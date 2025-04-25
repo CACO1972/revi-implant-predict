@@ -114,7 +114,7 @@ export default function ResultsCard({
           transition={{ delay: 0.3, duration: 0.8 }}
         >
           <div className="relative mx-auto w-64 h-64 mb-6">
-            <DentalIcon score={result.totalScore} />
+            <DentalIcon totalScore={result.totalScore} />
           </div>
           
           <h2 className="text-3xl md:text-4xl gold-gradient-text font-light tracking-wider">
