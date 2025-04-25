@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -33,8 +32,16 @@ export default {
         },
         gold: {
           DEFAULT: "#BFA181",
-          dark: "#A68A6B",
-          light: "#D4B797",
+          50: "#F4EDE4",
+          100: "#EBE0D2",
+          200: "#DCC7AD",
+          300: "#CDAE89",
+          400: "#BF9564",
+          500: "#BFA181", // Our main gold color
+          600: "#A68A6B",
+          700: "#8C7357",
+          800: "#725C44",
+          900: "#594831",
         },
         button: {
           dark: "#1A202C",
