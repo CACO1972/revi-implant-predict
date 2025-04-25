@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, Robot, Sparkles } from 'lucide-react';
+import { MessageSquare, Bot, Sparkles } from 'lucide-react';
 import { Button } from './ui/button';
 
 interface ReviAssistantProps {
@@ -65,7 +64,7 @@ export default function ReviAssistant({
                 className="w-14 h-14 rounded-full bg-gold hover:bg-gold/90 text-starry shadow-gold-glow border-none relative z-10"
                 size="icon"
               >
-                <Robot className="w-6 h-6" />
+                <Bot className="w-6 h-6" />
                 <span className="sr-only">Abrir asistente</span>
                 
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full animate-pulse" />
@@ -87,7 +86,7 @@ export default function ReviAssistant({
             <div className="bg-primary/20 p-3 flex items-center justify-between border-b border-white/10">
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
-                  <Robot className="w-4 h-4 text-gold" />
+                  <Bot className="w-4 h-4 text-gold" />
                 </div>
                 <div>
                   <h4 className="text-gold font-medium text-sm">Revi</h4>
