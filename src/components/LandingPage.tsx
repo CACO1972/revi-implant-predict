@@ -30,7 +30,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             top: `${10 + i * 10}%`,
             width: "4px",
             height: "4px",
-            background: "#BFA181",
+            background: "#BFA181", // Gold accent color
             borderRadius: "50%",
             filter: "blur(1px)",
             boxShadow: "0 0 10px 2px rgba(191, 161, 129, 0.4)"
