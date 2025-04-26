@@ -9,16 +9,6 @@ interface WelcomeScreenProps {
 export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center min-h-screen text-center px-4 bg-background overflow-hidden">
-      {/* Fondo animado con estrellas */}
-      <div 
-        className="fixed inset-0 bg-starry opacity-20"
-        style={{ 
-          backgroundImage: "url('/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center"
-        }}
-      />
-      
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -36,7 +26,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           }}
         >
           <img 
-            src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png"
+            src="/lovable-uploads/3d3b8ce7-1789-4fd0-ba94-16d161132e7e.png"
             alt="ImplantDX Logo"
             className="w-72 h-auto mx-auto"
           />
@@ -72,6 +62,18 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
 
           <p className="text-[11px] text-white/50 mt-6 max-w-md mx-auto">
             *Versión beta. Esta herramienta no reemplaza una evaluación profesional.
+          </p>
+        </motion.div>
+
+        <motion.div 
+          className="mt-12 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 0.8 }}
+        >
+          <p className="text-sm text-white/60">© 2025 ImplantDX - Evaluación clínica basada en IA</p>
+          <p className="text-xs text-white/40 mt-1">
+            Este es un sistema de predicción y no reemplaza la evaluación profesional
           </p>
         </motion.div>
       </motion.div>
