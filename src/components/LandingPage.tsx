@@ -1,44 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
 
 interface LandingPageProps {
   onStart: () => void;
 }
 
-export default function LandingPage({
-  onStart
-}: LandingPageProps) {
+export default function LandingPage({ onStart }: LandingPageProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[85vh] text-center px-4 relative">
-      {/* Background stars animation - keeping minimal stars, removing any that might be causing overlaps */}
-      {[...Array(3)].map((_, i) => (
-        <motion.div 
-          key={i} 
-          className="absolute" 
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.5, 0.8, 0.5]
-          }} 
-          transition={{
-            duration: 2 + i,
-            repeat: Infinity,
-            repeatType: "reverse",
-            delay: i * 0.7
-          }} 
-          style={{
-            left: `${20 + i * 20}%`,
-            top: `${10 + i * 15}%`,
-            width: "3px",
-            height: "3px",
-            background: "#BFA181",
-            borderRadius: "50%",
-            filter: "blur(1px)",
-            boxShadow: "0 0 8px 1px rgba(191, 161, 129, 0.4)"
-          }} 
-        />
-      ))}
-
       <motion.div 
         initial={{ opacity: 0, y: 20 }} 
         animate={{ opacity: 1, y: 0 }} 
@@ -51,38 +20,23 @@ export default function LandingPage({
           animate={{ opacity: 1 }} 
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          <div className="relative mx-auto w-64 h-64 mb-6">
-            {/* Logo background glow - simplified to avoid overlapping */}
+          <div className="relative mx-auto w-32 h-32 mb-12">
             <motion.div 
-              className="absolute inset-0 bg-gradient-to-br from-[#178582]/20 to-[#BFA181]/20 rounded-full blur-xl opacity-60" 
-              animate={{
-                scale: [1, 1.05, 1],
-                opacity: [0.4, 0.6, 0.4]
-              }} 
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }} 
-            />
-
-            {/* Logo container - simplified, single logo only */}
-            <motion.div 
+              className="w-full h-full"
               animate={{
                 y: [0, -5, 0],
-                filter: ["drop-shadow(0 0 10px rgba(23, 133, 130, 0.3))", "drop-shadow(0 0 15px rgba(23, 133, 130, 0.4))", "drop-shadow(0 0 10px rgba(23, 133, 130, 0.3))"]
+                filter: ["drop-shadow(0 0 10px rgba(0, 157, 255, 0.3))", "drop-shadow(0 0 15px rgba(0, 157, 255, 0.4))", "drop-shadow(0 0 10px rgba(0, 157, 255, 0.3))"]
               }} 
               transition={{
                 duration: 3,
                 repeat: Infinity,
                 repeatType: "reverse"
-              }} 
-              className="relative w-full h-full flex items-center justify-center"
+              }}
             >
               <img 
-                src="/lovable-uploads/3d3b8ce7-1789-4fd0-ba94-16d161132e7e.png" 
-                alt="ImplantDX Logo" 
-                className="w-64 h-auto object-contain" 
+                src="/lovable-uploads/88c650cf-ccc6-47f7-96d6-bf9fea223ecf.png" 
+                alt="ImplantX" 
+                className="w-full h-full object-contain"
               />
             </motion.div>
           </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, Bot, Sparkles } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 import { Button } from './ui/button';
 
 interface ReviAssistantProps {
@@ -11,7 +11,7 @@ interface ReviAssistantProps {
 }
 
 export default function ReviAssistant({
-  messages = ["¡Hola! Soy Revi, tu asistente IA dental. Estoy aquí para guiarte en tu evaluación de implantes."],
+  messages = ["¡Hola! Soy el asistente de ImplantX. Estoy aquí para guiarte en tu evaluación clínica."],
   currentStep = 0,
   totalSteps = 0,
   onClose
@@ -22,15 +22,6 @@ export default function ReviAssistant({
   const [typedText, setTypedText] = useState('');
 
   const toggleOpen = () => setIsOpen(!isOpen);
-
-  const getQuestionPrompts = () => {
-    return [
-      "¿Te quedó clara esta pregunta? Puedo explicártela mejor si lo necesitas.",
-      "¿Quieres saber más sobre este tema?",
-      "¿Necesitas ayuda para responder esta pregunta?",
-      "¿Te gustaría ver información adicional sobre este aspecto?"
-    ];
-  };
 
   useEffect(() => {
     if (isOpen && messages.length > 0) {
@@ -50,69 +41,65 @@ export default function ReviAssistant({
     }
   }, [isOpen, currentMessage, messages]);
 
-  useEffect(() => {
-    if (currentStep > 0) {
-      const prompts = getQuestionPrompts();
-      const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
-      messages = [...messages, randomPrompt];
-    }
-  }, [currentStep]);
-
-  return <>
+  return (
+    <>
       <div className="fixed bottom-6 right-6 z-50">
         <AnimatePresence>
-          {!isOpen && <motion.div initial={{
-          scale: 0
-        }} animate={{
-          scale: 1
-        }} exit={{
-          scale: 0
-        }} className="relative">
-              <motion.div animate={{
-            scale: [1, 1.1, 1]
-          }} transition={{
-            repeat: Infinity,
-            duration: 3
-          }} className="absolute -inset-1 bg-gradient-to-r from-primary to-gold rounded-full opacity-70 blur" />
-              <Button onClick={toggleOpen} size="icon" className="w-14 h-14 rounded-full text-starry shadow-gold-glow border-none relative z-10 bg-amber-500 hover:bg-amber-400">
-                <Bot className="w-6 h-6" />
+          {!isOpen && (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+              className="relative"
+            >
+              <Button 
+                onClick={toggleOpen} 
+                size="icon" 
+                className="w-14 h-14 rounded-full bg-transparent hover:bg-white/5 border border-white/20"
+              >
+                <img 
+                  src="/lovable-uploads/88c650cf-ccc6-47f7-96d6-bf9fea223ecf.png" 
+                  alt="ImplantX" 
+                  className="w-8 h-8 object-contain"
+                />
                 <span className="sr-only">Abrir asistente</span>
-                
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full animate-pulse" />
               </Button>
-            </motion.div>}
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
 
       <AnimatePresence>
-        {isOpen && <motion.div initial={{
-        opacity: 0,
-        y: 20,
-        scale: 0.9
-      }} animate={{
-        opacity: 1,
-        y: 0,
-        scale: 1
-      }} exit={{
-        opacity: 0,
-        y: 20,
-        scale: 0.9
-      }} className="fixed bottom-24 right-6 w-80 glass-panel shadow-lg overflow-hidden z-50">
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed bottom-24 right-6 w-80 glass-panel shadow-lg overflow-hidden z-50"
+          >
             <div className="bg-primary/20 p-3 flex items-center justify-between border-b border-white/10">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
-                  <Bot className="w-4 h-4 text-gold" />
-                </div>
+              <div className="flex items-center space-x-3">
+                <img 
+                  src="/lovable-uploads/88c650cf-ccc6-47f7-96d6-bf9fea223ecf.png" 
+                  alt="ImplantX" 
+                  className="w-6 h-6 object-contain"
+                />
                 <div>
-                  <h4 className="text-gold font-medium text-sm">Revi</h4>
-                  <p className="text-xs text-white/70">Asistente dental IA</p>
+                  <h4 className="text-white font-medium text-sm">ImplantX</h4>
+                  <p className="text-xs text-white/70">Asistente clínico</p>
                 </div>
               </div>
-              <Button onClick={toggleOpen} variant="ghost" size="sm" className="text-white/70 hover:text-white h-8 w-8 p-0">
+              <Button 
+                onClick={toggleOpen} 
+                variant="ghost" 
+                size="sm" 
+                className="text-white/70 hover:text-white h-8 w-8 p-0"
+              >
                 &times;
               </Button>
             </div>
-            
+
             <div className="p-4 h-64 overflow-y-auto">
               <div className="flex space-x-3">
                 <div className="flex-shrink-0 h-9 w-9 rounded-full bg-gradient-to-r from-primary to-gold p-1">
@@ -141,7 +128,7 @@ export default function ReviAssistant({
                   </div>
                 </div>}
             </div>
-            
+
             <div className="flex justify-between border-t border-white/10 p-3 bg-white/5">
               {messages.length > 1 && <div className="flex space-x-2">
                   <Button onClick={() => setCurrentMessage(prev => Math.max(0, prev - 1))} disabled={currentMessage <= 0} size="sm" variant="ghost" className="h-8 px-2 text-white/70">
@@ -155,7 +142,9 @@ export default function ReviAssistant({
                 Cerrar
               </Button>
             </div>
-          </motion.div>}
+          </motion.div>
+        )}
       </AnimatePresence>
-    </>;
+    </>
+  );
 }
