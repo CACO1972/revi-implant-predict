@@ -55,9 +55,9 @@ export default function InstagramDemo() {
       }}
     >
       <img 
-        src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png"
+        src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png"
         alt="ImplantX Logo"
-        className="h-16 w-auto mx-auto"
+        className="h-24 w-auto mx-auto"
       />
     </motion.div>
   );
@@ -178,18 +178,22 @@ export default function InstagramDemo() {
               <motion.div 
                 animate={{ 
                   scale: [1, 1.1, 1],
-                  filter: ["drop-shadow(0 0 15px rgba(191, 161, 129, 0.4))", 
-                          "drop-shadow(0 0 25px rgba(191, 161, 129, 0.6))", 
-                          "drop-shadow(0 0 15px rgba(191, 161, 129, 0.4))"]
+                  filter: ["drop-shadow(0 0 15px rgba(30, 174, 219, 0.4))", 
+                          "drop-shadow(0 0 25px rgba(30, 174, 219, 0.6))", 
+                          "drop-shadow(0 0 15px rgba(30, 174, 219, 0.4))"]
                 }}
                 transition={{
                   duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold/30 to-primary/20 flex items-center justify-center"
+                className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#1EAEDB]/30 to-primary/20 flex items-center justify-center"
               >
-                <Sparkles size={40} className="text-gold animate-pulse" />
+                <img 
+                  src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png"
+                  alt="ImplantX Logo"
+                  className="h-16 w-auto"
+                />
               </motion.div>
               
               <h2 className="text-2xl font-bold gold-gradient-text mb-4">
@@ -205,7 +209,7 @@ export default function InstagramDemo() {
                   href="https://implantdx.cl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full bg-gold hover:bg-gold/90 text-starry py-3 px-4 rounded-xl shadow-gold-glow transition-all duration-300 border border-gold/30"
+                  className="block w-full bg-[#1EAEDB] hover:bg-[#33C3F0] text-starry py-3 px-4 rounded-xl shadow-glow transition-all duration-300 border border-[#1EAEDB]/30"
                 >
                   Obtener evaluación completa
                 </a>

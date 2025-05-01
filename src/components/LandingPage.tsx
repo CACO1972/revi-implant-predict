@@ -1,9 +1,12 @@
+
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+
 interface LandingPageProps {
   onStart: () => void;
 }
+
 export default function LandingPage({
   onStart
 }: LandingPageProps) {
@@ -47,7 +50,7 @@ export default function LandingPage({
       }}>
           <div className="relative mx-auto w-72 h-72 mb-6">
             {/* Planetary animation background */}
-            <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-gold/30 rounded-full blur-2xl opacity-70" animate={{
+            <motion.div className="absolute inset-0 bg-gradient-to-br from-[#1EAEDB]/30 to-[#33C3F0]/30 rounded-full blur-2xl opacity-70" animate={{
             scale: [1, 1.1, 1],
             opacity: [0.5, 0.7, 0.5]
           }} transition={{
@@ -64,7 +67,7 @@ export default function LandingPage({
             repeat: Infinity,
             ease: "linear"
           }}>
-              {[...Array(12)].map((_, i) => <motion.div key={i} className="absolute w-2 h-2 bg-gold rounded-full" animate={{
+              {[...Array(12)].map((_, i) => <motion.div key={i} className="absolute w-2 h-2 bg-[#1EAEDB] rounded-full" animate={{
               opacity: [0.3, 1, 0.3]
             }} transition={{
               duration: 3,
@@ -80,14 +83,17 @@ export default function LandingPage({
             {/* Logo and title container */}
             <motion.div animate={{
             y: [0, -10, 0],
-            filter: ["drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))", "drop-shadow(0 0 25px rgba(23, 133, 130, 0.5))", "drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))"]
+            filter: ["drop-shadow(0 0 15px rgba(30, 174, 219, 0.3))", "drop-shadow(0 0 25px rgba(30, 174, 219, 0.5))", "drop-shadow(0 0 15px rgba(30, 174, 219, 0.3))"]
           }} transition={{
             duration: 4,
             repeat: Infinity,
             repeatType: "reverse"
           }} className="relative w-full h-full flex items-center justify-center flex-col">
-              
-              
+              <img 
+                src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png"
+                alt="ImplantX Logo"
+                className="h-40 w-auto"
+              />
             </motion.div>
           </div>
           
@@ -113,7 +119,7 @@ export default function LandingPage({
         }} whileTap={{
           scale: 0.98
         }}>
-            <Button onClick={onStart} className="group text-starry px-10 py-7 rounded-xl text-lg font-medium shadow-gold-glow transition-all duration-300 border border-gold/30 bg-amber-500 hover:bg-amber-400">
+            <Button onClick={onStart} className="group text-starry px-10 py-7 rounded-xl text-lg font-medium shadow-gold-glow transition-all duration-300 border border-[#1EAEDB]/30 bg-[#1EAEDB] hover:bg-[#33C3F0]">
               <Sparkles className="w-5 h-5 mr-2 group-hover:animate-sparkle" />
               Comenzar evaluación
             </Button>

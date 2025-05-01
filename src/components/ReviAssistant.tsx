@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Bot, Sparkles } from 'lucide-react';
@@ -73,12 +74,16 @@ export default function ReviAssistant({
           }} transition={{
             repeat: Infinity,
             duration: 3
-          }} className="absolute -inset-1 bg-gradient-to-r from-primary to-gold rounded-full opacity-70 blur" />
-              <Button onClick={toggleOpen} size="icon" className="w-14 h-14 rounded-full text-starry shadow-gold-glow border-none relative z-10 bg-amber-500 hover:bg-amber-400">
-                <Bot className="w-6 h-6" />
+          }} className="absolute -inset-1 bg-gradient-to-r from-[#1EAEDB] to-[#33C3F0] rounded-full opacity-70 blur" />
+              <Button onClick={toggleOpen} size="icon" className="w-14 h-14 rounded-full text-starry shadow-glow border-none relative z-10 bg-[#1EAEDB] hover:bg-[#33C3F0]">
+                <img 
+                  src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png" 
+                  alt="ImplantX Logo" 
+                  className="w-8 h-8"
+                />
                 <span className="sr-only">Abrir asistente</span>
                 
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full animate-pulse" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-[#33C3F0] rounded-full animate-pulse" />
               </Button>
             </motion.div>}
         </AnimatePresence>
@@ -98,13 +103,17 @@ export default function ReviAssistant({
         y: 20,
         scale: 0.9
       }} className="fixed bottom-24 right-6 w-80 glass-panel shadow-lg overflow-hidden z-50">
-            <div className="bg-primary/20 p-3 flex items-center justify-between border-b border-white/10">
+            <div className="bg-[#1EAEDB]/20 p-3 flex items-center justify-between border-b border-white/10">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
-                  <Bot className="w-4 h-4 text-gold" />
+                <div className="w-8 h-8 rounded-full bg-[#1EAEDB]/20 flex items-center justify-center">
+                  <img 
+                    src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png" 
+                    alt="ImplantX Logo" 
+                    className="w-5 h-5" 
+                  />
                 </div>
                 <div>
-                  <h4 className="text-gold font-medium text-sm">Revi</h4>
+                  <h4 className="text-[#1EAEDB] font-medium text-sm">Revi</h4>
                   <p className="text-xs text-white/70">Asistente dental IA</p>
                 </div>
               </div>
@@ -115,9 +124,13 @@ export default function ReviAssistant({
             
             <div className="p-4 h-64 overflow-y-auto">
               <div className="flex space-x-3">
-                <div className="flex-shrink-0 h-9 w-9 rounded-full bg-gradient-to-r from-primary to-gold p-1">
+                <div className="flex-shrink-0 h-9 w-9 rounded-full bg-gradient-to-r from-[#1EAEDB] to-[#33C3F0] p-1">
                   <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
-                    <Sparkles className="w-4 h-4 text-gold" />
+                    <img 
+                      src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png" 
+                      alt="ImplantX Logo" 
+                      className="w-5 h-5" 
+                    />
                   </div>
                 </div>
                 <div className="bg-white/5 rounded-xl p-3 text-sm relative">
@@ -135,7 +148,7 @@ export default function ReviAssistant({
                     <span>{currentStep}/{totalSteps} completado</span>
                   </div>
                   <div className="w-full bg-white/10 rounded-full h-1.5 mt-2">
-                    <div className="bg-gradient-to-r from-primary to-gold h-1.5 rounded-full transition-all duration-500" style={{
+                    <div className="bg-gradient-to-r from-[#1EAEDB] to-[#33C3F0] h-1.5 rounded-full transition-all duration-500" style={{
                 width: `${currentStep / totalSteps * 100}%`
               }} />
                   </div>

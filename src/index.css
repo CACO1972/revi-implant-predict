@@ -22,7 +22,7 @@
   
   .gold-text {
     @apply text-gold font-montserrat;
-    text-shadow: 0 0 8px rgba(191, 161, 129, 0.4);
+    text-shadow: 0 0 8px rgba(30, 174, 219, 0.4);
   }
   
   .primary-button {
@@ -30,7 +30,7 @@
   }
   
   .gold-button {
-    @apply bg-gold hover:bg-gold/90 text-starry px-6 py-3 rounded-xl shadow-gold-glow transition-all duration-300 border border-gold/30;
+    @apply bg-[#1EAEDB] hover:bg-[#33C3F0] text-starry px-6 py-3 rounded-xl shadow-gold-glow transition-all duration-300 border border-[#1EAEDB]/30;
   }
   
   .secondary-button {
@@ -99,7 +99,7 @@
 }
 
 .gold-gradient-text {
-  background: linear-gradient(to right, #BFA181, #E7DBC9, #BFA181);
+  background: linear-gradient(to right, #1EAEDB, #33C3F0, #1EAEDB);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -148,21 +148,21 @@
 
 /* Animación de brillo para botones */
 .shadow-glow {
-  box-shadow: 0 0 15px rgba(23, 133, 130, 0.4);
+  box-shadow: 0 0 15px rgba(30, 174, 219, 0.4);
   transition: box-shadow 0.3s ease;
 }
 
 .shadow-glow:hover {
-  box-shadow: 0 0 25px rgba(23, 133, 130, 0.6);
+  box-shadow: 0 0 25px rgba(30, 174, 219, 0.6);
 }
 
 .shadow-gold-glow {
-  box-shadow: 0 0 15px rgba(191, 161, 129, 0.4);
+  box-shadow: 0 0 15px rgba(30, 174, 219, 0.4);
   transition: box-shadow 0.3s ease;
 }
 
 .shadow-gold-glow:hover {
-  box-shadow: 0 0 25px rgba(191, 161, 129, 0.6);
+  box-shadow: 0 0 25px rgba(30, 174, 219, 0.6);
 }
 
 /* Animación para Sparkles */
