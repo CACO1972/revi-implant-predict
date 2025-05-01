@@ -106,3 +106,86 @@
   text-shadow: 0 2px 4px rgba(0,0,0,0.1);
   animation: pulse-subtle 4s ease-in-out infinite;
 }
+
+/* Nuevas animaciones para la versión demo */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes background-pan {
+  from {
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    transform: translateX(-500px) translateY(-500px);
+  }
+}
+
+@keyframes star-glow {
+  0% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Animación de brillo para botones */
+.shadow-glow {
+  box-shadow: 0 0 15px rgba(23, 133, 130, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+.shadow-glow:hover {
+  box-shadow: 0 0 25px rgba(23, 133, 130, 0.6);
+}
+
+.shadow-gold-glow {
+  box-shadow: 0 0 15px rgba(191, 161, 129, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+.shadow-gold-glow:hover {
+  box-shadow: 0 0 25px rgba(191, 161, 129, 0.6);
+}
+
+/* Animación para Sparkles */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle 1.5s infinite;
+}
+
+/* Mejoras para inputs en tema oscuro */
+input, select, textarea {
+  color-scheme: dark;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
