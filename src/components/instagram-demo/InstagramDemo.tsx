@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Question } from "@/types/implant";
@@ -38,7 +37,7 @@ export default function InstagramDemo() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 relative overflow-hidden">
-      <div className="animated-stars"></div>
+      {/* Removed the text that was appearing in the background */}
       
       <AppLogo />
 
