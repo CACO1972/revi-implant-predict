@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Question } from "@/types/implant";
@@ -5,6 +6,7 @@ import WelcomePanel from "./WelcomePanel";
 import QuestionPanel from "./QuestionPanel";
 import CompletedPanel from "./CompletedPanel";
 import AppLogo from "./AppLogo";
+import AnimatedStarryBackground from "../AnimatedStarryBackground";
 import { demoQuestions } from "@/data/demoQuestions";
 
 export default function InstagramDemo() {
@@ -37,7 +39,7 @@ export default function InstagramDemo() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 relative overflow-hidden">
-      {/* Removed the text that was appearing in the background */}
+      <AnimatedStarryBackground />
       
       <AppLogo />
 
