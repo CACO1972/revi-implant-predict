@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import InstagramDemo from "@/components/InstagramDemo";
+import InstagramDemo from "@/components/instagram-demo/InstagramDemo";
 
 export default function Index() {
   return (

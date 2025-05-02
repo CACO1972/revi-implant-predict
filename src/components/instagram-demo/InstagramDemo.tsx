@@ -1,68 +1,69 @@
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { demoQuestions } from "@/data/demoQuestions";
-import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
-import AppLogo from "./AppLogo";
+import { Question } from "@/types/implant";
 import WelcomePanel from "./WelcomePanel";
 import QuestionPanel from "./QuestionPanel";
 import CompletedPanel from "./CompletedPanel";
+import AppLogo from "./AppLogo";
+import { demoQuestions } from "@/data/demoQuestions";
 
 export default function InstagramDemo() {
-  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [name, setName] = useState("");
+  const [currentStep, setCurrentStep] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
-  const [name, setName] = useState<string>("");
-  const [completed, setCompleted] = useState<boolean>(false);
-  
-  const handleNext = () => {
-    if (currentStep < demoQuestions.length) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      setCompleted(true);
-    }
-  };
-  
-  const handleSelectAnswer = (questionId: number, value: string) => {
-    setSelectedAnswers({
-      ...selectedAnswers,
-      [questionId]: value
-    });
-  };
+  const [showReviAssistant, setShowReviAssistant] = useState(false);
+
+  // Steps: 0 = welcome, 1-N = questions, N+1 = completed
+  const totalQuestions = demoQuestions.length;
+  const isWelcomeStep = currentStep === 0;
+  const isCompleted = currentStep === totalQuestions + 1;
   
   const handleStart = () => {
     setCurrentStep(1);
   };
 
-  const currentQuestion = demoQuestions[currentStep - 1];
-  
+  const handleSelectAnswer = (questionId: number, value: string) => {
+    setSelectedAnswers(prev => ({ ...prev, [questionId]: value }));
+  };
+
+  const handleNext = () => {
+    if (currentStep <= totalQuestions) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  // Get the current question based on the current step
+  const currentQuestion: Question = demoQuestions[currentStep - 1];
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4 relative overflow-hidden">
-      <AnimatedStarryBackground />
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 relative overflow-hidden">
+      <div className="animated-stars"></div>
       
-      <div className="max-w-md w-full mx-auto z-10 relative">
-        <AppLogo />
-        
+      <AppLogo />
+
+      <div className="w-full max-w-md mx-auto">
         <AnimatePresence mode="wait">
-          {currentStep === 0 && (
+          {isWelcomeStep && (
             <WelcomePanel 
               name={name} 
               setName={setName} 
               handleStart={handleStart} 
             />
           )}
-          
-          {currentStep > 0 && currentStep <= demoQuestions.length && (
+
+          {!isWelcomeStep && !isCompleted && currentQuestion && (
             <QuestionPanel 
               currentQuestion={currentQuestion}
               currentStep={currentStep}
-              totalQuestions={demoQuestions.length}
+              totalQuestions={totalQuestions}
               selectedAnswers={selectedAnswers}
               handleSelectAnswer={handleSelectAnswer}
               handleNext={handleNext}
             />
           )}
-          
-          {completed && (
+
+          {isCompleted && (
             <CompletedPanel name={name} />
           )}
         </AnimatePresence>
