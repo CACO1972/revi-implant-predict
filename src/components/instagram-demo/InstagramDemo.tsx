@@ -20,6 +20,9 @@ export default function InstagramDemo() {
   const isWelcomeStep = currentStep === 0;
   const isCompleted = currentStep === totalQuestions + 1;
   
+  // Determine logo size based on current step
+  const logoSize = isWelcomeStep || isCompleted ? "large" : "small";
+  
   const handleStart = () => {
     setCurrentStep(1);
   };
@@ -41,7 +44,7 @@ export default function InstagramDemo() {
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 relative overflow-hidden">
       <AnimatedStarryBackground />
       
-      <AppLogo />
+      <AppLogo size={logoSize} />
 
       <div className="w-full max-w-md mx-auto">
         <AnimatePresence mode="wait">
