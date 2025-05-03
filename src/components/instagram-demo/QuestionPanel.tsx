@@ -1,8 +1,9 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Question } from "@/types/implant";
+import ReviAssistant from "./ReviAssistant";
 
 interface QuestionPanelProps {
   currentQuestion: Question;
@@ -22,6 +23,26 @@ export default function QuestionPanel({
   handleNext
 }: QuestionPanelProps) {
   const hasSelectedAnswer = Boolean(selectedAnswers[currentQuestion.id]);
+  const [reviMessage, setReviMessage] = useState<string>("");
+  
+  useEffect(() => {
+    // Mensajes personalizados de Revi para cada pregunta
+    const messages = [
+      "¡Hola! Soy Revi, tu asistente. Vamos a evaluar si eres candidato para implantes.",
+      "El consumo de tabaco puede afectar la cicatrización. ¡Sé honesto!",
+      "La diabetes bien controlada no es impedimento para un implante.",
+      "El bruxismo puede sobreesforzar los implantes. ¿Lo padeces?",
+      "Mientras menos tiempo haya pasado desde que perdiste el diente, mejor.",
+      "La cantidad de dientes afecta el tipo de tratamiento a realizar.",
+      "Cada zona de la boca tiene diferente calidad ósea y accesibilidad.",
+      "Es importante tratar estas condiciones antes de colocar implantes.",
+      "Conocer la causa de la pérdida dental nos ayuda a prevenir problemas.",
+      "¡La higiene es crucial para el mantenimiento de tus implantes!",
+      "Tu motivación es importante para el proceso."
+    ];
+    
+    setReviMessage(messages[currentStep - 1] || "Vamos a continuar con la evaluación");
+  }, [currentStep]);
 
   return (
     <motion.div
@@ -76,6 +97,9 @@ export default function QuestionPanel({
       >
         Siguiente
       </Button>
+      
+      {/* Revi Assistant */}
+      <ReviAssistant isVisible={true} message={reviMessage} />
     </motion.div>
   );
 }

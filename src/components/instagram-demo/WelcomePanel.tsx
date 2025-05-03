@@ -2,7 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Bird } from "lucide-react";
 
 interface WelcomePanelProps {
   name: string;
@@ -34,6 +34,15 @@ export default function WelcomePanel({
       <p className="text-white/80 mb-6">
         Este test evalúa si eres buen candidato para implantes dentales en solo 60 segundos.
       </p>
+      
+      <div className="flex items-center justify-center mb-6">
+        <div className="bg-[#1EAEDB]/20 rounded-full p-1">
+          <Bird className="w-6 h-6 text-[#33C3F0]" />
+        </div>
+        <p className="text-white/70 text-sm ml-2">
+          Revi, tu asistente virtual, te guiará durante el proceso
+        </p>
+      </div>
       
       <div className="mb-6">
         <label className="block text-white/80 text-sm mb-2" htmlFor="name">

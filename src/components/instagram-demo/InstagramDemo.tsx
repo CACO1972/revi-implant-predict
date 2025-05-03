@@ -8,6 +8,7 @@ import CompletedPanel from "./CompletedPanel";
 import AppLogo from "./AppLogo";
 import AnimatedStarryBackground from "../AnimatedStarryBackground";
 import { demoQuestions } from "@/data/demoQuestions";
+import ReviAssistant from "./ReviAssistant";
 
 export default function InstagramDemo() {
   const [name, setName] = useState("");
@@ -25,6 +26,7 @@ export default function InstagramDemo() {
   
   const handleStart = () => {
     setCurrentStep(1);
+    setShowReviAssistant(true);
   };
 
   const handleSelectAnswer = (questionId: number, value: string) => {
@@ -34,6 +36,9 @@ export default function InstagramDemo() {
   const handleNext = () => {
     if (currentStep <= totalQuestions) {
       setCurrentStep(currentStep + 1);
+      if (currentStep === totalQuestions) {
+        setShowReviAssistant(false);
+      }
     }
   };
 
@@ -72,6 +77,14 @@ export default function InstagramDemo() {
           )}
         </AnimatePresence>
       </div>
+      
+      {/* Revi Assistant en pantalla de bienvenida pero oculto hasta comenzar */}
+      {isWelcomeStep && (
+        <ReviAssistant 
+          isVisible={false} 
+          message="¡Hola! Soy Revi, tu asistente virtual. Estoy aquí para guiarte en tu evaluación de implantes dentales."
+        />
+      )}
     </div>
   );
 }
