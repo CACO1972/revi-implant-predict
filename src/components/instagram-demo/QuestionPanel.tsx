@@ -50,7 +50,7 @@ export default function QuestionPanel({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="glass-panel p-6"
+      className="glass-panel p-6 relative z-0"
     >
       <div className="mb-4">
         <div className="w-full bg-white/10 rounded-full h-2">
@@ -98,7 +98,7 @@ export default function QuestionPanel({
         Siguiente
       </Button>
       
-      {/* Revi Assistant */}
+      {/* Revi Assistant - Now with pointer-events-none to prevent blocking */}
       <ReviAssistant isVisible={true} message={reviMessage} />
     </motion.div>
   );
