@@ -9,9 +9,9 @@ interface AppLogoProps {
 export default function AppLogo({ size = "large" }: AppLogoProps) {
   // Dynamic height classes based on size prop
   const sizeClasses = {
-    small: "h-16",
-    medium: "h-24",
-    large: "h-[33vh]" // 1/3 of viewport height
+    small: "h-20", // Aumentado de h-16 a h-20
+    medium: "h-32", // Aumentado de h-24 a h-32
+    large: "h-[40vh]" // Aumentado de 33vh a 40vh (40% de la altura de la ventana)
   };
 
   const marginClasses = {

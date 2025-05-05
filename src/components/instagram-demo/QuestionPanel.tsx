@@ -90,15 +90,17 @@ export default function QuestionPanel({
         ))}
       </div>
       
-      <Button
-        onClick={handleNext}
-        disabled={!hasSelectedAnswer}
-        className="w-full bg-gradient-to-r from-primary to-gold hover:from-primary/90 hover:to-gold/90 text-white py-3 rounded-xl shadow-glow transition-all duration-300"
-      >
-        Siguiente
-      </Button>
+      <div className="pb-16">
+        <Button
+          onClick={handleNext}
+          disabled={!hasSelectedAnswer}
+          className="w-full bg-gradient-to-r from-primary to-gold hover:from-primary/90 hover:to-gold/90 text-white py-3 rounded-xl shadow-glow transition-all duration-300"
+        >
+          Siguiente
+        </Button>
+      </div>
       
-      {/* Blu Assistant - Now with pointer-events-none to prevent blocking */}
+      {/* Blu Assistant - Con espacio adicional para evitar superposiciones */}
       <ReviAssistant isVisible={true} message={reviMessage} />
     </motion.div>
   );
