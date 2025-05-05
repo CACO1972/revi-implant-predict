@@ -26,9 +26,9 @@ export default function QuestionPanel({
   const [reviMessage, setReviMessage] = useState<string>("");
   
   useEffect(() => {
-    // Mensajes personalizados de Revi para cada pregunta
+    // Mensajes personalizados de Blu para cada pregunta
     const messages = [
-      "¡Hola! Soy Revi, tu asistente. Vamos a evaluar si eres candidato para implantes.",
+      "¡Hola! Soy Blu, tu asistente. Vamos a evaluar si eres candidato para implantes.",
       "El consumo de tabaco puede afectar la cicatrización. ¡Sé honesto!",
       "La diabetes bien controlada no es impedimento para un implante.",
       "El bruxismo puede sobreesforzar los implantes. ¿Lo padeces?",
@@ -98,7 +98,7 @@ export default function QuestionPanel({
         Siguiente
       </Button>
       
-      {/* Revi Assistant - Now with pointer-events-none to prevent blocking */}
+      {/* Blu Assistant - Now with pointer-events-none to prevent blocking */}
       <ReviAssistant isVisible={true} message={reviMessage} />
     </motion.div>
   );

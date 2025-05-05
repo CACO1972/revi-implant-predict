@@ -40,7 +40,7 @@ export default function WelcomePanel({
           <Bird className="w-6 h-6 text-[#33C3F0]" />
         </div>
         <p className="text-white/70 text-sm ml-2">
-          Revi, tu asistente virtual, te guiará durante el proceso
+          Blu, tu asistente virtual, te guiará durante el proceso
         </p>
       </div>
       

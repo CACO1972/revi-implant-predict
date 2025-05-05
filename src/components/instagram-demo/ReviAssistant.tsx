@@ -37,7 +37,7 @@ export default function ReviAssistant({ message, isVisible }: ReviAssistantProps
       >
         <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-starry z-10"></div>
         <Avatar className="w-16 h-16 bg-gradient-to-br from-[#1EAEDB] to-[#33C3F0] p-1 shadow-glow">
-          <AvatarImage src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png" alt="Revi" />
+          <AvatarImage src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png" alt="Blu" />
           <AvatarFallback className="bg-[#1EAEDB] text-white">
             <Bird className="w-8 h-8" />
           </AvatarFallback>

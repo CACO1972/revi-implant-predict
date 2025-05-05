@@ -78,11 +78,11 @@ export default function InstagramDemo() {
         </AnimatePresence>
       </div>
       
-      {/* Revi Assistant en pantalla de bienvenida pero oculto hasta comenzar */}
+      {/* Blu Assistant en pantalla de bienvenida pero oculto hasta comenzar */}
       {isWelcomeStep && (
         <ReviAssistant 
           isVisible={false} 
-          message="¡Hola! Soy Revi, tu asistente virtual. Estoy aquí para guiarte en tu evaluación de implantes dentales."
+          message="¡Hola! Soy Blu, tu asistente virtual. Estoy aquí para guiarte en tu evaluación de implantes dentales."
         />
       )}
     </div>
