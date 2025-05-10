@@ -1,9 +1,12 @@
 
 import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Question } from "@/types/implant";
 import ReviAssistant from "./ReviAssistant";
+import ProgressBar from "./ProgressBar";
+import QuestionHeader from "./QuestionHeader";
+import AnswerOptions from "./AnswerOptions";
+import NextButton from "./NextButton";
 
 interface QuestionPanelProps {
   currentQuestion: Question;
@@ -52,53 +55,17 @@ export default function QuestionPanel({
       exit={{ opacity: 0, y: -20 }}
       className="glass-panel p-6 relative z-0"
     >
-      <div className="mb-4">
-        <div className="w-full bg-white/10 rounded-full h-2">
-          <div
-            className="bg-gradient-to-r from-primary to-gold h-2 rounded-full"
-            style={{ width: `${(currentStep / totalQuestions) * 100}%` }}
-          ></div>
-        </div>
-        <p className="text-white/60 text-xs mt-1 text-right">
-          {currentStep} de {totalQuestions}
-        </p>
-      </div>
+      <ProgressBar currentStep={currentStep} totalSteps={totalQuestions} />
       
-      <h2 className="text-lg font-bold text-gold mb-4">
-        {currentQuestion.title}
-      </h2>
+      <QuestionHeader question={currentQuestion} />
       
-      <p className="text-white/70 text-sm mb-6">
-        {currentQuestion.explanation}
-      </p>
+      <AnswerOptions 
+        currentQuestion={currentQuestion} 
+        selectedAnswer={selectedAnswers[currentQuestion.id]}
+        handleSelectAnswer={handleSelectAnswer}
+      />
       
-      <div className="space-y-3 mb-6">
-        {currentQuestion.options.map((option) => (
-          <motion.button
-            key={option.value.toString()}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => handleSelectAnswer(currentQuestion.id, option.value.toString())}
-            className={`w-full p-3 rounded-lg text-left transition-colors ${
-              selectedAnswers[currentQuestion.id] === option.value.toString()
-                ? "bg-gold/20 border border-gold/50"
-                : "bg-white/5 border border-white/10 hover:bg-white/10"
-            }`}
-          >
-            <span className="text-white/90">{option.label}</span>
-          </motion.button>
-        ))}
-      </div>
-      
-      <div className="pb-16">
-        <Button
-          onClick={handleNext}
-          disabled={!hasSelectedAnswer}
-          className="w-full bg-gradient-to-r from-primary to-gold hover:from-primary/90 hover:to-gold/90 text-white py-3 rounded-xl shadow-glow transition-all duration-300"
-        >
-          Siguiente
-        </Button>
-      </div>
+      <NextButton handleNext={handleNext} disabled={!hasSelectedAnswer} />
       
       {/* Blu Assistant - Con espacio adicional para evitar superposiciones */}
       <ReviAssistant isVisible={true} message={reviMessage} />
