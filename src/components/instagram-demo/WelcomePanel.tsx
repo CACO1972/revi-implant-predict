@@ -32,21 +32,22 @@ export default function WelcomePanel({
       </h1>
       
       <p className="text-white/80 mb-6">
-        Este test evalúa si eres buen candidato para implantes dentales en solo 60 segundos.
+        Este test evaluará en 60 segundos si eres un buen candidato para implantes dentales, 
+        considerando factores como tu salud, hábitos y condición bucal actual.
       </p>
       
-      <div className="flex items-center justify-center mb-6">
+      <div className="flex items-center justify-center mb-8 bg-[#1EAEDB]/10 p-3 rounded-lg">
         <div className="bg-[#1EAEDB]/20 rounded-full p-1">
           <Bird className="w-6 h-6 text-[#33C3F0]" />
         </div>
         <p className="text-white/70 text-sm ml-2">
-          Blu, tu asistente virtual, te guiará durante el proceso
+          Blu, tu asistente virtual, te guiará durante todo el proceso
         </p>
       </div>
       
-      <div className="mb-6">
-        <label className="block text-white/80 text-sm mb-2" htmlFor="name">
-          Tu nombre
+      <div className="mb-8">
+        <label className="block text-white/90 text-sm mb-2 font-medium" htmlFor="name">
+          ¿Cuál es tu nombre?
         </label>
         <input
           type="text"
@@ -54,18 +55,24 @@ export default function WelcomePanel({
           value={name}
           onChange={handleNameChange}
           placeholder="Ingresa tu nombre"
-          className="w-full p-2 bg-white/10 border border-white/20 rounded-lg text-white focus:ring-primary focus:border-primary"
+          className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white focus:ring-primary focus:border-primary text-center"
+          autoComplete="off"
         />
+        <p className="text-white/60 text-xs mt-2">Esta información solo será usada para personalizar tu experiencia</p>
       </div>
       
       <Button
         onClick={handleStart}
         disabled={!name.trim()}
-        className="group w-full bg-gradient-to-r from-primary to-gold hover:from-primary/90 hover:to-gold/90 text-white py-3 rounded-xl shadow-glow transition-all duration-300"
+        className="group w-full bg-gradient-to-r from-primary to-gold hover:from-primary/90 hover:to-gold/90 text-white py-5 rounded-xl shadow-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <Sparkles className="w-5 h-5 mr-2 group-hover:animate-pulse" />
-        Comenzar evaluación
+        Comenzar evaluación gratuita
       </Button>
+      
+      <p className="text-white/50 text-xs mt-4">
+        Este análisis no sustituye una evaluación clínica profesional.
+      </p>
     </motion.div>
   );
 }

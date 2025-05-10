@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { Bird } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-interface ReviAssistantProps {
+interface BluAssistantProps {
   message?: string;
   isVisible: boolean;
 }
 
-export default function ReviAssistant({ message, isVisible }: ReviAssistantProps) {
+export default function BluAssistant({ message, isVisible }: BluAssistantProps) {
   if (!isVisible) return null;
 
   return (
@@ -17,7 +17,7 @@ export default function ReviAssistant({ message, isVisible }: ReviAssistantProps
       initial={{ opacity: 0, y: 20, scale: 0.8 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 20, scale: 0.8 }}
-      className="fixed bottom-20 right-4 flex items-end z-10 pointer-events-none" // Cambiado de bottom-4 a bottom-20 para elevarlo
+      className="fixed bottom-28 right-4 flex items-end z-10 pointer-events-none" // Elevado a bottom-28 para evitar solapamiento
     >
       {message && (
         <motion.div
@@ -37,7 +37,6 @@ export default function ReviAssistant({ message, isVisible }: ReviAssistantProps
       >
         <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-starry z-10"></div>
         <Avatar className="w-16 h-16 bg-gradient-to-br from-[#1EAEDB] to-[#33C3F0] p-1 shadow-glow">
-          {/* Reemplazamos el logo antiguo con un avatar inspirado en el personaje Blu de la película Rio */}
           <div className="w-full h-full rounded-full bg-[#1EAEDB] flex items-center justify-center overflow-hidden">
             <svg viewBox="0 0 100 100" className="w-full h-full">
               {/* Forma de la cabeza del ave */}

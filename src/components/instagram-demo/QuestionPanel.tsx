@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Question } from "@/types/implant";
-import ReviAssistant from "./ReviAssistant";
+import BluAssistant from "./BluAssistant";
 import ProgressBar from "./ProgressBar";
 import QuestionHeader from "./QuestionHeader";
 import AnswerOptions from "./AnswerOptions";
@@ -26,7 +26,7 @@ export default function QuestionPanel({
   handleNext
 }: QuestionPanelProps) {
   const hasSelectedAnswer = Boolean(selectedAnswers[currentQuestion.id]);
-  const [reviMessage, setReviMessage] = useState<string>("");
+  const [bluMessage, setBluMessage] = useState<string>("");
   
   useEffect(() => {
     // Mensajes personalizados de Blu para cada pregunta
@@ -44,7 +44,7 @@ export default function QuestionPanel({
       "Tu motivación es importante para el proceso."
     ];
     
-    setReviMessage(messages[currentStep - 1] || "Vamos a continuar con la evaluación");
+    setBluMessage(messages[currentStep - 1] || "Vamos a continuar con la evaluación");
   }, [currentStep]);
 
   return (
@@ -68,7 +68,7 @@ export default function QuestionPanel({
       <NextButton handleNext={handleNext} disabled={!hasSelectedAnswer} />
       
       {/* Blu Assistant - Con espacio adicional para evitar superposiciones */}
-      <ReviAssistant isVisible={true} message={reviMessage} />
+      <BluAssistant isVisible={true} message={bluMessage} />
     </motion.div>
   );
 }

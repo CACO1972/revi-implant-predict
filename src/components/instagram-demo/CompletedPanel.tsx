@@ -1,12 +1,27 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { AssessmentResult } from "@/types/implant";
+import RecommendationList from "../results/RecommendationList";
 
 interface CompletedPanelProps {
   name: string;
+  result: AssessmentResult | null;
 }
 
-export default function CompletedPanel({ name }: CompletedPanelProps) {
+export default function CompletedPanel({ name, result }: CompletedPanelProps) {
+  const getColorByLevel = () => {
+    if (!result) return "text-primary";
+    
+    switch (result.level) {
+      case 1: return "text-emerald-400";
+      case 2: return "text-primary";
+      case 3: return "text-gold";
+      case 4: return "text-red-400";
+      default: return "text-primary";
+    }
+  };
+
   return (
     <motion.div
       key="completed"
@@ -39,9 +54,24 @@ export default function CompletedPanel({ name }: CompletedPanelProps) {
       <h2 className="text-2xl font-bold gold-gradient-text mb-4">
         ¡Gracias, {name}!
       </h2>
+
+      {result && (
+        <div className="mb-6">
+          <div className="p-4 rounded-lg bg-white/5 mb-4">
+            <h3 className={`text-xl font-semibold mb-2 ${getColorByLevel()}`}>
+              Nivel {result.level}: {result.prediction}
+            </h3>
+            <p className="text-white/80 text-sm">
+              Tu puntuación: <span className={`font-bold ${getColorByLevel()}`}>{result.totalScore}/16</span>
+            </p>
+          </div>
+          
+          <RecommendationList recommendations={result.recommendations} />
+        </div>
+      )}
       
       <p className="text-white/80 mb-6">
-        Visita nuestra web para obtener tu evaluación completa y descubrir si eres candidato para implantes dentales.
+        Visita nuestra web para obtener tu evaluación completa y descubrir opciones de tratamiento personalizadas.
       </p>
       
       <div className="space-y-4">
@@ -51,7 +81,7 @@ export default function CompletedPanel({ name }: CompletedPanelProps) {
           rel="noopener noreferrer"
           className="block w-full bg-[#1EAEDB] hover:bg-[#33C3F0] text-starry py-3 px-4 rounded-xl shadow-glow transition-all duration-300 border border-[#1EAEDB]/30"
         >
-          Obtener evaluación completa
+          Obtener evaluación profesional
         </a>
         <a
           href="https://instagram.com/reviveai.cl"

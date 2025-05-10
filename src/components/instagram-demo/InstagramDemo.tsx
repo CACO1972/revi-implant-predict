@@ -1,20 +1,22 @@
 
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { Question } from "@/types/implant";
+import { Question, AssessmentResult, Answer } from "@/types/implant";
 import WelcomePanel from "./WelcomePanel";
 import QuestionPanel from "./QuestionPanel";
 import CompletedPanel from "./CompletedPanel";
 import AppLogo from "./AppLogo";
 import AnimatedStarryBackground from "../AnimatedStarryBackground";
 import { demoQuestions } from "@/data/demoQuestions";
-import ReviAssistant from "./ReviAssistant";
+import BluAssistant from "./BluAssistant";
+import { calculateScore, evaluateResult } from "@/utils/assessmentUtils";
 
 export default function InstagramDemo() {
   const [name, setName] = useState("");
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
-  const [showReviAssistant, setShowReviAssistant] = useState(false);
+  const [showBluAssistant, setShowBluAssistant] = useState(false);
+  const [assessmentResult, setAssessmentResult] = useState<AssessmentResult | null>(null);
 
   // Steps: 0 = welcome, 1-N = questions, N+1 = completed
   const totalQuestions = demoQuestions.length;
@@ -26,7 +28,7 @@ export default function InstagramDemo() {
   
   const handleStart = () => {
     setCurrentStep(1);
-    setShowReviAssistant(true);
+    setShowBluAssistant(true);
   };
 
   const handleSelectAnswer = (questionId: number, value: string) => {
@@ -34,11 +36,24 @@ export default function InstagramDemo() {
   };
 
   const handleNext = () => {
-    if (currentStep <= totalQuestions) {
+    if (currentStep < totalQuestions) {
       setCurrentStep(currentStep + 1);
-      if (currentStep === totalQuestions) {
-        setShowReviAssistant(false);
-      }
+    } else if (currentStep === totalQuestions) {
+      // Calculamos los resultados antes de mostrar la pantalla final
+      const answers: Answer[] = Object.entries(selectedAnswers).map(([questionId, value]) => {
+        return {
+          questionId: parseInt(questionId),
+          selectedValues: [value],
+          score: parseInt(value) || 0 // Simplificación, normalmente usaríamos getScoreFromOptions
+        };
+      });
+      
+      const totalScore = calculateScore(answers);
+      const result = evaluateResult(totalScore);
+      setAssessmentResult(result);
+      
+      setCurrentStep(currentStep + 1);
+      setShowBluAssistant(false);
     }
   };
 
@@ -73,14 +88,17 @@ export default function InstagramDemo() {
           )}
 
           {isCompleted && (
-            <CompletedPanel name={name} />
+            <CompletedPanel 
+              name={name} 
+              result={assessmentResult} 
+            />
           )}
         </AnimatePresence>
       </div>
       
       {/* Blu Assistant en pantalla de bienvenida pero oculto hasta comenzar */}
       {isWelcomeStep && (
-        <ReviAssistant 
+        <BluAssistant 
           isVisible={false} 
           message="¡Hola! Soy Blu, tu asistente virtual. Estoy aquí para guiarte en tu evaluación de implantes dentales."
         />
