@@ -32,7 +32,7 @@ export default function QuestionPanel({
   useEffect(() => {
     // Mensajes personalizados de Blu para cada pregunta
     const messages = {
-      1: "¡Hola! Soy Blu, tu asistente. Vamos a evaluar si eres candidato para implantes.",
+      1: "¡Hola! Soy Blu. Puedes hacer clic en mi avatar si necesitas ayuda durante la evaluación.",
       2: "El consumo de tabaco puede afectar la cicatrización. ¡Sé honesto!",
       3: "La diabetes bien controlada no es impedimento para un implante.",
       4: "El bruxismo puede sobreesforzar los implantes. ¿Lo padeces?",
@@ -46,8 +46,8 @@ export default function QuestionPanel({
     };
     
     // Acceder directamente al mensaje por ID para garantizar sincronización
-    setBluMessage(messages[currentQuestion.id as keyof typeof messages] || "Vamos a continuar con la evaluación");
-  }, [currentQuestion.id]); // Dependencia actualizada para usar ID específico de pregunta
+    setBluMessage(messages[currentQuestion.id as keyof typeof messages] || "Haz clic en mi avatar si necesitas ayuda.");
+  }, [currentQuestion.id]); 
 
   return (
     <motion.div
@@ -69,7 +69,7 @@ export default function QuestionPanel({
       
       <NextButton handleNext={handleNext} disabled={!hasSelectedAnswer} />
       
-      {/* Blu Assistant - Ahora posicionado en la esquina inferior izquierda */}
+      {/* Blu Assistant - Ahora más pequeño y en la esquina inferior izquierda */}
       <BluAssistant isVisible={true} message={bluMessage} />
     </motion.div>
   );
