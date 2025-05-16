@@ -28,24 +28,26 @@ export default function QuestionPanel({
   const hasSelectedAnswer = Boolean(selectedAnswers[currentQuestion.id]);
   const [bluMessage, setBluMessage] = useState<string>("");
   
+  // Efecto para sincronizar los mensajes de Blu con la pregunta actual
   useEffect(() => {
     // Mensajes personalizados de Blu para cada pregunta
-    const messages = [
-      "¡Hola! Soy Blu, tu asistente. Vamos a evaluar si eres candidato para implantes.",
-      "El consumo de tabaco puede afectar la cicatrización. ¡Sé honesto!",
-      "La diabetes bien controlada no es impedimento para un implante.",
-      "El bruxismo puede sobreesforzar los implantes. ¿Lo padeces?",
-      "Mientras menos tiempo haya pasado desde que perdiste el diente, mejor.",
-      "La cantidad de dientes afecta el tipo de tratamiento a realizar.",
-      "Cada zona de la boca tiene diferente calidad ósea y accesibilidad.",
-      "Es importante tratar estas condiciones antes de colocar implantes.",
-      "Conocer la causa de la pérdida dental nos ayuda a prevenir problemas.",
-      "¡La higiene es crucial para el mantenimiento de tus implantes!",
-      "Tu motivación es importante para el proceso."
-    ];
+    const messages = {
+      1: "¡Hola! Soy Blu, tu asistente. Vamos a evaluar si eres candidato para implantes.",
+      2: "El consumo de tabaco puede afectar la cicatrización. ¡Sé honesto!",
+      3: "La diabetes bien controlada no es impedimento para un implante.",
+      4: "El bruxismo puede sobreesforzar los implantes. ¿Lo padeces?",
+      5: "Mientras menos tiempo haya pasado desde que perdiste el diente, mejor.",
+      6: "La cantidad de dientes afecta el tipo de tratamiento a realizar.",
+      7: "Cada zona de la boca tiene diferente calidad ósea y accesibilidad.",
+      8: "Es importante tratar estas condiciones antes de colocar implantes.",
+      9: "Conocer la causa de la pérdida dental nos ayuda a prevenir problemas.",
+      10: "¡La higiene es crucial para el mantenimiento de tus implantes!",
+      11: "Tu motivación es importante para el proceso."
+    };
     
-    setBluMessage(messages[currentStep - 1] || "Vamos a continuar con la evaluación");
-  }, [currentStep]);
+    // Acceder directamente al mensaje por ID para garantizar sincronización
+    setBluMessage(messages[currentQuestion.id as keyof typeof messages] || "Vamos a continuar con la evaluación");
+  }, [currentQuestion.id]); // Dependencia actualizada para usar ID específico de pregunta
 
   return (
     <motion.div
@@ -67,7 +69,7 @@ export default function QuestionPanel({
       
       <NextButton handleNext={handleNext} disabled={!hasSelectedAnswer} />
       
-      {/* Blu Assistant - Con espacio adicional para evitar superposiciones */}
+      {/* Blu Assistant - Ahora posicionado en la esquina inferior izquierda */}
       <BluAssistant isVisible={true} message={bluMessage} />
     </motion.div>
   );

@@ -17,19 +17,8 @@ export default function BluAssistant({ message, isVisible }: BluAssistantProps) 
       initial={{ opacity: 0, y: 20, scale: 0.8 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 20, scale: 0.8 }}
-      className="fixed bottom-28 right-4 flex items-end z-10 pointer-events-none" // Elevado a bottom-28 para evitar solapamiento
+      className="fixed bottom-4 left-4 flex items-end z-10 pointer-events-none" // Cambiado a left-4 y bottom-4
     >
-      {message && (
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 20 }}
-          className="mr-3 mb-2 max-w-[250px] bg-primary/80 backdrop-blur-sm p-4 rounded-xl rounded-br-none text-white text-sm shadow-lg pointer-events-none"
-        >
-          {message}
-        </motion.div>
-      )}
-
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -57,6 +46,17 @@ export default function BluAssistant({ message, isVisible }: BluAssistantProps) 
           </AvatarFallback>
         </Avatar>
       </motion.div>
+
+      {message && (
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 20 }}
+          className="ml-3 mb-2 max-w-[250px] bg-primary/80 backdrop-blur-sm p-4 rounded-xl rounded-bl-none text-white text-sm shadow-lg pointer-events-none"
+        >
+          {message}
+        </motion.div>
+      )}
     </motion.div>
   );
 }
