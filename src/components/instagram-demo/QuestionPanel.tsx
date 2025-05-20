@@ -30,15 +30,15 @@ export default function QuestionPanel({
   
   // Efecto para sincronizar los mensajes de Blu con la pregunta actual
   useEffect(() => {
-    // Mensajes personalizados de Blu para cada pregunta
+    // Mensajes personalizados de Blu para cada pregunta con más detalle clínico
     const messages = {
       1: "El tabaco reduce el flujo sanguíneo y afecta la cicatrización. Los fumadores tienen 2-3 veces más riesgo de fracaso en implantes.",
-      2: "La diabetes bien controlada (HbA1c <7%) no es impedimento para un implante, pero requiere monitoreo especial.",
-      3: "El bruxismo puede sobrecargar los implantes con fuerzas hasta 6 veces mayores que la masticación normal.",
-      4: "Idealmente, un implante debería colocarse 3-6 meses después de perder el diente para minimizar la pérdida ósea.",
-      5: "El número de dientes a reemplazar determina la cantidad de implantes y el tipo de prótesis más adecuado para tu caso.",
+      2: "La diabetes afecta la cicatrización de tejidos. Con niveles de HbA1c <7%, los implantes pueden tener éxito similar a pacientes no diabéticos.",
+      3: "El bruxismo puede sobrecargar los implantes con fuerzas hasta 6 veces mayores que la masticación normal, necesitando protección nocturna.",
+      4: "Idealmente, un implante debería colocarse 3-6 meses después de perder el diente. Se pierde 50% del ancho óseo en el primer año.",
+      5: "El número de dientes a reemplazar determina la cantidad de implantes necesarios y el tipo de prótesis más adecuado para tu caso.",
       6: "La mandíbula anterior tiene el hueso más denso, mientras que el maxilar posterior suele tener la menor densidad ósea.",
-      7: "Es crucial tratar estas condiciones antes de colocar implantes para crear un ambiente oral favorable.",
+      7: "Es crucial tratar la enfermedad periodontal y caries antes de colocar implantes para crear un ambiente oral favorable.",
       8: "Si perdiste dientes por enfermedad periodontal, necesitarás un protocolo de mantenimiento más estricto tras los implantes.",
       9: "La principal causa de fracaso a largo plazo de los implantes es la periimplantitis, relacionada directamente con la higiene.",
       10: "Tu motivación nos ayuda a personalizar el tratamiento hacia tus necesidades específicas, ya sean funcionales o estéticas.",
@@ -69,7 +69,7 @@ export default function QuestionPanel({
       
       <NextButton handleNext={handleNext} disabled={!hasSelectedAnswer} />
       
-      {/* Blu Assistant - Ahora más pequeño y en la esquina inferior izquierda */}
+      {/* Blu Assistant - Con mensajes más detallados y educativos */}
       <BluAssistant isVisible={true} message={bluMessage} />
     </motion.div>
   );

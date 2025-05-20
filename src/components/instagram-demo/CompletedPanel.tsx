@@ -11,14 +11,14 @@ interface CompletedPanelProps {
 
 export default function CompletedPanel({ name, result }: CompletedPanelProps) {
   const getColorByLevel = () => {
-    if (!result) return "text-primary";
+    if (!result) return "text-[#1EAEDB]";
     
     switch (result.level) {
       case 1: return "text-emerald-400";
-      case 2: return "text-primary";
+      case 2: return "text-[#1EAEDB]";
       case 3: return "text-gold";
       case 4: return "text-red-400";
-      default: return "text-primary";
+      default: return "text-[#1EAEDB]";
     }
   };
 
@@ -42,7 +42,7 @@ export default function CompletedPanel({ name, result }: CompletedPanelProps) {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#1EAEDB]/30 to-primary/20 flex items-center justify-center"
+        className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#1EAEDB]/30 to-[#1EAEDB]/20 flex items-center justify-center"
       >
         <img 
           src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png"
@@ -70,8 +70,12 @@ export default function CompletedPanel({ name, result }: CompletedPanelProps) {
         </div>
       )}
       
-      <p className="text-white/80 mb-6">
-        Visita nuestra web para obtener tu evaluación completa y descubrir opciones de tratamiento personalizadas.
+      <p className="text-white/80 mb-2">
+        Tu evaluación personalizada te ayudará a tomar decisiones informadas sobre tu salud bucal.
+      </p>
+      <p className="text-white/70 text-sm mb-6 italic">
+        ImplantDX busca democratizar el acceso a información de calidad sobre implantes dentales,
+        especialmente para personas con recursos limitados o en zonas geográficamente aisladas.
       </p>
       
       <div className="space-y-4">

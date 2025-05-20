@@ -33,7 +33,7 @@ export default function BluAssistant({ message, isVisible }: BluAssistantProps) 
         <Avatar className="w-12 h-12 bg-gradient-to-br from-[#1EAEDB] to-[#33C3F0] p-1 shadow-glow">
           <div className="w-full h-full rounded-full bg-[#1EAEDB] flex items-center justify-center overflow-hidden">
             <svg viewBox="0 0 100 100" className="w-full h-full">
-              <circle cx="50" cy="50" r="45" fill="#1E90FF" />
+              <circle cx="50" cy="50" r="45" fill="#1EAEDB" />
               <path d="M 30 30 Q 50 10 70 30" stroke="#0066CC" strokeWidth="8" fill="none" />
               <circle cx="35" cy="45" r="6" fill="white" />
               <circle cx="65" cy="45" r="6" fill="white" />
@@ -62,7 +62,7 @@ export default function BluAssistant({ message, isVisible }: BluAssistantProps) 
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className="absolute bottom-14 left-0 w-64 bg-primary/90 backdrop-blur-sm p-4 pr-8 rounded-xl rounded-bl-none text-white text-sm shadow-lg"
+            className="absolute bottom-14 left-0 w-64 bg-[#1EAEDB]/90 backdrop-blur-sm p-4 pr-8 rounded-xl rounded-bl-none text-white text-sm shadow-lg"
           >
             <Button 
               variant="ghost" 
