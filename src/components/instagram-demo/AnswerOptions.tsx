@@ -13,90 +13,122 @@ interface AnswerOptionsProps {
 export default function AnswerOptions({
   currentQuestion,
   selectedAnswer,
-  handleSelectAnswer,
+  handleSelectAnswer
 }: AnswerOptionsProps) {
-  // Estado local para manejar multiselección
-  const [multiSelectedValues, setMultiSelectedValues] = useState<string[]>(
-    selectedAnswer ? selectedAnswer.split(',') : []
+  // Estado para multiselección si es necesario
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(
+    selectedAnswer ? [selectedAnswer] : []
   );
 
-  const handleMultiSelect = (value: string, checked: boolean) => {
-    let newValues: string[];
-    
-    // Caso especial para "none" en la pregunta de condiciones (id 7)
-    if (currentQuestion.id === 7) {
-      if (value === "none" && checked) {
-        // Si selecciona "none", eliminar otras selecciones
-        newValues = ["none"];
-      } else if (checked) {
-        // Si selecciona cualquier otra opción, eliminar "none"
-        newValues = [...multiSelectedValues.filter(v => v !== "none"), value];
-      } else {
-        // Si deselecciona una opción
-        newValues = multiSelectedValues.filter(v => v !== value);
-      }
-    } else {
-      // Comportamiento normal para otras preguntas multiselección
-      if (checked) {
-        newValues = [...multiSelectedValues, value];
-      } else {
-        newValues = multiSelectedValues.filter(v => v !== value);
-      }
+  const handleOptionClick = (value: string) => {
+    handleSelectAnswer(currentQuestion.id, value);
+  };
+
+  const handleCheckboxChange = (value: string, checked: boolean) => {
+    if (!currentQuestion.multiSelect) {
+      handleSelectAnswer(currentQuestion.id, value);
+      return;
     }
     
-    setMultiSelectedValues(newValues);
-    // Pasamos los valores como string separados por coma
-    handleSelectAnswer(currentQuestion.id, newValues.join(','));
+    let newSelected: string[];
+    
+    if (checked) {
+      // Si se selecciona "none", deseleccionar todas las demás opciones
+      if (value === "none") {
+        newSelected = ["none"];
+      } else {
+        // Si se selecciona cualquier otra opción, quitar "none" si está presente
+        newSelected = [...selectedOptions.filter(opt => opt !== "none"), value];
+      }
+    } else {
+      newSelected = selectedOptions.filter(opt => opt !== value);
+    }
+    
+    setSelectedOptions(newSelected);
+    // Para multi-selección, unimos las opciones con comas
+    handleSelectAnswer(currentQuestion.id, newSelected.join(","));
   };
 
   return (
-    <div className="space-y-3 mb-6">
+    <div className="mb-6">
       {currentQuestion.multiSelect ? (
-        // Opciones con checkbox para multiselección
-        currentQuestion.options.map((option) => (
-          <motion.div
-            key={option.value.toString()}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className={`w-full p-3 rounded-lg flex items-center gap-3 transition-colors ${
-              multiSelectedValues.includes(option.value.toString())
-                ? "bg-gold/20 border border-gold/50"
-                : "bg-white/5 border border-white/10 hover:bg-white/10"
-            }`}
-          >
-            <Checkbox
-              id={`option-${option.value}`}
-              checked={multiSelectedValues.includes(option.value.toString())}
-              onCheckedChange={(checked) => {
-                handleMultiSelect(option.value.toString(), checked === true);
+        <div className="space-y-3">
+          {currentQuestion.options.map((option, index) => (
+            <motion.div 
+              key={option.value.toString()}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className={`
+                flex items-center p-3 rounded-md transition-all
+                hover:bg-white/5 cursor-pointer
+              `}
+              onClick={() => {
+                const isChecked = !selectedOptions.includes(option.value.toString());
+                handleCheckboxChange(option.value.toString(), isChecked);
               }}
-              className="border-gold/30 data-[state=checked]:bg-gold data-[state=checked]:border-gold"
-            />
-            <label
-              htmlFor={`option-${option.value}`}
-              className="flex-1 text-white/90 cursor-pointer"
             >
-              {option.label}
-            </label>
-          </motion.div>
-        ))
+              <Checkbox
+                id={`option-${option.value}`}
+                checked={selectedOptions.includes(option.value.toString())}
+                onCheckedChange={(checked) => {
+                  handleCheckboxChange(option.value.toString(), !!checked);
+                }}
+                className="border-[#1EAEDB]/30 data-[state=checked]:bg-[#1EAEDB] data-[state=checked]:border-[#1EAEDB]"
+              />
+              <label
+                htmlFor={`option-${option.value}`}
+                className="ml-3 text-sm text-white/90 cursor-pointer"
+              >
+                {option.label}
+              </label>
+            </motion.div>
+          ))}
+        </div>
       ) : (
-        // Botones para selección única
-        currentQuestion.options.map((option) => (
-          <motion.button
-            key={option.value.toString()}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => handleSelectAnswer(currentQuestion.id, option.value.toString())}
-            className={`w-full p-3 rounded-lg text-left transition-colors ${
-              selectedAnswer === option.value.toString()
-                ? "bg-gold/20 border border-gold/50"
-                : "bg-white/5 border border-white/10 hover:bg-white/10"
-            }`}
-          >
-            <span className="text-white/90">{option.label}</span>
-          </motion.button>
-        ))
+        <div className="space-y-3">
+          {currentQuestion.options.map((option, index) => (
+            <motion.div
+              key={option.value.toString()}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className={`
+                flex items-center p-4 rounded-md transition-all
+                border border-transparent
+                ${
+                  selectedAnswer === option.value.toString()
+                    ? "bg-[#1EAEDB]/10 border-[#1EAEDB]/30"
+                    : "hover:bg-white/5"
+                }
+                cursor-pointer
+              `}
+              onClick={() => handleOptionClick(option.value.toString())}
+            >
+              <div
+                className={`
+                  w-5 h-5 rounded-full border-2 flex-shrink-0
+                  ${
+                    selectedAnswer === option.value.toString()
+                      ? "border-[#1EAEDB] bg-[#1EAEDB]/20"
+                      : "border-white/30"
+                  }
+                `}
+              >
+                {selectedAnswer === option.value.toString() && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="w-2.5 h-2.5 bg-[#1EAEDB] rounded-full m-auto"
+                  />
+                )}
+              </div>
+              <label className="ml-3 text-sm text-white/90 cursor-pointer">
+                {option.label}
+              </label>
+            </motion.div>
+          ))}
+        </div>
       )}
     </div>
   );

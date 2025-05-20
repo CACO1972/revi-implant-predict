@@ -11,6 +11,8 @@ import ContactForm from "./ContactForm";
 import FeedbackForm from "./FeedbackForm";
 import FeedbackSubmittedScreen from "./FeedbackSubmittedScreen";
 import RequestSubmittedScreen from "./RequestSubmittedScreen";
+import EducationalSection from "./EducationalSection";
+import CompletionMessage from "./CompletionMessage";
 
 import { PatientInfo, AssessmentResult } from "@/types/implant";
 
@@ -53,20 +55,20 @@ export default function ResultsCard({
   const getColorByLevel = () => {
     switch (result.level) {
       case 1: return "text-emerald-400";
-      case 2: return "text-primary";
+      case 2: return "text-[#1EAEDB]";
       case 3: return "text-gold";
       case 4: return "text-red-400";
-      default: return "text-primary";
+      default: return "text-[#1EAEDB]";
     }
   };
   
   const getBgColorByLevel = () => {
     switch (result.level) {
       case 1: return "bg-emerald-400/10";
-      case 2: return "bg-primary/10";
+      case 2: return "bg-[#1EAEDB]/10";
       case 3: return "bg-gold/10";
       case 4: return "bg-red-400/10";
-      default: return "bg-primary/10";
+      default: return "bg-[#1EAEDB]/10";
     }
   };
   
@@ -133,6 +135,10 @@ export default function ResultsCard({
         />
         
         <RecommendationList recommendations={result.recommendations} />
+        
+        <EducationalSection patientLevel={result.level} />
+        
+        <CompletionMessage />
 
         <motion.div className="space-y-6" initial={{
         opacity: 0
@@ -176,7 +182,7 @@ export default function ResultsCard({
             />
           ) : (
             <>
-              <div className="flex justify-center space-x-4">
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                   <Button onClick={handleContactClick} className="group text-starry px-8 py-5 rounded-xl text-lg font-medium shadow-gold-glow transition-all duration-300 border border-gold/30 bg-amber-500 hover:bg-amber-400">
                     <Sparkles className="w-5 h-5 mr-2 group-hover:animate-sparkle" />
