@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Sparkles } from "lucide-react";
 
 interface WelcomeScreenProps {
   onStart: () => void;
@@ -8,7 +9,7 @@ interface WelcomeScreenProps {
 
 export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center min-h-screen text-center px-4 bg-background overflow-hidden">
+    <div className="fixed inset-0 flex flex-col items-center justify-center min-h-screen text-center px-4 bg-[#0A1828] overflow-hidden">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -26,7 +27,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           }}
         >
           <img 
-            src="/lovable-uploads/3d3b8ce7-1789-4fd0-ba94-16d161132e7e.png"
+            src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png"
             alt="ImplantDX Logo"
             className="w-72 h-auto mx-auto"
           />
@@ -38,12 +39,12 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          <h2 className="text-lg md:text-xl text-white/85 font-light max-w-xl mx-auto">
-            Una herramienta clínica predictiva basada en IA
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            ¿Eres candidato a implantes dentales?
           </h2>
           
-          <p className="text-[15px] text-white/70 max-w-lg mx-auto font-light">
-            Te ayudaremos a saber si eres un buen candidato para implantes dentales
+          <p className="text-lg text-white/85 max-w-xl mx-auto">
+            Descúbrelo en 2 minutos con ayuda de la IA y recibe tu plan clínico personalizado
           </p>
         </motion.div>
 
@@ -55,13 +56,14 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
         >
           <Button 
             onClick={onStart}
-            className="bg-primary hover:bg-primary-dark text-white px-8 py-6 rounded-xl text-lg shadow-glow transition-all duration-300 border border-gold/30"
+            className="bg-[#178582] hover:bg-[#178582]/90 text-white px-8 py-6 rounded-xl text-lg shadow-glow transition-all duration-300 border border-[#BFA181]/30"
           >
-            Comenzar evaluación
+            <Sparkles className="w-5 h-5 mr-2" />
+            Evaluar mi caso
           </Button>
 
           <p className="text-[11px] text-white/50 mt-6 max-w-md mx-auto">
-            *Versión beta. Esta herramienta no reemplaza una evaluación profesional.
+            *Esta herramienta clínica predictiva está basada en evidencia científica, pero no reemplaza una evaluación profesional.
           </p>
         </motion.div>
 
@@ -71,9 +73,9 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9, duration: 0.8 }}
         >
-          <p className="text-sm text-white/60">© 2025 ImplantDX - Evaluación clínica basada en IA</p>
+          <p className="text-sm text-white/60">© 2025 ImplantDX - Democratizando el acceso a evaluación clínica</p>
           <p className="text-xs text-white/40 mt-1">
-            Este es un sistema de predicción y no reemplaza la evaluación profesional
+            Para personas con recursos limitados o en zonas geográficamente aisladas
           </p>
         </motion.div>
       </motion.div>

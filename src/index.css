@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,30 +7,30 @@
 
 @layer base {
   body {
-    @apply bg-starry text-foreground font-montserrat overflow-x-hidden;
+    @apply bg-[#0A1828] text-white font-montserrat overflow-x-hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-playfair;
+    @apply font-inter;
   }
 }
 
 @layer components {
   .glass-panel {
-    @apply bg-background/30 backdrop-blur-md border border-primary/10 rounded-3xl shadow-soft;
+    @apply bg-[#0A1828]/30 backdrop-blur-md border border-[#178582]/10 rounded-3xl shadow-soft;
   }
   
   .gold-text {
-    @apply text-gold font-montserrat;
-    text-shadow: 0 0 8px rgba(30, 174, 219, 0.4);
+    @apply text-[#BFA181] font-montserrat;
+    text-shadow: 0 0 8px rgba(191, 161, 129, 0.4);
   }
   
   .primary-button {
-    @apply bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-xl shadow-glow transition-all duration-300 border border-primary/30;
+    @apply bg-[#178582] hover:bg-[#178582]/90 text-white px-6 py-3 rounded-xl shadow-glow transition-all duration-300 border border-[#178582]/30;
   }
   
   .gold-button {
-    @apply bg-[#1EAEDB] hover:bg-[#33C3F0] text-starry px-6 py-3 rounded-xl shadow-gold-glow transition-all duration-300 border border-[#1EAEDB]/30;
+    @apply bg-[#BFA181] hover:bg-[#BFA181]/90 text-[#0A1828] px-6 py-3 rounded-xl shadow-gold-glow transition-all duration-300 border border-[#BFA181]/30;
   }
   
   .secondary-button {
@@ -79,7 +79,7 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(134, 195, 235, 0.1) 10%, transparent 70%);
+  background: radial-gradient(circle, rgba(23, 133, 130, 0.1) 10%, transparent 70%);
   filter: blur(20px);
   animation: nebula-glow 15s ease-in-out infinite alternate;
   z-index: 0;
@@ -87,7 +87,7 @@
 }
 
 .gold-gradient-text {
-  background: linear-gradient(to right, #1EAEDB, #33C3F0, #1EAEDB);
+  background: linear-gradient(to right, #178582, #BFA181, #178582);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -171,21 +171,21 @@
 
 /* Animación de brillo para botones */
 .shadow-glow {
-  box-shadow: 0 0 15px rgba(30, 174, 219, 0.4);
+  box-shadow: 0 0 15px rgba(23, 133, 130, 0.4);
   transition: box-shadow 0.3s ease;
 }
 
 .shadow-glow:hover {
-  box-shadow: 0 0 25px rgba(30, 174, 219, 0.6);
+  box-shadow: 0 0 25px rgba(23, 133, 130, 0.6);
 }
 
 .shadow-gold-glow {
-  box-shadow: 0 0 15px rgba(30, 174, 219, 0.4);
+  box-shadow: 0 0 15px rgba(191, 161, 129, 0.4);
   transition: box-shadow 0.3s ease;
 }
 
 .shadow-gold-glow:hover {
-  box-shadow: 0 0 25px rgba(30, 174, 219, 0.6);
+  box-shadow: 0 0 25px rgba(191, 161, 129, 0.6);
 }
 
 /* Animación para Sparkles */
@@ -211,4 +211,20 @@ input, select, textarea {
 
 input::placeholder {
   color: rgba(255, 255, 255, 0.4);
+}
+
+/* Tema Actualizado para ImplantDX */
+:root {
+  --color-background: #0A1828;
+  --color-primary: #178582;
+  --color-accent: #BFA181;
+  --color-text: #F5F5F5;
+}
+
+.font-inter {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
 }
