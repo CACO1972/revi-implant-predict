@@ -13,6 +13,7 @@ import Odontogram from "./pages/Odontogram";
 import Results from "./pages/Results";
 import TreatmentComparison from "./pages/TreatmentComparison";
 import ContactForm from "./pages/ContactForm";
+import QuienesSomos from "./pages/QuienesSomos";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/comparador" element={<TreatmentComparison />} />
           <Route path="/calculadora" element={<PriceCalculator />} />
           <Route path="/contacto" element={<ContactForm />} />
+          <Route path="/quienes-somos" element={<QuienesSomos />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
