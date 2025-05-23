@@ -1,14 +1,13 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Sparkles, Info, PanelRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, Zap, Brain, Activity, Lock, BadgeCheck, MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
 import DemoModal from "@/components/demo/DemoModal";
 import QuestionnaireDemo from "@/components/demo/QuestionnaireDemo";
-import OdontogramDemo from "@/components/demo/OdontogramDemo";
 import ClinicalFlowDemo from "@/components/demo/ClinicalFlowDemo";
 import TreatmentComparisonDemo from "@/components/demo/TreatmentComparisonDemo";
 import PriceCalculatorDemo from "@/components/demo/PriceCalculatorDemo";
@@ -17,6 +16,7 @@ import PdfReportDemo from "@/components/demo/PdfReportDemo";
 export default function Index() {
   const navigate = useNavigate();
   const [currentModal, setCurrentModal] = useState<string | null>(null);
+  const [animatedElement, setAnimatedElement] = useState(0);
   
   const openModal = (modalId: string) => {
     setCurrentModal(modalId);
@@ -25,6 +25,15 @@ export default function Index() {
   const closeModal = () => {
     setCurrentModal(null);
   };
+
+  // Efecto para animar elementos secuencialmente
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimatedElement(prev => (prev + 1) % 4);
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, []);
   
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative overflow-hidden">
@@ -34,12 +43,17 @@ export default function Index() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="w-full max-w-2xl space-y-8 z-10 relative"
+        className="w-full max-w-5xl space-y-8 z-10 relative py-16"
       >
         {/* Logo animado */}
         <motion.div 
           className="mb-8"
-          animate={{ y: [0, -10, 0] }}
+          animate={{ 
+            y: [0, -15, 0],
+            filter: ["drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))", 
+                     "drop-shadow(0 0 25px rgba(23, 133, 130, 0.7))", 
+                     "drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))"]
+          }}
           transition={{
             duration: 4,
             repeat: Infinity,
@@ -59,85 +73,230 @@ export default function Index() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-white">
-            ¿Eres candidato a implantes dentales?
-          </h1>
+          <div className="relative">
+            <motion.div 
+              className="absolute -z-10 inset-0 rounded-full blur-3xl bg-gradient-to-r from-[#178582]/20 to-[#BFA181]/20 opacity-60" 
+              animate={{ 
+                scale: [1, 1.1, 1],
+                opacity: [0.3, 0.5, 0.3]
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut"
+              }}
+            />
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-[#178582] to-[#BFA181] bg-clip-text text-transparent">
+                ImplantDX
+              </span>
+            </h1>
+            <h2 className="text-3xl md:text-4xl font-light text-white/90">
+              ¿Eres candidato a implantes dentales?
+            </h2>
+          </div>
           
-          <p className="text-lg md:text-xl text-white/85 max-w-xl mx-auto">
-            Descúbrelo en 2 minutos con ayuda de la IA y recibe tu plan clínico personalizado
+          <p className="text-xl md:text-2xl text-white/85 max-w-2xl mx-auto font-light leading-relaxed">
+            Descúbrelo en 2 minutos con ayuda de nuestra <span className="text-[#178582] font-medium">inteligencia artificial</span>
           </p>
           
-          <div className="mt-4 p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl">
-            <p className="text-white/80 text-sm">
-              <span className="text-[#178582] font-medium">ImplantDX</span> utiliza inteligencia artificial basada en criterios científicos 
-              para evaluar tu candidatura a implantes dentales y brindarte información personalizada.
-            </p>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <motion.div 
+              className="glass-panel p-6 hologram-effect"
+              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(23, 133, 130, 0.5)" }}
+            >
+              <div className="mb-4 flex justify-center">
+                <motion.div 
+                  className="w-16 h-16 rounded-full bg-gradient-to-r from-[#178582]/20 to-[#178582]/60 flex items-center justify-center"
+                  animate={{ 
+                    scale: animatedElement === 0 ? [1, 1.1, 1] : 1,
+                    boxShadow: animatedElement === 0 ? ["0 0 0 rgba(23, 133, 130, 0.4)", "0 0 15px rgba(23, 133, 130, 0.7)", "0 0 0 rgba(23, 133, 130, 0.4)"] : "0 0 0 rgba(23, 133, 130, 0.4)"
+                  }}
+                  transition={{ duration: 1 }}
+                >
+                  <Brain className="w-8 h-8 text-[#178582]" />
+                </motion.div>
+              </div>
+              <h3 className="text-xl font-medium text-white mb-2">Análisis potenciado por IA</h3>
+              <p className="text-white/70 text-sm">
+                Algoritmo de diagnóstico basado en criterios científicos validados para predecir 
+                tu compatibilidad con implantes dentales con precisión.
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              className="glass-panel p-6 hologram-effect"
+              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(191, 161, 129, 0.5)" }}
+            >
+              <div className="mb-4 flex justify-center">
+                <motion.div 
+                  className="w-16 h-16 rounded-full bg-gradient-to-r from-[#BFA181]/20 to-[#BFA181]/60 flex items-center justify-center"
+                  animate={{ 
+                    scale: animatedElement === 1 ? [1, 1.1, 1] : 1,
+                    boxShadow: animatedElement === 1 ? ["0 0 0 rgba(191, 161, 129, 0.4)", "0 0 15px rgba(191, 161, 129, 0.7)", "0 0 0 rgba(191, 161, 129, 0.4)"] : "0 0 0 rgba(191, 161, 129, 0.4)"
+                  }}
+                  transition={{ duration: 1 }}
+                >
+                  <Activity className="w-8 h-8 text-[#BFA181]" />
+                </motion.div>
+              </div>
+              <h3 className="text-xl font-medium text-white mb-2">Resultados personalizados</h3>
+              <p className="text-white/70 text-sm">
+                Obtén una evaluación personalizada de tu caso que te ayudará a 
+                tomar decisiones informadas sobre tu tratamiento dental.
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              className="glass-panel p-6 hologram-effect"
+              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(23, 133, 130, 0.5)" }}
+            >
+              <div className="mb-4 flex justify-center">
+                <motion.div 
+                  className="w-16 h-16 rounded-full bg-gradient-to-r from-[#178582]/20 to-[#178582]/60 flex items-center justify-center"
+                  animate={{ 
+                    scale: animatedElement === 2 ? [1, 1.1, 1] : 1,
+                    boxShadow: animatedElement === 2 ? ["0 0 0 rgba(23, 133, 130, 0.4)", "0 0 15px rgba(23, 133, 130, 0.7)", "0 0 0 rgba(23, 133, 130, 0.4)"] : "0 0 0 rgba(23, 133, 130, 0.4)"
+                  }}
+                  transition={{ duration: 1 }}
+                >
+                  <Zap className="w-8 h-8 text-[#178582]" />
+                </motion.div>
+              </div>
+              <h3 className="text-xl font-medium text-white mb-2">Evaluación en tiempo real</h3>
+              <p className="text-white/70 text-sm">
+                Contesta simples preguntas y recibe inmediatamente una evaluación detallada 
+                de tu candidatura para implantes dentales.
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              className="glass-panel p-6 hologram-effect"
+              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(191, 161, 129, 0.5)" }}
+            >
+              <div className="mb-4 flex justify-center">
+                <motion.div 
+                  className="w-16 h-16 rounded-full bg-gradient-to-r from-[#BFA181]/20 to-[#BFA181]/60 flex items-center justify-center"
+                  animate={{ 
+                    scale: animatedElement === 3 ? [1, 1.1, 1] : 1,
+                    boxShadow: animatedElement === 3 ? ["0 0 0 rgba(191, 161, 129, 0.4)", "0 0 15px rgba(191, 161, 129, 0.7)", "0 0 0 rgba(191, 161, 129, 0.4)"] : "0 0 0 rgba(191, 161, 129, 0.4)"
+                  }}
+                  transition={{ duration: 1 }}
+                >
+                  <Lock className="w-8 h-8 text-[#BFA181]" />
+                </motion.div>
+              </div>
+              <h3 className="text-xl font-medium text-white mb-2">100% confidencial</h3>
+              <p className="text-white/70 text-sm">
+                Tu información está segura y protegida. No compartimos tus datos con terceros, 
+                garantizando tu privacidad en todo momento.
+              </p>
+            </motion.div>
           </div>
         </motion.div>
 
         <motion.div 
-          className="space-y-6 mt-8"
+          className="space-y-6 mt-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
           <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-            <Button 
-              onClick={() => openModal("questionnaire")}
-              className="bg-[#178582] hover:bg-[#178582]/90 text-white px-6 py-5 rounded-xl text-lg shadow-glow transition-all duration-300 border border-[#BFA181]/30 w-full md:w-auto"
+            <motion.div 
+              whileHover={{ scale: 1.05 }} 
+              whileTap={{ scale: 0.98 }}
             >
-              <Sparkles className="w-5 h-5 mr-2" />
-              Ver Cuestionario
-            </Button>
+              <Button 
+                onClick={() => openModal("questionnaire")}
+                className="bg-[#178582] hover:bg-[#178582]/90 text-white px-8 py-6 rounded-xl text-lg shadow-glow transition-all duration-300 border border-[#178582]/30 w-full md:w-auto"
+              >
+                <Sparkles className="w-5 h-5 mr-2 animate-sparkle" />
+                Evalúa tu caso ahora
+              </Button>
+            </motion.div>
             
-            <Button 
-              onClick={() => navigate('/quienes-somos')}
-              variant="outline"
-              className="text-white border-white/20 hover:bg-white/5 px-6 py-5 rounded-xl text-lg transition-all duration-300 w-full md:w-auto"
+            <motion.div 
+              whileHover={{ scale: 1.05 }} 
+              whileTap={{ scale: 0.98 }}
             >
-              <Info className="w-5 h-5 mr-2" />
-              Quiénes Somos
-            </Button>
+              <Button 
+                onClick={() => navigate('/quienes-somos')}
+                variant="outline"
+                className="text-white border-white/20 hover:bg-white/5 px-8 py-6 rounded-xl text-lg transition-all duration-300 w-full md:w-auto group"
+              >
+                <BadgeCheck className="w-5 h-5 mr-2" />
+                <span>Quiénes Somos</span>
+                <MoveRight className="ml-2 opacity-0 w-0 group-hover:opacity-100 group-hover:w-5 transition-all duration-300" />
+              </Button>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              className="p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 hover:border-[#178582]/30 transition-all duration-300"
-              onClick={() => openModal("odontogram")}
-            >
-              <div className="text-white text-xs font-medium">Odontograma Interactivo</div>
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              className="p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 hover:border-[#178582]/30 transition-all duration-300"
-              onClick={() => openModal("clinical-flow")}
-            >
-              <div className="text-white text-xs font-medium">Tú estás aquí</div>
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              className="p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 hover:border-[#178582]/30 transition-all duration-300"
-              onClick={() => openModal("treatment-comparison")}
-            >
-              <div className="text-white text-xs font-medium">Alternativas de Tratamiento</div>
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              className="p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 hover:border-[#178582]/30 transition-all duration-300"
-              onClick={() => openModal("price-calculator")}
-            >
-              <div className="text-white text-xs font-medium">Calculadora de Costos</div>
-            </motion.button>
+          <div className="mt-12">
+            <h3 className="text-xl text-[#BFA181] font-light mb-6">
+              Exploraciones avanzadas
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+              <motion.button
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="p-4 glass-panel hologram-effect border border-white/10 hover:border-[#178582]/30 transition-all duration-300 flex flex-col items-center"
+                onClick={() => openModal("clinical-flow")}
+              >
+                <img 
+                  src="/lovable-uploads/19481b4c-abe4-45b5-849c-180b7603e111.png" 
+                  alt="Flujo Clínico" 
+                  className="w-20 h-20 object-contain mb-2 rounded-md" 
+                />
+                <div className="text-white text-xs font-medium">Tú estás aquí</div>
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="p-4 glass-panel hologram-effect border border-white/10 hover:border-[#178582]/30 transition-all duration-300 flex flex-col items-center"
+                onClick={() => openModal("treatment-comparison")}
+              >
+                <img 
+                  src="/lovable-uploads/3d3b8ce7-1789-4fd0-ba94-16d161132e7e.png" 
+                  alt="Alternativas de Tratamiento" 
+                  className="w-20 h-20 object-contain mb-2 rounded-md" 
+                />
+                <div className="text-white text-xs font-medium">Alternativas de Tratamiento</div>
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="p-4 glass-panel hologram-effect border border-white/10 hover:border-[#178582]/30 transition-all duration-300 flex flex-col items-center"
+                onClick={() => openModal("price-calculator")}
+              >
+                <img 
+                  src="/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png" 
+                  alt="Calculadora de Costos" 
+                  className="w-20 h-20 object-contain mb-2 rounded-md" 
+                />
+                <div className="text-white text-xs font-medium">Calculadora de Costos</div>
+              </motion.button>
+            </div>
           </div>
-
-          <p className="text-[13px] text-white/50 mt-6 max-w-md mx-auto">
-            *Esta herramienta clínica predictiva está basada en evidencia científica,
-            pero no reemplaza una evaluación profesional.
-          </p>
+          
+          <AnimatePresence>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              className="mt-12 max-w-3xl mx-auto glass-panel p-6"
+            >
+              <div className="flex items-center justify-center space-x-2 mb-3">
+                <div className="w-2 h-2 rounded-full bg-[#178582] animate-pulse"></div>
+                <h3 className="text-lg text-[#178582]">Información importante</h3>
+                <div className="w-2 h-2 rounded-full bg-[#178582] animate-pulse"></div>
+              </div>
+              <p className="text-sm text-white/70 max-w-xl mx-auto">
+                Esta herramienta clínica predictiva está basada en evidencia científica y diseñada para democratizar 
+                el acceso a evaluación clínica especializada, especialmente para personas con recursos limitados 
+                o en zonas geográficamente aisladas.
+              </p>
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
 
         <motion.div 
@@ -146,10 +305,31 @@ export default function Index() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9, duration: 0.8 }}
         >
-          <p className="text-sm text-white/60">© 2025 ImplantDX - Democratizando el acceso a evaluación clínica</p>
-          <p className="text-xs text-white/40 mt-1">
-            Para personas con recursos limitados o en zonas geográficamente aisladas
-          </p>
+          <p className="text-sm text-white/60">© 2025 ImplantDX - <span className="text-[#BFA181]">Democratizando el acceso a evaluación clínica</span></p>
+          <div className="flex items-center justify-center mt-3 space-x-6">
+            <motion.a 
+              href="https://instagram.com/reviveai.cl" 
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              className="text-white/50 hover:text-[#BFA181] transition-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+              </svg>
+            </motion.a>
+            <motion.a 
+              href="https://instagram.com/thehumanupgrade" 
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1, rotate: -5 }}
+              className="text-white/50 hover:text-[#178582] transition-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+              </svg>
+            </motion.a>
+          </div>
         </motion.div>
       </motion.div>
       
@@ -161,10 +341,6 @@ export default function Index() {
       {/* Modals para demo */}
       <DemoModal isOpen={currentModal === "questionnaire"} onClose={closeModal} title="Cuestionario Clínico Predictivo">
         <QuestionnaireDemo />
-      </DemoModal>
-      
-      <DemoModal isOpen={currentModal === "odontogram"} onClose={closeModal} title="Odontograma Interactivo">
-        <OdontogramDemo />
       </DemoModal>
       
       <DemoModal isOpen={currentModal === "clinical-flow"} onClose={closeModal} title="Flujo Clínico">
