@@ -1,64 +1,89 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+ 
 @layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+ 
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
   body {
-    @apply bg-[#0A1828] text-white font-montserrat overflow-x-hidden;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-inter;
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-@layer components {
-  .glass-panel {
-    @apply bg-[#0A1828]/30 backdrop-blur-md border border-[#178582]/10 rounded-3xl shadow-soft;
-  }
-  
-  .gold-text {
-    @apply text-[#BFA181] font-montserrat;
-    text-shadow: 0 0 8px rgba(191, 161, 129, 0.4);
-  }
-  
-  .primary-button {
-    @apply bg-[#178582] hover:bg-[#178582]/90 text-white px-6 py-3 rounded-xl shadow-glow transition-all duration-300 border border-[#178582]/30;
-  }
-  
-  .gold-button {
-    @apply bg-[#BFA181] hover:bg-[#BFA181]/90 text-[#0A1828] px-6 py-3 rounded-xl shadow-gold-glow transition-all duration-300 border border-[#BFA181]/30;
-  }
-  
-  .secondary-button {
-    @apply bg-transparent hover:bg-white/5 text-white px-6 py-3 rounded-xl border border-white/20 transition-all duration-300;
-  }
-}
-
-/* Estilos para el fondo estrellado */
+/* Estilos para AnimatedStarryBackground */
 .star {
   position: absolute;
-  background-color: #ffffff;
   border-radius: 50%;
-  opacity: 0;
-  filter: blur(0.5px);
-  animation: star-glow 6s ease-in-out infinite alternate;
-  z-index: 1;
-  box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.1);
-}
-
-.star.large {
-  width: 3px;
-  height: 3px;
-  box-shadow: 0 0 8px 2px rgba(134, 195, 235, 0.3);
-}
-
-.star.medium {
-  width: 2px;
-  height: 2px;
+  background-color: #fff;
+  opacity: 0.5;
+  animation: twinkle linear infinite;
 }
 
 .star.small {
@@ -66,165 +91,64 @@
   height: 1px;
 }
 
+.star.medium {
+  width: 2px;
+  height: 2px;
+}
+
+.star.large {
+  width: 3px;
+  height: 3px;
+}
+
 .star.bright {
-  width: 4px;
-  height: 4px;
-  background-color: #a7d8ff;
-  box-shadow: 0 0 15px 5px rgba(134, 195, 235, 0.7);
-  animation: star-pulse 4s ease-in-out infinite;
+  box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.3);
+  opacity: 0.9;
 }
 
 .nebula {
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(23, 133, 130, 0.1) 10%, transparent 70%);
-  filter: blur(20px);
-  animation: nebula-glow 15s ease-in-out infinite alternate;
-  z-index: 0;
-  transform-origin: center center;
+  background: radial-gradient(circle at center, rgba(23, 133, 130, 0.2), transparent 70%);
+  animation: pulse 8s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
 }
 
-.gold-gradient-text {
-  background: linear-gradient(to right, #178582, #BFA181, #178582);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  animation: pulse-subtle 4s ease-in-out infinite;
-}
-
-/* Animaciones */
-@keyframes star-glow {
+@keyframes twinkle {
   0% {
-    opacity: 0.1;
-    transform: scale(1);
+    opacity: 0.2;
   }
   50% {
-    opacity: 0.5;
-  }
-  100% {
     opacity: 0.8;
-    transform: scale(1.2);
-  }
-}
-
-@keyframes star-pulse {
-  0% {
-    opacity: 0.5;
-    filter: blur(1px);
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 1;
-    filter: blur(0.5px);
-    transform: scale(1.2);
-  }
-  100% {
-    opacity: 0.5;
-    filter: blur(1px);
-    transform: scale(0.8);
-  }
-}
-
-@keyframes nebula-glow {
-  0% {
-    opacity: 0.1;
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    opacity: 0.3;
   }
   100% {
     opacity: 0.2;
-    transform: scale(1.5) rotate(30deg);
   }
 }
 
-@keyframes floating {
-  0%, 100% {
-    transform: translateY(0);
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.2;
   }
   50% {
-    transform: translateY(-10px);
+    transform: scale(1.2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.2;
   }
 }
 
-@keyframes pulse-subtle {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-@keyframes background-pan {
-  from {
-    transform: translateX(0) translateY(0);
-  }
-  to {
-    transform: translateX(-500px) translateY(-500px);
-  }
-}
-
-/* Animación de brillo para botones */
+/* Estilos para la sombra del botón principal */
 .shadow-glow {
-  box-shadow: 0 0 15px rgba(23, 133, 130, 0.4);
+  box-shadow: 0 0 15px rgba(23, 133, 130, 0.5);
   transition: box-shadow 0.3s ease;
 }
 
 .shadow-glow:hover {
-  box-shadow: 0 0 25px rgba(23, 133, 130, 0.6);
-}
-
-.shadow-gold-glow {
-  box-shadow: 0 0 15px rgba(191, 161, 129, 0.4);
-  transition: box-shadow 0.3s ease;
-}
-
-.shadow-gold-glow:hover {
-  box-shadow: 0 0 25px rgba(191, 161, 129, 0.6);
-}
-
-/* Animación para Sparkles */
-@keyframes sparkle {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.2);
-  }
-}
-
-.animate-sparkle {
-  animation: sparkle 1.5s infinite;
-}
-
-/* Mejoras para inputs en tema oscuro */
-input, select, textarea {
-  color-scheme: dark;
-}
-
-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-/* Tema Actualizado para ImplantDX */
-:root {
-  --color-background: #0A1828;
-  --color-primary: #178582;
-  --color-accent: #BFA181;
-  --color-text: #F5F5F5;
-}
-
-.font-inter {
-  font-family: 'Inter', 'Helvetica Neue', sans-serif;
-}
-
-.font-montserrat {
-  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 0 25px rgba(23, 133, 130, 0.7);
 }
