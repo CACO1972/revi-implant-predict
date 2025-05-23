@@ -1,5 +1,6 @@
 
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 export default function OdontogramDemo() {
   const renderTooth = (number: number, isMissing: boolean = false) => (
