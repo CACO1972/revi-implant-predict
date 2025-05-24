@@ -48,10 +48,7 @@ export default function QuienesSomos() {
                 </div>
                 <h2 className="text-2xl font-bold text-[#BFA181]">Nuestra Misión</h2>
               </div>
-              <p className="mb-4 text-white/80">
-                ImplantDX nace con el propósito de democratizar el acceso a evaluaciones clínicas de calidad para implantes dentales, 
-                especialmente para aquellas personas con recursos limitados o que viven en zonas geográficamente aisladas.
-              </p>
+              <p className="mb-4 text-white/80">Implant X nace con el propósito de democratizar el acceso a evaluaciones clínicas de calidad para implantes dentales, especialmente para aquellas personas con recursos limitados o que viven en zonas geográficamente aisladas de Chile y Latinoamérica</p>
               <p className="text-white/80">
                 Buscamos educar, orientar y empoderar a pacientes, brindándoles información basada en evidencia científica 
                 que les permita tomar decisiones informadas sobre su salud oral y llegar a su primera consulta presencial 
@@ -80,10 +77,7 @@ export default function QuienesSomos() {
                 ImplantDX utiliza inteligencia artificial basada en criterios científicos y protocolos validados 
                 para realizar evaluaciones predictivas sobre el éxito potencial de tratamientos con implantes dentales.
               </p>
-              <p className="text-white/80">
-                Nuestro sistema ha sido desarrollado por especialistas en implantología, periodoncistas y expertos en 
-                tecnología médica, asegurando que todas las recomendaciones tengan un sólido respaldo científico.
-              </p>
+              <p className="text-white/80">Implant X es la primera app en su tipo en Latam.</p>
             </motion.div>
             
             {/* Impacto Social */}
@@ -107,10 +101,7 @@ export default function QuienesSomos() {
                 Nuestro objetivo es cerrar la brecha de acceso a evaluaciones clínicas especializadas. En muchas regiones, 
                 el acceso a especialistas en implantología dental es limitado, costoso o requiere largos desplazamientos.
               </p>
-              <p className="text-white/80">
-                ImplantDX ofrece una primera evaluación gratuita y accesible desde cualquier dispositivo con conexión a internet, 
-                permitiendo que más personas puedan dar el primer paso hacia la recuperación de su sonrisa y funcionalidad oral.
-              </p>
+              <p className="text-white/80">Implant X ofrece una primera evaluación gratuita y accesible desde cualquier dispositivo con conexión a internet, permitiendo que más personas puedan dar el primer paso hacia la recuperación de su sonrisa y funcionalidad oral.</p>
             </motion.div>
             
             {/* Fundador */}
