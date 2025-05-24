@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Question, Answer } from "@/types/implant";
 import { getScoreFromOptions } from "@/utils/assessmentUtils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import QuestionHeader from "./question/QuestionHeader";
 import QuestionOptions from "./question/QuestionOptions";
 import RecommendationBox from "./question/RecommendationBox";
