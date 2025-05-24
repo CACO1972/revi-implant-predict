@@ -134,5 +134,39 @@ export const questions: Question[] = [
       { value: "other", label: "Otra", score: 0 }
     ],
     recommendation: "Existen soluciones predecibles, seguras y mínimamente invasivas."
+  },
+  // Nuevas preguntas
+  {
+    id: 12,
+    title: "¿Has tenido alguna experiencia previa con implantes dentales?",
+    explanation: "La experiencia previa puede influir en tus expectativas y en el plan de tratamiento.",
+    options: [
+      { value: "none", label: "No, nunca", score: 0 },
+      { value: "failed", label: "Sí, y tuve problemas", score: 1.5 },
+      { value: "success", label: "Sí, con buenos resultados", score: 0.5 }
+    ],
+    recommendation: "Cada caso es único, incluso si has tenido experiencias previas con implantes."
+  },
+  {
+    id: 13,
+    title: "¿Tienes alguna enfermedad autoinmune diagnosticada?",
+    explanation: "Algunas condiciones autoinmunes pueden afectar la integración del implante.",
+    options: [
+      { value: "none", label: "No", score: 0 },
+      { value: "controlled", label: "Sí, pero está controlada", score: 1 },
+      { value: "uncontrolled", label: "Sí, y no está bien controlada", score: 2 }
+    ],
+    recommendation: "Un buen control de enfermedades autoinmunes mejora el pronóstico de los implantes."
+  },
+  {
+    id: 14,
+    title: "¿Has recibido algún tratamiento con bifosfonatos?",
+    explanation: "Los bifosfonatos son medicamentos utilizados para osteoporosis y ciertos cánceres que pueden afectar la cicatrización ósea.",
+    options: [
+      { value: "none", label: "No, nunca", score: 0 },
+      { value: "past", label: "Sí, en el pasado", score: 1 },
+      { value: "current", label: "Sí, actualmente", score: 2 }
+    ],
+    recommendation: "Es importante informar a tu dentista sobre cualquier medicamento que estés tomando o hayas tomado."
   }
 ];
