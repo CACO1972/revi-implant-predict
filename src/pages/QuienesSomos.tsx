@@ -1,52 +1,47 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, UserCheck, Brain, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
-
 export default function QuienesSomos() {
   const navigate = useNavigate();
-  
-  return (
-    <div className="min-h-screen bg-[#0A1828] text-white">
+  return <div className="min-h-screen bg-[#0A1828] text-white">
       <AnimatedStarryBackground />
       
       <div className="container mx-auto px-4 py-12 relative z-10">
-        <Button 
-          variant="ghost" 
-          onClick={() => navigate("/")}
-          className="mb-8 text-white hover:text-white/80 hover:bg-white/5"
-        >
+        <Button variant="ghost" onClick={() => navigate("/")} className="mb-8 text-white hover:text-white/80 hover:bg-white/5">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Volver al inicio
         </Button>
         
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto space-y-12"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 20
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.8
+      }} className="max-w-3xl mx-auto space-y-12">
           <div className="text-center mb-12">
-            <img 
-              src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png" 
-              alt="ImplantDX Logo" 
-              className="w-32 h-auto mx-auto mb-6" 
-            />
+            <img src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png" alt="ImplantDX Logo" className="w-32 h-auto mx-auto mb-6" />
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Quiénes Somos</h1>
             <div className="h-1 w-20 bg-gradient-to-r from-[#178582] to-[#BFA181] mx-auto"></div>
           </div>
           
           <div className="space-y-12">
             {/* Misión */}
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            x: -20
+          }} animate={{
+            opacity: 1,
+            x: 0
+          }} transition={{
+            duration: 0.8,
+            delay: 0.2
+          }} className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-full bg-[#178582]/20 text-[#178582]">
                   <UserCheck className="w-6 h-6" />
@@ -65,12 +60,16 @@ export default function QuienesSomos() {
             </motion.div>
             
             {/* Tecnología */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            x: 20
+          }} animate={{
+            opacity: 1,
+            x: 0
+          }} transition={{
+            duration: 0.8,
+            delay: 0.4
+          }} className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-full bg-[#178582]/20 text-[#178582]">
                   <Brain className="w-6 h-6" />
@@ -88,12 +87,16 @@ export default function QuienesSomos() {
             </motion.div>
             
             {/* Impacto Social */}
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            x: -20
+          }} animate={{
+            opacity: 1,
+            x: 0
+          }} transition={{
+            duration: 0.8,
+            delay: 0.6
+          }} className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-full bg-[#178582]/20 text-[#178582]">
                   <Globe className="w-6 h-6" />
@@ -111,12 +114,16 @@ export default function QuienesSomos() {
             </motion.div>
             
             {/* Fundador */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="p-8 rounded-xl border border-white/10 bg-gradient-to-br from-[#0A1828]/80 to-[#178582]/10"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.8,
+            delay: 0.8
+          }} className="p-8 rounded-xl border border-white/10 bg-gradient-to-br from-[#0A1828]/80 to-[#178582]/10">
               <h2 className="text-2xl font-bold text-center text-[#BFA181] mb-6">Fundador</h2>
               <div className="flex flex-col md:flex-row items-center gap-6">
                 <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#178582] to-[#BFA181] p-1">
@@ -125,29 +132,20 @@ export default function QuienesSomos() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Dr. Carlos Montoya</h3>
-                  <p className="text-[#BFA181] mb-3">Director de The Human Upgrade & Especialista en Implantología</p>
-                  <p className="text-white/80">
-                    Con más de 15 años de experiencia clínica, el Dr. Montoya ha dedicado su carrera a mejorar 
-                    el acceso a tratamientos avanzados de implantología dental. A través de ImplantDX, 
-                    combina su experiencia clínica con tecnologías emergentes para llevar evaluaciones 
-                    especializadas a quienes más las necesitan.
-                  </p>
+                  <h3 className="text-xl font-bold text-white mb-2">Dr. Carlos Montoya Bacigalupo</h3>
+                  <p className="text-[#BFA181] mb-3">Director de Humana.ai </p>
+                  <p className="text-white/80">Con más de 25 años de experiencia clínica, el Dr. Montoya ha dedicado su carrera a mejorar el acceso a tratamientos avanzados de implantología dental. A través de Implant X, combina su experiencia clínica con tecnologías emergentes para llevar evaluaciones especializadas a quienes más las necesitan.</p>
                 </div>
               </div>
             </motion.div>
             
             <div className="text-center pt-6">
-              <Button
-                onClick={() => navigate("/")}
-                className="bg-gradient-to-r from-[#178582] to-[#BFA181] hover:opacity-90 text-white"
-              >
+              <Button onClick={() => navigate("/")} className="bg-gradient-to-r from-[#178582] to-[#BFA181] hover:opacity-90 text-white">
                 Volver a Inicio
               </Button>
             </div>
           </div>
         </motion.div>
       </div>
-    </div>
-  );
+    </div>;
 }
