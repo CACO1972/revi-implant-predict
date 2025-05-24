@@ -4,9 +4,22 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, UserCheck, Brain, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
+
 export default function QuienesSomos() {
   const navigate = useNavigate();
-  return <div className="min-h-screen bg-[#0A1828] text-white">
+  
+  return (
+    <div className="min-h-screen bg-[#0A1828] text-white relative">
+      {/* Imagen de fondo con overlay */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-30"
+        style={{ backgroundImage: "url('/lovable-uploads/4340a4e4-45cd-474b-ad0d-10e701b4f2b4.png')" }}
+      />
+      
+      {/* Overlay gradiente para mejorar legibilidad */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0A1828]/95 via-[#0A1828]/80 to-[#0A1828]/70 z-0"></div>
+      
+      {/* Fondo con estrellas detrás de la imagen */}
       <AnimatedStarryBackground />
       
       <div className="container mx-auto px-4 py-12 relative z-10">
@@ -15,15 +28,12 @@ export default function QuienesSomos() {
           Volver al inicio
         </Button>
         
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.8
-      }} className="max-w-3xl mx-auto space-y-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.8 }} 
+          className="max-w-3xl mx-auto space-y-12"
+        >
           <div className="text-center mb-12">
             <img src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png" alt="ImplantDX Logo" className="w-32 h-auto mx-auto mb-6" />
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Quiénes Somos</h1>
@@ -138,5 +148,6 @@ export default function QuienesSomos() {
           </div>
         </motion.div>
       </div>
-    </div>;
+    </div>
+  );
 }
