@@ -54,32 +54,32 @@ export default function Welcome({ onStart }: WelcomeProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] text-center px-4 relative bg-gradient-to-br from-white to-gray-50">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] text-center px-4 relative">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="w-full max-w-md"
       >
-        <div className="bg-white/90 backdrop-blur-lg rounded-xl p-8 shadow-xl border border-gray-200 relative overflow-hidden">
+        <div className="glass-panel p-8 backdrop-blur-lg relative overflow-hidden">
           {/* Efecto de brillo en la esquina */}
-          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-[#BFA181]/20 to-transparent rounded-full blur-2xl -z-0"></div>
-          <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-[#178582]/20 to-transparent rounded-full blur-2xl -z-0"></div>
+          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-gold/20 to-transparent rounded-full blur-2xl -z-0"></div>
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-2xl -z-0"></div>
           
           <div className="mb-8 relative z-10">
             <motion.div 
               className="flex justify-center mb-4"
               whileHover={{ rotate: [0, 5, -5, 0], transition: { duration: 0.5 } }}
             >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#178582] to-[#BFA181] p-0.5">
-                <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
-                  <Sparkles className="text-[#BFA181] w-8 h-8" />
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-gold p-0.5">
+                <div className="w-full h-full rounded-full bg-starry flex items-center justify-center">
+                  <Sparkles className="text-gold w-8 h-8" />
                 </div>
               </div>
             </motion.div>
             
             <motion.h1 
-              className="text-4xl font-bold bg-gradient-to-r from-[#178582] to-[#BFA181] bg-clip-text text-transparent mb-3"
+              className="text-4xl font-bold gold-gradient-text mb-3"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
@@ -88,7 +88,7 @@ export default function Welcome({ onStart }: WelcomeProps) {
             </motion.h1>
             
             <motion.h2 
-              className="text-xl font-light text-[#178582] mb-4"
+              className="text-xl font-light text-primary mb-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
@@ -97,7 +97,7 @@ export default function Welcome({ onStart }: WelcomeProps) {
             </motion.h2>
             
             <motion.p 
-              className="text-gray-600 mb-6 font-light"
+              className="text-white/80 mb-6 font-light"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
@@ -119,7 +119,7 @@ export default function Welcome({ onStart }: WelcomeProps) {
               variants={inputVariants}
               animate={nameError ? "error" : ""}
             >
-              <label htmlFor="name" className="block text-left text-sm font-medium text-gray-700">
+              <label htmlFor="name" className="block text-left text-sm font-medium text-white/90">
                 Nombre
               </label>
               <motion.div whileHover="focused" variants={inputVariants}>
@@ -128,11 +128,11 @@ export default function Welcome({ onStart }: WelcomeProps) {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className={`w-full bg-white border-gray-300 text-gray-900 placeholder-gray-400 ${nameError ? 'border-red-500' : ''}`}
+                  className={`w-full bg-white/5 border-white/10 text-white placeholder-white/40 ${nameError ? 'border-red-500' : ''}`}
                   placeholder="Tu nombre"
                 />
               </motion.div>
-              {nameError && <p className="text-red-500 text-xs text-left">Por favor, introduce tu nombre</p>}
+              {nameError && <p className="text-red-400 text-xs text-left">Por favor, introduce tu nombre</p>}
             </motion.div>
             
             <motion.div 
@@ -140,7 +140,7 @@ export default function Welcome({ onStart }: WelcomeProps) {
               variants={inputVariants}
               animate={ageError ? "error" : ""}
             >
-              <label htmlFor="age" className="block text-left text-sm font-medium text-gray-700">
+              <label htmlFor="age" className="block text-left text-sm font-medium text-white/90">
                 Edad
               </label>
               <motion.div whileHover="focused" variants={inputVariants}>
@@ -149,14 +149,14 @@ export default function Welcome({ onStart }: WelcomeProps) {
                   type="number"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
-                  className={`w-full bg-white border-gray-300 text-gray-900 placeholder-gray-400 ${ageError ? 'border-red-500' : ''}`}
+                  className={`w-full bg-white/5 border-white/10 text-white placeholder-white/40 ${ageError ? 'border-red-500' : ''}`}
                   placeholder="Tu edad"
                   min="18"
                   max="120"
                 />
               </motion.div>
               {ageError && (
-                <p className="text-red-500 text-xs text-left">
+                <p className="text-red-400 text-xs text-left">
                   Por favor, introduce una edad válida (entre 18 y 120)
                 </p>
               )}
@@ -168,7 +168,7 @@ export default function Welcome({ onStart }: WelcomeProps) {
             >
               <Button 
                 type="submit" 
-                className="w-full bg-gradient-to-r from-[#178582] to-[#BFA181] hover:from-[#178582]/90 hover:to-[#BFA181]/90 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 border border-[#BFA181]/20"
+                className="w-full bg-gradient-to-r from-primary to-gold hover:from-primary/90 hover:to-gold/90 text-white font-medium shadow-glow transition-all duration-300 border border-gold/20"
               >
                 Comenzar evaluación
               </Button>

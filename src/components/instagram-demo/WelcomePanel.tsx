@@ -19,7 +19,7 @@ export default function WelcomePanel({ name, setName, handleStart }: WelcomePane
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.6 }}
-      className="bg-white/90 backdrop-blur-md rounded-xl p-8 text-center relative shadow-xl border border-gray-200"
+      className="glass-panel p-8 text-center relative"
     >
       <motion.div 
         animate={{ 
@@ -36,17 +36,17 @@ export default function WelcomePanel({ name, setName, handleStart }: WelcomePane
         className="w-20 h-20 mx-auto mb-6"
       >
         <img 
-          src="/lovable-uploads/d0629260-8b0f-417c-8230-2e2edac5950d.png"
+          src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png"
           alt="ImplantDX Logo"
           className="w-full h-full"
         />
       </motion.div>
       
-      <h1 className="text-3xl font-bold bg-gradient-to-r from-[#178582] to-[#BFA181] bg-clip-text text-transparent mb-2">
+      <h1 className="text-3xl font-bold gold-gradient-text mb-2">
         ImplantDX
       </h1>
       
-      <p className="text-gray-700 mb-8">
+      <p className="text-white/80 mb-8">
         Evalúa tu candidatura para implantes dentales con tecnología de inteligencia artificial. 
         Completa este breve cuestionario para recibir una evaluación personalizada.
       </p>
@@ -57,7 +57,7 @@ export default function WelcomePanel({ name, setName, handleStart }: WelcomePane
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Ingresa tu nombre"
-          className="bg-white border-[#1EAEDB]/30 text-gray-900 placeholder:text-gray-500"
+          className="bg-white/10 border-[#1EAEDB]/30 text-white placeholder:text-white/50"
         />
       </div>
       
@@ -70,7 +70,7 @@ export default function WelcomePanel({ name, setName, handleStart }: WelcomePane
         <Button 
           onClick={handleStart} 
           disabled={!name.trim()} 
-          className="w-full bg-[#1EAEDB] hover:bg-[#33C3F0] text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:bg-gray-400 disabled:text-gray-200"
+          className="w-full bg-[#1EAEDB] hover:bg-[#33C3F0] text-white shadow-glow transition-all duration-300 disabled:bg-neutral-600 disabled:text-white/50"
         >
           Comenzar evaluación
         </Button>
@@ -82,7 +82,7 @@ export default function WelcomePanel({ name, setName, handleStart }: WelcomePane
         transition={{ delay: 0.5 }}
         className="p-4 rounded-lg bg-gradient-to-r from-[#1EAEDB]/10 to-transparent border border-[#1EAEDB]/20"
       >
-        <p className="text-gray-600 text-sm">
+        <p className="text-white/70 text-sm">
           <span className="text-[#1EAEDB] font-medium block mb-1">Democratizando el acceso a tratamientos dentales</span>
           Esta herramienta está diseñada para ayudar a personas con acceso limitado a servicios 
           odontológicos especializados, ya sea por ubicación geográfica o recursos económicos, 

@@ -36,8 +36,8 @@ export default function AppLogo({ size = "large" }: AppLogoProps) {
       }}
     >
       <img 
-        src="/lovable-uploads/d0629260-8b0f-417c-8230-2e2edac5950d.png"
-        alt="ImplantDX Logo"
+        src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png"
+        alt="ImplantX Logo"
         className={`${sizeClasses[size]} w-auto mx-auto`}
       />
     </motion.div>
