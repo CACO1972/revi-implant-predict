@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -36,7 +37,7 @@ export default function Index() {
     <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50">
       {/* Subtle background pattern */}
       <div className="fixed inset-0 z-[-1] opacity-30">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23178582" fill-opacity="0.1"%3E%3Ccircle cx="7" cy="7" r="1"/%3E%3Ccircle cx="37" cy="37" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] bg-repeat"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23178582\" fill-opacity=\"0.1\"%3E%3Ccircle cx=\"7\" cy=\"7\" r=\"1\"/%3E%3Ccircle cx=\"37\" cy=\"37\" r=\"1\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] bg-repeat"></div>
       </div>
       
       <motion.div 
@@ -61,8 +62,8 @@ export default function Index() {
           }}
         >
           <img 
-            src="/lovable-uploads/d0629260-8b0f-417c-8230-2e2edac5950d.png"
-            alt="ImplantDX Logo"
+            src="/lovable-uploads/c46ba2b0-a173-472f-ab9c-eca0ae248f43.png"
+            alt="ImplantX Logo"
             className="w-72 h-auto mx-auto"
           />
         </motion.div>
@@ -325,7 +326,7 @@ export default function Index() {
               </svg>
             </motion.a>
           </div>
-        </motion.div>
+        </div>
       </motion.div>
       
       <RioAssistant isVisible={true} message="¡Hola! Soy Río, tu asistente virtual. Estoy aquí para guiarte durante todo el proceso de evaluación. ¡Haz clic para comenzar!" />
