@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -32,12 +33,17 @@ export default function Index() {
     return () => clearInterval(interval);
   }, []);
 
+  const backgroundPattern = "data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23178582' fill-opacity='0.1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='37' cy='37' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E";
+
   return (
     <>
       <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50">
         {/* Subtle background pattern */}
         <div className="fixed inset-0 z-[-1] opacity-30">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23178582\" fill-opacity=\"0.1\"%3E%3Ccircle cx=\"7\" cy=\"7\" r=\"1\"/%3E%3Ccircle cx=\"37\" cy=\"37\" r=\"1\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] bg-repeat"></div>
+          <div 
+            className="absolute inset-0 bg-repeat"
+            style={{ backgroundImage: `url("${backgroundPattern}")` }}
+          ></div>
         </div>
         
         <motion.div 
