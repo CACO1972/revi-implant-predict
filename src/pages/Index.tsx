@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -90,7 +89,7 @@ export default function Index() {
             />
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               <span className="bg-gradient-to-r from-[#178582] to-[#BFA181] bg-clip-text text-transparent">
-                ImplantDX
+                ImplantX
               </span>
             </h1>
             <h2 className="text-3xl md:text-4xl font-light text-gray-800">
@@ -301,7 +300,7 @@ export default function Index() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9, duration: 0.8 }}
         >
-          <p className="text-sm text-gray-500">© 2025 ImplantDX - <span className="text-[#BFA181]">Democratizando el acceso a evaluación clínica</span></p>
+          <p className="text-sm text-gray-500">© 2025 ImplantX - <span className="text-[#BFA181]">Democratizando el acceso a evaluación clínica</span></p>
           <div className="flex items-center justify-center mt-3 space-x-6">
             <motion.a 
               href="https://instagram.com/reviveai.cl" 
@@ -326,7 +325,7 @@ export default function Index() {
               </svg>
             </motion.a>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
       
       <RioAssistant isVisible={true} message="¡Hola! Soy Río, tu asistente virtual. Estoy aquí para guiarte durante todo el proceso de evaluación. ¡Haz clic para comenzar!" />
