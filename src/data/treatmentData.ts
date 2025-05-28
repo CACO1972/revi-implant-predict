@@ -2,65 +2,125 @@
 export const treatmentTypes = {
   unitario: {
     title: "Implante Unitario",
-    description: "Reemplazo de un solo diente",
     icon: "🦷",
+    description: "Reemplazo de un solo diente perdido",
     conventional: {
-      duration: "3-4 meses",
-      success: "96%",
-      cost: "$$",
-      steps: ["Cirugía de implante", "Cicatrización (3-4 meses)", "Corona definitiva"],
-      benefits: ["Máxima predictibilidad", "Mejor integración ósea"],
-      drawbacks: ["Tiempo más largo", "Sin diente temporal estético"]
+      title: "Carga Convencional",
+      duration: "4-6 meses",
+      sessions: "3-4 sesiones",
+      success: "98%",
+      healing: "Cicatrización completa antes de la corona",
+      advantages: [
+        "Mayor tiempo de osteointegración",
+        "Menor riesgo de complicaciones",
+        "Protocolo más predecible"
+      ],
+      disadvantages: [
+        "Más tiempo sin diente",
+        "Mayor número de citas",
+        "Posible uso de prótesis temporal"
+      ],
+      price: "$800-1200"
     },
     immediate: {
-      duration: "1 día + 3 meses",
-      success: "92%",
-      cost: "$$$",
-      steps: ["Cirugía + corona temporal", "Cicatrización (3 meses)", "Corona definitiva"],
-      benefits: ["Estética inmediata", "Una sola cirugía"],
-      drawbacks: ["Mayor costo", "Requiere condiciones ideales"]
+      title: "Carga Inmediata",
+      duration: "1-2 días",
+      sessions: "1-2 sesiones",
+      success: "95%",
+      healing: "Corona provisional el mismo día",
+      advantages: [
+        "Diente inmediato",
+        "Menos citas",
+        "Mejor estética desde el inicio"
+      ],
+      disadvantages: [
+        "Requiere buena calidad ósea",
+        "Mayor costo inicial",
+        "Restricciones alimentarias"
+      ],
+      price: "$1200-1800"
     }
   },
   multiple: {
     title: "Implantes Múltiples",
-    description: "Reemplazo de 2-6 dientes",
     icon: "🦷🦷🦷",
+    description: "Reemplazo de varios dientes adyacentes",
     conventional: {
-      duration: "4-6 meses",
-      success: "95%",
-      cost: "$$$",
-      steps: ["Cirugía de implantes", "Cicatrización (4-6 meses)", "Puente o coronas"],
-      benefits: ["Alta predictibilidad", "Mejor distribución de fuerzas"],
-      drawbacks: ["Tiempo prolongado", "Múltiples citas"]
+      title: "Carga Convencional",
+      duration: "4-8 meses",
+      sessions: "4-6 sesiones",
+      success: "97%",
+      healing: "Cicatrización completa antes del puente",
+      advantages: [
+        "Osteointegración óptima",
+        "Menor riesgo por implante",
+        "Protocolo bien establecido"
+      ],
+      disadvantages: [
+        "Período prolongado sin dientes",
+        "Más visitas al dentista",
+        "Prótesis temporal necesaria"
+      ],
+      price: "$2500-4500"
     },
     immediate: {
-      duration: "1-2 días + 4 meses",
-      success: "90%",
-      cost: "$$$$",
-      steps: ["Cirugía + puente temporal", "Cicatrización (4 meses)", "Restauración definitiva"],
-      benefits: ["Función inmediata", "Menos molestias"],
-      drawbacks: ["Mayor complejidad", "Criterios estrictos"]
+      title: "Carga Inmediata",
+      duration: "2-3 días",
+      sessions: "2-3 sesiones",
+      success: "93%",
+      healing: "Puente provisional inmediato",
+      advantages: [
+        "Función inmediata",
+        "Estética preservada",
+        "Menos tiempo de tratamiento"
+      ],
+      disadvantages: [
+        "Selección estricta de casos",
+        "Mayor complejidad técnica",
+        "Cuidados postoperatorios rigurosos"
+      ],
+      price: "$4000-7000"
     }
   },
   total: {
-    title: "All-on-4 / Rehabilitación Total",
-    description: "Arcada completa con 4-6 implantes",
+    title: "All-on-4",
     icon: "😁",
+    description: "Rehabilitación completa con 4 implantes",
     conventional: {
-      duration: "6-8 meses",
-      success: "94%",
-      cost: "$$$$",
-      steps: ["Cirugía de implantes", "Cicatrización (6-8 meses)", "Prótesis definitiva"],
-      benefits: ["Máxima estabilidad", "Resultado duradero"],
-      drawbacks: ["Tiempo muy largo", "Sin prótesis funcional"]
+      title: "Carga Convencional",
+      duration: "6-12 meses",
+      sessions: "5-8 sesiones",
+      success: "96%",
+      healing: "Prótesis removible durante cicatrización",
+      advantages: [
+        "Integración ósea completa",
+        "Ajuste perfecto de la prótesis",
+        "Menor riesgo de fracaso"
+      ],
+      disadvantages: [
+        "Largo período de adaptación",
+        "Prótesis removible temporal",
+        "Múltiples citas de ajuste"
+      ],
+      price: "$8000-12000"
     },
     immediate: {
-      duration: "1 día + 6 meses",
-      success: "89%",
-      cost: "$$$$$",
-      steps: ["Cirugía + prótesis temporal", "Cicatrización (6 meses)", "Prótesis definitiva"],
-      benefits: ["Dientes el mismo día", "Calidad de vida inmediata"],
-      drawbacks: ["Más costoso", "Dieta especial inicial"]
+      title: "Carga Inmediata",
+      duration: "24-48 horas",
+      sessions: "2-4 sesiones",
+      success: "92%",
+      healing: "Prótesis fija provisional inmediata",
+      advantages: [
+        "Dientes fijos inmediatos",
+        "Una sola cirugía",
+        "Recuperación más rápida"
+      ],
+      disadvantages: [
+        "Criterios de selección estrictos",
+        "Mayor costo inicial",
+        "Dieta líquida inicial"
+      ],
+      price: "$12000-18000"
     }
   }
 };
@@ -68,30 +128,30 @@ export const treatmentTypes = {
 export const reconstructionTreatments = [
   {
     name: "Injerto Óseo",
-    description: "Regeneración de hueso perdido",
-    duration: "4-6 meses",
-    indication: "Falta de volumen óseo",
-    success: "92%"
+    description: "Aumento del volumen óseo insuficiente",
+    duration: "3-6 meses",
+    success: "95%",
+    indication: "Pérdida ósea vertical u horizontal significativa"
   },
   {
     name: "Elevación de Seno",
-    description: "Aumento de hueso en zona posterior superior",
-    duration: "6-8 meses",
-    indication: "Poco hueso en premolares/molares superiores",
-    success: "94%"
-  },
-  {
-    name: "Regeneración Guiada",
-    description: "Técnica con membranas para regenerar tejidos",
-    duration: "6-9 meses",
-    indication: "Defectos óseos localizados",
-    success: "88%"
+    description: "Aumento óseo en sector posterior superior",
+    duration: "4-8 meses", 
+    success: "94%",
+    indication: "Altura ósea insuficiente en molares superiores"
   },
   {
     name: "Injerto de Tejido Blando",
-    description: "Mejora de encías alrededor del implante",
-    duration: "2-3 meses",
-    indication: "Falta de encía adherida",
-    success: "96%"
+    description: "Aumento del grosor gingival",
+    duration: "2-4 meses",
+    success: "97%",
+    indication: "Encía delgada o recesiones gingivales"
+  },
+  {
+    name: "Regeneración Ósea Guiada",
+    description: "Técnica con membranas para regenerar hueso",
+    duration: "4-6 meses",
+    success: "93%",
+    indication: "Defectos óseos localizados o pérdida ósea compleja"
   }
 ];

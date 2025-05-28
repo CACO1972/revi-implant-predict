@@ -28,7 +28,6 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
 
   if (!isVisible) return null;
 
-  // Simular que Río está escribiendo un mensaje
   const handleTypingResponse = (suggestion: string) => {
     setIsTyping(true);
     setTimeout(() => {
@@ -43,7 +42,6 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
       setCurrentMessage(newMessage);
       if (onMessageChange) onMessageChange(newMessage);
       
-      // Generar nuevas sugerencias basadas en la pregunta actual
       if (suggestion === "¿Qué es un implante dental?") {
         setSuggestions([
           "¿Cuánto cuesta un implante?",
@@ -80,14 +78,15 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.8, y: 20 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       className="fixed bottom-4 right-4 z-50"
     >
       {/* Avatar de Río - Clickeable */}
       <motion.div
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         className="relative cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
@@ -95,29 +94,81 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
         <AnimatePresence>
           {!isExpanded && message && (
             <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0, opacity: 0 }}
-              className="absolute -top-10 -right-2 bg-[#178582] px-3 py-1 rounded-full text-white text-xs whitespace-nowrap"
+              initial={{ scale: 0, opacity: 0, y: -10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0, opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="absolute -top-12 -right-2 bg-[#178582] px-3 py-2 rounded-lg text-white text-xs whitespace-nowrap shadow-lg"
             >
               ¡Haz clic para conversar!
+              <div className="absolute bottom-0 right-4 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-[#178582] transform translate-y-full"></div>
             </motion.div>
           )}
         </AnimatePresence>
         
-        <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-[#0A1828] z-10"></div>
+        <motion.div 
+          className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-[#0A1828] z-10"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            boxShadow: ["0 0 0 0 rgba(34, 197, 94, 0.7)", "0 0 0 10px rgba(34, 197, 94, 0)", "0 0 0 0 rgba(34, 197, 94, 0)"]
+          }}
+          transition={{ 
+            duration: 2, 
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
         <Avatar className="w-14 h-14 bg-gradient-to-br from-[#178582] to-[#178582]/70 p-1 shadow-glow">
-          <div className="w-full h-full rounded-full bg-[#178582] flex items-center justify-center overflow-hidden">
+          <motion.div 
+            className="w-full h-full rounded-full bg-[#178582] flex items-center justify-center overflow-hidden"
+            animate={{ 
+              rotate: [0, 5, -5, 0],
+            }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
             <svg viewBox="0 0 100 100" className="w-full h-full">
               <circle cx="50" cy="50" r="45" fill="#178582" />
-              <path d="M 30 30 Q 50 10 70 30" stroke="#BFA181" strokeWidth="8" fill="none" />
+              <motion.path 
+                d="M 30 30 Q 50 10 70 30" 
+                stroke="#BFA181" 
+                strokeWidth="8" 
+                fill="none"
+                animate={{ d: ["M 30 30 Q 50 10 70 30", "M 30 32 Q 50 8 70 32", "M 30 30 Q 50 10 70 30"] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
               <circle cx="35" cy="45" r="6" fill="white" />
               <circle cx="65" cy="45" r="6" fill="white" />
-              <circle cx="35" cy="45" r="3" fill="#0A1828" />
-              <circle cx="65" cy="45" r="3" fill="#0A1828" />
-              <path d="M 43 60 Q 50 70 57 60" stroke="#BFA181" strokeWidth="3" fill="none" />
+              <motion.circle 
+                cx="35" 
+                cy="45" 
+                r="3" 
+                fill="#0A1828"
+                animate={{ scale: [1, 0.8, 1] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.circle 
+                cx="65" 
+                cy="45" 
+                r="3" 
+                fill="#0A1828"
+                animate={{ scale: [1, 0.8, 1] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.path 
+                d="M 43 60 Q 50 70 57 60" 
+                stroke="#BFA181" 
+                strokeWidth="3" 
+                fill="none"
+                animate={{ d: ["M 43 60 Q 50 70 57 60", "M 43 62 Q 50 72 57 62", "M 43 60 Q 50 70 57 60"] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              />
             </svg>
-          </div>
+          </motion.div>
           <AvatarFallback className="bg-[#178582] text-white">
             RÍO
           </AvatarFallback>
@@ -125,9 +176,20 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
         
         {/* Indicador de mensaje */}
         {message && !isExpanded && (
-          <div className="absolute -top-1 right-0 w-5 h-5 bg-[#BFA181] rounded-full flex items-center justify-center text-[10px] text-[#0A1828] font-bold animate-pulse">
+          <motion.div 
+            className="absolute -top-1 right-0 w-5 h-5 bg-[#BFA181] rounded-full flex items-center justify-center text-[10px] text-[#0A1828] font-bold"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              rotate: [0, 10, -10, 0]
+            }}
+            transition={{ 
+              duration: 1.5, 
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
             !
-          </div>
+          </motion.div>
         )}
       </motion.div>
 
@@ -135,26 +197,37 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
       <AnimatePresence>
         {isExpanded && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.9 }}
+            initial={{ opacity: 0, y: 20, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className="absolute bottom-16 right-0 w-80 bg-[#0A1828]/90 backdrop-blur-sm rounded-xl rounded-br-none text-white shadow-lg border border-[#178582]/30 overflow-hidden"
+            exit={{ opacity: 0, y: 20, scale: 0.8 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="absolute bottom-16 right-0 w-80 bg-[#0A1828]/95 backdrop-blur-md rounded-xl rounded-br-none text-white shadow-2xl border border-[#178582]/40 overflow-hidden"
           >
             {/* Header del chat */}
-            <div className="bg-[#178582] p-3 flex items-center justify-between">
+            <motion.div 
+              className="bg-gradient-to-r from-[#178582] to-[#178582]/80 p-3 flex items-center justify-between"
+              initial={{ x: -100 }}
+              animate={{ x: 0 }}
+              transition={{ delay: 0.2, duration: 0.3 }}
+            >
               <div className="flex items-center gap-2">
-                <Bot size={18} />
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                >
+                  <Bot size={18} />
+                </motion.div>
                 <span className="font-medium">Río - Asistente IA</span>
               </div>
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="h-6 w-6 text-white/70 hover:text-white hover:bg-transparent"
+                className="h-6 w-6 text-white/70 hover:text-white hover:bg-white/10"
                 onClick={() => setIsExpanded(false)}
               >
                 <X size={14} />
               </Button>
-            </div>
+            </motion.div>
             
             {/* Cuerpo del chat */}
             <div className="p-4 max-h-60 overflow-y-auto">
@@ -172,7 +245,12 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
                 </div>
               ) : (
                 <>
-                  <div className="flex items-start mb-4">
+                  <motion.div 
+                    className="flex items-start mb-4"
+                    initial={{ x: -50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.3, duration: 0.4 }}
+                  >
                     <div className="w-6 h-6 rounded-full bg-[#178582] flex-shrink-0 mr-2 flex items-center justify-center text-xs">R</div>
                     <div className="bg-[#178582]/20 rounded-lg p-3 rounded-tl-none">
                       {isTyping ? (
@@ -197,12 +275,17 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
                         <p className="text-sm">{currentMessage}</p>
                       )}
                     </div>
-                  </div>
+                  </motion.div>
                   
                   {!isTyping && (
                     <>
                       {/* Botones de feedback */}
-                      <div className="flex justify-center gap-2 my-3">
+                      <motion.div 
+                        className="flex justify-center gap-2 my-3"
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.5, duration: 0.3 }}
+                      >
                         <Button 
                           variant="outline" 
                           size="sm" 
@@ -219,10 +302,15 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
                         >
                           <ThumbsDown size={14} className="mr-1" /> Mejorar
                         </Button>
-                      </div>
+                      </motion.div>
                       
                       {/* Sugerencias de preguntas */}
-                      <div className="mt-4">
+                      <motion.div 
+                        className="mt-4"
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.6, duration: 0.3 }}
+                      >
                         <p className="text-xs text-white/60 mb-2">Preguntas sugeridas:</p>
                         <div className="space-y-2">
                           {suggestions.map((suggestion, i) => (
@@ -230,14 +318,17 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
                               key={i}
                               className="text-xs bg-[#178582]/10 hover:bg-[#178582]/20 transition-colors rounded-full px-3 py-1 text-white/90 w-full text-left"
                               onClick={() => handleTypingResponse(suggestion)}
-                              whileHover={{ scale: 1.02 }}
+                              whileHover={{ scale: 1.02, x: 5 }}
                               whileTap={{ scale: 0.98 }}
+                              initial={{ x: -20, opacity: 0 }}
+                              animate={{ x: 0, opacity: 1 }}
+                              transition={{ delay: 0.7 + i * 0.1, duration: 0.3 }}
                             >
                               {suggestion}
                             </motion.button>
                           ))}
                         </div>
-                      </div>
+                      </motion.div>
                     </>
                   )}
                 </>
@@ -245,9 +336,14 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
             </div>
             
             {/* Footer del chat */}
-            <div className="p-3 border-t border-[#178582]/20 text-xs text-center text-white/60">
+            <motion.div 
+              className="p-3 border-t border-[#178582]/20 text-xs text-center text-white/60"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.3 }}
+            >
               Río está entrenado para brindarte información clínica sobre implantes dentales
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
