@@ -15,6 +15,7 @@ interface TreatmentData {
   steps: string[];
   benefits: string[];
   drawbacks: string[];
+  price: string;
 }
 
 interface TreatmentComparisonCardsProps {
@@ -42,8 +43,8 @@ export default function TreatmentComparisonCards({ conventional, immediate }: Tr
             <span className="font-semibold text-green-400">{conventional.success}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-white/80">Costo:</span>
-            <span className="font-semibold text-white">{conventional.cost}</span>
+            <span className="text-white/80">Precio:</span>
+            <span className="font-semibold text-white">{conventional.price}</span>
           </div>
         </div>
 
@@ -110,8 +111,8 @@ export default function TreatmentComparisonCards({ conventional, immediate }: Tr
             <span className="font-semibold text-green-400">{immediate.success}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-white/80">Costo:</span>
-            <span className="font-semibold text-white">{immediate.cost}</span>
+            <span className="text-white/80">Precio:</span>
+            <span className="font-semibold text-white">{immediate.price}</span>
           </div>
         </div>
 

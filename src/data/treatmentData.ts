@@ -10,12 +10,19 @@ export const treatmentTypes = {
       sessions: "3-4 sesiones",
       success: "98%",
       healing: "Cicatrización completa antes de la corona",
-      advantages: [
+      cost: "$$",
+      steps: [
+        "Evaluación y planificación",
+        "Colocación del implante",
+        "Período de cicatrización (3-6 meses)",
+        "Colocación de la corona definitiva"
+      ],
+      benefits: [
         "Mayor tiempo de osteointegración",
         "Menor riesgo de complicaciones",
         "Protocolo más predecible"
       ],
-      disadvantages: [
+      drawbacks: [
         "Más tiempo sin diente",
         "Mayor número de citas",
         "Posible uso de prótesis temporal"
@@ -28,12 +35,18 @@ export const treatmentTypes = {
       sessions: "1-2 sesiones",
       success: "95%",
       healing: "Corona provisional el mismo día",
-      advantages: [
+      cost: "$$$",
+      steps: [
+        "Evaluación y planificación detallada",
+        "Extracción (si es necesario) y colocación del implante",
+        "Colocación inmediata de corona provisional"
+      ],
+      benefits: [
         "Diente inmediato",
         "Menos citas",
         "Mejor estética desde el inicio"
       ],
-      disadvantages: [
+      drawbacks: [
         "Requiere buena calidad ósea",
         "Mayor costo inicial",
         "Restricciones alimentarias"
@@ -51,12 +64,20 @@ export const treatmentTypes = {
       sessions: "4-6 sesiones",
       success: "97%",
       healing: "Cicatrización completa antes del puente",
-      advantages: [
+      cost: "$$$",
+      steps: [
+        "Evaluación y planificación",
+        "Colocación de múltiples implantes",
+        "Período de cicatrización (4-6 meses)",
+        "Toma de impresiones",
+        "Colocación del puente definitivo"
+      ],
+      benefits: [
         "Osteointegración óptima",
         "Menor riesgo por implante",
         "Protocolo bien establecido"
       ],
-      disadvantages: [
+      drawbacks: [
         "Período prolongado sin dientes",
         "Más visitas al dentista",
         "Prótesis temporal necesaria"
@@ -69,12 +90,19 @@ export const treatmentTypes = {
       sessions: "2-3 sesiones",
       success: "93%",
       healing: "Puente provisional inmediato",
-      advantages: [
+      cost: "$$$$",
+      steps: [
+        "Evaluación y planificación avanzada",
+        "Colocación de implantes múltiples",
+        "Colocación inmediata de puente provisional",
+        "Ajustes y seguimiento"
+      ],
+      benefits: [
         "Función inmediata",
         "Estética preservada",
         "Menos tiempo de tratamiento"
       ],
-      disadvantages: [
+      drawbacks: [
         "Selección estricta de casos",
         "Mayor complejidad técnica",
         "Cuidados postoperatorios rigurosos"
@@ -92,12 +120,20 @@ export const treatmentTypes = {
       sessions: "5-8 sesiones",
       success: "96%",
       healing: "Prótesis removible durante cicatrización",
-      advantages: [
+      cost: "$$$$",
+      steps: [
+        "Evaluación y planificación detallada",
+        "Colocación de 4 implantes estratégicos",
+        "Período de cicatrización con prótesis temporal",
+        "Múltiples citas de ajuste",
+        "Colocación de prótesis definitiva"
+      ],
+      benefits: [
         "Integración ósea completa",
         "Ajuste perfecto de la prótesis",
         "Menor riesgo de fracaso"
       ],
-      disadvantages: [
+      drawbacks: [
         "Largo período de adaptación",
         "Prótesis removible temporal",
         "Múltiples citas de ajuste"
@@ -110,12 +146,19 @@ export const treatmentTypes = {
       sessions: "2-4 sesiones",
       success: "92%",
       healing: "Prótesis fija provisional inmediata",
-      advantages: [
+      cost: "$$$$$",
+      steps: [
+        "Evaluación y planificación 3D",
+        "Colocación de 4 implantes en una sesión",
+        "Colocación inmediata de prótesis provisional",
+        "Seguimiento y ajustes menores"
+      ],
+      benefits: [
         "Dientes fijos inmediatos",
         "Una sola cirugía",
         "Recuperación más rápida"
       ],
-      disadvantages: [
+      drawbacks: [
         "Criterios de selección estrictos",
         "Mayor costo inicial",
         "Dieta líquida inicial"
