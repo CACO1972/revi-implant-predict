@@ -42,14 +42,14 @@ export default function Index() {
       duration: 0.8
     }} className="w-full max-w-5xl space-y-8 z-10 relative py-16">
         {/* Logo animado */}
-        <motion.div className="mb-8" animate={{
+        <motion.div animate={{
         y: [0, -15, 0],
         filter: ["drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))", "drop-shadow(0 0 25px rgba(23, 133, 130, 0.7))", "drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))"]
       }} transition={{
         duration: 4,
         repeat: Infinity,
         ease: "easeInOut"
-      }}>
+      }} className="mb-8 rounded-md">
           <img src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png" alt="ImplantX Logo" className="w-72 h-auto mx-auto" />
         </motion.div>
 
@@ -71,11 +71,7 @@ export default function Index() {
             repeatType: "reverse",
             ease: "easeInOut"
           }} />
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-[#178582] to-[#BFA181] bg-clip-text text-transparent">
-                ImplantDX
-              </span>
-            </h1>
+            
             <h2 className="text-3xl md:text-4xl font-light text-white/90">
               ¿Eres candidato a implantes dentales?
             </h2>
