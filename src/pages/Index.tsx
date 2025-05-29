@@ -6,18 +6,21 @@ import { Button } from "@/components/ui/button";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
 import DemoModal from "@/components/demo/DemoModal";
-import QuestionnaireDemo from "@/components/demo/QuestionnaireDemo";
+import DynamicQuestionnaireDemo from "@/components/demo/DynamicQuestionnaireDemo";
 import ClinicalFlowDemo from "@/components/demo/ClinicalFlowDemo";
 import TreatmentComparisonDemo from "@/components/demo/TreatmentComparisonDemo";
 import PriceCalculatorDemo from "@/components/demo/PriceCalculatorDemo";
 import PdfReportDemo from "@/components/demo/PdfReportDemo";
+
 export default function Index() {
   const navigate = useNavigate();
   const [currentModal, setCurrentModal] = useState<string | null>(null);
   const [animatedElement, setAnimatedElement] = useState(0);
+  
   const openModal = (modalId: string) => {
     setCurrentModal(modalId);
   };
+  
   const closeModal = () => {
     setCurrentModal(null);
   };
@@ -29,18 +32,17 @@ export default function Index() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-  return <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative overflow-hidden">
+  
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative overflow-hidden">
       <AnimatedStarryBackground />
       
-      <motion.div initial={{
-      opacity: 0,
-      y: 20
-    }} animate={{
-      opacity: 1,
-      y: 0
-    }} transition={{
-      duration: 0.8
-    }} className="w-full max-w-5xl space-y-8 z-10 relative py-16">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-5xl space-y-8 z-10 relative py-16"
+      >
         {/* Logo animado */}
         <motion.div animate={{
         y: [0, -15, 0],
@@ -287,13 +289,14 @@ export default function Index() {
         </motion.div>
       </motion.div>
       
-      <RioAssistant isVisible={true} message="¡Hola! Soy Río, tu asistente virtual. Estoy aquí para guiarte durante todo el proceso de evaluación. ¡Haz clic para comenzar!" />
+      <RioAssistant isVisible={true} message="¡Hola! Soy Río, tu asistente virtual. ¿Listo para descubrir si eres candidato a implantes? ¡El nuevo cuestionario es súper dinámico!" />
       
-      {/* Modals para demo */}
-      <DemoModal isOpen={currentModal === "questionnaire"} onClose={closeModal} title="Cuestionario Clínico Predictivo">
-        <QuestionnaireDemo />
+      {/* Updated modal with new dynamic questionnaire */}
+      <DemoModal isOpen={currentModal === "questionnaire"} onClose={closeModal} title="Cuestionario Dinámico">
+        <DynamicQuestionnaireDemo />
       </DemoModal>
       
+      {/* Modals for demo */}
       <DemoModal isOpen={currentModal === "clinical-flow"} onClose={closeModal} title="Flujo Clínico">
         <ClinicalFlowDemo />
       </DemoModal>
@@ -309,5 +312,6 @@ export default function Index() {
       <DemoModal isOpen={currentModal === "pdf-report"} onClose={closeModal} title="Informe PDF">
         <PdfReportDemo />
       </DemoModal>
-    </div>;
+    </div>
+  );
 }
