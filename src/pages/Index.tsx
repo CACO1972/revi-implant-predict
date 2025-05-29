@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
 import DemoModal from "@/components/demo/DemoModal";
-import DynamicQuestionnaireDemo from "@/components/demo/DynamicQuestionnaireDemo";
 import ClinicalFlowDemo from "@/components/demo/ClinicalFlowDemo";
 import TreatmentComparisonDemo from "@/components/demo/TreatmentComparisonDemo";
 import PriceCalculatorDemo from "@/components/demo/PriceCalculatorDemo";
@@ -184,7 +184,7 @@ export default function Index() {
           }} whileTap={{
             scale: 0.98
           }}>
-              <Button onClick={() => openModal("questionnaire")} className="bg-[#178582] hover:bg-[#178582]/90 text-white px-8 py-6 rounded-xl text-lg shadow-glow transition-all duration-300 border border-[#178582]/30 w-full md:w-auto">
+              <Button onClick={() => navigate('/evaluacion')} className="bg-[#178582] hover:bg-[#178582]/90 text-white px-8 py-6 rounded-xl text-lg shadow-glow transition-all duration-300 border border-[#178582]/30 w-full md:w-auto">
                 <Sparkles className="w-5 h-5 mr-2 animate-sparkle" />
                 Evalúa tu caso ahora
               </Button>
@@ -289,12 +289,7 @@ export default function Index() {
         </motion.div>
       </motion.div>
       
-      <RioAssistant isVisible={true} message="¡Hola! Soy Río, tu asistente virtual. ¿Listo para descubrir si eres candidato a implantes? ¡El nuevo cuestionario es súper dinámico!" />
-      
-      {/* Updated modal with new dynamic questionnaire */}
-      <DemoModal isOpen={currentModal === "questionnaire"} onClose={closeModal} title="Cuestionario Dinámico">
-        <DynamicQuestionnaireDemo />
-      </DemoModal>
+      <RioAssistant isVisible={true} message="¡Hola! Soy Río, tu asistente virtual. ¿Listo para descubrir si eres candidato a implantes? ¡Haz clic en 'Evalúa tu caso ahora' para comenzar!" />
       
       {/* Modals for demo */}
       <DemoModal isOpen={currentModal === "clinical-flow"} onClose={closeModal} title="Flujo Clínico">
