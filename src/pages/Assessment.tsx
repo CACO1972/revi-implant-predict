@@ -2,160 +2,175 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { questions } from "@/data/questions";
-import { Question, Answer, PatientInfo } from "@/types/implant";
-import QuestionCard from "@/components/QuestionCard";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
+import { PatientInfo, Question, Answer } from "@/types/implant";
+import { questions } from "@/data/questions";
+import { toast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
+import QuestionCard from "@/components/QuestionCard";
 import ProgressBar from "@/components/ProgressBar";
-import UserInfoForm from "@/components/UserInfoForm";
+import { calculateScore, evaluateResult } from "@/utils/assessmentUtils";
 
 export default function Assessment() {
   const navigate = useNavigate();
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(-1); // -1 para el formulario inicial
+  const [currentStep, setCurrentStep] = useState(0);
+  const [patientInfo, setPatientInfo] = useState<PatientInfo>({ name: "", age: null });
   const [answers, setAnswers] = useState<Answer[]>([]);
-  const [patientInfo, setPatientInfo] = useState<PatientInfo>({
-    name: "",
-    age: null
-  });
-  const [rioMessage, setRioMessage] = useState("¡Hola! Para comenzar, necesito que me indiques tu nombre y edad. Esta información es importante para personalizar tu evaluación.");
-  
-  const currentQuestion: Question | undefined = questions[currentQuestionIndex];
-  const totalQuestions = questions.length;
-  
-  const handleStart = (info: PatientInfo) => {
-    setPatientInfo(info);
-    setCurrentQuestionIndex(0);
-    setRioMessage(`¡Hola ${info.name}! Empecemos con la evaluación. Te haré una serie de preguntas para determinar tu compatibilidad con implantes dentales. Responde con sinceridad para obtener el mejor resultado.`);
-  };
-  
-  const handleAnswer = (answer: Answer) => {
-    const existingIndex = answers.findIndex(a => a.questionId === answer.questionId);
-    
-    if (existingIndex !== -1) {
-      // Update existing answer
-      setAnswers(prev => 
-        prev.map(a => a.questionId === answer.questionId ? answer : a)
-      );
-    } else {
-      // Add new answer
-      setAnswers(prev => [...prev, answer]);
-    }
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [assessmentResult, setAssessmentResult] = useState<any>(null);
 
-    // Proporcionar feedback personalizado basado en la respuesta
-    if (currentQuestion) {
-      const selectedOption = currentQuestion.options.find(
-        o => answer.selectedValues.includes(o.value)
-      );
-      
-      if (selectedOption) {
-        let feedback = "";
-        
-        switch(currentQuestion.id) {
-          case 1: // Tabaquismo
-            if (selectedOption.score > 0) {
-              feedback = `El tabaquismo puede reducir la tasa de éxito de los implantes hasta en un 15%. Si puedes reducir o eliminar este hábito antes del tratamiento, mejorarás significativamente tus posibilidades de éxito.`;
-            } else {
-              feedback = `¡Excelente! No fumar es muy favorable para el éxito de los implantes dentales.`;
-            }
-            break;
-          case 12: // Experiencia previa con implantes
-            if (selectedOption.value === "failed") {
-              feedback = `Entiendo que has tenido dificultades previas. Es importante analizar qué causó ese problema para evitarlo en el futuro. Cada caso es único y podemos aprender de experiencias pasadas.`;
-            } else if (selectedOption.value === "success") {
-              feedback = `¡Eso es genial! Tener una experiencia previa positiva sugiere que tu cuerpo responde bien a los implantes.`;
-            } else {
-              feedback = `No hay problema, esta será tu primera experiencia con implantes. Te guiaré en todo el proceso.`;
-            }
-            break;
-          case 13: // Enfermedad autoinmune
-            if (selectedOption.score > 0) {
-              feedback = `Las enfermedades autoinmunes pueden afectar la cicatrización. Es fundamental que esté bien controlada antes del procedimiento y que trabajes con un equipo médico-dental coordinado.`;
-            } else {
-              feedback = `Perfecto, no tener condiciones autoinmunes simplifica el proceso de implantes.`;
-            }
-            break;
-          case 14: // Bifosfonatos
-            if (selectedOption.score > 0) {
-              feedback = `Los bifosfonatos pueden afectar la cicatrización ósea. Es muy importante que informes esto a tu dentista, ya que requiere consideraciones especiales durante la planificación.`;
-            } else {
-              feedback = `Excelente, esto elimina un factor de riesgo importante para la cicatrización ósea.`;
-            }
-            break;
-          default:
-            feedback = getAssistantMessage();
-        }
-        
-        setRioMessage(feedback);
-      }
-    }
-  };
-  
-  const handleNext = () => {
-    if (currentQuestionIndex < totalQuestions - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setRioMessage(getAssistantMessage(currentQuestionIndex + 1));
-    } else {
-      // Save answers to sessionStorage before navigating
-      sessionStorage.setItem('patientInfo', JSON.stringify(patientInfo));
-      sessionStorage.setItem('answers', JSON.stringify(answers));
-      navigate('/odontograma');
-    }
-  };
-  
-  const handlePrevious = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
-      setRioMessage(getAssistantMessage(currentQuestionIndex - 1));
-    } else {
-      setCurrentQuestionIndex(-1); // Go back to user info form
-      setRioMessage("¡Hola! Para comenzar, necesito que me indiques tu nombre y edad. Esta información es importante para personalizar tu evaluación.");
-    }
-  };
-  
-  const getCurrentAnswer = (questionId: number) => {
-    return answers.find(a => a.questionId === questionId);
-  };
-  
-  const getAssistantMessage = (indexOverride?: number) => {
-    const index = indexOverride !== undefined ? indexOverride : currentQuestionIndex;
-    if (index === -1) {
-      return "¡Hola! Para comenzar, necesito que me indiques tu nombre y edad. Esta información es importante para personalizar tu evaluación.";
-    }
-    
-    const q = questions[index];
-    if (!q) return "";
-    
-    const messages: Record<number, string> = {
-      1: "El tabaquismo afecta significativamente el éxito de los implantes. Si fumas, reducir o idealmente dejar el hábito mejora mucho el pronóstico.",
-      2: "La diabetes bien controlada permite buenos resultados con implantes. Un buen control de glucemia antes del procedimiento es clave.",
-      3: "El bruxismo puede sobrecargar los implantes. Un plano de relajación ayuda a proteger tu inversión a largo plazo.",
-      4: "A mayor tiempo sin dientes, mayor pérdida de hueso. Pero no te preocupes, existen técnicas para regenerar hueso cuando es necesario.",
-      5: "La cantidad de dientes afecta el plan de tratamiento. A veces no se necesita un implante por cada diente perdido.",
-      6: "Cada zona de la boca tiene diferente calidad ósea, lo que influye en la técnica quirúrgica y el tiempo de cicatrización.",
-      7: "Es importante tratar cualquier condición dental existente antes de colocar implantes para optimizar resultados.",
-      8: "La causa de la pérdida dental puede indicar factores de riesgo que debemos controlar para el éxito del implante.",
-      9: "La higiene oral es crucial para la longevidad de los implantes. Una rutina adecuada previene complicaciones.",
-      10: "Tu motivación es importante. Los implantes no solo mejoran la función masticatoria, sino también la autoestima y calidad de vida.",
-      11: "Es normal tener preocupaciones. Los avances en implantología han hecho que los procedimientos sean mucho más predecibles y cómodos.",
-      12: "La experiencia previa con implantes puede darnos información valiosa sobre cómo tu cuerpo responde a este tratamiento.",
-      13: "Las enfermedades autoinmunes pueden afectar la cicatrización de los implantes, pero con un buen control médico, muchos pacientes logran excelentes resultados.",
-      14: "Los tratamientos con bifosfonatos pueden afectar el metabolismo óseo. Es un factor importante que tu dentista debe considerar en la planificación."
-    };
-    
-    return messages[q.id] || "Estoy aquí para ayudarte con cualquier duda sobre esta pregunta.";
-  };
-  
-  const progress = currentQuestionIndex === -1 ? 0 : (currentQuestionIndex + 1) / (totalQuestions + 1) * 100;
+  // 0 = patient info, 1-9 = questions, 10 = completed
+  const totalSteps = questions.length + 1; // +1 for patient info
+  const currentQuestion = currentStep > 0 ? questions[currentStep - 1] : null;
 
-  const handleRioMessageChange = (newMessage: string) => {
-    setRioMessage(newMessage);
+  const handlePatientInfoSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!patientInfo.name.trim()) {
+      toast({
+        title: "Error",
+        description: "Por favor ingresa tu nombre",
+        variant: "destructive"
+      });
+      return;
+    }
+    if (!patientInfo.age || patientInfo.age < 18 || patientInfo.age > 99) {
+      toast({
+        title: "Error", 
+        description: "Por favor ingresa una edad válida (18-99 años)",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    sessionStorage.setItem('patientInfo', JSON.stringify(patientInfo));
+    setCurrentStep(1);
   };
+
+  const handleAnswerSubmit = (answer: Answer) => {
+    const newAnswers = [...answers, answer];
+    setAnswers(newAnswers);
+    sessionStorage.setItem('answers', JSON.stringify(newAnswers));
+    
+    if (currentStep < questions.length) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      // Evaluación completada
+      const totalScore = calculateScore(newAnswers);
+      const result = evaluateResult(totalScore);
+      setAssessmentResult(result);
+      setIsCompleted(true);
+    }
+  };
+
+  const handleRestart = () => {
+    sessionStorage.removeItem('patientInfo');
+    sessionStorage.removeItem('answers');
+    setCurrentStep(0);
+    setAnswers([]);
+    setPatientInfo({ name: "", age: null });
+    setIsCompleted(false);
+    setAssessmentResult(null);
+  };
+
+  const getColorByLevel = () => {
+    if (!assessmentResult) return "text-[#178582]";
+    switch (assessmentResult.level) {
+      case 1: return "text-emerald-400";
+      case 2: return "text-[#178582]";
+      case 3: return "text-[#BFA181]";
+      case 4: return "text-red-400";
+      default: return "text-[#178582]";
+    }
+  };
+
+  const getBgColorByLevel = () => {
+    if (!assessmentResult) return "bg-[#178582]/10";
+    switch (assessmentResult.level) {
+      case 1: return "bg-emerald-400/10";
+      case 2: return "bg-[#178582]/10";
+      case 3: return "bg-[#BFA181]/10";
+      case 4: return "bg-red-400/10";
+      default: return "bg-[#178582]/10";
+    }
+  };
+
+  if (isCompleted && assessmentResult) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
+        <AnimatedStarryBackground />
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-md mx-auto"
+        >
+          <div className="glass-panel p-8">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-[#BFA181]">Resultados de tu evaluación</h2>
+              <p className="text-white/80 mt-2 font-light">
+                Hola {patientInfo.name}, basado en tus respuestas hemos generado tu predicción de éxito clínico.
+              </p>
+            </div>
+            
+            <div className={`${getBgColorByLevel()} rounded-lg p-6 mb-6 border border-white/10`}>
+              <div className="text-center">
+                <div className={`text-4xl font-bold ${getColorByLevel()} mb-2`}>
+                  Nivel {assessmentResult.level}
+                </div>
+                <h3 className="text-xl font-medium text-white mb-3">
+                  {assessmentResult.title}
+                </h3>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  {assessmentResult.description}
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-3 mb-6">
+              <h4 className="text-[#BFA181] font-medium">Recomendaciones:</h4>
+              {assessmentResult.recommendations.map((rec: string, index: number) => (
+                <div key={index} className="flex items-start space-x-2">
+                  <div className="w-2 h-2 rounded-full bg-[#178582] mt-2 flex-shrink-0"></div>
+                  <p className="text-white/80 text-sm">{rec}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="space-y-4">
+              <Button 
+                onClick={() => navigate('/contacto')}
+                className="w-full bg-[#178582] hover:bg-[#178582]/90 text-white shadow-glow border border-[#BFA181]/30"
+              >
+                Recibir evaluación profesional
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={handleRestart}
+                className="w-full border-white/20 text-white hover:bg-white/5"
+              >
+                Volver a empezar
+              </Button>
+            </div>
+          </div>
+        </motion.div>
+        
+        <RioAssistant 
+          isVisible={true} 
+          message="¡Evaluación completada! Estos resultados son una orientación inicial. Te recomendamos consultar con un profesional para una evaluación completa."
+        />
+        
+        <Toaster />
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen flex flex-col items-center px-4 py-10 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 relative overflow-hidden">
       <AnimatedStarryBackground />
       
       {/* Logo pequeño */}
@@ -167,41 +182,86 @@ export default function Assessment() {
         />
       </div>
       
-      <ProgressBar progress={progress} />
+      <ProgressBar progress={(currentStep / totalSteps) * 100} />
       
       <AnimatePresence mode="wait">
-        {currentQuestionIndex === -1 ? (
+        {currentStep === 0 ? (
           <motion.div
-            key="user-info"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
+            key="patient-info"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            className="glass-panel p-8 max-w-md w-full"
           >
-            <UserInfoForm 
-              initialData={patientInfo} 
-              onSubmit={handleStart} 
-            />
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-[#178582] mb-2">Información Personal</h2>
+              <p className="text-white/80">
+                Para comenzar, necesitamos algunos datos básicos
+              </p>
+            </div>
+            
+            <form onSubmit={handlePatientInfoSubmit} className="space-y-4">
+              <div>
+                <Label htmlFor="name" className="text-white/90">Nombre completo</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  value={patientInfo.name}
+                  onChange={(e) => setPatientInfo({ ...patientInfo, name: e.target.value })}
+                  className="bg-white/10 border-white/20 text-white placeholder-white/50"
+                  placeholder="Escribe tu nombre completo"
+                  required
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="age" className="text-white/90">Edad</Label>
+                <Input
+                  id="age"
+                  type="number"
+                  min="18"
+                  max="99"
+                  value={patientInfo.age || ""}
+                  onChange={(e) => setPatientInfo({ ...patientInfo, age: parseInt(e.target.value) || null })}
+                  className="bg-white/10 border-white/20 text-white placeholder-white/50"
+                  placeholder="Tu edad"
+                  required
+                />
+              </div>
+              
+              <Button 
+                type="submit" 
+                className="w-full bg-[#178582] hover:bg-[#178582]/90 text-white shadow-glow transition-all duration-300 border border-[#BFA181]/30"
+              >
+                <Sparkles className="w-4 h-4 mr-2" />
+                Comenzar Evaluación
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </form>
           </motion.div>
         ) : currentQuestion ? (
           <QuestionCard
             key={currentQuestion.id}
             question={currentQuestion}
-            onAnswer={handleAnswer}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            isFirst={currentQuestionIndex === 0}
-            isLast={currentQuestionIndex === totalQuestions - 1}
-            currentAnswer={getCurrentAnswer(currentQuestion.id)}
+            onAnswer={handleAnswerSubmit}
+            questionNumber={currentStep}
+            totalQuestions={questions.length}
           />
         ) : null}
       </AnimatePresence>
       
       <RioAssistant 
         isVisible={true} 
-        message={rioMessage}
-        onMessageChange={handleRioMessageChange}
+        message={
+          currentStep === 0 
+            ? "¡Hola! Soy Río, tu asistente virtual. Vamos a hacer una evaluación personalizada para saber si eres candidato a implantes dentales." 
+            : currentQuestion
+            ? `Pregunta ${currentStep} de ${questions.length}. ${currentQuestion.assistantMessage || "Tómate tu tiempo para responder con sinceridad."}`
+            : "¡Genial! Hemos terminado la evaluación."
+        }
       />
+      
+      <Toaster />
     </div>
   );
 }

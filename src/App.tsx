@@ -10,8 +10,6 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PriceCalculator from "./pages/PriceCalculator";
 import Assessment from "./pages/Assessment";
-import Odontogram from "./pages/Odontogram";
-import Results from "./pages/Results";
 import TreatmentComparison from "./pages/TreatmentComparison";
 import ContactForm from "./pages/ContactForm";
 import QuienesSomos from "./pages/QuienesSomos";
@@ -28,8 +26,6 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/evaluacion" element={<Assessment />} />
-            <Route path="/odontograma" element={<Odontogram />} />
-            <Route path="/resultados" element={<Results />} />
             <Route path="/comparador" element={<TreatmentComparison />} />
             <Route path="/calculadora" element={<PriceCalculator />} />
             <Route path="/contacto" element={<ContactForm />} />
