@@ -1,11 +1,10 @@
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import { Cigarette, Heart, Smile, Clock, Teeth, MapPin, AlertTriangle, Brush, Target, HelpCircle } from "lucide-react";
+import { Cigarette, Heart, Smile, Clock, MapPin, AlertTriangle, Brush, Target, HelpCircle } from "lucide-react";
 import RioInteractiveAssistant from "./RioInteractiveAssistant";
 
 const miniQuestions = [
@@ -44,7 +43,7 @@ const miniQuestions = [
   },
   {
     id: 4,
-    icon: <Teeth className="w-6 h-6" />,
+    icon: <Smile className="w-6 h-6" />,
     title: "¿Cuántos dientes necesitas reemplazar?",
     options: [
       { value: "one", label: "1 diente", score: 0 },
