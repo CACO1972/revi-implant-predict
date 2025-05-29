@@ -67,6 +67,18 @@ export default function Assessment() {
     }
   };
 
+  const handleNext = () => {
+    if (currentStep < questions.length) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
   const handleRestart = () => {
     sessionStorage.removeItem('patientInfo');
     sessionStorage.removeItem('answers');
@@ -123,10 +135,10 @@ export default function Assessment() {
                   Nivel {assessmentResult.level}
                 </div>
                 <h3 className="text-xl font-medium text-white mb-3">
-                  {assessmentResult.title}
+                  {assessmentResult.prediction}
                 </h3>
                 <p className="text-white/80 text-sm leading-relaxed">
-                  {assessmentResult.description}
+                  Puntuación total: {assessmentResult.totalScore} puntos
                 </p>
               </div>
             </div>
@@ -244,8 +256,11 @@ export default function Assessment() {
             key={currentQuestion.id}
             question={currentQuestion}
             onAnswer={handleAnswerSubmit}
-            questionNumber={currentStep}
-            totalQuestions={questions.length}
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+            isFirst={currentStep === 1}
+            isLast={currentStep === questions.length}
+            currentAnswer={answers.find(a => a.questionId === currentQuestion.id)}
           />
         ) : null}
       </AnimatePresence>
@@ -256,7 +271,7 @@ export default function Assessment() {
           currentStep === 0 
             ? "¡Hola! Soy Río, tu asistente virtual. Vamos a hacer una evaluación personalizada para saber si eres candidato a implantes dentales." 
             : currentQuestion
-            ? `Pregunta ${currentStep} de ${questions.length}. ${currentQuestion.assistantMessage || "Tómate tu tiempo para responder con sinceridad."}`
+            ? `Pregunta ${currentStep} de ${questions.length}. Tómate tu tiempo para responder con sinceridad.`
             : "¡Genial! Hemos terminado la evaluación."
         }
       />
