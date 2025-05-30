@@ -100,7 +100,7 @@ export default function InstagramDemo() {
       {isWelcomeStep && (
         <BluAssistant 
           isVisible={false} 
-          message="¡Hola! Soy Blu, tu asistente virtual. Haz clic en mi avatar si necesitas ayuda durante la evaluación."
+          message="¡Hola! Soy Río, como Blu de la película. Esta es la versión beta demo con las 5 preguntas principales. Haz clic en mi avatar si necesitas ayuda durante la evaluación."
         />
       )}
     </div>

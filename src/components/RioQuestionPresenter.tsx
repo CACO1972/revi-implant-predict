@@ -7,11 +7,7 @@ import {
   Heart, 
   Moon, 
   Clock, 
-  Smile, 
-  MapPin, 
-  AlertTriangle, 
-  Trash2, 
-  Brush,
+  Smile,
   Sparkles,
   MessageCircle
 } from "lucide-react";
@@ -27,11 +23,7 @@ const questionIcons = {
   2: Heart,
   3: Moon,
   4: Clock,
-  5: Smile,
-  6: MapPin,
-  7: AlertTriangle,
-  8: Trash2,
-  9: Brush
+  5: Smile
 };
 
 const rioMessages = {
@@ -39,11 +31,7 @@ const rioMessages = {
   2: "¿Tienes diabetes? No te preocupes, podemos trabajar con eso...",
   3: "¿Rechinas los dientes por la noche? Es más común de lo que piensas...",
   4: "El tiempo sin dientes es crucial. Cuéntame cuándo los perdiste...",
-  5: "¿Cuántos dientes necesitamos reemplazar? Esto define tu plan...",
-  6: "La ubicación importa mucho. ¿Dónde están los dientes perdidos?",
-  7: "Revisemos tu salud oral actual. ¿Tienes alguno de estos problemas?",
-  8: "¿Sabes por qué perdiste tus dientes? Esto me ayuda a planificar mejor...",
-  9: "Tu higiene oral será clave para el éxito. Cuéntame tus hábitos..."
+  5: "¿Cuántos dientes necesitamos reemplazar? Esto define tu plan..."
 };
 
 export default function RioQuestionPresenter({ question, questionNumber, totalQuestions }: RioQuestionPresenterProps) {
@@ -74,7 +62,7 @@ export default function RioQuestionPresenter({ question, questionNumber, totalQu
             exit={{ opacity: 0, scale: 0.8, y: -20 }}
             className="relative"
           >
-            {/* Avatar de Río más grande */}
+            {/* Avatar de Río más grande - Color azul como Blu */}
             <motion.div
               animate={{ 
                 y: [0, -8, 0],
@@ -87,16 +75,16 @@ export default function RioQuestionPresenter({ question, questionNumber, totalQu
               }}
               className="mx-auto w-20 h-20 mb-4"
             >
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-[#178582] to-[#178582]/70 p-2 shadow-glow relative">
-                <div className="w-full h-full rounded-full bg-[#178582] flex items-center justify-center overflow-hidden">
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-500 to-blue-600 p-2 shadow-glow relative">
+                <div className="w-full h-full rounded-full bg-blue-500 flex items-center justify-center overflow-hidden">
                   <svg viewBox="0 0 100 100" className="w-full h-full">
-                    <circle cx="50" cy="50" r="45" fill="#178582" />
-                    <path d="M 30 30 Q 50 10 70 30" stroke="#BFA181" strokeWidth="8" fill="none" />
+                    <circle cx="50" cy="50" r="45" fill="#3B82F6" />
+                    <path d="M 30 30 Q 50 10 70 30" stroke="#60A5FA" strokeWidth="8" fill="none" />
                     <circle cx="35" cy="45" r="6" fill="white" />
                     <circle cx="65" cy="45" r="6" fill="white" />
-                    <circle cx="35" cy="45" r="3" fill="#0A1828" />
-                    <circle cx="65" cy="45" r="3" fill="#0A1828" />
-                    <path d="M 43 60 Q 50 70 57 60" stroke="#BFA181" strokeWidth="3" fill="none" />
+                    <circle cx="35" cy="45" r="3" fill="#1E3A8A" />
+                    <circle cx="65" cy="45" r="3" fill="#1E3A8A" />
+                    <path d="M 43 60 Q 50 70 57 60" stroke="#F59E0B" strokeWidth="3" fill="none" />
                   </svg>
                 </div>
                 
@@ -106,7 +94,7 @@ export default function RioQuestionPresenter({ question, questionNumber, totalQu
                   transition={{ duration: 2, repeat: Infinity }}
                   className="absolute -top-1 -right-1"
                 >
-                  <Sparkles className="w-5 h-5 text-[#BFA181]" />
+                  <Sparkles className="w-5 h-5 text-yellow-400" />
                 </motion.div>
               </div>
             </motion.div>
@@ -116,15 +104,15 @@ export default function RioQuestionPresenter({ question, questionNumber, totalQu
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="relative bg-gradient-to-r from-[#178582]/20 to-[#BFA181]/20 rounded-xl p-4 border border-[#178582]/30 mx-auto max-w-sm"
+              className="relative bg-gradient-to-r from-blue-500/20 to-blue-400/20 rounded-xl p-4 border border-blue-500/30 mx-auto max-w-sm"
             >
               {/* Flecha que apunta hacia Río */}
-              <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[8px] border-b-[#178582]/30"></div>
+              <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[8px] border-b-blue-500/30"></div>
               
               <div className="flex items-start gap-2">
-                <MessageCircle className="w-4 h-4 text-[#178582] mt-0.5 flex-shrink-0" />
+                <MessageCircle className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-xs text-[#178582] font-medium mb-1">Río dice:</p>
+                  <p className="text-xs text-blue-400 font-medium mb-1">Río dice:</p>
                   <motion.p 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -159,20 +147,23 @@ export default function RioQuestionPresenter({ question, questionNumber, totalQu
                   damping: 15,
                   delay: 0.2 
                 }}
-                className="mx-auto w-16 h-16 bg-gradient-to-br from-[#BFA181]/20 to-[#178582]/20 rounded-full flex items-center justify-center border border-[#BFA181]/30"
+                className="mx-auto w-16 h-16 bg-gradient-to-br from-[#BFA181]/20 to-blue-500/20 rounded-full flex items-center justify-center border border-[#BFA181]/30"
               >
                 <IconComponent className="w-8 h-8 text-[#BFA181]" />
               </motion.div>
             )}
 
-            {/* Número de pregunta */}
+            {/* Número de pregunta con indicador de demo */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
-              className="text-[#BFA181] text-sm font-medium"
+              className="text-[#BFA181] text-sm font-medium space-y-1"
             >
-              Pregunta {questionNumber} de {totalQuestions}
+              <div>Pregunta {questionNumber} de {totalQuestions}</div>
+              <div className="text-xs text-blue-400 bg-blue-500/10 px-2 py-1 rounded-full border border-blue-500/20">
+                📱 Demo versión Beta
+              </div>
             </motion.div>
 
             {/* Título de la pregunta */}

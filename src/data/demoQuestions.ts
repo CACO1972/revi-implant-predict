@@ -1,7 +1,7 @@
 
 import { Question } from "@/types/implant";
 
-// Las preguntas para la demostración de Instagram, versión simplificada y con orden específico
+// Las 5 primeras preguntas para la demostración de Instagram (versión beta demo)
 export const demoQuestions: Question[] = [
   {
     id: 1,
@@ -57,65 +57,5 @@ export const demoQuestions: Question[] = [
       { value: "2", label: "4 o más dientes", score: 2 }
     ],
     recommendation: "Existen diferentes soluciones según la cantidad de dientes a reemplazar."
-  },
-  {
-    id: 6,
-    title: "¿En qué parte de la boca necesitas el implante?",
-    explanation: "Cada zona de la boca tiene características específicas que influyen en el tratamiento.",
-    options: [
-      { value: "0", label: "Zona delantera", score: 0 },
-      { value: "1", label: "Zona posterior superior", score: 1 },
-      { value: "2", label: "Zona posterior inferior", score: 2 }
-    ],
-    recommendation: "La ubicación determina el enfoque quirúrgico y el tipo de implante."
-  },
-  {
-    id: 7,
-    title: "¿Presentas alguna de estas condiciones actuales?",
-    explanation: "Estas condiciones pueden afectar el éxito del tratamiento con implantes.",
-    options: [
-      { value: "caries", label: "Caries activas", score: 1 },
-      { value: "gum", label: "Sangrado de encías", score: 1 },
-      { value: "mobility", label: "Movilidad dental", score: 1 },
-      { value: "pain", label: "Dolor o inflamación", score: 1 },
-      { value: "none", label: "Ninguna de estas", score: 0 }
-    ],
-    multiSelect: true,
-    recommendation: "Es importante tratar estas condiciones antes de proceder con implantes."
-  },
-  {
-    id: 8,
-    title: "¿Por qué perdiste el diente o dientes?",
-    explanation: "La causa de la pérdida puede influir en el tratamiento y prevención futura.",
-    options: [
-      { value: "0", label: "Accidente o trauma", score: 0 },
-      { value: "1", label: "Caries", score: 1 },
-      { value: "2", label: "Enfermedad periodontal", score: 2 }
-    ],
-    recommendation: "Conocer la causa ayuda a prevenir problemas futuros."
-  },
-  {
-    id: 9,
-    title: "¿Cuáles son tus hábitos de higiene bucal?",
-    explanation: "La higiene es clave para mantener la salud de los implantes a largo plazo.",
-    options: [
-      { value: "0", label: "Cepillado 3 veces/día + hilo + enjuague", score: 0 },
-      { value: "1", label: "Cepillado 2 veces/día", score: 1 },
-      { value: "2", label: "Cepillado 1 vez/día o menos", score: 2 }
-    ],
-    recommendation: "Una buena higiene oral es fundamental para el éxito del implante."
-  },
-  {
-    id: 10,
-    title: "¿Qué te motiva a buscar un implante dental?",
-    explanation: "Comprender tu motivación nos ayuda a brindarte un mejor servicio.",
-    options: [
-      { value: "aesthetic", label: "Mejorar mi estética", score: 0 },
-      { value: "function", label: "Recuperar la función masticatoria", score: 0 },
-      { value: "confidence", label: "Aumentar mi confianza", score: 0 },
-      { value: "health", label: "Mejorar mi salud bucal", score: 0 }
-    ],
-    multiSelect: true,
-    recommendation: "Tu motivación es importante para personalizar el tratamiento."
   }
 ];
