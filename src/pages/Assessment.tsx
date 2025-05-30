@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,7 +13,7 @@ import { toast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import QuestionCard from "@/components/QuestionCard";
 import ProgressBar from "@/components/ProgressBar";
-import { calculateScore, evaluateResult } from "@/utils/assessmentUtils";
+import { calculateScore, evaluateResult, getPersonalizedRecommendations } from "@/utils/assessmentUtils";
 
 export default function Assessment() {
   const navigate = useNavigate();
@@ -59,10 +58,19 @@ export default function Assessment() {
     if (currentStep < questions.length) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Evaluación completada
+      // Evaluación completada - generar recomendaciones personalizadas
       const totalScore = calculateScore(newAnswers);
       const result = evaluateResult(totalScore);
-      setAssessmentResult(result);
+      
+      // Generar recomendaciones personalizadas basadas en las respuestas específicas
+      const personalizedRecommendations = getPersonalizedRecommendations(patientInfo, newAnswers, result);
+      
+      const finalResult = {
+        ...result,
+        recommendations: personalizedRecommendations
+      };
+      
+      setAssessmentResult(finalResult);
       setIsCompleted(true);
     }
   };
@@ -119,53 +127,69 @@ export default function Assessment() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-md mx-auto"
+          className="w-full max-w-2xl mx-auto"
         >
           <div className="glass-panel p-8">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-[#BFA181]">Resultados de tu evaluación</h2>
-              <p className="text-white/80 mt-2 font-light">
-                Hola {patientInfo.name}, basado en tus respuestas hemos generado tu predicción de éxito clínico.
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-[#BFA181] mb-3">
+                {patientInfo.name}, aquí están tus resultados
+              </h2>
+              <p className="text-white/80 text-lg font-light">
+                Tu evaluación personalizada de ImplantDX
               </p>
             </div>
             
-            <div className={`${getBgColorByLevel()} rounded-lg p-6 mb-6 border border-white/10`}>
-              <div className="text-center">
-                <div className={`text-4xl font-bold ${getColorByLevel()} mb-2`}>
-                  Nivel {assessmentResult.level}
+            <div className={`${getBgColorByLevel()} rounded-xl p-8 mb-8 border border-white/10 text-center`}>
+              <div className="mb-4">
+                <div className={`text-5xl font-bold ${getColorByLevel()} mb-2`}>
+                  {assessmentResult.totalScore}/16
                 </div>
-                <h3 className="text-xl font-medium text-white mb-3">
-                  {assessmentResult.prediction}
+                <h3 className="text-2xl font-semibold text-white mb-3">
+                  Nivel {assessmentResult.level}: {assessmentResult.prediction}
                 </h3>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  Puntuación total: {assessmentResult.totalScore} puntos
+                <p className="text-white/70 text-sm leading-relaxed max-w-md mx-auto">
+                  {assessmentResult.level === 1 && "Tus condiciones son ideales para un tratamiento de implantes con excelente pronóstico."}
+                  {assessmentResult.level === 2 && "Presentas buenas condiciones generales con algunos factores menores a considerar."}
+                  {assessmentResult.level === 3 && "Existen factores que requieren optimización antes del tratamiento para mejores resultados."}
+                  {assessmentResult.level === 4 && "Se han identificado varios factores importantes que necesitan abordarse con un especialista."}
                 </p>
               </div>
             </div>
 
-            <div className="space-y-3 mb-6">
-              <h4 className="text-[#BFA181] font-medium">Recomendaciones:</h4>
+            {/* Recomendaciones personalizadas y empáticas */}
+            <div className="space-y-4 mb-8">
+              <h4 className="text-[#BFA181] font-semibold text-lg mb-4 flex items-center">
+                <Heart className="w-5 h-5 mr-2" />
+                Recomendaciones específicas para ti:
+              </h4>
               {assessmentResult.recommendations.map((rec: string, index: number) => (
-                <div key={index} className="flex items-start space-x-2">
-                  <div className="w-2 h-2 rounded-full bg-[#178582] mt-2 flex-shrink-0"></div>
-                  <p className="text-white/80 text-sm">{rec}</p>
-                </div>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-start space-x-3 p-4 bg-white/5 rounded-lg"
+                >
+                  <div className="w-2 h-2 rounded-full bg-[#178582] mt-3 flex-shrink-0"></div>
+                  <p className="text-white/85 text-sm leading-relaxed font-light">{rec}</p>
+                </motion.div>
               ))}
             </div>
 
             <div className="space-y-4">
               <Button 
                 onClick={() => navigate('/contacto')}
-                className="w-full bg-[#178582] hover:bg-[#178582]/90 text-white shadow-glow border border-[#BFA181]/30"
+                className="w-full bg-[#178582] hover:bg-[#178582]/90 text-white shadow-glow border border-[#BFA181]/30 py-4 text-lg"
               >
-                Recibir evaluación profesional
+                <Sparkles className="w-5 h-5 mr-2" />
+                Obtener evaluación profesional personalizada
               </Button>
               <Button 
                 variant="outline" 
                 onClick={handleRestart}
                 className="w-full border-white/20 text-white hover:bg-white/5"
               >
-                Volver a empezar
+                Realizar nueva evaluación
               </Button>
             </div>
           </div>
@@ -173,7 +197,7 @@ export default function Assessment() {
         
         <RioAssistant 
           isVisible={true} 
-          message="¡Evaluación completada! Estos resultados son una orientación inicial. Te recomendamos consultar con un profesional para una evaluación completa."
+          message={`¡${patientInfo.name}, tu evaluación está completa! Estos resultados te darán una excelente base para tu consulta profesional. Recuerda que cada factor identificado es una oportunidad de mejora.`}
         />
         
         <Toaster />
