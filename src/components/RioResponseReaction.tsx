@@ -9,7 +9,21 @@ interface RioResponseReactionProps {
   isVisible: boolean;
 }
 
-const rioReactions = {
+interface ReactionData {
+  emoji: string;
+  message: string;
+  mood: string;
+}
+
+interface QuestionReactions {
+  [key: string]: ReactionData;
+}
+
+interface RioReactionsData {
+  [key: number]: QuestionReactions;
+}
+
+const rioReactions: RioReactionsData = {
   1: {
     no: { emoji: "🎉", message: "¡Excelente! Sin tabaco tendrás una cicatrización perfecta", mood: "excited" },
     light: { emoji: "⚠️", message: "Considera reducir más. Cada cigarrillo menos ayuda", mood: "concerned" },
@@ -40,7 +54,9 @@ const rioReactions = {
 export default function RioResponseReaction({ questionId, selectedAnswer, isVisible }: RioResponseReactionProps) {
   const [showReaction, setShowReaction] = useState(false);
   
-  const reaction = rioReactions[questionId as keyof typeof rioReactions]?.[selectedAnswer as keyof typeof rioReactions[keyof typeof rioReactions]];
+  // Obtener la reacción de forma segura
+  const questionReactions = rioReactions[questionId];
+  const reaction: ReactionData | undefined = questionReactions?.[selectedAnswer];
 
   useEffect(() => {
     if (isVisible && reaction) {
