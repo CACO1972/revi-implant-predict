@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,7 +5,6 @@ import { Sparkles, Zap, Brain, Activity, Lock, BadgeCheck, MoveRight } from "luc
 import { Button } from "@/components/ui/button";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
-
 export default function Index() {
   const navigate = useNavigate();
   const [animatedElement, setAnimatedElement] = useState(0);
@@ -18,24 +16,29 @@ export default function Index() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-  
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative overflow-hidden">
+  return <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative overflow-hidden">
       <AnimatedStarryBackground />
       
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="w-full max-w-5xl space-y-8 z-10 relative py-16"
-      >
+      <motion.div initial={{
+      opacity: 0,
+      y: 20
+    }} animate={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      duration: 0.8
+    }} className="w-full max-w-5xl space-y-8 z-10 relative py-16">
         {/* Badge de versión beta */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="mb-4"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        scale: 0.8
+      }} animate={{
+        opacity: 1,
+        scale: 1
+      }} transition={{
+        delay: 0.2,
+        duration: 0.6
+      }} className="mb-4">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#178582]/20 to-[#BFA181]/20 px-4 py-2 rounded-full border border-[#178582]/30">
             <div className="w-2 h-2 bg-[#178582] rounded-full animate-pulse"></div>
             <span className="text-[#178582] text-sm font-medium">DEMO VERSIÓN BETA</span>
@@ -73,9 +76,7 @@ export default function Index() {
             ease: "easeInOut"
           }} />
             
-            <h2 className="text-3xl md:text-4xl font-light text-white/90">
-              ¿Eres candidato a implantes dentales?
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-light text-white/90">¿Necesitas Implantes Dentales?</h2>
           </div>
           
           <p className="text-xl md:text-2xl text-white/85 max-w-2xl mx-auto font-light leading-relaxed">
@@ -269,6 +270,5 @@ export default function Index() {
       </motion.div>
       
       <RioAssistant isVisible={true} message="¡Hola! Soy Río, tu asistente virtual. ¿Listo para descubrir si eres candidato a implantes? ¡Haz clic en 'Evalúa tu caso ahora' para comenzar!" />
-    </div>
-  );
+    </div>;
 }
