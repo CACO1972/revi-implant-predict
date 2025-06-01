@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -43,6 +42,19 @@ export default function Index() {
         transition={{ duration: 0.8 }}
         className="w-full max-w-5xl space-y-8 z-10 relative py-16"
       >
+        {/* Badge de versión beta */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="mb-4"
+        >
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#178582]/20 to-[#BFA181]/20 px-4 py-2 rounded-full border border-[#178582]/30">
+            <div className="w-2 h-2 bg-[#178582] rounded-full animate-pulse"></div>
+            <span className="text-[#178582] text-sm font-medium">DEMO VERSIÓN BETA</span>
+          </div>
+        </motion.div>
+
         {/* Logo animado */}
         <motion.div animate={{
         y: [0, -15, 0],
@@ -82,6 +94,17 @@ export default function Index() {
           <p className="text-xl md:text-2xl text-white/85 max-w-2xl mx-auto font-light leading-relaxed">
             Descúbrelo en 2 minutos con ayuda de nuestra <span className="text-[#178582] font-medium">inteligencia artificial</span>
           </p>
+
+          {/* Texto de demo beta */}
+          <div className="bg-gradient-to-r from-[#BFA181]/10 to-transparent p-4 rounded-lg border border-[#BFA181]/20 max-w-lg mx-auto">
+            <p className="text-[#BFA181] text-sm font-medium mb-2">
+              🚀 Demo Gratuita - Versión Beta
+            </p>
+            <p className="text-white/70 text-xs leading-relaxed">
+              Esta es una versión demo con las 5 preguntas principales. 
+              <span className="text-[#178582] font-medium"> ¡Suscríbete para ser de los primeros en usar la versión completa!</span>
+            </p>
+          </div>
           
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <motion.div className="glass-panel p-6 hologram-effect" whileHover={{

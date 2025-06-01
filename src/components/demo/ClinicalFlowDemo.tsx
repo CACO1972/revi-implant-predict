@@ -9,7 +9,7 @@ export default function ClinicalFlowDemo() {
       title: "Evaluación inicial",
       description: "Diagnóstico completo del caso mediante examen clínico detallado",
       icon: CheckCircle,
-      image: "/lovable-uploads/488590528505-98d2b5aba04b.png", // laptop computer - representing evaluation
+      image: "/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png", // Logo ImplantDX
       status: "completed",
       timeframe: "Hoy",
       color: "emerald"
@@ -19,7 +19,7 @@ export default function ClinicalFlowDemo() {
       title: "Toma de RX y evaluación especialista",
       description: "Radiografías, tomografías y análisis por especialista en implantología",
       icon: Camera,
-      image: "/lovable-uploads/518770660439-4636190af475.png", // circuit board - representing x-rays/scans
+      image: "/lovable-uploads/19481b4c-abe4-45b5-849c-180b7603e111.png", // Imagen disponible
       status: "current",
       timeframe: "1-2 semanas",
       color: "blue"
@@ -29,7 +29,7 @@ export default function ClinicalFlowDemo() {
       title: "Planificación y ejecución cirugía",
       description: "Diseño digital del tratamiento y colocación quirúrgica de los implantes",
       icon: Zap,
-      image: "/lovable-uploads/485827404703-89b55fcc595e.png", // robot - representing surgical planning
+      image: "/lovable-uploads/3d3b8ce7-1789-4fd0-ba94-16d161132e7e.png", // Imagen disponible
       status: "pending",
       timeframe: "2-4 semanas",
       color: "purple"
@@ -39,7 +39,7 @@ export default function ClinicalFlowDemo() {
       title: "Período de oseointegración",
       description: "Tiempo de espera para la integración del implante con el hueso",
       icon: Clock,
-      image: "/lovable-uploads/509316975850-ff9c5deb0cd9.png", // pine trees - representing healing process
+      image: "/lovable-uploads/4340a4e4-45cd-474b-ad0d-10e701b4f2b4.png", // Imagen disponible
       status: "pending",
       timeframe: "2-6 meses",
       color: "green"
@@ -49,7 +49,7 @@ export default function ClinicalFlowDemo() {
       title: "Rehabilitación definitiva",
       description: "Colocación de la corona o prótesis final sobre los implantes",
       icon: Heart,
-      image: "/lovable-uploads/487958449943-2429e8be8625.png", // white building - representing final result
+      image: "/lovable-uploads/846506fe-9bf3-421d-913e-bfd48b9feb05.png", // Imagen disponible
       status: "pending",
       timeframe: "2-4 semanas",
       color: "gold"
@@ -134,11 +134,11 @@ export default function ClinicalFlowDemo() {
                 className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-6 border border-white/20 backdrop-blur-sm"
               >
                 {/* Imagen de la etapa */}
-                <div className="w-16 h-16 mx-auto mb-4 rounded-lg overflow-hidden bg-white/10">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-lg overflow-hidden bg-white/10 p-2">
                   <img 
                     src={stage.image} 
                     alt={stage.title}
-                    className="w-full h-full object-cover opacity-80"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 
@@ -200,4 +200,22 @@ export default function ClinicalFlowDemo() {
       </motion.div>
     </div>
   );
+
+  function getStatusColor(status: string) {
+    switch (status) {
+      case "completed": return "bg-emerald-500";
+      case "current": return "bg-[#178582] animate-pulse";
+      case "pending": return "bg-white/20";
+      default: return "bg-white/20";
+    }
+  }
+
+  function getStatusText(status: string) {
+    switch (status) {
+      case "completed": return "✅ Completado";
+      case "current": return "🎯 TÚ ESTÁS AQUÍ";
+      case "pending": return "⏳ Pendiente";
+      default: return "";
+    }
+  }
 }
