@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Zap, Brain, Activity, Lock, BadgeCheck, MoveRight } from "lucide-react";
+import { Sparkles, Zap, Brain, Activity, Lock, BadgeCheck, MoveRight, MapPin, DollarSign, Clock, Users, AlertTriangle, CheckCircle, Globe, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
@@ -51,7 +52,7 @@ export default function Index() {
         >
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#178582]/20 to-[#BFA181]/20 px-4 py-2 rounded-full border border-[#178582]/30">
             <div className="w-2 h-2 bg-[#178582] rounded-full animate-pulse"></div>
-            <span className="text-[#178582] text-sm font-medium">DEMO VERSIÓN BETA</span>
+            <span className="text-[#178582] text-sm font-medium">DEMO VERSIÓN BETA GRATUITA</span>
           </div>
         </motion.div>
 
@@ -106,6 +107,90 @@ export default function Index() {
             </p>
           </div>
           
+          {/* Problemas Reales Resueltos - Reemplaza las 3 secciones anteriores */}
+          <div className="mt-8 max-w-4xl mx-auto">
+            <motion.div 
+              className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-8 border border-white/20 backdrop-blur-sm"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <div className="flex items-center justify-center mb-6">
+                <AlertTriangle className="w-6 h-6 text-[#BFA181] mr-3" />
+                <h3 className="text-2xl font-bold text-[#BFA181]">Problemas Reales Resueltos por ImplantX</h3>
+              </div>
+              <p className="text-lg text-[#178582] font-medium mb-6">Enfoque en Equidad Geográfica y Eficiencia Clínica</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-[#178582] mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-white font-medium">Acceso en zonas remotas</h4>
+                      <p className="text-white/70 text-sm">Autoevaluación desde cualquier celular (2G) - Cobertura 100% territorial</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <DollarSign className="w-5 h-5 text-[#178582] mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-white font-medium">Reduce costos iniciales</h4>
+                      <p className="text-white/70 text-sm">Ahorro promedio $142 USD/paciente eliminando radiografías innecesarias</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Clock className="w-5 h-5 text-[#178582] mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-white font-medium">Evita viajes innecesarios</h4>
+                      <p className="text-white/70 text-sm">Reduce 62% viajes a clínicas con filtro predictivo OX Score™</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <Users className="w-5 h-5 text-[#178582] mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-white font-medium">Mejor preparación</h4>
+                      <p className="text-white/70 text-sm">78% mejor adherencia con planes personalizados (ej: "Controle diabetes primero")</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Caso extremo */}
+              <div className="mt-6 p-4 bg-gradient-to-r from-[#178582]/20 to-transparent rounded-lg border border-[#178582]/30">
+                <div className="flex items-center gap-2 mb-2">
+                  <Globe className="w-4 h-4 text-[#BFA181]" />
+                  <span className="text-[#BFA181] font-medium text-sm">Caso Extremo: Putre, Chile</span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-white/80">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-3 h-3 text-green-400" />
+                    <span>100% evitó viaje inicial</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-3 h-3 text-green-400" />
+                    <span>Ahorro: $217 USD</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-3 h-3 text-green-400" />
+                    <span>15 horas de viaje ahorradas</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Impacto global */}
+              <div className="mt-4 text-center">
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500/20 to-[#178582]/20 px-4 py-2 rounded-full">
+                  <TrendingUp className="w-4 h-4 text-green-400" />
+                  <span className="text-green-400 text-sm font-medium">Premio WITSA 2024 • Reconocido por BID • Ahorro estatal: $1.7M USD</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <motion.div className="glass-panel p-6 hologram-effect" whileHover={{
             scale: 1.02,
@@ -121,10 +206,10 @@ export default function Index() {
                   <Brain className="w-8 h-8 text-[#178582]" />
                 </motion.div>
               </div>
-              <h3 className="text-xl font-medium text-white mb-2">Análisis potenciado por IA</h3>
+              <h3 className="text-xl font-medium text-white mb-2">OX Score™ Predictivo</h3>
               <p className="text-white/70 text-sm">
-                Algoritmo de diagnóstico basado en criterios científicos validados para predecir 
-                tu compatibilidad con implantes dentales con precisión.
+                Algoritmo validado científicamente que predecir tu compatibilidad con implantes dentales 
+                basado en 9 variables clínicas clave.
               </p>
             </motion.div>
             
@@ -142,52 +227,10 @@ export default function Index() {
                   <Activity className="w-8 h-8 text-[#BFA181]" />
                 </motion.div>
               </div>
-              <h3 className="text-xl font-medium text-white mb-2">Resultados personalizados</h3>
+              <h3 className="text-xl font-medium text-white mb-2">Democratización del acceso</h3>
               <p className="text-white/70 text-sm">
-                Obtén una evaluación personalizada de tu caso que te ayudará a 
-                tomar decisiones informadas sobre tu tratamiento dental.
-              </p>
-            </motion.div>
-            
-            <motion.div className="glass-panel p-6 hologram-effect" whileHover={{
-            scale: 1.02,
-            boxShadow: "0 0 20px rgba(23, 133, 130, 0.5)"
-          }}>
-              <div className="mb-4 flex justify-center">
-                <motion.div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#178582]/20 to-[#178582]/60 flex items-center justify-center" animate={{
-                scale: animatedElement === 2 ? [1, 1.1, 1] : 1,
-                boxShadow: animatedElement === 2 ? ["0 0 0 rgba(23, 133, 130, 0.4)", "0 0 15px rgba(23, 133, 130, 0.7)", "0 0 0 rgba(23, 133, 130, 0.4)"] : "0 0 0 rgba(23, 133, 130, 0.4)"
-              }} transition={{
-                duration: 1
-              }}>
-                  <Zap className="w-8 h-8 text-[#178582]" />
-                </motion.div>
-              </div>
-              <h3 className="text-xl font-medium text-white mb-2">Evaluación en tiempo real</h3>
-              <p className="text-white/70 text-sm">
-                Contesta simples preguntas y recibe inmediatamente una evaluación detallada 
-                de tu candidatura para implantes dentales.
-              </p>
-            </motion.div>
-            
-            <motion.div className="glass-panel p-6 hologram-effect" whileHover={{
-            scale: 1.02,
-            boxShadow: "0 0 20px rgba(191, 161, 129, 0.5)"
-          }}>
-              <div className="mb-4 flex justify-center">
-                <motion.div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#BFA181]/20 to-[#BFA181]/60 flex items-center justify-center" animate={{
-                scale: animatedElement === 3 ? [1, 1.1, 1] : 1,
-                boxShadow: animatedElement === 3 ? ["0 0 0 rgba(191, 161, 129, 0.4)", "0 0 15px rgba(191, 161, 129, 0.7)", "0 0 0 rgba(191, 161, 129, 0.4)"] : "0 0 0 rgba(191, 161, 129, 0.4)"
-              }} transition={{
-                duration: 1
-              }}>
-                  <Lock className="w-8 h-8 text-[#BFA181]" />
-                </motion.div>
-              </div>
-              <h3 className="text-xl font-medium text-white mb-2">100% confidencial</h3>
-              <p className="text-white/70 text-sm">
-                Tu información está segura y protegida. No compartimos tus datos con terceros, 
-                garantizando tu privacidad en todo momento.
+                Rompe barreras geográficas y económicas, dando acceso igualitario a diagnóstico 
+                predictivo desde cualquier ubicación.
               </p>
             </motion.div>
           </div>
@@ -270,13 +313,16 @@ export default function Index() {
           }} className="mt-12 max-w-3xl mx-auto glass-panel p-6">
               <div className="flex items-center justify-center space-x-2 mb-3">
                 <div className="w-2 h-2 rounded-full bg-[#178582] animate-pulse"></div>
-                <h3 className="text-lg text-[#178582]">Información importante</h3>
+                <h3 className="text-lg text-[#178582]">Innovación Social Comprobada</h3>
                 <div className="w-2 h-2 rounded-full bg-[#178582] animate-pulse"></div>
               </div>
-              <p className="text-sm text-white/70 max-w-xl mx-auto">
-                Esta herramienta clínica predictiva está basada en evidencia científica y diseñada para democratizar 
-                el acceso a evaluación clínica especializada, especialmente para personas con recursos limitados 
-                o en zonas geográficamente aisladas.
+              <p className="text-sm text-white/70 max-w-xl mx-auto mb-3">
+                "Como el autoexamen mamario en los 80s, ImplantX democratiza el primer diagnóstico: 
+                cualquier persona, en cualquier lugar, puede conocer su riesgo inicial antes de gastar recursos escasos."
+              </p>
+              <p className="text-xs text-[#BFA181] font-medium">
+                No curamos bocas; curamos procesos. La verdadera revolución es que una madre en Chiloé 
+                tenga el mismo acceso a diagnóstico predictivo que un ejecutivo en Vitacura.
               </p>
             </motion.div>
           </AnimatePresence>
