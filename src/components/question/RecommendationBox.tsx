@@ -16,88 +16,27 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
     setIsTyping(true);
     setDisplayedText("");
     
-    // Log detallado para depuración
-    console.log("RAW recommendation received:", recommendation);
-    console.log("Type of recommendation:", typeof recommendation);
-    console.log("Recommendation as JSON:", JSON.stringify(recommendation));
+    // Construcción ultra-simple del mensaje para evitar cualquier "undefined"
+    let finalMessage = "";
     
-    // Función para limpiar texto de forma ultra-agresiva
-    const cleanText = (text: any): string => {
-      // Si no es string, convertir o retornar vacío
-      if (typeof text !== 'string') {
-        if (text === null || text === undefined) return '';
-        text = String(text);
-      }
-      
-      // Limpieza paso a paso con logs
-      let cleaned = text;
-      console.log("Step 1 - Original:", cleaned);
-      
-      // Remover undefined en todas sus formas
-      cleaned = cleaned.replace(/undefined/gi, '');
-      cleaned = cleaned.replace(/null/gi, '');
-      console.log("Step 2 - After undefined/null removal:", cleaned);
-      
-      // Remover undefined con límites de palabra
-      cleaned = cleaned.replace(/\bundefined\b/gi, '');
-      cleaned = cleaned.replace(/\bnull\b/gi, '');
-      console.log("Step 3 - After word boundary removal:", cleaned);
-      
-      // Remover undefined con espacios, comas, puntos
-      cleaned = cleaned.replace(/\s+undefined\s+/gi, ' ');
-      cleaned = cleaned.replace(/^undefined\s*/gi, '');
-      cleaned = cleaned.replace(/\s*undefined$/gi, '');
-      cleaned = cleaned.replace(/undefined,/gi, '');
-      cleaned = cleaned.replace(/,undefined/gi, '');
-      cleaned = cleaned.replace(/undefined\./gi, '');
-      cleaned = cleaned.replace(/\.undefined/gi, '');
-      console.log("Step 4 - After punctuation removal:", cleaned);
-      
-      // Limpiar espacios múltiples
-      cleaned = cleaned.replace(/\s+/g, ' ').trim();
-      console.log("Step 5 - After space cleanup:", cleaned);
-      
-      // Filtrar palabra por palabra
-      const words = cleaned.split(/\s+/);
-      const filteredWords = words.filter(word => {
-        const cleanWord = word.toLowerCase().replace(/[.,;:!?]/g, '');
-        return cleanWord !== 'undefined' && 
-               cleanWord !== 'null' && 
-               cleanWord !== '' &&
-               word.trim() !== '';
-      });
-      cleaned = filteredWords.join(' ').trim();
-      console.log("Step 6 - After word filtering:", cleaned);
-      
-      return cleaned;
-    };
-    
-    // Limpiar la recomendación
-    let cleanRecommendation = cleanText(recommendation);
-    console.log("FINAL cleaned recommendation:", cleanRecommendation);
-    
-    // Si queda muy poco contenido, usar mensaje por defecto
-    if (!cleanRecommendation || cleanRecommendation.length < 5) {
-      cleanRecommendation = "Cada respuesta nos ayuda a personalizar mejor tu evaluación y recomendaciones";
+    // Si recommendation es válido, usarlo
+    if (recommendation && typeof recommendation === 'string' && recommendation.trim().length > 0) {
+      const cleanRec = recommendation.trim();
+      finalMessage = `💡 ${cleanRec}. Esto nos ayuda a personalizar tu evaluación.`;
+    } else {
+      // Mensaje por defecto si no hay recomendación válida
+      finalMessage = "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación y crear un plan de tratamiento más preciso.";
     }
     
-    // Construir mensaje final SIN interpolación que pueda causar undefined
-    const emoji = "💡";
-    const ending = "Esto nos permite crear un plan de tratamiento más preciso para tu caso";
-    const finalMessage = `${emoji} ${cleanRecommendation}. ${ending}.`;
+    console.log("FINAL MESSAGE (simple):", finalMessage);
     
-    console.log("FINAL MESSAGE to display:", finalMessage);
-    console.log("Final message contains undefined?", finalMessage.includes('undefined'));
-    
-    // Verificación final de seguridad
-    const safeMessage = finalMessage.includes('undefined') ? 
-      "💡 Tu respuesta nos ayuda a personalizar mejor tu evaluación. Esto nos permite crear un plan de tratamiento más preciso para tu caso." : 
-      finalMessage;
-    
-    console.log("SAFE MESSAGE:", safeMessage);
+    // Verificación final de seguridad - si aún contiene undefined, usar mensaje seguro
+    if (finalMessage.includes('undefined')) {
+      finalMessage = "💡 Tu respuesta nos ayuda a crear un plan de tratamiento más preciso para tu caso.";
+    }
     
     // Simular efecto de escritura
-    const words = safeMessage.split(" ");
+    const words = finalMessage.split(" ");
     let currentIndex = 0;
     
     const typingInterval = setInterval(() => {
