@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -5,24 +6,10 @@ import { Sparkles, Zap, Brain, Activity, Lock, BadgeCheck, MoveRight } from "luc
 import { Button } from "@/components/ui/button";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
-import DemoModal from "@/components/demo/DemoModal";
-import ClinicalFlowDemo from "@/components/demo/ClinicalFlowDemo";
-import TreatmentComparisonDemo from "@/components/demo/TreatmentComparisonDemo";
-import PriceCalculatorDemo from "@/components/demo/PriceCalculatorDemo";
-import PdfReportDemo from "@/components/demo/PdfReportDemo";
 
 export default function Index() {
   const navigate = useNavigate();
-  const [currentModal, setCurrentModal] = useState<string | null>(null);
   const [animatedElement, setAnimatedElement] = useState(0);
-  
-  const openModal = (modalId: string) => {
-    setCurrentModal(modalId);
-  };
-  
-  const closeModal = () => {
-    setCurrentModal(null);
-  };
 
   // Efecto para animar elementos secuencialmente
   useEffect(() => {
@@ -142,10 +129,10 @@ export default function Index() {
                   <Activity className="w-8 h-8 text-[#BFA181]" />
                 </motion.div>
               </div>
-              <h3 className="text-xl font-medium text-white mb-2">Resultados personalizados</h3>
+              <h3 className="text-xl font-medium text-white mb-2">Democratización del diagnóstico</h3>
               <p className="text-white/70 text-sm">
-                Obtén una evaluación personalizada de tu caso que te ayudará a 
-                tomar decisiones informadas sobre tu tratamiento dental.
+                Acceso igualitario a evaluación clínica especializada, especialmente para personas 
+                en zonas geográficamente aisladas o con recursos limitados.
               </p>
             </motion.div>
             
@@ -163,10 +150,10 @@ export default function Index() {
                   <Zap className="w-8 h-8 text-[#178582]" />
                 </motion.div>
               </div>
-              <h3 className="text-xl font-medium text-white mb-2">Evaluación en tiempo real</h3>
+              <h3 className="text-xl font-medium text-white mb-2">Reducción de costos innecesarios</h3>
               <p className="text-white/70 text-sm">
-                Contesta simples preguntas y recibe inmediatamente una evaluación detallada 
-                de tu candidatura para implantes dentales.
+                Evita desplazamientos y gastos catastróficos mediante filtrado inteligente 
+                antes de la consulta presencial con el especialista.
               </p>
             </motion.div>
             
@@ -184,10 +171,10 @@ export default function Index() {
                   <Lock className="w-8 h-8 text-[#BFA181]" />
                 </motion.div>
               </div>
-              <h3 className="text-xl font-medium text-white mb-2">100% confidencial</h3>
+              <h3 className="text-xl font-medium text-white mb-2">Optimización de sistemas públicos</h3>
               <p className="text-white/70 text-sm">
-                Tu información está segura y protegida. No compartimos tus datos con terceros, 
-                garantizando tu privacidad en todo momento.
+                Derivaciones inteligentes con pacientes preparados, reduciendo la saturación 
+                en centros urbanos y mejorando la eficiencia del sistema.
               </p>
             </motion.div>
           </div>
@@ -224,37 +211,6 @@ export default function Index() {
                 <MoveRight className="ml-2 opacity-0 w-0 group-hover:opacity-100 group-hover:w-5 transition-all duration-300" />
               </Button>
             </motion.div>
-          </div>
-
-          <div className="mt-12">
-            <h3 className="text-xl text-[#BFA181] font-light mb-6">
-              Exploraciones avanzadas
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
-              <motion.button whileHover={{
-              scale: 1.05,
-              y: -5
-            }} className="p-4 glass-panel hologram-effect border border-white/10 hover:border-[#178582]/30 transition-all duration-300 flex flex-col items-center" onClick={() => openModal("clinical-flow")}>
-                
-                <div className="text-white text-xs font-medium">Tú estás aquí</div>
-              </motion.button>
-              
-              <motion.button whileHover={{
-              scale: 1.05,
-              y: -5
-            }} className="p-4 glass-panel hologram-effect border border-white/10 hover:border-[#178582]/30 transition-all duration-300 flex flex-col items-center" onClick={() => openModal("treatment-comparison")}>
-                
-                <div className="text-white text-xs font-medium">Alternativas de Tratamiento</div>
-              </motion.button>
-              
-              <motion.button whileHover={{
-              scale: 1.05,
-              y: -5
-            }} className="p-4 glass-panel hologram-effect border border-white/10 hover:border-[#178582]/30 transition-all duration-300 flex flex-col items-center" onClick={() => openModal("price-calculator")}>
-                
-                <div className="text-white text-xs font-medium">Calculadora de Costos</div>
-              </motion.button>
-            </div>
           </div>
           
           <AnimatePresence>
@@ -313,23 +269,6 @@ export default function Index() {
       </motion.div>
       
       <RioAssistant isVisible={true} message="¡Hola! Soy Río, tu asistente virtual. ¿Listo para descubrir si eres candidato a implantes? ¡Haz clic en 'Evalúa tu caso ahora' para comenzar!" />
-      
-      {/* Modals for demo */}
-      <DemoModal isOpen={currentModal === "clinical-flow"} onClose={closeModal} title="Flujo Clínico">
-        <ClinicalFlowDemo />
-      </DemoModal>
-      
-      <DemoModal isOpen={currentModal === "treatment-comparison"} onClose={closeModal} title="Comparador de Tratamientos">
-        <TreatmentComparisonDemo />
-      </DemoModal>
-      
-      <DemoModal isOpen={currentModal === "price-calculator"} onClose={closeModal} title="Calculadora de Costos">
-        <PriceCalculatorDemo />
-      </DemoModal>
-      
-      <DemoModal isOpen={currentModal === "pdf-report"} onClose={closeModal} title="Informe PDF">
-        <PdfReportDemo />
-      </DemoModal>
     </div>
   );
 }
