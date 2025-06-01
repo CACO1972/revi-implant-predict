@@ -139,6 +139,9 @@ export default function ClinicalFlowDemo() {
                     src={stage.image} 
                     alt={stage.title}
                     className="w-full h-full object-contain"
+                    onError={(e) => {
+                      console.log(`Error loading image for ${stage.title}:`, stage.image);
+                    }}
                   />
                 </div>
                 
@@ -200,22 +203,4 @@ export default function ClinicalFlowDemo() {
       </motion.div>
     </div>
   );
-
-  function getStatusColor(status: string) {
-    switch (status) {
-      case "completed": return "bg-emerald-500";
-      case "current": return "bg-[#178582] animate-pulse";
-      case "pending": return "bg-white/20";
-      default: return "bg-white/20";
-    }
-  }
-
-  function getStatusText(status: string) {
-    switch (status) {
-      case "completed": return "✅ Completado";
-      case "current": return "🎯 TÚ ESTÁS AQUÍ";
-      case "pending": return "⏳ Pendiente";
-      default: return "";
-    }
-  }
 }
