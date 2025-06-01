@@ -26,17 +26,22 @@ export default function Index() {
         transition={{ duration: 0.8 }}
         className="w-full max-w-5xl space-y-8 z-10 relative py-16"
       >
-        {/* Badge de versión beta */}
+        {/* Badge de versión beta clickeable */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.6 }}
           className="mb-4"
         >
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#178582]/20 to-[#BFA181]/20 px-4 py-2 rounded-full border border-[#178582]/30">
+          <motion.button
+            onClick={() => navigate('/evaluacion')}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#178582]/20 to-[#BFA181]/20 px-4 py-2 rounded-full border border-[#178582]/30 hover:bg-gradient-to-r hover:from-[#178582]/30 hover:to-[#BFA181]/30 transition-all duration-300 cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
             <div className="w-2 h-2 bg-[#178582] rounded-full animate-pulse"></div>
             <span className="text-[#178582] text-sm font-medium">DEMO VERSIÓN BETA</span>
-          </div>
+          </motion.button>
         </motion.div>
 
         {/* Logo animado */}
