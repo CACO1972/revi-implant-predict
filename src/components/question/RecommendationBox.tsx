@@ -16,8 +16,11 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
     setIsTyping(true);
     setDisplayedText("");
     
+    // Limpiar la recomendación para evitar "undefined"
+    const cleanRecommendation = recommendation?.toString().replace(/undefined/g, '').trim() || '';
+    
     // Simular efecto de escritura
-    const words = recommendation.split(" ");
+    const words = cleanRecommendation.split(" ");
     let currentIndex = 0;
     
     const typingInterval = setInterval(() => {
