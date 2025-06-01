@@ -13,31 +13,38 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
+    console.log("=== RECOMMENDATION BOX DEBUG ===");
+    console.log("Recommendation prop received:", recommendation);
+    console.log("Type:", typeof recommendation);
+    console.log("Is undefined?", recommendation === undefined);
+    console.log("Is null?", recommendation === null);
+    console.log("String representation:", String(recommendation));
+    console.log("=== END RECOMMENDATION DEBUG ===");
+
     setIsTyping(true);
     setDisplayedText("");
     
-    // LOG DE DEBUG
-    console.log("RecommendationBox received:", recommendation);
+    // Mensaje fijo sin usar la prop recommendation en absoluto
+    const fixedMessage = "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación y crear un plan de tratamiento más preciso.";
     
-    // Mensaje completamente estático para eliminar cualquier undefined
-    const staticMessage = "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación y crear un plan de tratamiento más preciso.";
-    
-    console.log("Using static message:", staticMessage);
+    console.log("Fixed message to display:", fixedMessage);
     
     // Simular efecto de escritura
-    const words = staticMessage.split(" ");
+    const words = fixedMessage.split(" ");
     let currentIndex = 0;
     
     const typingInterval = setInterval(() => {
       if (currentIndex < words.length) {
         setDisplayedText(prev => {
           const newText = prev + (prev ? " " : "") + words[currentIndex];
+          console.log("Adding word:", words[currentIndex], "Current text:", newText);
           return newText;
         });
         currentIndex++;
       } else {
         setIsTyping(false);
         clearInterval(typingInterval);
+        console.log("Typing completed. Final text:", displayedText);
       }
     }, 100);
 
@@ -52,6 +59,8 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
 
     return () => clearInterval(cursorInterval);
   }, []);
+
+  console.log("About to render. DisplayedText:", displayedText);
 
   return (
     <motion.div 
@@ -108,7 +117,7 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
           <div className="flex-1">
             <p className="text-xs text-[#178582] font-medium mb-1">Río te explica:</p>
             <p className="text-sm text-white/90 font-light leading-relaxed">
-              {displayedText}
+              {displayedText || "Cargando mensaje..."}
               {isTyping && showCursor && (
                 <motion.span 
                   className="inline-block w-0.5 h-4 bg-[#BFA181] ml-1"
