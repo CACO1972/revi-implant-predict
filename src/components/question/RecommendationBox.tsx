@@ -16,55 +16,88 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
     setIsTyping(true);
     setDisplayedText("");
     
-    // Log para depuración
-    console.log("Recommendation received:", recommendation, typeof recommendation);
+    // Log detallado para depuración
+    console.log("RAW recommendation received:", recommendation);
+    console.log("Type of recommendation:", typeof recommendation);
+    console.log("Recommendation as JSON:", JSON.stringify(recommendation));
     
-    // Limpieza ultra-agresiva de la recomendación
-    let cleanRecommendation = '';
-    
-    if (recommendation) {
-      // Convertir a string y aplicar múltiples filtros
-      cleanRecommendation = String(recommendation)
-        // Eliminar todas las variaciones de "undefined"
-        .replace(/undefined/gi, '')
-        .replace(/null/gi, '')
-        .replace(/\bundefined\b/gi, '')
-        .replace(/\s+undefined\s+/gi, ' ')
-        .replace(/^undefined\s*/gi, '')
-        .replace(/\s*undefined$/gi, '')
-        .replace(/undefined,/gi, '')
-        .replace(/,undefined/gi, '')
-        .replace(/undefined\./gi, '')
-        .replace(/\.undefined/gi, '')
-        // Limpiar espacios múltiples
-        .replace(/\s+/g, ' ')
-        .trim();
+    // Función para limpiar texto de forma ultra-agresiva
+    const cleanText = (text: any): string => {
+      // Si no es string, convertir o retornar vacío
+      if (typeof text !== 'string') {
+        if (text === null || text === undefined) return '';
+        text = String(text);
+      }
       
-      // Filtrar palabras una por una para eliminar cualquier "undefined" restante
-      const words = cleanRecommendation.split(' ');
-      const filteredWords = words.filter(word => 
-        word.toLowerCase() !== 'undefined' && 
-        word.toLowerCase() !== 'null' &&
-        word.trim() !== ''
-      );
-      cleanRecommendation = filteredWords.join(' ').trim();
-    }
+      // Limpieza paso a paso con logs
+      let cleaned = text;
+      console.log("Step 1 - Original:", cleaned);
+      
+      // Remover undefined en todas sus formas
+      cleaned = cleaned.replace(/undefined/gi, '');
+      cleaned = cleaned.replace(/null/gi, '');
+      console.log("Step 2 - After undefined/null removal:", cleaned);
+      
+      // Remover undefined con límites de palabra
+      cleaned = cleaned.replace(/\bundefined\b/gi, '');
+      cleaned = cleaned.replace(/\bnull\b/gi, '');
+      console.log("Step 3 - After word boundary removal:", cleaned);
+      
+      // Remover undefined con espacios, comas, puntos
+      cleaned = cleaned.replace(/\s+undefined\s+/gi, ' ');
+      cleaned = cleaned.replace(/^undefined\s*/gi, '');
+      cleaned = cleaned.replace(/\s*undefined$/gi, '');
+      cleaned = cleaned.replace(/undefined,/gi, '');
+      cleaned = cleaned.replace(/,undefined/gi, '');
+      cleaned = cleaned.replace(/undefined\./gi, '');
+      cleaned = cleaned.replace(/\.undefined/gi, '');
+      console.log("Step 4 - After punctuation removal:", cleaned);
+      
+      // Limpiar espacios múltiples
+      cleaned = cleaned.replace(/\s+/g, ' ').trim();
+      console.log("Step 5 - After space cleanup:", cleaned);
+      
+      // Filtrar palabra por palabra
+      const words = cleaned.split(/\s+/);
+      const filteredWords = words.filter(word => {
+        const cleanWord = word.toLowerCase().replace(/[.,;:!?]/g, '');
+        return cleanWord !== 'undefined' && 
+               cleanWord !== 'null' && 
+               cleanWord !== '' &&
+               word.trim() !== '';
+      });
+      cleaned = filteredWords.join(' ').trim();
+      console.log("Step 6 - After word filtering:", cleaned);
+      
+      return cleaned;
+    };
     
-    console.log("Cleaned recommendation:", cleanRecommendation);
+    // Limpiar la recomendación
+    let cleanRecommendation = cleanText(recommendation);
+    console.log("FINAL cleaned recommendation:", cleanRecommendation);
     
-    // Verificar si queda contenido útil después de la limpieza
+    // Si queda muy poco contenido, usar mensaje por defecto
     if (!cleanRecommendation || cleanRecommendation.length < 5) {
-      cleanRecommendation = "Cada respuesta nos ayuda a personalizar mejor tu evaluación y recomendaciones.";
+      cleanRecommendation = "Cada respuesta nos ayuda a personalizar mejor tu evaluación y recomendaciones";
     }
     
-    // Mejorar la redacción con contexto profesional
-    const professionalContext = "💡 ";
-    const finalRecommendation = `${professionalContext}${cleanRecommendation} Esto nos permite crear un plan de tratamiento más preciso para tu caso.`;
+    // Construir mensaje final SIN interpolación que pueda causar undefined
+    const emoji = "💡";
+    const ending = "Esto nos permite crear un plan de tratamiento más preciso para tu caso";
+    const finalMessage = `${emoji} ${cleanRecommendation}. ${ending}.`;
     
-    console.log("Final recommendation:", finalRecommendation);
+    console.log("FINAL MESSAGE to display:", finalMessage);
+    console.log("Final message contains undefined?", finalMessage.includes('undefined'));
+    
+    // Verificación final de seguridad
+    const safeMessage = finalMessage.includes('undefined') ? 
+      "💡 Tu respuesta nos ayuda a personalizar mejor tu evaluación. Esto nos permite crear un plan de tratamiento más preciso para tu caso." : 
+      finalMessage;
+    
+    console.log("SAFE MESSAGE:", safeMessage);
     
     // Simular efecto de escritura
-    const words = finalRecommendation.split(" ");
+    const words = safeMessage.split(" ");
     let currentIndex = 0;
     
     const typingInterval = setInterval(() => {
