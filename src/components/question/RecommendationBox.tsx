@@ -16,29 +16,52 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
     setIsTyping(true);
     setDisplayedText("");
     
-    // Limpieza exhaustiva de la recomendación
+    // Log para depuración
+    console.log("Recommendation received:", recommendation, typeof recommendation);
+    
+    // Limpieza ultra-agresiva de la recomendación
     let cleanRecommendation = '';
     
     if (recommendation) {
+      // Convertir a string y aplicar múltiples filtros
       cleanRecommendation = String(recommendation)
+        // Eliminar todas las variaciones de "undefined"
         .replace(/undefined/gi, '')
         .replace(/null/gi, '')
+        .replace(/\bundefined\b/gi, '')
         .replace(/\s+undefined\s+/gi, ' ')
         .replace(/^undefined\s*/gi, '')
         .replace(/\s*undefined$/gi, '')
-        .replace(/\bundefined\b/gi, '')
+        .replace(/undefined,/gi, '')
+        .replace(/,undefined/gi, '')
+        .replace(/undefined\./gi, '')
+        .replace(/\.undefined/gi, '')
+        // Limpiar espacios múltiples
         .replace(/\s+/g, ' ')
         .trim();
+      
+      // Filtrar palabras una por una para eliminar cualquier "undefined" restante
+      const words = cleanRecommendation.split(' ');
+      const filteredWords = words.filter(word => 
+        word.toLowerCase() !== 'undefined' && 
+        word.toLowerCase() !== 'null' &&
+        word.trim() !== ''
+      );
+      cleanRecommendation = filteredWords.join(' ').trim();
     }
     
+    console.log("Cleaned recommendation:", cleanRecommendation);
+    
     // Verificar si queda contenido útil después de la limpieza
-    if (!cleanRecommendation || cleanRecommendation.length < 10) {
+    if (!cleanRecommendation || cleanRecommendation.length < 5) {
       cleanRecommendation = "Cada respuesta nos ayuda a personalizar mejor tu evaluación y recomendaciones.";
     }
     
-    // Mejorar la redacción con contexto profesional más específico
+    // Mejorar la redacción con contexto profesional
     const professionalContext = "💡 ";
     const finalRecommendation = `${professionalContext}${cleanRecommendation} Esto nos permite crear un plan de tratamiento más preciso para tu caso.`;
+    
+    console.log("Final recommendation:", finalRecommendation);
     
     // Simular efecto de escritura
     const words = finalRecommendation.split(" ");
@@ -55,7 +78,7 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
         setIsTyping(false);
         clearInterval(typingInterval);
       }
-    }, 100); // Velocidad de escritura optimizada
+    }, 100);
 
     return () => clearInterval(typingInterval);
   }, [recommendation]);
@@ -96,7 +119,6 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
             </svg>
           </div>
         </div>
-        {/* Indicador de que está hablando */}
         {isTyping && (
           <motion.div 
             className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full"
@@ -113,7 +135,6 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
         transition={{ delay: 0.5, duration: 0.4 }}
         className="ml-6 p-4 bg-gradient-to-r from-[#178582]/20 to-[#BFA181]/10 rounded-xl rounded-tl-none border border-[#178582]/30 relative"
       >
-        {/* Flecha de la burbuja */}
         <div className="absolute -left-2 top-4 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[8px] border-r-[#178582]/30"></div>
         
         <div className="flex items-start gap-3">
@@ -136,7 +157,6 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
               )}
             </p>
             
-            {/* Botón "Saber más" inactivo */}
             {!isTyping && (
               <motion.button
                 initial={{ opacity: 0, y: 10 }}
