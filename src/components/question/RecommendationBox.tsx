@@ -1,5 +1,5 @@
 
-import { Sparkles, MessageCircle } from "lucide-react";
+import { Sparkles, MessageCircle, Info } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -16,11 +16,26 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
     setIsTyping(true);
     setDisplayedText("");
     
-    // Limpiar la recomendación para evitar "undefined"
-    const cleanRecommendation = recommendation?.toString().replace(/undefined/g, '').trim() || '';
+    // Limpiar y validar la recomendación completamente
+    let cleanRecommendation = '';
+    if (recommendation && typeof recommendation === 'string') {
+      cleanRecommendation = recommendation
+        .replace(/undefined/gi, '')
+        .replace(/null/gi, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+    
+    // Si no hay recomendación válida, usar mensaje por defecto
+    if (!cleanRecommendation) {
+      cleanRecommendation = "Recuerda que cada respuesta nos ayuda a darte una evaluación más precisa para tu caso específico.";
+    }
+    
+    // Mejorar la redacción agregando contexto profesional
+    const improvedRecommendation = `💡 ${cleanRecommendation} Esto es importante para determinar el mejor plan de tratamiento para ti.`;
     
     // Simular efecto de escritura
-    const words = cleanRecommendation.split(" ");
+    const words = improvedRecommendation.split(" ");
     let currentIndex = 0;
     
     const typingInterval = setInterval(() => {
@@ -34,7 +49,7 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
         setIsTyping(false);
         clearInterval(typingInterval);
       }
-    }, 150); // Velocidad de escritura
+    }, 120); // Velocidad de escritura ligeramente más rápida
 
     return () => clearInterval(typingInterval);
   }, [recommendation]);
@@ -114,6 +129,21 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
                 />
               )}
             </p>
+            
+            {/* Botón "Saber más" inactivo */}
+            {!isTyping && (
+              <motion.button
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="mt-3 flex items-center gap-2 text-xs text-[#BFA181]/60 hover:text-[#BFA181]/40 transition-colors cursor-not-allowed"
+                disabled
+              >
+                <Info className="w-3 h-3" />
+                <span>Saber más</span>
+                <span className="text-[10px] text-white/40">(Próximamente)</span>
+              </motion.button>
+            )}
           </div>
         </div>
 
