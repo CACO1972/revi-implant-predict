@@ -16,26 +16,32 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
     setIsTyping(true);
     setDisplayedText("");
     
-    // Limpiar y validar la recomendación completamente
+    // Limpieza exhaustiva de la recomendación
     let cleanRecommendation = '';
-    if (recommendation && typeof recommendation === 'string') {
-      cleanRecommendation = recommendation
+    
+    if (recommendation) {
+      cleanRecommendation = String(recommendation)
         .replace(/undefined/gi, '')
         .replace(/null/gi, '')
+        .replace(/\s+undefined\s+/gi, ' ')
+        .replace(/^undefined\s*/gi, '')
+        .replace(/\s*undefined$/gi, '')
+        .replace(/\bundefined\b/gi, '')
         .replace(/\s+/g, ' ')
         .trim();
     }
     
-    // Si no hay recomendación válida, usar mensaje por defecto
-    if (!cleanRecommendation) {
-      cleanRecommendation = "Recuerda que cada respuesta nos ayuda a darte una evaluación más precisa para tu caso específico.";
+    // Verificar si queda contenido útil después de la limpieza
+    if (!cleanRecommendation || cleanRecommendation.length < 10) {
+      cleanRecommendation = "Cada respuesta nos ayuda a personalizar mejor tu evaluación y recomendaciones.";
     }
     
-    // Mejorar la redacción agregando contexto profesional
-    const improvedRecommendation = `💡 ${cleanRecommendation} Esto es importante para determinar el mejor plan de tratamiento para ti.`;
+    // Mejorar la redacción con contexto profesional más específico
+    const professionalContext = "💡 ";
+    const finalRecommendation = `${professionalContext}${cleanRecommendation} Esto nos permite crear un plan de tratamiento más preciso para tu caso.`;
     
     // Simular efecto de escritura
-    const words = improvedRecommendation.split(" ");
+    const words = finalRecommendation.split(" ");
     let currentIndex = 0;
     
     const typingInterval = setInterval(() => {
@@ -49,7 +55,7 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
         setIsTyping(false);
         clearInterval(typingInterval);
       }
-    }, 120); // Velocidad de escritura ligeramente más rápida
+    }, 100); // Velocidad de escritura optimizada
 
     return () => clearInterval(typingInterval);
   }, [recommendation]);
@@ -118,7 +124,7 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
             <MessageCircle className="w-4 h-4 text-[#178582] mt-0.5 flex-shrink-0" />
           </motion.div>
           <div className="flex-1">
-            <p className="text-xs text-[#178582] font-medium mb-1">Río te aconseja:</p>
+            <p className="text-xs text-[#178582] font-medium mb-1">Río te explica:</p>
             <p className="text-sm text-white/90 font-light leading-relaxed">
               {displayedText}
               {isTyping && showCursor && (
