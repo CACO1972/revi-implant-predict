@@ -16,27 +16,16 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
     setIsTyping(true);
     setDisplayedText("");
     
-    // Construcción ultra-simple del mensaje para evitar cualquier "undefined"
-    let finalMessage = "";
+    // LOG DE DEBUG
+    console.log("RecommendationBox received:", recommendation);
     
-    // Si recommendation es válido, usarlo
-    if (recommendation && typeof recommendation === 'string' && recommendation.trim().length > 0) {
-      const cleanRec = recommendation.trim();
-      finalMessage = `💡 ${cleanRec}. Esto nos ayuda a personalizar tu evaluación.`;
-    } else {
-      // Mensaje por defecto si no hay recomendación válida
-      finalMessage = "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación y crear un plan de tratamiento más preciso.";
-    }
+    // Mensaje completamente estático para eliminar cualquier undefined
+    const staticMessage = "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación y crear un plan de tratamiento más preciso.";
     
-    console.log("FINAL MESSAGE (simple):", finalMessage);
-    
-    // Verificación final de seguridad - si aún contiene undefined, usar mensaje seguro
-    if (finalMessage.includes('undefined')) {
-      finalMessage = "💡 Tu respuesta nos ayuda a crear un plan de tratamiento más preciso para tu caso.";
-    }
+    console.log("Using static message:", staticMessage);
     
     // Simular efecto de escritura
-    const words = finalMessage.split(" ");
+    const words = staticMessage.split(" ");
     let currentIndex = 0;
     
     const typingInterval = setInterval(() => {
