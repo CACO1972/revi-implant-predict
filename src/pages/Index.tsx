@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Zap, Brain, Activity, Lock, BadgeCheck, MoveRight } from "lucide-react";
+import { Sparkles, Zap, Brain, Activity, Lock, BadgeCheck, MoveRight, Users, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
@@ -9,6 +9,7 @@ import RioAssistant from "@/components/RioAssistant";
 export default function Index() {
   const navigate = useNavigate();
   const [animatedElement, setAnimatedElement] = useState(0);
+  const [peopleCount, setPeopleCount] = useState(1247);
 
   // Efecto para animar elementos secuencialmente
   useEffect(() => {
@@ -17,6 +18,15 @@ export default function Index() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  // Simular contador en tiempo real
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPeopleCount(prev => prev + Math.floor(Math.random() * 3));
+    }, 15000);
+    return () => clearInterval(interval);
+  }, []);
+
   return <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative overflow-hidden">
       <AnimatedStarryBackground />
       
@@ -40,7 +50,7 @@ export default function Index() {
             whileTap={{ scale: 0.98 }}
           >
             <div className="w-2 h-2 bg-[#178582] rounded-full animate-pulse"></div>
-            <span className="text-[#178582] text-sm font-medium">DEMO VERSIÓN BETA</span>
+            <span className="text-[#178582] text-sm font-medium">DEMO VERSIÓN BETA GRATUITA</span>
           </motion.button>
         </motion.div>
 
@@ -81,15 +91,38 @@ export default function Index() {
               }}
             />
             
-            <h2 className="text-3xl md:text-4xl font-light text-white/90 mb-4">¿Necesitas Implantes Dentales?</h2>
+            <h2 className="text-3xl md:text-4xl font-light text-white/90 mb-4">¿Puedes hacerte Implantes Dentales?</h2>
             <p className="text-lg md:text-xl text-white/75 font-light italic">
-              ¿pero no sabes si puedes hacerlo ni por donde empezar?
+              Descúbrelo GRATIS sin salir de casa
             </p>
           </div>
           
           <p className="text-xl md:text-2xl text-white/85 max-w-2xl mx-auto font-light leading-relaxed">
-            Descúbrelo en 2 minutos con ayuda de nuestra <span className="text-[#178582] font-medium">inteligencia artificial</span>
+            Solo 2 minutos con nuestra <span className="text-[#178582] font-medium">inteligencia artificial</span>
           </p>
+
+          {/* Elementos de confianza prominentes */}
+          <div className="flex flex-wrap justify-center gap-4 mt-6">
+            <motion.div 
+              className="flex items-center gap-2 bg-gradient-to-r from-[#178582]/10 to-[#178582]/20 px-4 py-2 rounded-full border border-[#178582]/30"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <Shield className="w-4 h-4 text-[#178582]" />
+              <span className="text-[#178582] text-sm font-medium">Basado en evidencia científica</span>
+            </motion.div>
+            
+            <motion.div 
+              className="flex items-center gap-2 bg-gradient-to-r from-[#BFA181]/10 to-[#BFA181]/20 px-4 py-2 rounded-full border border-[#BFA181]/30"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <Users className="w-4 h-4 text-[#BFA181]" />
+              <span className="text-[#BFA181] text-sm font-medium">{peopleCount.toLocaleString()} personas evaluadas</span>
+            </motion.div>
+          </div>
 
           {/* Texto de demo beta */}
           <div className="bg-gradient-to-r from-[#BFA181]/10 to-transparent p-4 rounded-lg border border-[#BFA181]/20 max-w-lg mx-auto">
@@ -231,10 +264,15 @@ export default function Index() {
             }}>
               <Button
                 onClick={() => navigate('/evaluacion')}
-                className="bg-[#178582] hover:bg-[#178582]/90 text-white px-8 py-6 rounded-xl text-lg shadow-glow transition-all duration-300 border border-[#178582]/30 w-full md:w-auto"
+                className="bg-[#178582] hover:bg-[#178582]/90 text-white px-8 py-6 rounded-xl text-lg shadow-glow transition-all duration-300 border border-[#178582]/30 w-full md:w-auto relative overflow-hidden"
               >
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                  animate={{ x: [-200, 200] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                />
                 <Sparkles className="w-5 h-5 mr-2 animate-sparkle" />
-                Evalúa tu caso ahora
+                Descubre si puedes hacerlo GRATIS
               </Button>
             </motion.div>
             
@@ -332,6 +370,6 @@ export default function Index() {
         </motion.div>
       </motion.div>
       
-      <RioAssistant isVisible={true} message="¡Hola! Soy Río, tu asistente virtual. ¿Listo para descubrir si eres candidato a implantes? ¡Haz clic en 'Evalúa tu caso ahora' para comenzar!" />
+      <RioAssistant isVisible={true} message="¡Hola! Soy Río, tu asistente virtual. ¿Listo para descubrir si puedes hacerte implantes SIN SALIR DE CASA? ¡Solo toma 2 minutos! 🦷✨" />
     </div>;
 }
