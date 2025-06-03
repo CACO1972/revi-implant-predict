@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Question, Answer } from "@/types/implant";
 import { getScoreFromOptions } from "@/utils/assessmentUtils";
@@ -39,6 +38,9 @@ export default function QuestionCard({
   const totalQuestions = 9; // Total de preguntas en el cuestionario
 
   useEffect(() => {
+    console.log('QuestionCard - question.id:', question.id);
+    console.log('QuestionCard - question:', question);
+    
     // Reset selected values when question changes
     setSelectedValues(currentAnswer?.selectedValues || []);
     setError(false);

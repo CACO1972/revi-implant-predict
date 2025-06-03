@@ -1,14 +1,13 @@
-
 import { Sparkles, MessageCircle, Info } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 interface RecommendationBoxProps {
-  questionId: number; // Ahora necesitamos el ID de la pregunta
+  questionId: number;
 }
 
-// Mensajes educativos específicos para cada pregunta
-const educationalMessages = {
+// Mensajes educativos específicos para cada pregunta (basado en los IDs reales del cuestionario)
+const educationalMessages: { [key: number]: string } = {
   1: "🚭 El tabaco reduce el flujo sanguíneo hasta en un 70%, dificultando la cicatrización y la integración del implante al hueso. Los fumadores tienen 2-3 veces más riesgo de fracaso.",
   2: "🩺 La diabetes afecta la cicatrización, pero con niveles de HbA1c controlados (menos de 7%), los implantes pueden tener éxito similar a personas sin diabetes.",
   3: "😴 El bruxismo genera fuerzas hasta 6 veces mayores que la masticación normal. Una férula nocturna protege tanto tus dientes naturales como los implantes.",
@@ -17,9 +16,7 @@ const educationalMessages = {
   6: "🏗️ Cada zona de la boca tiene diferente calidad ósea: la mandíbula anterior es la más fuerte, el maxilar posterior la más delicada.",
   7: "⚠️ Estas condiciones deben tratarse antes de colocar implantes para crear un ambiente oral saludable y libre de bacterias.",
   8: "🔍 La causa de pérdida dental nos indica qué cuidados extra necesitas: trauma = menos riesgo, periodontitis = más seguimiento.",
-  9: "🪥 La higiene es el factor #1 para el éxito a largo plazo. Los implantes necesitan cuidados similares a los dientes naturales pero sin caries.",
-  10: "❤️ Tu motivación personal es clave para el éxito del tratamiento, ya que influye en tu compromiso con el cuidado y mantenimiento.",
-  11: "🤝 Todas las preocupaciones son válidas y tienen solución con las técnicas modernas disponibles hoy en día."
+  9: "🪥 La higiene es el factor #1 para el éxito a largo plazo. Los implantes necesitan cuidados similares a los dientes naturales pero sin caries."
 };
 
 export default function RecommendationBox({ questionId }: RecommendationBoxProps) {
@@ -31,9 +28,12 @@ export default function RecommendationBox({ questionId }: RecommendationBoxProps
     setIsTyping(true);
     setDisplayedText("");
     
-    // Obtener el mensaje educativo específico para esta pregunta
-    const educationalMessage = educationalMessages[questionId as keyof typeof educationalMessages] || 
+    // Obtener el mensaje educativo específico para esta pregunta con fallback garantizado
+    const educationalMessage = educationalMessages[questionId] || 
       "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación.";
+    
+    console.log('RecommendationBox - questionId:', questionId);
+    console.log('RecommendationBox - educationalMessage:', educationalMessage);
     
     // Simular efecto de escritura
     const words = educationalMessage.split(" ");
@@ -52,7 +52,7 @@ export default function RecommendationBox({ questionId }: RecommendationBoxProps
     }, 100);
 
     return () => clearInterval(typingInterval);
-  }, [questionId]); // Ahora depende del questionId
+  }, [questionId]);
 
   // Efecto de cursor parpadeante
   useEffect(() => {
