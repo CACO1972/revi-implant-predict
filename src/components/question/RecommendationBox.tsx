@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 interface RecommendationBoxProps {
-  recommendation: string;
+  recommendation?: string; // Hacemos la prop opcional ya que no la usaremos
 }
 
 export default function RecommendationBox({ recommendation }: RecommendationBoxProps) {
@@ -13,43 +13,30 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
-    console.log("=== RECOMMENDATION BOX DEBUG ===");
-    console.log("Recommendation prop received:", recommendation);
-    console.log("Type:", typeof recommendation);
-    console.log("Is undefined?", recommendation === undefined);
-    console.log("Is null?", recommendation === null);
-    console.log("String representation:", String(recommendation));
-    console.log("=== END RECOMMENDATION DEBUG ===");
-
     setIsTyping(true);
     setDisplayedText("");
     
-    // Mensaje fijo sin usar la prop recommendation en absoluto
-    const fixedMessage = "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación y crear un plan de tratamiento más preciso.";
-    
-    console.log("Fixed message to display:", fixedMessage);
+    // Texto completamente estático sin ninguna variable
+    const staticMessage = "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación y crear un plan de tratamiento más preciso.";
     
     // Simular efecto de escritura
-    const words = fixedMessage.split(" ");
+    const words = staticMessage.split(" ");
     let currentIndex = 0;
     
     const typingInterval = setInterval(() => {
       if (currentIndex < words.length) {
         setDisplayedText(prev => {
-          const newText = prev + (prev ? " " : "") + words[currentIndex];
-          console.log("Adding word:", words[currentIndex], "Current text:", newText);
-          return newText;
+          return prev + (prev ? " " : "") + words[currentIndex];
         });
         currentIndex++;
       } else {
         setIsTyping(false);
         clearInterval(typingInterval);
-        console.log("Typing completed. Final text:", displayedText);
       }
     }, 100);
 
     return () => clearInterval(typingInterval);
-  }, [recommendation]);
+  }, []); // Removemos recommendation de las dependencias
 
   // Efecto de cursor parpadeante
   useEffect(() => {
@@ -59,8 +46,6 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
 
     return () => clearInterval(cursorInterval);
   }, []);
-
-  console.log("About to render. DisplayedText:", displayedText);
 
   return (
     <motion.div 
@@ -117,7 +102,7 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
           <div className="flex-1">
             <p className="text-xs text-[#178582] font-medium mb-1">Río te explica:</p>
             <p className="text-sm text-white/90 font-light leading-relaxed">
-              {displayedText || "Cargando mensaje..."}
+              {displayedText}
               {isTyping && showCursor && (
                 <motion.span 
                   className="inline-block w-0.5 h-4 bg-[#BFA181] ml-1"

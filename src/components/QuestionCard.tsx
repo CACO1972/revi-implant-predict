@@ -44,15 +44,6 @@ export default function QuestionCard({
     setError(false);
     setShowOptions(false);
     
-    // DEBUG: Log detallado de la pregunta y recomendación
-    console.log("=== DEBUG QUESTION CARD ===");
-    console.log("Question ID:", question.id);
-    console.log("Question object:", question);
-    console.log("Recommendation from question:", question.recommendation);
-    console.log("Type of recommendation:", typeof question.recommendation);
-    console.log("Recommendation as JSON:", JSON.stringify(question.recommendation));
-    console.log("=== END DEBUG ===");
-    
     // Mostrar opciones después de que Río presente la pregunta
     const timer = setTimeout(() => {
       setShowOptions(true);
@@ -125,7 +116,7 @@ export default function QuestionCard({
               </motion.div>
             )}
             
-            <RecommendationBox recommendation={question.recommendation} />
+            <RecommendationBox />
 
             <NavigationButtons 
               onNext={handleNext}
