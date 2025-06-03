@@ -1,3 +1,4 @@
+
 import { Sparkles, MessageCircle, Info } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -28,12 +29,10 @@ export default function RecommendationBox({ questionId }: RecommendationBoxProps
     setIsTyping(true);
     setDisplayedText("");
     
-    // Obtener el mensaje educativo específico para esta pregunta con fallback garantizado
-    const educationalMessage = educationalMessages[questionId] || 
+    // Validar que questionId sea un número válido y obtener el mensaje educativo
+    const safeQuestionId = typeof questionId === 'number' && questionId > 0 ? questionId : 1;
+    const educationalMessage = educationalMessages[safeQuestionId] || 
       "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación.";
-    
-    console.log('RecommendationBox - questionId:', questionId);
-    console.log('RecommendationBox - educationalMessage:', educationalMessage);
     
     // Simular efecto de escritura
     const words = educationalMessage.split(" ");
