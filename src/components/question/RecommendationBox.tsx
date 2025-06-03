@@ -4,10 +4,25 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 interface RecommendationBoxProps {
-  recommendation?: string; // Hacemos la prop opcional ya que no la usaremos
+  questionId: number; // Ahora necesitamos el ID de la pregunta
 }
 
-export default function RecommendationBox({ recommendation }: RecommendationBoxProps) {
+// Mensajes educativos específicos para cada pregunta
+const educationalMessages = {
+  1: "🚭 El tabaco reduce el flujo sanguíneo hasta en un 70%, dificultando la cicatrización y la integración del implante al hueso. Los fumadores tienen 2-3 veces más riesgo de fracaso.",
+  2: "🩺 La diabetes afecta la cicatrización, pero con niveles de HbA1c controlados (menos de 7%), los implantes pueden tener éxito similar a personas sin diabetes.",
+  3: "😴 El bruxismo genera fuerzas hasta 6 veces mayores que la masticación normal. Una férula nocturna protege tanto tus dientes naturales como los implantes.",
+  4: "⏰ Después de perder un diente, se pierde hasta 50% del ancho del hueso en el primer año. Mientras antes actúes, mejor será el pronóstico.",
+  5: "🦷 La cantidad de dientes determina la estrategia: 1 diente = 1 implante, varios dientes = puente o implantes múltiples, muchos dientes = All-on-4/6.",
+  6: "🏗️ Cada zona de la boca tiene diferente calidad ósea: la mandíbula anterior es la más fuerte, el maxilar posterior la más delicada.",
+  7: "⚠️ Estas condiciones deben tratarse antes de colocar implantes para crear un ambiente oral saludable y libre de bacterias.",
+  8: "🔍 La causa de pérdida dental nos indica qué cuidados extra necesitas: trauma = menos riesgo, periodontitis = más seguimiento.",
+  9: "🪥 La higiene es el factor #1 para el éxito a largo plazo. Los implantes necesitan cuidados similares a los dientes naturales pero sin caries.",
+  10: "❤️ Tu motivación personal es clave para el éxito del tratamiento, ya que influye en tu compromiso con el cuidado y mantenimiento.",
+  11: "🤝 Todas las preocupaciones son válidas y tienen solución con las técnicas modernas disponibles hoy en día."
+};
+
+export default function RecommendationBox({ questionId }: RecommendationBoxProps) {
   const [isTyping, setIsTyping] = useState(true);
   const [displayedText, setDisplayedText] = useState("");
   const [showCursor, setShowCursor] = useState(true);
@@ -16,11 +31,12 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
     setIsTyping(true);
     setDisplayedText("");
     
-    // Texto completamente estático sin ninguna variable
-    const staticMessage = "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación y crear un plan de tratamiento más preciso.";
+    // Obtener el mensaje educativo específico para esta pregunta
+    const educationalMessage = educationalMessages[questionId as keyof typeof educationalMessages] || 
+      "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación.";
     
     // Simular efecto de escritura
-    const words = staticMessage.split(" ");
+    const words = educationalMessage.split(" ");
     let currentIndex = 0;
     
     const typingInterval = setInterval(() => {
@@ -36,7 +52,7 @@ export default function RecommendationBox({ recommendation }: RecommendationBoxP
     }, 100);
 
     return () => clearInterval(typingInterval);
-  }, []); // Removemos recommendation de las dependencias
+  }, [questionId]); // Ahora depende del questionId
 
   // Efecto de cursor parpadeante
   useEffect(() => {

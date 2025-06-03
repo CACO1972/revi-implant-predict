@@ -116,7 +116,7 @@ export default function QuestionCard({
               </motion.div>
             )}
             
-            <RecommendationBox />
+            <RecommendationBox questionId={question.id} />
 
             <NavigationButtons 
               onNext={handleNext}
