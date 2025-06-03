@@ -26,13 +26,25 @@ export default function RecommendationBox({ questionId }: RecommendationBoxProps
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
+    // Agregar logging temporal para debug
+    console.log('DEBUG - questionId recibido:', questionId, 'tipo:', typeof questionId);
+    
     setIsTyping(true);
     setDisplayedText("");
     
-    // Validar que questionId sea un número válido y obtener el mensaje educativo
-    const safeQuestionId = typeof questionId === 'number' && questionId > 0 ? questionId : 1;
+    // Validación más robusta del questionId
+    let safeQuestionId: number;
+    if (typeof questionId === 'number' && questionId >= 1 && questionId <= 9) {
+      safeQuestionId = questionId;
+    } else {
+      console.warn('questionId inválido, usando 1 como fallback:', questionId);
+      safeQuestionId = 1;
+    }
+    
     const educationalMessage = educationalMessages[safeQuestionId] || 
       "💡 Cada respuesta nos ayuda a personalizar mejor tu evaluación.";
+    
+    console.log('DEBUG - mensaje seleccionado:', educationalMessage);
     
     // Simular efecto de escritura
     const words = educationalMessage.split(" ");
