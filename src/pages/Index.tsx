@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -370,6 +371,9 @@ export default function Index() {
         </motion.div>
       </motion.div>
       
-      <RioAssistant isVisible={true} message="¡Hola! Soy Río, tu asistente virtual. ¿Listo para descubrir si puedes hacerte implantes SIN SALIR DE CASA? ¡Solo toma 2 minutos! 🦷✨" />
+      <RioAssistant 
+        isVisible={true} 
+        message="¡Hola! Soy Río, tu asistente virtual. ¿Listo para descubrir si puedes hacerte implantes SIN SALIR DE CASA? ¡Solo toma 2 minutos! 🦷✨" 
+      />
     </div>;
 }
