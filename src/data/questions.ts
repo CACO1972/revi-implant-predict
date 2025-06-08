@@ -59,15 +59,16 @@ export const questions: Question[] = [
   },
   {
     id: 6,
-    title: "¿En qué zona(s) están los dientes a reemplazar?",
-    explanation: "Cada zona tiene distinta calidad ósea.",
+    title: "¿En qué zona(s) están los dientes que necesitas reemplazar?",
+    explanation: "Puedes seleccionar múltiples zonas. Cada zona tiene distinta calidad ósea y complejidad.",
     options: [
-      { value: "maxilla_anterior", label: "Maxilar anterior", score: 0 },
-      { value: "maxilla_posterior", label: "Maxilar posterior", score: 1 },
-      { value: "mandible_anterior", label: "Mandíbula anterior", score: 1 },
-      { value: "mandible_posterior", label: "Mandíbula posterior", score: 2 }
+      { value: "maxilla_anterior", label: "Maxilar superior - zona anterior (dientes del frente)", score: 0.5 },
+      { value: "maxilla_posterior", label: "Maxilar superior - zona posterior (muelas)", score: 1 },
+      { value: "mandible_anterior", label: "Mandíbula inferior - zona anterior (dientes del frente)", score: 0.5 },
+      { value: "mandible_posterior", label: "Mandíbula inferior - zona posterior (muelas)", score: 1 }
     ],
-    recommendation: "Cada zona tiene distinta calidad ósea, lo que afecta el enfoque quirúrgico."
+    multiSelect: true,
+    recommendation: "Cada zona requiere un enfoque quirúrgico específico según la calidad ósea y estética."
   },
   {
     id: 7,
