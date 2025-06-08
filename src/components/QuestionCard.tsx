@@ -7,7 +7,6 @@ import QuestionOptions from "./question/QuestionOptions";
 import RecommendationBox from "./question/RecommendationBox";
 import NavigationButtons from "./question/NavigationButtons";
 import RioQuestionPresenter from "./RioQuestionPresenter";
-import RioInteractiveAssistant from "./demo/RioInteractiveAssistant";
 import { AlertCircle } from "lucide-react";
 
 interface QuestionCardProps {
@@ -45,10 +44,10 @@ export default function QuestionCard({
     setError(false);
     setShowOptions(false);
     
-    // Mostrar opciones más rápido sin esperar tanto a Río
+    // Mostrar opciones después de que Río presente la pregunta
     const timer = setTimeout(() => {
       setShowOptions(true);
-    }, 800);
+    }, 2500);
     
     return () => clearTimeout(timer);
   }, [question.id, currentAnswer]);
@@ -84,7 +83,7 @@ export default function QuestionCard({
       transition={{ duration: 0.5 }}
       className="w-full max-w-lg mx-auto glass-panel p-8 shadow-lg backdrop-blur-lg"
     >
-      {/* Presentación de pregunta más directa */}
+      {/* Río presentando la pregunta */}
       <RioQuestionPresenter 
         question={question}
         questionNumber={questionNumber}
@@ -113,7 +112,7 @@ export default function QuestionCard({
                 className="flex items-center justify-center gap-2 text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-lg p-3"
               >
                 <AlertCircle size={16} />
-                <span>Por favor selecciona una opción para continuar</span>
+                <span>Río necesita que selecciones una opción para continuar</span>
               </motion.div>
             )}
             
@@ -128,13 +127,6 @@ export default function QuestionCard({
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Río flotante interactivo */}
-      <RioInteractiveAssistant 
-        questionId={question.id} 
-        selectedAnswer={selectedValues[0]?.toString() || ""} 
-        compact={true}
-      />
     </motion.div>
   );
 }
