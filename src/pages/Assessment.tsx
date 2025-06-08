@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
+import AIProcessingScreen from "@/components/AIProcessingScreen";
 import { PatientInfo, Question, Answer } from "@/types/implant";
 import { questions } from "@/data/questions";
 import { toast } from "@/components/ui/use-toast";
@@ -20,13 +22,14 @@ export default function Assessment() {
   const [currentStep, setCurrentStep] = useState(0);
   const [patientInfo, setPatientInfo] = useState<PatientInfo>({ name: "", age: null });
   const [answers, setAnswers] = useState<Answer[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [assessmentResult, setAssessmentResult] = useState<any>(null);
   const [showRio, setShowRio] = useState(true);
 
-  // 0 = patient info, 1-9 = questions, 10 = completed
+  // 0 = patient info, 1-9 = questions, processing, completed
   const totalSteps = questions.length + 1; // +1 for patient info
-  const currentQuestion = currentStep > 0 ? questions[currentStep - 1] : null;
+  const currentQuestion = currentStep > 0 && currentStep <= questions.length ? questions[currentStep - 1] : null;
 
   const handlePatientInfoSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,21 +62,28 @@ export default function Assessment() {
     if (currentStep < questions.length) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Evaluación completada - generar recomendaciones personalizadas
-      const totalScore = calculateScore(newAnswers);
-      const result = evaluateResult(totalScore);
-      
-      // Generar recomendaciones personalizadas basadas en las respuestas específicas
-      const personalizedRecommendations = getPersonalizedRecommendations(patientInfo, newAnswers, result);
-      
-      const finalResult = {
-        ...result,
-        recommendations: personalizedRecommendations
-      };
-      
-      setAssessmentResult(finalResult);
-      setIsCompleted(true);
+      // Iniciar procesamiento con IA
+      setIsProcessing(true);
+      setShowRio(false);
     }
+  };
+
+  const handleProcessingComplete = () => {
+    // Generar resultados después del procesamiento
+    const totalScore = calculateScore(answers);
+    const result = evaluateResult(totalScore);
+    
+    // Generar recomendaciones personalizadas basadas en las respuestas específicas
+    const personalizedRecommendations = getPersonalizedRecommendations(patientInfo, answers, result);
+    
+    const finalResult = {
+      ...result,
+      recommendations: personalizedRecommendations
+    };
+    
+    setAssessmentResult(finalResult);
+    setIsProcessing(false);
+    setIsCompleted(true);
   };
 
   const handleNext = () => {
@@ -94,8 +104,10 @@ export default function Assessment() {
     setCurrentStep(0);
     setAnswers([]);
     setPatientInfo({ name: "", age: null });
+    setIsProcessing(false);
     setIsCompleted(false);
     setAssessmentResult(null);
+    setShowRio(true);
   };
 
   const getColorByLevel = () => {
@@ -120,6 +132,18 @@ export default function Assessment() {
     }
   };
 
+  // Mostrar pantalla de procesamiento
+  if (isProcessing) {
+    return (
+      <AIProcessingScreen
+        patientInfo={patientInfo}
+        answers={answers}
+        onComplete={handleProcessingComplete}
+      />
+    );
+  }
+
+  // Mostrar resultados finales
   if (isCompleted && assessmentResult) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
@@ -195,14 +219,6 @@ export default function Assessment() {
             </div>
           </div>
         </motion.div>
-        
-        {showRio && (
-          <RioAssistant 
-            isVisible={true} 
-            message={`¡${patientInfo.name}, tu evaluación está completa! Estos resultados te darán una excelente base para tu consulta profesional. Recuerda que cada factor identificado es una oportunidad de mejora.`}
-            onDismiss={() => setShowRio(false)}
-          />
-        )}
         
         <Toaster />
       </div>

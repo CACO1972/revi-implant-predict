@@ -8,6 +8,9 @@ import {
   Moon, 
   Clock, 
   Smile,
+  MapPin,
+  Shield,
+  AlertTriangle,
   Sparkles,
   MessageCircle
 } from "lucide-react";
@@ -24,7 +27,11 @@ const questionIcons = {
   2: Heart,
   3: Moon,
   4: Clock,
-  5: Smile
+  5: Smile,
+  6: MapPin,
+  7: Shield,
+  8: AlertTriangle,
+  9: Sparkles
 };
 
 const getRioMessages = (patientName: string = "paciente") => ({
@@ -32,7 +39,11 @@ const getRioMessages = (patientName: string = "paciente") => ({
   2: `${patientName}, ¿tienes diabetes? No te preocupes, podemos trabajar con eso...`,
   3: `${patientName}, ¿rechinas los dientes por la noche? Es más común de lo que piensas...`,
   4: `${patientName}, el tiempo sin dientes es crucial. Cuéntame cuándo los perdiste...`,
-  5: `${patientName}, ¿cuántos dientes necesitamos reemplazar? Esto define tu plan...`
+  5: `${patientName}, ¿cuántos dientes necesitamos reemplazar? Esto define tu plan...`,
+  6: `${patientName}, necesito saber en qué zonas perdiste los dientes para planificar mejor...`,
+  7: `${patientName}, ¿tienes alguna condición bucal actual? Es importante tratarla antes...`,
+  8: `${patientName}, ¿cómo perdiste los dientes? Esto me ayuda a entender tu caso...`,
+  9: `${patientName}, la higiene será clave para el éxito de tu tratamiento...`
 });
 
 export default function RioQuestionPresenter({ question, questionNumber, totalQuestions, patientName }: RioQuestionPresenterProps) {
@@ -43,6 +54,10 @@ export default function RioQuestionPresenter({ question, questionNumber, totalQu
   const message = rioMessages[question.id as keyof typeof rioMessages];
 
   useEffect(() => {
+    // Reset states when question changes
+    setShowMessage(false);
+    setShowQuestion(false);
+    
     // Secuencia de animaciones
     const timer1 = setTimeout(() => setShowMessage(true), 500);
     const timer2 = setTimeout(() => setShowQuestion(true), 2000);
