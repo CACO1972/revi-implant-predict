@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Lightbulb, ThumbsUp, AlertTriangle, Sparkles } from "lucide-react";
+import { MessageCircle, Sparkles } from "lucide-react";
 
 interface RioInteractiveAssistantProps {
   questionId: number;
@@ -11,7 +11,7 @@ interface RioInteractiveAssistantProps {
 
 const rioMessages = {
   1: {
-    default: "💨 El tabaco afecta la cicatrización de implantes",
+    default: "💨 El tabaco afecta la cicatrización",
     answers: {
       never: "🎉 ¡Perfecto! Sin tabaco = mejor cicatrización",
       quit_old: "👍 ¡Genial! Tu cuerpo ya se recuperó",
@@ -25,43 +25,39 @@ const rioMessages = {
     answers: {
       no: "✅ Sin diabetes = proceso más simple",
       controlled: "👨‍⚕️ Con control médico, excelentes resultados",
-      uncontrolled: "⚠️ Controlar glucemia antes del implante es clave"
+      uncontrolled: "⚠️ Controlar glucemia antes del implante"
     }
   },
   3: {
-    default: "⏰ El tiempo sin dientes afecta el hueso disponible",
+    default: "⏰ El tiempo sin dientes afecta el hueso",
     answers: {
-      recent: "🏃‍♂️ ¡Perfecto timing! Hueso aún en buenas condiciones",
-      medium: "⚡ Buen momento, hueso todavía favorable",
+      recent: "🏃‍♂️ ¡Perfecto timing! Hueso en buenas condiciones",
+      medium: "⚡ Buen momento, hueso favorable",
       long: "🔧 Podríamos necesitar regeneración ósea",
       very_long: "🏗️ Evaluaremos opciones de reconstrucción"
     }
   },
   4: {
-    default: "🦷 La cantidad determina la estrategia de tratamiento",
+    default: "🦷 La cantidad determina la estrategia",
     answers: {
       one: "🎯 Caso ideal: 1 implante, 1 corona",
-      few: "🔧 Implantes individuales o puente sobre implantes",
+      few: "🔧 Implantes individuales o puente",
       several: "🏗️ Prótesis parcial sobre implantes",
-      many: "🚀 All-on-4 o All-on-6 podrían ser ideales"
+      many: "🚀 All-on-4 o All-on-6 ideales"
     }
   },
   5: {
-    default: "🪥 La higiene es clave para el éxito a largo plazo",
+    default: "🪥 La higiene es clave para el éxito",
     answers: {
       excellent: "⭐ ¡Perfecto! Tus implantes durarán décadas",
       good: "👍 Con ligeras mejoras, resultados excelentes",
       fair: "📚 Te enseñaremos técnicas específicas",
-      poor: "🎯 Mejorar higiene = factor crítico de éxito"
+      poor: "🎯 Mejorar higiene = factor crítico"
     }
-  },
-  999: {
-    default: "🎉 ¡Evaluación completa! Tu plan personalizado está listo",
-    answers: {}
   }
 };
 
-export default function RioInteractiveAssistant({ questionId, selectedAnswer, compact = false }: RioInteractiveAssistantProps) {
+export default function RioInteractiveAssistant({ questionId, selectedAnswer, compact = true }: RioInteractiveAssistantProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [currentMessage, setCurrentMessage] = useState("");
   const [mood, setMood] = useState<"happy" | "thinking" | "concerned" | "excited">("thinking");
@@ -114,13 +110,13 @@ export default function RioInteractiveAssistant({ questionId, selectedAnswer, co
         initial={{ opacity: 0, y: 10, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 10, scale: 0.95 }}
-        className={`relative ${compact ? 'mt-4' : 'mt-6'}`}
+        className="fixed bottom-4 right-4 z-10 max-w-xs"
       >
-        {/* Rio Avatar */}
+        {/* Rio Avatar pequeño flotante */}
         <motion.div
           animate={{ 
-            y: [0, -5, 0],
-            rotate: mood === "excited" ? [0, 5, -5, 0] : [0, 2, -2, 0]
+            y: [0, -3, 0],
+            rotate: mood === "excited" ? [0, 3, -3, 0] : [0, 1, -1, 0]
           }}
           transition={{ 
             duration: mood === "excited" ? 1.5 : 3, 
@@ -129,76 +125,48 @@ export default function RioInteractiveAssistant({ questionId, selectedAnswer, co
           }}
           className="absolute -left-2 -top-2 z-10"
         >
-          <div className={`w-${compact ? '10' : '12'} h-${compact ? '10' : '12'} rounded-full bg-gradient-to-br from-[#178582] to-[#178582]/70 p-1 shadow-lg`}>
-            <div className="w-full h-full rounded-full bg-[#178582] flex items-center justify-center text-lg">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#178582] to-[#178582]/70 p-1 shadow-lg">
+            <div className="w-full h-full rounded-full bg-[#178582] flex items-center justify-center text-sm">
               {getMoodIcon()}
             </div>
           </div>
           
-          {/* Mood indicator */}
+          {/* Sparkle effect for excited mood */}
           {mood === "excited" && (
             <motion.div
               animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }}
               transition={{ duration: 1, repeat: Infinity }}
               className="absolute -top-1 -right-1"
             >
-              <Sparkles className="w-4 h-4 text-[#BFA181]" />
+              <Sparkles className="w-3 h-3 text-[#BFA181]" />
             </motion.div>
           )}
         </motion.div>
 
-        {/* Message Bubble */}
+        {/* Message Bubble compacto */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className={`ml-8 p-${compact ? '3' : '4'} bg-gradient-to-r ${getMoodColor()} rounded-xl rounded-tl-none border border-[#178582]/30 relative`}
+          className={`ml-6 p-3 bg-gradient-to-r ${getMoodColor()} rounded-xl rounded-tl-none border border-[#178582]/30 relative shadow-lg backdrop-blur-sm`}
         >
           {/* Bubble arrow */}
-          <div className="absolute -left-2 top-4 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[8px] border-r-[#178582]/30"></div>
+          <div className="absolute -left-2 top-3 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[6px] border-r-[#178582]/30"></div>
           
           <div className="flex items-start gap-2">
-            <MessageCircle className={`w-${compact ? '3' : '4'} h-${compact ? '3' : '4'} text-[#178582] mt-0.5 flex-shrink-0`} />
+            <MessageCircle className="w-3 h-3 text-[#178582] mt-0.5 flex-shrink-0" />
             <div>
-              <p className={`text-${compact ? 'xs' : 'sm'} text-[#178582] font-medium mb-1`}>Río:</p>
+              <p className="text-xs text-[#178582] font-medium mb-1">Río:</p>
               <motion.p 
                 key={currentMessage}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className={`text-${compact ? 'xs' : 'sm'} text-white/90 leading-relaxed`}
+                className="text-xs text-white/90 leading-relaxed"
               >
                 {currentMessage}
               </motion.p>
             </div>
           </div>
-
-          {/* Floating elements for excited mood */}
-          {mood === "excited" && !compact && (
-            <>
-              <motion.div
-                animate={{ 
-                  y: [0, -10, 0], 
-                  opacity: [0.6, 1, 0.6],
-                  rotate: [0, 180, 360]
-                }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                className="absolute top-2 right-2"
-              >
-                <Sparkles className="w-3 h-3 text-[#BFA181]" />
-              </motion.div>
-              <motion.div
-                animate={{ 
-                  y: [0, -8, 0], 
-                  opacity: [0.4, 0.8, 0.4],
-                  rotate: [0, -180, -360]
-                }}
-                transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
-                className="absolute bottom-2 right-4"
-              >
-                <Sparkles className="w-2 h-2 text-[#178582]" />
-              </motion.div>
-            </>
-          )}
         </motion.div>
       </motion.div>
     </AnimatePresence>
