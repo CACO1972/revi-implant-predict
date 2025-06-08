@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Question, Answer } from "@/types/implant";
 import { getScoreFromOptions } from "@/utils/assessmentUtils";
@@ -6,7 +7,7 @@ import QuestionOptions from "./question/QuestionOptions";
 import RecommendationBox from "./question/RecommendationBox";
 import NavigationButtons from "./question/NavigationButtons";
 import RioQuestionPresenter from "./RioQuestionPresenter";
-import RioInteractiveAssistant from "./RioInteractiveAssistant";
+import RioInteractiveAssistant from "./demo/RioInteractiveAssistant";
 import { AlertCircle } from "lucide-react";
 
 interface QuestionCardProps {
