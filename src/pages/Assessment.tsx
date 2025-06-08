@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,8 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
-import AIProcessingScreen from "@/components/ai/AIProcessingScreen";
-import IntelligentResultsPresentation from "@/components/ai/IntelligentResultsPresentation";
 import { PatientInfo, Question, Answer } from "@/types/implant";
 import { questions } from "@/data/questions";
 import { toast } from "@/components/ui/use-toast";
@@ -25,6 +22,7 @@ export default function Assessment() {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
   const [assessmentResult, setAssessmentResult] = useState<any>(null);
+  const [showRio, setShowRio] = useState(true);
 
   // 0 = patient info, 1-9 = questions, 10 = completed
   const totalSteps = questions.length + 1; // +1 for patient info
@@ -198,10 +196,13 @@ export default function Assessment() {
           </div>
         </motion.div>
         
-        <RioAssistant 
-          isVisible={true} 
-          message={`¡${patientInfo.name}, tu evaluación está completa! Estos resultados te darán una excelente base para tu consulta profesional. Recuerda que cada factor identificado es una oportunidad de mejora.`}
-        />
+        {showRio && (
+          <RioAssistant 
+            isVisible={true} 
+            message={`¡${patientInfo.name}, tu evaluación está completa! Estos resultados te darán una excelente base para tu consulta profesional. Recuerda que cada factor identificado es una oportunidad de mejora.`}
+            onDismiss={() => setShowRio(false)}
+          />
+        )}
         
         <Toaster />
       </div>
@@ -292,16 +293,19 @@ export default function Assessment() {
         ) : null}
       </AnimatePresence>
       
-      <RioAssistant 
-        isVisible={true} 
-        message={
-          currentStep === 0 
-            ? "¡Hola! Soy Río, tu asistente virtual. Vamos a hacer una evaluación personalizada para saber si eres candidato a implantes dentales." 
-            : currentQuestion
-            ? `Pregunta ${currentStep} de ${questions.length}. Tómate tu tiempo para responder con sinceridad.`
-            : "¡Genial! Hemos terminado la evaluación."
-        }
-      />
+      {showRio && (
+        <RioAssistant 
+          isVisible={true} 
+          message={
+            currentStep === 0 
+              ? "¡Hola! Soy Río, tu asistente virtual. Vamos a hacer una evaluación personalizada para saber si eres candidato a implantes dentales." 
+              : currentQuestion
+              ? `Pregunta ${currentStep} de ${questions.length}. Tómate tu tiempo para responder con sinceridad.`
+              : "¡Genial! Hemos terminado la evaluación."
+          }
+          onDismiss={() => setShowRio(false)}
+        />
+      )}
       
       <Toaster />
     </div>

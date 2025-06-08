@@ -9,9 +9,10 @@ interface RioAssistantProps {
   message?: string;
   isVisible: boolean;
   onMessageChange?: (newMessage: string) => void;
+  onDismiss?: () => void;
 }
 
-export default function RioAssistant({ message, isVisible, onMessageChange }: RioAssistantProps) {
+export default function RioAssistant({ message, isVisible, onMessageChange, onDismiss }: RioAssistantProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentMessage, setCurrentMessage] = useState(message || "");
   const [isTyping, setIsTyping] = useState(false);
@@ -85,6 +86,20 @@ export default function RioAssistant({ message, isVisible, onMessageChange }: Ri
       exit={{ opacity: 0, scale: 0.8 }}
       className="fixed bottom-4 right-4 z-50"
     >
+      {/* Botón de cierre flotante sobre Río */}
+      {onDismiss && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={onDismiss}
+          className="absolute -top-2 -left-2 z-20 w-6 h-6 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white shadow-lg transition-colors"
+        >
+          <X size={14} />
+        </motion.button>
+      )}
+
       {/* Avatar de Río - Clickeable */}
       <motion.div
         whileHover={{ scale: 1.05 }}
