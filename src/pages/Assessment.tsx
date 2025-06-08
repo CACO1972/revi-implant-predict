@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
+import AIProcessingScreen from "@/components/ai/AIProcessingScreen";
+import IntelligentResultsPresentation from "@/components/ai/IntelligentResultsPresentation";
 import { PatientInfo, Question, Answer } from "@/types/implant";
 import { questions } from "@/data/questions";
 import { toast } from "@/components/ui/use-toast";
