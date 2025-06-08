@@ -16,6 +16,7 @@ interface RioQuestionPresenterProps {
   question: Question;
   questionNumber: number;
   totalQuestions: number;
+  patientName?: string;
 }
 
 const questionIcons = {
@@ -26,18 +27,19 @@ const questionIcons = {
   5: Smile
 };
 
-const rioMessages = {
-  1: "Necesito preguntarte sobre el tabaco. Es muy importante para tu tratamiento...",
-  2: "¿Tienes diabetes? No te preocupes, podemos trabajar con eso...",
-  3: "¿Rechinas los dientes por la noche? Es más común de lo que piensas...",
-  4: "El tiempo sin dientes es crucial. Cuéntame cuándo los perdiste...",
-  5: "¿Cuántos dientes necesitamos reemplazar? Esto define tu plan..."
-};
+const getRioMessages = (patientName: string = "paciente") => ({
+  1: `${patientName}, necesito preguntarte sobre el tabaco. Es muy importante para tu tratamiento...`,
+  2: `${patientName}, ¿tienes diabetes? No te preocupes, podemos trabajar con eso...`,
+  3: `${patientName}, ¿rechinas los dientes por la noche? Es más común de lo que piensas...`,
+  4: `${patientName}, el tiempo sin dientes es crucial. Cuéntame cuándo los perdiste...`,
+  5: `${patientName}, ¿cuántos dientes necesitamos reemplazar? Esto define tu plan...`
+});
 
-export default function RioQuestionPresenter({ question, questionNumber, totalQuestions }: RioQuestionPresenterProps) {
+export default function RioQuestionPresenter({ question, questionNumber, totalQuestions, patientName }: RioQuestionPresenterProps) {
   const [showMessage, setShowMessage] = useState(false);
   const [showQuestion, setShowQuestion] = useState(false);
   const IconComponent = questionIcons[question.id as keyof typeof questionIcons];
+  const rioMessages = getRioMessages(patientName || "");
   const message = rioMessages[question.id as keyof typeof rioMessages];
 
   useEffect(() => {
@@ -123,6 +125,20 @@ export default function RioQuestionPresenter({ question, questionNumber, totalQu
                 </div>
               </div>
             </motion.div>
+
+            {/* Mensaje especial para la primera pregunta */}
+            {questionNumber === 1 && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.5 }}
+                className="mt-4 p-3 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-lg border border-yellow-500/20"
+              >
+                <p className="text-xs text-yellow-400 text-center">
+                  💡 Para obtener el mejor resultado, responde lo más verazmente posible
+                </p>
+              </motion.div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

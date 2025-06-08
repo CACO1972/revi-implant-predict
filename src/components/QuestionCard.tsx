@@ -17,6 +17,7 @@ interface QuestionCardProps {
   isFirst: boolean;
   isLast: boolean;
   currentAnswer?: Answer;
+  patientName?: string;
 }
 
 export default function QuestionCard({
@@ -26,7 +27,8 @@ export default function QuestionCard({
   onPrevious,
   isFirst,
   isLast,
-  currentAnswer
+  currentAnswer,
+  patientName
 }: QuestionCardProps) {
   const [selectedValues, setSelectedValues] = useState<(string | number)[]>(
     currentAnswer?.selectedValues || []
@@ -88,6 +90,7 @@ export default function QuestionCard({
         question={question}
         questionNumber={questionNumber}
         totalQuestions={totalQuestions}
+        patientName={patientName}
       />
 
       {/* Opciones de respuesta */}

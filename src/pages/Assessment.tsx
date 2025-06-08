@@ -289,6 +289,7 @@ export default function Assessment() {
             isFirst={currentStep === 1}
             isLast={currentStep === questions.length}
             currentAnswer={answers.find(a => a.questionId === currentQuestion.id)}
+            patientName={patientInfo.name}
           />
         ) : null}
       </AnimatePresence>
@@ -298,9 +299,11 @@ export default function Assessment() {
           isVisible={true} 
           message={
             currentStep === 0 
-              ? "¡Hola! Soy Río, tu asistente virtual. Vamos a hacer una evaluación personalizada para saber si eres candidato a implantes dentales." 
+              ? `¡Hola! Soy Río, tu asistente virtual. Vamos a hacer una evaluación personalizada para saber si eres candidato a implantes dentales.`
               : currentQuestion
-              ? `Pregunta ${currentStep} de ${questions.length}. Tómate tu tiempo para responder con sinceridad.`
+              ? currentStep === 1 
+                ? `${patientInfo.name}, comenzamos con la evaluación. Recuerda responder con total sinceridad para obtener el mejor resultado.`
+                : `Pregunta ${currentStep} de ${questions.length}. Tómate tu tiempo para responder con sinceridad.`
               : "¡Genial! Hemos terminado la evaluación."
           }
           onDismiss={() => setShowRio(false)}
