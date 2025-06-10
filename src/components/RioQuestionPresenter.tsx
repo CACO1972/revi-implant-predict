@@ -34,17 +34,22 @@ const questionIcons = {
   9: Sparkles
 };
 
-const getRioMessages = (patientName: string = "paciente") => ({
-  1: `${patientName}, necesito preguntarte sobre el tabaco. Es muy importante para tu tratamiento...`,
-  2: `${patientName}, ¿tienes diabetes? No te preocupes, podemos trabajar con eso...`,
-  3: `${patientName}, ¿rechinas los dientes por la noche? Es más común de lo que piensas...`,
-  4: `${patientName}, el tiempo sin dientes es crucial. Cuéntame cuándo los perdiste...`,
-  5: `${patientName}, ¿cuántos dientes necesitamos reemplazar? Esto define tu plan...`,
-  6: `${patientName}, necesito saber en qué zonas perdiste los dientes para planificar mejor...`,
-  7: `${patientName}, ¿tienes alguna condición bucal actual? Es importante tratarla antes...`,
-  8: `${patientName}, ¿cómo perdiste los dientes? Esto me ayuda a entender tu caso...`,
-  9: `${patientName}, la higiene será clave para el éxito de tu tratamiento...`
-});
+const getRioMessages = (patientName: string = "paciente") => {
+  // Extraer solo el primer nombre
+  const firstName = patientName.split(' ')[0];
+  
+  return {
+    1: `${firstName}, ¿fumas o has fumado?`,
+    2: `${firstName}, ¿tienes diabetes?`,
+    3: `${firstName}, ¿rechinas los dientes por la noche?`,
+    4: `${firstName}, ¿cuánto tiempo llevas sin estos dientes?`,
+    5: `${firstName}, ¿cuántos dientes necesitas reemplazar?`,
+    6: `${firstName}, selecciona exactamente qué dientes te faltan`,
+    7: `${firstName}, ¿tienes alguna condición bucal actual?`,
+    8: `${firstName}, ¿cómo perdiste estos dientes?`,
+    9: `${firstName}, ¿cómo calificas tu higiene dental?`
+  };
+};
 
 export default function RioQuestionPresenter({ question, questionNumber, totalQuestions, patientName }: RioQuestionPresenterProps) {
   const [showMessage, setShowMessage] = useState(false);
