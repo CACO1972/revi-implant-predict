@@ -14,6 +14,20 @@ export const questions: Question[] = [
     recommendation: "Dejar o reducir el consumo mejora significativamente el pronóstico."
   },
   {
+    id: 1.5, // Pregunta condicional
+    title: "¿Estarías dispuesto/a a dejar de fumar?",
+    explanation: "Dejar de fumar mejorará tus posibilidades de éxito en un 40-60%.",
+    options: [
+      { value: "yes_already", label: "Sí, ya estoy en proceso", score: -1 },
+      { value: "yes_willing", label: "Sí, estoy dispuesto/a", score: -0.5 },
+      { value: "maybe", label: "Tal vez, necesito más información", score: 0 },
+      { value: "no", label: "No, por ahora no", score: 1 }
+    ],
+    recommendation: "Cada día sin fumar mejora tu cicatrización y el pronóstico de tus implantes.",
+    isConditional: true,
+    showWhenQuestionHasValues: { questionId: 1, values: ["light", "heavy"] }
+  },
+  {
     id: 2,
     title: "¿Eres diabético/a?",
     explanation: "La diabetes no controlada aumenta el riesgo de infecciones.",

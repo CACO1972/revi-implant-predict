@@ -9,6 +9,7 @@ interface RecommendationBoxProps {
 
 const clinicalRecommendations = {
   1: "🚭 El tabaco reduce el flujo sanguíneo hasta en un 70%, dificultando la cicatrización y la integración del implante al hueso. Los fumadores tienen 2-3 veces más riesgo de fracaso.",
+  1.5: "✅ Dejar de fumar mejora el flujo sanguíneo y la cicatrización. Los ex-fumadores tienen tasas de éxito similares a los no fumadores después de 6 meses sin fumar.",
   2: "💉 La diabetes afecta la cicatrización de tejidos. Con niveles de HbA1c <7%, los implantes pueden tener éxito similar a pacientes no diabéticos.",
   3: "😴 El bruxismo genera fuerzas hasta 6 veces mayores que la masticación normal. Una férula nocturna protege tanto tus dientes naturales como los implantes.",
   4: "⏰ Después de perder un diente, se pierde hasta 50% del ancho del hueso en el primer año. Mientras antes actúes, mejor será el pronóstico.",
@@ -25,7 +26,7 @@ export default function RecommendationBox({ questionId }: RecommendationBoxProps
   useEffect(() => {
     console.log("DEBUG - questionId recibido:", questionId, "tipo:", typeof questionId);
     
-    // Validar que el questionId esté en el rango válido (1-9)
+    // Validar que el questionId esté en el rango válido (1-9 y 1.5)
     if (questionId >= 1 && questionId <= 9) {
       const message = clinicalRecommendations[questionId as keyof typeof clinicalRecommendations];
       setSelectedMessage(message);

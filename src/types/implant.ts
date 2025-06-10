@@ -17,6 +17,11 @@ export type Question = {
   options: QuestionOption[];
   recommendation: string;
   multiSelect?: boolean;
+  isConditional?: boolean;
+  showWhenQuestionHasValues?: {
+    questionId: number;
+    values: (string | number)[];
+  };
 };
 
 export type Answer = {

@@ -40,6 +40,7 @@ const getRioMessages = (patientName: string = "paciente") => {
   
   return {
     1: `${firstName}, ¿fumas o has fumado?`,
+    1.5: `${firstName}, ¿estarías dispuesto/a a dejar de fumar?`,
     2: `${firstName}, ¿tienes diabetes?`,
     3: `${firstName}, ¿rechinas los dientes por la noche?`,
     4: `${firstName}, ¿cuánto tiempo llevas sin estos dientes?`,

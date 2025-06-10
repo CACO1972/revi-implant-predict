@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,10 +25,36 @@ export default function Assessment() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [assessmentResult, setAssessmentResult] = useState<any>(null);
   const [showRio, setShowRio] = useState(true);
+  const [availableQuestions, setAvailableQuestions] = useState<Question[]>([]);
 
-  // 0 = patient info, 1-9 = questions, processing, completed
-  const totalSteps = questions.length + 1; // +1 for patient info
-  const currentQuestion = currentStep > 0 && currentStep <= questions.length ? questions[currentStep - 1] : null;
+  // Función para determinar qué preguntas mostrar basado en las respuestas
+  const updateAvailableQuestions = (currentAnswers: Answer[]) => {
+    let questionsToShow = questions.filter(q => !q.isConditional);
+    
+    // Revisar si se deben mostrar preguntas condicionales
+    questions.filter(q => q.isConditional).forEach(conditionalQ => {
+      if (conditionalQ.showWhenQuestionHasValues) {
+        const { questionId, values } = conditionalQ.showWhenQuestionHasValues;
+        const relevantAnswer = currentAnswers.find(a => a.questionId === questionId);
+        
+        if (relevantAnswer && relevantAnswer.selectedValues.some(val => values.includes(val))) {
+          questionsToShow.push(conditionalQ);
+        }
+      }
+    });
+    
+    // Ordenar por ID
+    questionsToShow.sort((a, b) => a.id - b.id);
+    setAvailableQuestions(questionsToShow);
+  };
+
+  useEffect(() => {
+    updateAvailableQuestions(answers);
+  }, [answers]);
+
+  // 0 = patient info, 1-N = questions, processing, completed
+  const totalSteps = availableQuestions.length + 1; // +1 for patient info
+  const currentQuestion = currentStep > 0 && currentStep <= availableQuestions.length ? availableQuestions[currentStep - 1] : null;
 
   const handlePatientInfoSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,12 +84,22 @@ export default function Assessment() {
     setAnswers(newAnswers);
     sessionStorage.setItem('answers', JSON.stringify(newAnswers));
     
-    if (currentStep < questions.length) {
+    // Actualizar preguntas disponibles con las nuevas respuestas
+    updateAvailableQuestions(newAnswers);
+    
+    if (currentStep < availableQuestions.length) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Iniciar procesamiento con IA
-      setIsProcessing(true);
-      setShowRio(false);
+      // Verificar si hay nuevas preguntas condicionales que mostrar
+      setTimeout(() => {
+        if (currentStep < availableQuestions.length) {
+          setCurrentStep(currentStep + 1);
+        } else {
+          // Iniciar procesamiento con IA
+          setIsProcessing(true);
+          setShowRio(false);
+        }
+      }, 100);
     }
   };
 
@@ -87,7 +122,7 @@ export default function Assessment() {
   };
 
   const handleNext = () => {
-    if (currentStep < questions.length) {
+    if (currentStep < availableQuestions.length) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -108,6 +143,7 @@ export default function Assessment() {
     setIsCompleted(false);
     setAssessmentResult(null);
     setShowRio(true);
+    setAvailableQuestions([]);
   };
 
   const getColorByLevel = () => {
@@ -303,7 +339,7 @@ export default function Assessment() {
             onNext={handleNext}
             onPrevious={handlePrevious}
             isFirst={currentStep === 1}
-            isLast={currentStep === questions.length}
+            isLast={currentStep === availableQuestions.length}
             currentAnswer={answers.find(a => a.questionId === currentQuestion.id)}
             patientName={patientInfo.name}
           />
@@ -319,7 +355,7 @@ export default function Assessment() {
               : currentQuestion
               ? currentStep === 1 
                 ? `${patientInfo.name}, comenzamos con la evaluación. Recuerda responder con total sinceridad para obtener el mejor resultado.`
-                : `Pregunta ${currentStep} de ${questions.length}. Tómate tu tiempo para responder con sinceridad.`
+                : `Pregunta ${currentStep} de ${availableQuestions.length}. Tómate tu tiempo para responder con sinceridad.`
               : "¡Genial! Hemos terminado la evaluación."
           }
           onDismiss={() => setShowRio(false)}
