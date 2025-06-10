@@ -13,9 +13,9 @@ const clinicalRecommendations = {
   3: "😴 El bruxismo genera fuerzas hasta 6 veces mayores que la masticación normal. Una férula nocturna protege tanto tus dientes naturales como los implantes.",
   4: "⏰ Después de perder un diente, se pierde hasta 50% del ancho del hueso en el primer año. Mientras antes actúes, mejor será el pronóstico.",
   5: "🦷 La cantidad de dientes determina la estrategia: 1 diente = 1 implante, varios dientes = puente o implantes múltiples, muchos dientes = All-on-4/6.",
-  6: "🏗️ Cada zona de la boca tiene diferente calidad ósea: la mandíbula anterior es la más fuerte, el maxilar posterior la más delicada.",
+  6: "🏗️ La selección exacta de dientes nos permite crear un plan preciso: cada diente tiene un pronóstico específico según su zona, y debemos considerar si la oclusión será implante contra implante o implante contra diente natural.",
   7: "⚠️ Estas condiciones deben tratarse antes de colocar implantes para crear un ambiente oral saludable y libre de bacterias.",
-  8: "🔍 La causa de pérdida dental nos indica qué cuidados extra necesitas: trauma = menos riesgo, periodontitis = más seguimiento.",
+  8: "🔍 La causa de pérdida dental nos indica qué cuidados extra necesitas: trauma = menos riesgo, periodontitis (por dientes sueltos) = más seguimiento.",
   9: "🪥 La higiene es el factor #1 para el éxito a largo plazo. Los implantes necesitan cuidados similares a los dientes naturales pero sin caries."
 };
 
@@ -25,7 +25,7 @@ export default function RecommendationBox({ questionId }: RecommendationBoxProps
   useEffect(() => {
     console.log("DEBUG - questionId recibido:", questionId, "tipo:", typeof questionId);
     
-    // Validar que el questionId esté en el rango válido
+    // Validar que el questionId esté en el rango válido (1-9)
     if (questionId >= 1 && questionId <= 9) {
       const message = clinicalRecommendations[questionId as keyof typeof clinicalRecommendations];
       setSelectedMessage(message);

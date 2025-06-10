@@ -59,16 +59,11 @@ export const questions: Question[] = [
   },
   {
     id: 6,
-    title: "¿En qué zona(s) están los dientes que necesitas reemplazar?",
-    explanation: "Puedes seleccionar múltiples zonas. Cada zona tiene distinta calidad ósea y complejidad.",
-    options: [
-      { value: "maxilla_anterior", label: "Maxilar superior - zona anterior (dientes del frente)", score: 0.5 },
-      { value: "maxilla_posterior", label: "Maxilar superior - zona posterior (muelas)", score: 1 },
-      { value: "mandible_anterior", label: "Mandíbula inferior - zona anterior (dientes del frente)", score: 0.5 },
-      { value: "mandible_posterior", label: "Mandíbula inferior - zona posterior (muelas)", score: 1 }
-    ],
+    title: "¿Cuáles son exactamente los dientes que te faltan?",
+    explanation: "Selecciona en la imagen los dientes específicos que has perdido. Esto nos permitirá crear un plan de tratamiento completamente personalizado.",
+    options: [], // Se maneja con el selector dental interactivo
     multiSelect: true,
-    recommendation: "Cada zona requiere un enfoque quirúrgico específico según la calidad ósea y estética."
+    recommendation: "La selección precisa de dientes nos permite calcular el pronóstico específico para cada zona y planificar la oclusión ideal."
   },
   {
     id: 7,
@@ -91,7 +86,7 @@ export const questions: Question[] = [
     options: [
       { value: "trauma", label: "Trauma", score: 0 },
       { value: "cavities", label: "Caries", score: 1 },
-      { value: "periodontitis", label: "Periodontitis", score: 2 },
+      { value: "periodontitis", label: "Periodontitis (por dientes sueltos)", score: 2 },
       { value: "other", label: "Otra", score: 2 }
     ],
     recommendation: "Conocer la causa ayuda a prevenir futuras pérdidas."
@@ -106,68 +101,5 @@ export const questions: Question[] = [
       { value: "complete", label: "Me cepillo 2–3 veces/día y uso hilo y/o enjuague", score: 0 }
     ],
     recommendation: "Mejorar la higiene bucal refuerza la estabilidad de los implantes."
-  },
-  {
-    id: 10,
-    title: "¿Qué te motiva a hacer este tratamiento?",
-    explanation: "Tu motivación es importante para el proceso.",
-    options: [
-      { value: "smile", label: "Volver a sonreír", score: 0 },
-      { value: "self_esteem", label: "Mejorar autoestima", score: 0 },
-      { value: "relationship", label: "Conseguir pareja", score: 0 },
-      { value: "job", label: "Encontrar trabajo", score: 0 },
-      { value: "health", label: "Mejorar salud", score: 0 },
-      { value: "other", label: "Otro", score: 0 }
-    ],
-    multiSelect: true,
-    recommendation: "Tu motivación personal también es parte del éxito del tratamiento."
-  },
-  {
-    id: 11,
-    title: "¿Cuál es tu principal preocupación?",
-    explanation: "Entender tus preocupaciones nos ayuda a brindarte mejor atención.",
-    options: [
-      { value: "pain", label: "Dolor", score: 0 },
-      { value: "failure", label: "Que no resulte", score: 0 },
-      { value: "cost", label: "Costo", score: 0 },
-      { value: "fear", label: "Miedo", score: 0 },
-      { value: "no_dentist", label: "No conozco dentistas", score: 0 },
-      { value: "other", label: "Otra", score: 0 }
-    ],
-    recommendation: "Existen soluciones predecibles, seguras y mínimamente invasivas."
-  },
-  // Nuevas preguntas
-  {
-    id: 12,
-    title: "¿Has tenido alguna experiencia previa con implantes dentales?",
-    explanation: "La experiencia previa puede influir en tus expectativas y en el plan de tratamiento.",
-    options: [
-      { value: "none", label: "No, nunca", score: 0 },
-      { value: "failed", label: "Sí, y tuve problemas", score: 1.5 },
-      { value: "success", label: "Sí, con buenos resultados", score: 0.5 }
-    ],
-    recommendation: "Cada caso es único, incluso si has tenido experiencias previas con implantes."
-  },
-  {
-    id: 13,
-    title: "¿Tienes alguna enfermedad autoinmune diagnosticada?",
-    explanation: "Algunas condiciones autoinmunes pueden afectar la integración del implante.",
-    options: [
-      { value: "none", label: "No", score: 0 },
-      { value: "controlled", label: "Sí, pero está controlada", score: 1 },
-      { value: "uncontrolled", label: "Sí, y no está bien controlada", score: 2 }
-    ],
-    recommendation: "Un buen control de enfermedades autoinmunes mejora el pronóstico de los implantes."
-  },
-  {
-    id: 14,
-    title: "¿Has recibido algún tratamiento con bifosfonatos?",
-    explanation: "Los bifosfonatos son medicamentos utilizados para osteoporosis y ciertos cánceres que pueden afectar la cicatrización ósea.",
-    options: [
-      { value: "none", label: "No, nunca", score: 0 },
-      { value: "past", label: "Sí, en el pasado", score: 1 },
-      { value: "current", label: "Sí, actualmente", score: 2 }
-    ],
-    recommendation: "Es importante informar a tu dentista sobre cualquier medicamento que estés tomando o hayas tomado."
   }
 ];

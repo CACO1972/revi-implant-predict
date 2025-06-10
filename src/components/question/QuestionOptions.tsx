@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import RioResponseReaction from "../RioResponseReaction";
+import DentalQuestionSelector from "./DentalQuestionSelector";
 
 interface QuestionOptionsProps {
   question: Question;
@@ -37,6 +38,28 @@ export default function QuestionOptions({ question, selectedValues, onSelectionC
     onSelectionChange(newValues);
   };
 
+  // Pregunta 6 - Selector dental interactivo
+  if (question.id === 6) {
+    return (
+      <div className="space-y-4">
+        <DentalQuestionSelector 
+          selectedValues={selectedValues}
+          onSelectionChange={onSelectionChange}
+        />
+        
+        {/* Reacción de Río cuando se selecciona */}
+        {showReaction && (
+          <RioResponseReaction 
+            questionId={question.id}
+            selectedAnswer={lastSelectedAnswer}
+            isVisible={showReaction}
+          />
+        )}
+      </div>
+    );
+  }
+
+  // Para preguntas multi-select (excepto la 6)
   if (question.multiSelect) {
     return (
       <div className="space-y-3">
@@ -66,6 +89,7 @@ export default function QuestionOptions({ question, selectedValues, onSelectionC
     );
   }
 
+  // Para preguntas de selección única
   return (
     <div className="space-y-4">
       <RadioGroup
