@@ -43,83 +43,119 @@ export const getPersonalizedRecommendations = (
   let recommendations: string[] = [];
   let personalFactors: string[] = [];
 
+  console.log("DEBUG - Generando recomendaciones para respuestas:", answers);
+
   // Analizar cada respuesta para generar recomendaciones específicas
   answers.forEach(answer => {
     const questionId = answer.questionId;
     const selectedValue = answer.selectedValues[0]?.toString() || "";
+    
+    console.log(`DEBUG - Procesando pregunta ${questionId} con valor:`, selectedValue);
 
     switch (questionId) {
-      case 1: // Tabaquismo
-        if (selectedValue === "1") {
+      case 1: // Tabaquismo - usando valores correctos
+        if (selectedValue === "light") {
           personalFactors.push("fumador ocasional");
           recommendations.push("💪 Como fumador ocasional, tienes una gran ventaja. Te recomendamos reducir aún más o idealmente eliminar el tabaco 2 semanas antes de la cirugía para optimizar tu cicatrización.");
-        } else if (selectedValue === "2") {
+        } else if (selectedValue === "heavy") {
           personalFactors.push("fumador habitual");
           recommendations.push("🚭 Sabemos que dejar de fumar es un desafío, pero es el factor más importante para el éxito de tu implante. Considera buscar apoyo profesional para dejarlo al menos 1 mes antes del procedimiento.");
-        } else {
+        } else if (selectedValue === "no") {
           recommendations.push("🎉 ¡Excelente! Al no fumar, tienes las mejores condiciones para una cicatrización perfecta y un éxito duradero del implante.");
         }
         break;
 
-      case 2: // Diabetes
-        if (selectedValue === "1") {
+      case 1.5: // Pregunta condicional sobre dejar de fumar
+        if (selectedValue === "yes_already") {
+          recommendations.push("🎯 ¡Fantástico! Ya estar en proceso de dejar de fumar mejorará significativamente tus resultados.");
+        } else if (selectedValue === "yes_willing") {
+          recommendations.push("💪 Tu disposición a dejar de fumar es muy positiva. Te ayudaremos con recursos para lograrlo.");
+        } else if (selectedValue === "no") {
+          recommendations.push("🤝 Entendemos que es difícil. Aún podemos trabajar contigo para minimizar los riesgos.");
+        }
+        break;
+
+      case 2: // Diabetes - usando valores correctos
+        if (selectedValue === "controlled") {
           personalFactors.push("diabetes controlada");
           recommendations.push("👨‍⚕️ Tu diabetes controlada es una gran fortaleza. Mantén ese excelente control de glucemia (HbA1c < 7%) y coordina con tu médico durante todo el proceso.");
-        } else if (selectedValue === "2") {
+        } else if (selectedValue === "uncontrolled") {
           personalFactors.push("diabetes no controlada");
           recommendations.push("⚠️ Es fundamental estabilizar tu diabetes antes del implante. Trabaja con tu médico para optimizar el control glucémico - esto será clave para tu éxito.");
-        } else {
+        } else if (selectedValue === "no") {
           recommendations.push("✅ Sin diabetes, tu proceso de cicatrización será más predecible y exitoso.");
         }
         break;
 
-      case 3: // Bruxismo
-        if (selectedValue === "1") {
+      case 3: // Bruxismo - usando valores correctos
+        if (selectedValue === "treated") {
           personalFactors.push("bruxismo controlado");
           recommendations.push("😴 ¡Perfecto! Ya usas placa de protección. Continúa con este hábito durante y después del tratamiento para proteger tu inversión.");
-        } else if (selectedValue === "2") {
+        } else if (selectedValue === "untreated") {
           personalFactors.push("bruxismo no tratado");
           recommendations.push("🦷 El bruxismo puede afectar la longevidad de tu implante. Te recomendamos una férula de descarga nocturna - es una inversión pequeña que protegerá tu implante por décadas.");
-        } else {
+        } else if (selectedValue === "no") {
           recommendations.push("😌 Sin bruxismo, tu implante tendrá una vida útil óptima sin fuerzas destructivas.");
         }
         break;
 
-      case 4: // Tiempo de pérdida dental
-        if (selectedValue === "0") {
+      case 4: // Tiempo de pérdida dental - usando valores correctos
+        if (selectedValue === "recent") {
           recommendations.push("⚡ ¡Timing perfecto! Al haber perdido el diente recientemente, tu hueso está en excelentes condiciones para recibir el implante.");
-        } else if (selectedValue === "1") {
+        } else if (selectedValue === "medium") {
           recommendations.push("👍 Buen momento para actuar. Tu hueso aún mantiene buena calidad y cantidad para un tratamiento exitoso.");
-        } else if (selectedValue === "2") {
+        } else if (selectedValue === "old") {
           personalFactors.push("pérdida dental antigua");
           recommendations.push("🔧 Aunque ha pasado tiempo, existen técnicas avanzadas de regeneración ósea que pueden restaurar las condiciones ideales para tu implante.");
         }
         break;
 
-      case 5: // Cantidad de dientes
-        if (selectedValue === "0") {
+      case 5: // Cantidad de dientes - usando valores correctos
+        if (selectedValue === "one") {
           recommendations.push("🎯 Un implante individual es el tratamiento más predecible y conservador. Excelente opción para mantener tus dientes naturales intactos.");
-        } else if (selectedValue === "1") {
+        } else if (selectedValue === "several") {
           recommendations.push("🔧 Para 2-3 dientes, podemos considerar implantes individuales o un puente sobre implantes, según tu anatomía específica.");
-        } else if (selectedValue === "2") {
+        } else if (selectedValue === "all") {
           recommendations.push("🚀 Para múltiples dientes, técnicas como All-on-4 o All-on-6 pueden ofrecerte una solución completa y eficiente en menor tiempo.");
         }
         break;
 
       case 6: // Dientes específicos
         try {
-          const teeth = answer.selectedValues.map(val => {
-            if (typeof val === 'string' && val.startsWith('{')) {
-              return JSON.parse(val);
-            }
-            return null;
-          }).filter(Boolean);
-          
-          if (teeth.length > 0) {
-            recommendations.push(`🦷 Has seleccionado ${teeth.length} diente${teeth.length !== 1 ? 's' : ''} específico${teeth.length !== 1 ? 's' : ''}. Esto nos permite crear un plan de tratamiento preciso considerando la oclusión y el pronóstico individual de cada zona.`);
+          if (answer.selectedValues && answer.selectedValues.length > 0) {
+            const teethCount = answer.selectedValues.length;
+            recommendations.push(`🦷 Has seleccionado ${teethCount} diente${teethCount !== 1 ? 's' : ''} específico${teethCount !== 1 ? 's' : ''}. Esto nos permite crear un plan de tratamiento preciso considerando la oclusión y el pronóstico individual de cada zona.`);
           }
         } catch (error) {
-          console.warn('Error parsing teeth data:', error);
+          console.warn('Error processing teeth data:', error);
+        }
+        break;
+
+      case 7: // Condiciones actuales
+        if (selectedValue === "none") {
+          recommendations.push("✅ Excelente salud bucal actual. Esto favorece mucho el pronóstico de tus implantes.");
+        } else {
+          recommendations.push("⚠️ Es importante tratar las condiciones bucales actuales antes del implante para crear un ambiente favorable.");
+        }
+        break;
+
+      case 8: // Causa de pérdida dental - usando valores correctos
+        if (selectedValue === "trauma") {
+          recommendations.push("💥 La pérdida por trauma tiene buen pronóstico ya que el hueso circundante suele estar sano.");
+        } else if (selectedValue === "cavities") {
+          recommendations.push("🦷 La pérdida por caries requiere verificar que no haya infección residual antes del implante.");
+        } else if (selectedValue === "periodontitis") {
+          recommendations.push("🔍 La pérdida por periodontitis requiere un protocolo especial de mantenimiento para prevenir problemas futuros.");
+        }
+        break;
+
+      case 9: // Higiene oral - usando valores correctos
+        if (selectedValue === "complete") {
+          recommendations.push("🪥 ¡Excelente higiene! Esto es el factor más importante para el éxito a largo plazo de los implantes.");
+        } else if (selectedValue === "multiple") {
+          recommendations.push("👍 Buena base de higiene. Te ayudaremos a optimizarla con técnicas específicas para implantes.");
+        } else if (selectedValue === "once") {
+          recommendations.push("📈 Mejorar tu rutina de higiene será fundamental para el éxito del implante. Es más fácil de lo que piensas.");
         }
         break;
     }
@@ -140,5 +176,7 @@ export const getPersonalizedRecommendations = (
 
   // Eliminar duplicados y limitar recomendaciones
   const uniqueRecommendations = [...new Set(recommendations)];
+  console.log("DEBUG - Recomendaciones finales:", uniqueRecommendations);
+  
   return uniqueRecommendations.slice(0, 6);
 };

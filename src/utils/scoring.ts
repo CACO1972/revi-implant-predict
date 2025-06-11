@@ -3,15 +3,28 @@ import { Answer, QuestionOption } from "@/types/implant";
 import { questions } from "@/data/questions";
 
 export const calculateScore = (answers: Answer[]): number => {
-  return answers.reduce((total, answer) => total + answer.score, 0);
+  console.log("DEBUG - Calculando puntuación total para respuestas:", answers);
+  
+  const totalScore = answers.reduce((total, answer) => {
+    console.log(`DEBUG - Pregunta ${answer.questionId}: score ${answer.score}, acumulado: ${total + answer.score}`);
+    return total + answer.score;
+  }, 0);
+  
+  console.log("DEBUG - Puntuación total final:", totalScore);
+  return totalScore;
 };
 
 export const getScoreFromOptions = (
   questionId: number, 
   selectedValues: (string | number)[]
 ): number => {
+  console.log(`DEBUG - Calculando score para pregunta ${questionId} con valores:`, selectedValues);
+  
   const question = questions.find(q => q.id === questionId);
-  if (!question) return 0;
+  if (!question) {
+    console.warn(`DEBUG - Pregunta ${questionId} no encontrada`);
+    return 0;
+  }
   
   // Pregunta 6 - Selector dental específico
   if (questionId === 6) {
@@ -24,6 +37,8 @@ export const getScoreFromOptions = (
         }
         return null;
       }).filter(Boolean);
+      
+      console.log("DEBUG - Dientes procesados para scoring:", teeth);
       
       // Calcular puntuación basada en:
       // - Número de dientes (más dientes = mayor complejidad)
@@ -58,10 +73,14 @@ export const getScoreFromOptions = (
         else if (tooth.cause === 'caries') score += 0.3;
       });
       
-      return Math.min(score, 2); // Cap máximo de 2 puntos
+      const finalScore = Math.min(score, 2); // Cap máximo de 2 puntos
+      console.log("DEBUG - Score final para pregunta 6:", finalScore);
+      return finalScore;
     } catch (error) {
       console.error('Error calculating dental score:', error);
-      return selectedValues.length > 3 ? 2 : selectedValues.length > 1 ? 1 : 0.5;
+      const fallbackScore = selectedValues.length > 3 ? 2 : selectedValues.length > 1 ? 1 : 0.5;
+      console.log("DEBUG - Score fallback para pregunta 6:", fallbackScore);
+      return fallbackScore;
     }
   }
   
@@ -69,23 +88,31 @@ export const getScoreFromOptions = (
     // Para pregunta 7 (condiciones actuales)
     if (questionId === 7) {
       // Si seleccionó "Ninguna", score es 0
-      if (selectedValues.includes("none")) return 0;
+      if (selectedValues.includes("none")) {
+        console.log("DEBUG - Pregunta 7: seleccionó 'none', score = 0");
+        return 0;
+      }
       
       // Calcula puntuación basada en número de síntomas
       const symptomsCount = selectedValues.length;
-      if (symptomsCount <= 2) return 1;
-      return 2;
+      const score = symptomsCount <= 2 ? 1 : 2;
+      console.log(`DEBUG - Pregunta 7: ${symptomsCount} síntomas, score = ${score}`);
+      return score;
     }
     
     // Para otras preguntas multiselección
-    return question.options
+    const score = question.options
       .filter(option => selectedValues.includes(option.value))
       .reduce((total, option) => total + option.score, 0);
+    console.log(`DEBUG - Pregunta ${questionId} (multiselect): score = ${score}`);
+    return score;
   } else {
     // Para preguntas de selección única
     const selectedOption = question.options.find(
       option => selectedValues.includes(option.value)
     );
-    return selectedOption ? selectedOption.score : 0;
+    const score = selectedOption ? selectedOption.score : 0;
+    console.log(`DEBUG - Pregunta ${questionId} (single): opción '${selectedValues[0]}', score = ${score}`);
+    return score;
   }
 };

@@ -15,6 +15,12 @@ export default function PersonalizedRecommendations({
 }: PersonalizedRecommendationsProps) {
   const firstName = patientName.split(' ')[0];
   
+  console.log("DEBUG - PersonalizedRecommendations recibió:", {
+    recommendations,
+    patientName,
+    level
+  });
+  
   const getIconForRecommendation = (rec: string) => {
     if (rec.includes('🎉') || rec.includes('✅') || rec.includes('🌟')) {
       return <CheckCircle className="w-5 h-5 text-emerald-400" />;
@@ -67,6 +73,22 @@ export default function PersonalizedRecommendations({
   };
 
   const tone = getMessageTone();
+
+  // Si no hay recomendaciones, mostrar un mensaje por defecto
+  if (!recommendations || recommendations.length === 0) {
+    console.warn("DEBUG - No hay recomendaciones disponibles");
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-white/5 border border-white/20 rounded-2xl p-6 mb-8"
+      >
+        <p className="text-white/70 text-center">
+          Estamos procesando tus recomendaciones personalizadas...
+        </p>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div

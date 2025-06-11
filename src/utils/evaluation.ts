@@ -33,13 +33,19 @@ const getRecommendationsByLevel = (level: number): string[] => {
 };
 
 export const evaluateResult = (totalScore: number): AssessmentResult => {
+  console.log("DEBUG - Evaluando resultado con score total:", totalScore);
+  
   let level = 1;
   let prediction = "";
   
-  if (totalScore <= 3) {
+  // Rangos ajustados considerando que pueden haber scores negativos de la pregunta condicional
+  // Score mínimo teórico: -1 (si responde muy bien en pregunta condicional)
+  // Score máximo teórico: ~18 puntos (casos muy graves)
+  
+  if (totalScore <= 2) {
     level = 1;
     prediction = "Excelente candidato para implantes";
-  } else if (totalScore <= 6) {
+  } else if (totalScore <= 5) {
     level = 2;
     prediction = "Buen candidato con consideraciones menores";
   } else if (totalScore <= 9) {
@@ -50,13 +56,18 @@ export const evaluateResult = (totalScore: number): AssessmentResult => {
     prediction = "Requiere evaluación y tratamiento previo";
   }
   
+  console.log(`DEBUG - Resultado: Nivel ${level}, Predicción: "${prediction}"`);
+  
   // Recomendaciones personalizadas basadas en el nivel
   const recommendations = getRecommendationsByLevel(level);
   
-  return {
+  const result = {
     totalScore,
     level,
     prediction,
     recommendations
   };
+  
+  console.log("DEBUG - Resultado final:", result);
+  return result;
 };
