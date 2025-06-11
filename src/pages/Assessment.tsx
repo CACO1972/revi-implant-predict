@@ -15,6 +15,8 @@ import { Toaster } from "@/components/ui/toaster";
 import QuestionCard from "@/components/QuestionCard";
 import ProgressBar from "@/components/ProgressBar";
 import { calculateScore, evaluateResult, getPersonalizedRecommendations } from "@/utils/assessmentUtils";
+import AdvancedAIProcessor from "@/components/ai/AdvancedAIProcessor";
+import IntelligentResultsDisplay from "@/components/ai/IntelligentResultsDisplay";
 
 export default function Assessment() {
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ export default function Assessment() {
   const [patientInfo, setPatientInfo] = useState<PatientInfo>({ name: "", age: null });
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [showAIResults, setShowAIResults] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [assessmentResult, setAssessmentResult] = useState<any>(null);
   const [showRio, setShowRio] = useState(true);
@@ -104,11 +107,10 @@ export default function Assessment() {
   };
 
   const handleProcessingComplete = () => {
-    // Generar resultados después del procesamiento
+    // Generate results after AI processing
     const totalScore = calculateScore(answers);
     const result = evaluateResult(totalScore);
     
-    // Generar recomendaciones personalizadas basadas en las respuestas específicas
     const personalizedRecommendations = getPersonalizedRecommendations(patientInfo, answers, result);
     
     const finalResult = {
@@ -118,6 +120,11 @@ export default function Assessment() {
     
     setAssessmentResult(finalResult);
     setIsProcessing(false);
+    setShowAIResults(true);
+  };
+
+  const handleAIResultsComplete = () => {
+    setShowAIResults(false);
     setIsCompleted(true);
   };
 
@@ -168,13 +175,24 @@ export default function Assessment() {
     }
   };
 
-  // Mostrar pantalla de procesamiento
+  // Show advanced AI processing screen
   if (isProcessing) {
     return (
-      <AIProcessingScreen
-        patientInfo={patientInfo}
+      <AdvancedAIProcessor
+        patientName={patientInfo.name}
         answers={answers}
         onComplete={handleProcessingComplete}
+      />
+    );
+  }
+
+  // Show intelligent AI results display
+  if (showAIResults && assessmentResult) {
+    return (
+      <IntelligentResultsDisplay
+        result={assessmentResult}
+        patientName={patientInfo.name}
+        onContinue={handleAIResultsComplete}
       />
     );
   }
