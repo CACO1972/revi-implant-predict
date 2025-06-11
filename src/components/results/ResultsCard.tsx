@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
-import { Sparkles } from "lucide-react";
+import { Sparkles, FileText } from "lucide-react";
 
 import DentalIcon from "@/components/DentalIcon";
 import ResultSummaryBlock from "./ResultSummaryBlock";
@@ -13,6 +12,7 @@ import FeedbackSubmittedScreen from "./FeedbackSubmittedScreen";
 import RequestSubmittedScreen from "./RequestSubmittedScreen";
 import EducationalSection from "./EducationalSection";
 import CompletionMessage from "./CompletionMessage";
+import TreatmentSummaryScreen from "./TreatmentSummaryScreen";
 
 import { PatientInfo, AssessmentResult } from "@/types/implant";
 
@@ -29,6 +29,7 @@ export default function ResultsCard({
 }: ResultsCardProps) {
   const [showContactForm, setShowContactForm] = React.useState(false);
   const [showFeedbackForm, setShowFeedbackForm] = React.useState(false);
+  const [showTreatmentSummary, setShowTreatmentSummary] = React.useState(false);
   const [feedbackSubmitted, setFeedbackSubmitted] = React.useState(false);
   const [requestSubmitted, setRequestSubmitted] = React.useState(false);
   const [feedback, setFeedback] = React.useState<string | null>(null);
@@ -41,6 +42,10 @@ export default function ResultsCard({
     setShowFeedbackForm(true);
   };
 
+  const handleTreatmentSummaryClick = () => {
+    setShowTreatmentSummary(true);
+  };
+
   const closeContactForm = () => {
     setShowContactForm(false);
     setRequestSubmitted(true);
@@ -50,6 +55,17 @@ export default function ResultsCard({
     setShowFeedbackForm(false);
     setFeedbackSubmitted(true);
   };
+
+  // If showing treatment summary, render that screen
+  if (showTreatmentSummary) {
+    return (
+      <TreatmentSummaryScreen
+        patientInfo={patientInfo}
+        result={result}
+        onBack={() => setShowTreatmentSummary(false)}
+      />
+    );
+  }
 
   // Functions for ResultSummaryBlock
   const getColorByLevel = () => {
@@ -140,15 +156,8 @@ export default function ResultsCard({
         
         <CompletionMessage />
 
-        <motion.div className="space-y-6" initial={{
-        opacity: 0
-      }} animate={{
-        opacity: 1
-      }} transition={{
-        delay: 0.6,
-        duration: 0.8
-      }}>
-        {requestSubmitted ? (
+        <motion.div className="space-y-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.8 }}>
+          {requestSubmitted ? (
             <RequestSubmittedScreen 
               patientName={patientInfo.name}
               onRestart={onRestart}
@@ -182,6 +191,17 @@ export default function ResultsCard({
             />
           ) : (
             <>
+              {/* New Treatment Summary Button */}
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                <Button 
+                  onClick={handleTreatmentSummaryClick} 
+                  className="w-full group text-starry px-8 py-5 rounded-xl text-lg font-medium shadow-gold-glow transition-all duration-300 border border-gold/30 bg-gradient-to-r from-[#178582] to-[#BFA181] hover:from-[#178582]/90 hover:to-[#BFA181]/90 mb-4"
+                >
+                  <FileText className="w-5 h-5 mr-2 group-hover:animate-pulse" />
+                  Ver análisis completo y alternativas de tratamiento
+                </Button>
+              </motion.div>
+
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                   <Button onClick={handleContactClick} className="group text-starry px-8 py-5 rounded-xl text-lg font-medium shadow-gold-glow transition-all duration-300 border border-gold/30 bg-amber-500 hover:bg-amber-400">
