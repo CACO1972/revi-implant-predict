@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, ThumbsUp, ThumbsDown, Bot, Sparkles } from "lucide-react";
+import { MessageCircle, X, ThumbsUp, ThumbsDown, Bot, Sparkles, ArrowLeft } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 
@@ -17,6 +17,7 @@ export default function RioAssistant({ message, isVisible, onMessageChange, onDi
   const [currentMessage, setCurrentMessage] = useState(message || "");
   const [isTyping, setIsTyping] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
+  const [attentionLevel, setAttentionLevel] = useState(0); // 0-3 levels of attention seeking
   const [suggestions, setSuggestions] = useState<string[]>([
     "¿Qué es un implante dental?",
     "¿El procedimiento duele?",
@@ -27,7 +28,47 @@ export default function RioAssistant({ message, isVisible, onMessageChange, onDi
     setCurrentMessage(message || "");
   }, [message]);
 
+  // Sistema de atención progresiva - aumenta cada 10 segundos
+  useEffect(() => {
+    if (!isExpanded) {
+      const interval = setInterval(() => {
+        setAttentionLevel(prev => Math.min(prev + 1, 3));
+      }, 10000);
+      return () => clearInterval(interval);
+    }
+  }, [isExpanded]);
+
+  // Reset attention level when expanded
+  useEffect(() => {
+    if (isExpanded) {
+      setAttentionLevel(0);
+    }
+  }, [isExpanded]);
+
   if (!isVisible) return null;
+
+  // Animaciones de vuelo basadas en el nivel de atención
+  const getFlightAnimation = () => {
+    const baseAnimation = {
+      y: [0, -15, 0],
+      x: [0, -8, 0],
+      rotate: [0, -5, 5, 0]
+    };
+
+    const intensityMultiplier = 1 + (attentionLevel * 0.5);
+    
+    return {
+      y: baseAnimation.y.map(val => val * intensityMultiplier),
+      x: baseAnimation.x.map(val => val * intensityMultiplier),
+      rotate: baseAnimation.rotate.map(val => val * intensityMultiplier)
+    };
+  };
+
+  const getFlightTransition = () => ({
+    duration: 3 - (attentionLevel * 0.3),
+    repeat: Infinity,
+    ease: "easeInOut"
+  });
 
   // Simular que Río está escribiendo un mensaje
   const handleTypingResponse = (suggestion: string) => {
@@ -100,27 +141,106 @@ export default function RioAssistant({ message, isVisible, onMessageChange, onDi
         </motion.button>
       )}
 
-      {/* Avatar de Río - Clickeable */}
+      {/* Efectos de partículas que vuelan hacia el demo */}
+      {attentionLevel >= 2 && !isExpanded && (
+        <>
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-[#BFA181] rounded-full"
+              initial={{ x: 0, y: 0, opacity: 0 }}
+              animate={{
+                x: [-100, -120, -140],
+                y: [-50, -60, -70],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.7,
+                ease: "easeOut"
+              }}
+            />
+          ))}
+        </>
+      )}
+
+      {/* Avatar de Río - Con animaciones de vuelo mejoradas */}
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="relative cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
+        animate={getFlightAnimation()}
+        transition={getFlightTransition()}
       >
         <AnimatePresence>
           {!isExpanded && message && (
             <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
+              initial={{ scale: 0, opacity: 0, x: 20 }}
+              animate={{ 
+                scale: 1, 
+                opacity: 1, 
+                x: attentionLevel >= 1 ? [-10, 0, -10] : 0
+              }}
               exit={{ scale: 0, opacity: 0 }}
-              className="absolute -top-10 -right-2 bg-[#178582] px-3 py-1 rounded-full text-white text-xs whitespace-nowrap"
+              transition={{
+                x: { duration: 1, repeat: attentionLevel >= 1 ? Infinity : 0, ease: "easeInOut" }
+              }}
+              className="absolute -top-16 -right-2 bg-[#178582] px-4 py-2 rounded-xl text-white text-sm whitespace-nowrap shadow-lg border border-[#BFA181]/30"
             >
-              ¡Haz clic para conversar!
+              <div className="flex items-center gap-2">
+                {attentionLevel >= 2 && (
+                  <motion.div
+                    animate={{ x: [-5, 0, -5] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                  >
+                    <ArrowLeft size={16} className="text-[#BFA181]" />
+                  </motion.div>
+                )}
+                <span className="font-medium">¡PRUEBA EL DEMO GRATIS!</span>
+                {attentionLevel >= 3 && (
+                  <motion.div
+                    animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.2, 1] }}
+                    transition={{ duration: 0.5, repeat: Infinity }}
+                  >
+                    <Sparkles size={14} className="text-[#BFA181]" />
+                  </motion.div>
+                )}
+              </div>
+              <div className="text-xs opacity-90 mt-1">Solo 2 minutos ← Click aquí</div>
             </motion.div>
           )}
         </AnimatePresence>
         
-        <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-[#0A1828] z-10"></div>
+        {/* Efectos de brillo intensificados */}
+        <motion.div
+          className="absolute -inset-2 rounded-full"
+          animate={{
+            boxShadow: attentionLevel >= 1 ? [
+              "0 0 0 0 rgba(23, 133, 130, 0)",
+              "0 0 0 10px rgba(23, 133, 130, 0.2)",
+              "0 0 0 20px rgba(23, 133, 130, 0)"
+            ] : "0 0 0 0 rgba(23, 133, 130, 0)"
+          }}
+          transition={{
+            duration: 2,
+            repeat: attentionLevel >= 1 ? Infinity : 0,
+            ease: "easeOut"
+          }}
+        />
+        
+        <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-[#0A1828] z-10">
+          {attentionLevel >= 2 && (
+            <motion.div
+              className="absolute inset-0 bg-green-400 rounded-full"
+              animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            />
+          )}
+        </div>
+        
         <Avatar className="w-14 h-14 bg-gradient-to-br from-[#178582] to-[#178582]/70 p-1 shadow-glow">
           <div className="w-full h-full rounded-full bg-[#178582] flex items-center justify-center overflow-hidden">
             <svg viewBox="0 0 100 100" className="w-full h-full">
@@ -138,11 +258,21 @@ export default function RioAssistant({ message, isVisible, onMessageChange, onDi
           </AvatarFallback>
         </Avatar>
         
-        {/* Indicador de mensaje */}
+        {/* Indicador de mensaje mejorado */}
         {message && !isExpanded && (
-          <div className="absolute -top-1 right-0 w-5 h-5 bg-[#BFA181] rounded-full flex items-center justify-center text-[10px] text-[#0A1828] font-bold animate-pulse">
+          <motion.div 
+            className="absolute -top-1 right-0 w-5 h-5 bg-[#BFA181] rounded-full flex items-center justify-center text-[10px] text-[#0A1828] font-bold"
+            animate={{
+              scale: attentionLevel >= 1 ? [1, 1.3, 1] : 1,
+              backgroundColor: attentionLevel >= 3 ? ["#BFA181", "#FF6B6B", "#BFA181"] : "#BFA181"
+            }}
+            transition={{
+              duration: 0.8,
+              repeat: attentionLevel >= 1 ? Infinity : 0
+            }}
+          >
             !
-          </div>
+          </motion.div>
         )}
       </motion.div>
 

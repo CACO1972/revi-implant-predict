@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Zap, Brain, Activity, Lock, BadgeCheck, MoveRight, Users, Shield } from "lucide-react";
+import { Sparkles, Zap, Brain, Activity, Lock, BadgeCheck, MoveRight, Users, Shield, ArrowDown, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import RioAssistant from "@/components/RioAssistant";
@@ -11,6 +10,7 @@ export default function Index() {
   const navigate = useNavigate();
   const [animatedElement, setAnimatedElement] = useState(0);
   const [peopleCount, setPeopleCount] = useState(1247);
+  const [demoButtonPulse, setDemoButtonPulse] = useState(false);
 
   // Efecto para animar elementos secuencialmente
   useEffect(() => {
@@ -28,6 +28,15 @@ export default function Index() {
     return () => clearInterval(interval);
   }, []);
 
+  // Pulso intenso del botón demo cada 8 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDemoButtonPulse(true);
+      setTimeout(() => setDemoButtonPulse(false), 2000);
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
   return <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative overflow-hidden">
       <AnimatedStarryBackground />
       
@@ -37,24 +46,6 @@ export default function Index() {
         transition={{ duration: 0.8 }}
         className="w-full max-w-5xl space-y-8 z-10 relative py-16"
       >
-        {/* Badge de versión beta clickeable */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="mb-4"
-        >
-          <motion.button
-            onClick={() => navigate('/evaluacion')}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#178582]/20 to-[#BFA181]/20 px-4 py-2 rounded-full border border-[#178582]/30 hover:bg-gradient-to-r hover:from-[#178582]/30 hover:to-[#BFA181]/30 transition-all duration-300 cursor-pointer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <div className="w-2 h-2 bg-[#178582] rounded-full animate-pulse"></div>
-            <span className="text-[#178582] text-sm font-medium">DEMO VERSIÓN BETA GRATUITA</span>
-          </motion.button>
-        </motion.div>
-
         {/* Logo animado */}
         <motion.div
           animate={{
@@ -102,6 +93,49 @@ export default function Index() {
             Solo 2 minutos con nuestra <span className="text-[#178582] font-medium">inteligencia artificial</span>
           </p>
 
+          {/* Badge de demo MEGA prominente */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="mb-8"
+          >
+            <motion.div
+              animate={{
+                scale: [1, 1.05, 1],
+                boxShadow: [
+                  "0 0 20px rgba(23, 133, 130, 0.3)",
+                  "0 0 40px rgba(23, 133, 130, 0.6)",
+                  "0 0 20px rgba(23, 133, 130, 0.3)"
+                ]
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#178582]/30 to-[#BFA181]/30 px-6 py-4 rounded-2xl border-2 border-[#178582]/50"
+            >
+              <motion.div 
+                className="w-4 h-4 bg-[#178582] rounded-full"
+                animate={{ scale: [1, 1.3, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              />
+              <span className="text-[#178582] text-lg font-bold">🚀 DEMO GRATUITA DISPONIBLE</span>
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Sparkles className="w-5 h-5 text-[#BFA181]" />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
+          {/* Flecha apuntando hacia abajo al botón */}
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="flex justify-center"
+          >
+            <ArrowDown className="w-8 h-8 text-[#178582]" />
+          </motion.div>
+
           {/* Elementos de confianza prominentes */}
           <div className="flex flex-wrap justify-center gap-4 mt-6">
             <motion.div 
@@ -128,11 +162,11 @@ export default function Index() {
           {/* Texto de demo beta */}
           <div className="bg-gradient-to-r from-[#BFA181]/10 to-transparent p-4 rounded-lg border border-[#BFA181]/20 max-w-lg mx-auto">
             <p className="text-[#BFA181] text-sm font-medium mb-2">
-              🚀 Demo Gratuita - Versión Beta
+              ⚡ Solo toma 2 minutos completarlo
             </p>
             <p className="text-white/70 text-xs leading-relaxed">
-              Esta es una versión demo con las 5 preguntas principales. 
-              <span className="text-[#178582] font-medium"> ¡Suscríbete para ser de los primeros en usar la versión completa!</span>
+              Versión demo con las 5 preguntas principales. 
+              <span className="text-[#178582] font-medium"> ¡Completamente gratis y sin registro!</span>
             </p>
           </div>
           
@@ -251,45 +285,99 @@ export default function Index() {
           </div>
         </motion.div>
 
+        {/* BOTÓN DEMO MEGA PROMINENTE */}
         <motion.div
           className="space-y-6 mt-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
-          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-            <motion.div whileHover={{
-              scale: 1.05
-            }} whileTap={{
-              scale: 0.98
-            }}>
-              <Button
-                onClick={() => navigate('/evaluacion')}
-                className="bg-[#178582] hover:bg-[#178582]/90 text-white px-8 py-6 rounded-xl text-lg shadow-glow transition-all duration-300 border border-[#178582]/30 w-full md:w-auto relative overflow-hidden"
+          <div className="flex flex-col items-center gap-6">
+            {/* Efectos visuales alrededor del botón */}
+            <motion.div
+              className="relative"
+              animate={demoButtonPulse ? {
+                scale: [1, 1.02, 1],
+                filter: ["drop-shadow(0 0 20px rgba(23, 133, 130, 0.5))", "drop-shadow(0 0 40px rgba(23, 133, 130, 0.8))", "drop-shadow(0 0 20px rgba(23, 133, 130, 0.5))"]
+              } : {}}
+              transition={{ duration: 0.8 }}
+            >
+              {/* Anillo de partículas alrededor del botón */}
+              <motion.div
+                className="absolute -inset-4"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                  animate={{ x: [-200, 200] }}
-                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                />
-                <Sparkles className="w-5 h-5 mr-2 animate-sparkle" />
-                Descubre si puedes hacerlo GRATIS
-              </Button>
+                {[...Array(8)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-2 h-2 bg-[#BFA181] rounded-full"
+                    style={{
+                      left: '50%',
+                      top: '50%',
+                      transform: `rotate(${i * 45}deg) translateY(-60px) translateX(-50%)`
+                    }}
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.25 }}
+                  />
+                ))}
+              </motion.div>
+
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.98 }}
+                className="relative"
+              >
+                <Button
+                  onClick={() => navigate('/evaluacion')}
+                  className="bg-[#178582] hover:bg-[#178582]/90 text-white px-12 py-8 rounded-2xl text-xl font-bold shadow-glow transition-all duration-300 border-2 border-[#BFA181]/50 relative overflow-hidden group"
+                >
+                  {/* Efecto de brillo que se mueve */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    animate={{ x: [-200, 200] }}
+                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                  />
+                  
+                  <div className="flex items-center gap-3 relative z-10">
+                    <motion.div
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                    >
+                      <Play className="w-6 h-6" />
+                    </motion.div>
+                    <span>PROBAR DEMO GRATIS AHORA</span>
+                    <motion.div
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 1, repeat: Infinity }}
+                    >
+                      <Sparkles className="w-6 h-6" />
+                    </motion.div>
+                  </div>
+                </Button>
+              </motion.div>
             </motion.div>
             
-            <motion.div whileHover={{
-              scale: 1.05
-            }} whileTap={{
-              scale: 0.98
-            }}>
+            {/* Texto de urgencia debajo del botón */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="text-center"
+            >
+              <p className="text-[#BFA181] font-bold text-lg mb-1">👆 ¡HAZLO AHORA! 👆</p>
+              <p className="text-white/70 text-sm">Solo 2 minutos • Sin registro • Completamente gratis</p>
+            </motion.div>
+            
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
               <Button
                 onClick={() => navigate('/quienes-somos')}
                 variant="outline"
-                className="text-white border-white/20 hover:bg-white/5 px-8 py-6 rounded-xl text-lg transition-all duration-300 w-full md:w-auto group"
+                className="text-white/60 border-white/20 hover:bg-white/5 px-6 py-3 rounded-xl text-sm transition-all duration-300 group"
               >
-                <BadgeCheck className="w-5 h-5 mr-2" />
+                <BadgeCheck className="w-4 h-4 mr-2" />
                 <span>Quiénes Somos</span>
-                <MoveRight className="ml-2 opacity-0 w-0 group-hover:opacity-100 group-hover:w-5 transition-all duration-300" />
+                <MoveRight className="ml-2 opacity-0 w-0 group-hover:opacity-100 group-hover:w-4 transition-all duration-300" />
               </Button>
             </motion.div>
           </div>
@@ -298,7 +386,7 @@ export default function Index() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.8 }}
+              transition={{ delay: 1.2, duration: 0.8 }}
               className="mt-12 max-w-3xl mx-auto glass-panel p-6"
             >
               <div className="flex items-center justify-center space-x-2 mb-3">
