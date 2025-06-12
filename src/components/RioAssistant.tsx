@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, ThumbsUp, ThumbsDown, Bot, Sparkles, ArrowLeft } from "lucide-react";
@@ -10,14 +9,15 @@ interface RioAssistantProps {
   isVisible: boolean;
   onMessageChange?: (newMessage: string) => void;
   onDismiss?: () => void;
+  onNavigateToDemo?: () => void;
 }
 
-export default function RioAssistant({ message, isVisible, onMessageChange, onDismiss }: RioAssistantProps) {
+export default function RioAssistant({ message, isVisible, onMessageChange, onDismiss, onNavigateToDemo }: RioAssistantProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentMessage, setCurrentMessage] = useState(message || "");
   const [isTyping, setIsTyping] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
-  const [attentionLevel, setAttentionLevel] = useState(0); // 0-3 levels of attention seeking
+  const [attentionLevel, setAttentionLevel] = useState(0);
   const [suggestions, setSuggestions] = useState<string[]>([
     "¿Qué es un implante dental?",
     "¿El procedimiento duele?",
@@ -120,6 +120,17 @@ export default function RioAssistant({ message, isVisible, onMessageChange, onDi
     }, 2000);
   };
 
+  const handleAvatarClick = () => {
+    if (onNavigateToDemo) {
+      onNavigateToDemo();
+    }
+  };
+
+  const handleChatToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsExpanded(!isExpanded);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
@@ -171,7 +182,7 @@ export default function RioAssistant({ message, isVisible, onMessageChange, onDi
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="relative cursor-pointer"
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={handleAvatarClick}
         animate={getFlightAnimation()}
         transition={getFlightTransition()}
       >
@@ -199,7 +210,7 @@ export default function RioAssistant({ message, isVisible, onMessageChange, onDi
                     <ArrowLeft size={16} className="text-[#BFA181]" />
                   </motion.div>
                 )}
-                <span className="font-medium">¡PRUEBA EL DEMO GRATIS!</span>
+                <span className="font-medium">¡CLICK AQUÍ PARA EL DEMO!</span>
                 {attentionLevel >= 3 && (
                   <motion.div
                     animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.2, 1] }}
@@ -209,7 +220,7 @@ export default function RioAssistant({ message, isVisible, onMessageChange, onDi
                   </motion.div>
                 )}
               </div>
-              <div className="text-xs opacity-90 mt-1">Solo 2 minutos ← Click aquí</div>
+              <div className="text-xs opacity-90 mt-1">Solo 2 minutos ← GRATIS</div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -274,6 +285,16 @@ export default function RioAssistant({ message, isVisible, onMessageChange, onDi
             !
           </motion.div>
         )}
+
+        {/* Botón de chat separado */}
+        <motion.button
+          onClick={handleChatToggle}
+          className="absolute -bottom-1 -left-1 w-6 h-6 bg-[#BFA181] hover:bg-[#BFA181]/80 rounded-full flex items-center justify-center text-[#0A1828] shadow-lg transition-colors z-10"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <MessageCircle size={12} />
+        </motion.button>
       </motion.div>
 
       {/* Burbuja de mensaje - Solo visible cuando está expandido */}

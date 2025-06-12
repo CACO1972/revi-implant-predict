@@ -37,6 +37,10 @@ export default function Index() {
     return () => clearInterval(interval);
   }, []);
 
+  const handleNavigateToDemo = () => {
+    navigate('/evaluacion');
+  };
+
   return <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative overflow-hidden">
       <AnimatedStarryBackground />
       
@@ -329,7 +333,7 @@ export default function Index() {
                 className="relative"
               >
                 <Button
-                  onClick={() => navigate('/evaluacion')}
+                  onClick={handleNavigateToDemo}
                   className="bg-[#178582] hover:bg-[#178582]/90 text-white px-12 py-8 rounded-2xl text-xl font-bold shadow-glow transition-all duration-300 border-2 border-[#BFA181]/50 relative overflow-hidden group"
                 >
                   {/* Efecto de brillo que se mueve */}
@@ -462,6 +466,7 @@ export default function Index() {
       <RioAssistant 
         isVisible={true} 
         message="¡Hola! Soy Río, tu asistente virtual. ¿Listo para descubrir si puedes hacerte implantes SIN SALIR DE CASA? ¡Solo toma 2 minutos! 🦷✨" 
+        onNavigateToDemo={handleNavigateToDemo}
       />
     </div>;
 }
