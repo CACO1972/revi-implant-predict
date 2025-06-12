@@ -75,13 +75,13 @@ export const getPersonalizedRecommendations = (
         }
         break;
 
-      case 2: // Diabetes - usando valores correctos
+      case 2: // Diabetes - usando valores correctos y cambiando a glicemia
         if (selectedValue === "controlled") {
           personalFactors.push("diabetes controlada");
-          recommendations.push("👨‍⚕️ Tu diabetes controlada es una gran fortaleza. Mantén ese excelente control de glucemia (HbA1c < 7%) y coordina con tu médico durante todo el proceso.");
+          recommendations.push("👨‍⚕️ Tu diabetes controlada es una gran fortaleza. Mantén niveles de glicemia estables (menor a 180 mg/dL) y coordina con tu médico durante todo el proceso.");
         } else if (selectedValue === "uncontrolled") {
           personalFactors.push("diabetes no controlada");
-          recommendations.push("⚠️ Es fundamental estabilizar tu diabetes antes del implante. Trabaja con tu médico para optimizar el control glucémico - esto será clave para tu éxito.");
+          recommendations.push("⚠️ Es fundamental estabilizar tu diabetes antes del implante. Trabaja con tu médico para optimizar el control de glicemia - esto será clave para tu éxito.");
         } else if (selectedValue === "no") {
           recommendations.push("✅ Sin diabetes, tu proceso de cicatrización será más predecible y exitoso.");
         }
@@ -99,14 +99,14 @@ export const getPersonalizedRecommendations = (
         }
         break;
 
-      case 4: // Tiempo de pérdida dental - usando valores correctos
+      case 4: // Tiempo de pérdida dental - CORREGIDO para ser más preciso
         if (selectedValue === "recent") {
           recommendations.push("⚡ ¡Timing perfecto! Al haber perdido el diente recientemente, tu hueso está en excelentes condiciones para recibir el implante.");
         } else if (selectedValue === "medium") {
           recommendations.push("👍 Buen momento para actuar. Tu hueso aún mantiene buena calidad y cantidad para un tratamiento exitoso.");
         } else if (selectedValue === "old") {
           personalFactors.push("pérdida dental antigua");
-          recommendations.push("🔧 Aunque ha pasado tiempo, existen técnicas avanzadas de regeneración ósea que pueden restaurar las condiciones ideales para tu implante.");
+          recommendations.push("🔍 Aunque ha pasado tiempo, cada caso es único. Un solo diente perdido hace años puede conservar suficiente hueso para colocar el implante sin injerto. La evaluación radiográfica determinará si necesitas regeneración ósea o si tu hueso actual es suficiente.");
         }
         break;
 
@@ -174,9 +174,12 @@ export const getPersonalizedRecommendations = (
   const levelRecommendations = getEmpathicRecommendationsByLevel(result.level, patient.name);
   recommendations = [...recommendations, ...levelRecommendations];
 
+  // Disclaimer médico al final
+  recommendations.push("⚠️ Recuerda: Esta evaluación es orientativa y no sustituye el diagnóstico profesional. Siempre consulta con un dentista especialista para una evaluación completa.");
+
   // Eliminar duplicados y limitar recomendaciones
   const uniqueRecommendations = [...new Set(recommendations)];
   console.log("DEBUG - Recomendaciones finales:", uniqueRecommendations);
   
-  return uniqueRecommendations.slice(0, 6);
+  return uniqueRecommendations.slice(0, 8);
 };
