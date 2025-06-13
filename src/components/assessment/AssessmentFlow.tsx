@@ -12,6 +12,7 @@ import AdvancedAIProcessor from "@/components/ai/AdvancedAIProcessor";
 import IntelligentResultsDisplay from "@/components/ai/IntelligentResultsDisplay";
 import PatientInfoForm from "./PatientInfoForm";
 import AssessmentResults from "./AssessmentResults";
+import InteractiveBreak from "./InteractiveBreak";
 import RioAssistant from "@/components/RioAssistant";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 
@@ -25,6 +26,7 @@ export default function AssessmentFlow() {
   const [assessmentResult, setAssessmentResult] = useState<any>(null);
   const [showRio, setShowRio] = useState(true);
   const [availableQuestions, setAvailableQuestions] = useState<Question[]>([]);
+  const [showBreak, setShowBreak] = useState(false);
 
   // Función para determinar qué preguntas mostrar basado en las respuestas
   const updateAvailableQuestions = (currentAnswers: Answer[]) => {
@@ -51,7 +53,7 @@ export default function AssessmentFlow() {
     updateAvailableQuestions(answers);
   }, [answers]);
 
-  // 0 = patient info, 1-N = questions, processing, completed
+  // 0 = patient info, 1-N = questions, break = descanso, processing, completed
   const totalSteps = availableQuestions.length + 1; // +1 for patient info
   const currentQuestion = currentStep > 0 && currentStep <= availableQuestions.length ? availableQuestions[currentStep - 1] : null;
 
@@ -86,6 +88,14 @@ export default function AssessmentFlow() {
     // Actualizar preguntas disponibles con las nuevas respuestas
     updateAvailableQuestions(newAnswers);
     
+    // Mostrar descanso entretenido en la mitad del cuestionario
+    const midPoint = Math.ceil(availableQuestions.length / 2);
+    if (currentStep === midPoint && !showBreak) {
+      setShowBreak(true);
+      setShowRio(false);
+      return;
+    }
+    
     if (currentStep < availableQuestions.length) {
       setCurrentStep(currentStep + 1);
     } else {
@@ -100,6 +110,12 @@ export default function AssessmentFlow() {
         }
       }, 100);
     }
+  };
+
+  const handleBreakContinue = () => {
+    setShowBreak(false);
+    setShowRio(true);
+    setCurrentStep(currentStep + 1);
   };
 
   const handleProcessingComplete = () => {
@@ -147,7 +163,18 @@ export default function AssessmentFlow() {
     setAssessmentResult(null);
     setShowRio(true);
     setAvailableQuestions([]);
+    setShowBreak(false);
   };
+
+  // Show interactive break
+  if (showBreak) {
+    return (
+      <InteractiveBreak
+        patientName={patientInfo.name}
+        onContinue={handleBreakContinue}
+      />
+    );
+  }
 
   // Show advanced AI processing screen
   if (isProcessing) {
