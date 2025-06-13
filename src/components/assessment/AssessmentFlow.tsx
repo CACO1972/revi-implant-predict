@@ -12,7 +12,6 @@ import AdvancedAIProcessor from "@/components/ai/AdvancedAIProcessor";
 import IntelligentResultsDisplay from "@/components/ai/IntelligentResultsDisplay";
 import PatientInfoForm from "./PatientInfoForm";
 import AssessmentResults from "./AssessmentResults";
-import MidAssessmentBreak from "./MidAssessmentBreak";
 import RioAssistant from "@/components/RioAssistant";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 
@@ -26,7 +25,6 @@ export default function AssessmentFlow() {
   const [assessmentResult, setAssessmentResult] = useState<any>(null);
   const [showRio, setShowRio] = useState(true);
   const [availableQuestions, setAvailableQuestions] = useState<Question[]>([]);
-  const [showMidBreak, setShowMidBreak] = useState(false);
 
   // Función para determinar qué preguntas mostrar basado en las respuestas
   const updateAvailableQuestions = (currentAnswers: Answer[]) => {
@@ -56,9 +54,6 @@ export default function AssessmentFlow() {
   // 0 = patient info, 1-N = questions, processing, completed
   const totalSteps = availableQuestions.length + 1; // +1 for patient info
   const currentQuestion = currentStep > 0 && currentStep <= availableQuestions.length ? availableQuestions[currentStep - 1] : null;
-
-  // Determinar si mostrar el descanso (a mitad del cuestionario)
-  const shouldShowMidBreak = currentStep > 0 && currentStep === Math.ceil(availableQuestions.length / 2) && !showMidBreak;
 
   const handlePatientInfoSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,12 +86,6 @@ export default function AssessmentFlow() {
     // Actualizar preguntas disponibles con las nuevas respuestas
     updateAvailableQuestions(newAnswers);
     
-    // Verificar si debe mostrar el descanso
-    if (currentStep === Math.ceil(availableQuestions.length / 2) && !showMidBreak) {
-      setShowMidBreak(true);
-      return;
-    }
-    
     if (currentStep < availableQuestions.length) {
       setCurrentStep(currentStep + 1);
     } else {
@@ -111,11 +100,6 @@ export default function AssessmentFlow() {
         }
       }, 100);
     }
-  };
-
-  const handleMidBreakContinue = () => {
-    setShowMidBreak(false);
-    setCurrentStep(currentStep + 1);
   };
 
   const handleProcessingComplete = () => {
@@ -163,21 +147,7 @@ export default function AssessmentFlow() {
     setAssessmentResult(null);
     setShowRio(true);
     setAvailableQuestions([]);
-    setShowMidBreak(false);
   };
-
-  // Show mid-assessment break
-  if (showMidBreak) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 relative overflow-hidden">
-        <AnimatedStarryBackground />
-        <MidAssessmentBreak 
-          patientName={patientInfo.name}
-          onContinue={handleMidBreakContinue}
-        />
-      </div>
-    );
-  }
 
   // Show advanced AI processing screen
   if (isProcessing) {
