@@ -1,11 +1,14 @@
 
-import { Hero } from "@/components/LandingPage";
+import LandingPage from "@/components/LandingPage";
 import { motion } from "framer-motion";
 
 export default function Index() {
   return (
     <div className="min-h-screen relative">
-      <Hero />
+      <LandingPage onStart={() => {
+        // Navigate to assessment
+        window.location.href = '/assessment';
+      }} />
       
       {/* Disclaimer médico */}
       <motion.div 
