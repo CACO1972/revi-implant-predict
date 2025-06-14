@@ -53,7 +53,7 @@ export const getPersonalizedRecommendations = (
     console.log(`DEBUG - Procesando pregunta ${questionId} con valor:`, selectedValue);
 
     switch (questionId) {
-      case 1: // Tabaquismo
+      case 1: // Tabaquismo - usando valores correctos
         if (selectedValue === "light") {
           personalFactors.push("fumador ocasional");
           recommendations.push("💪 Como fumador ocasional, tienes una gran ventaja. Te recomendamos reducir aún más o idealmente eliminar el tabaco 2 semanas antes de la cirugía para optimizar tu cicatrización.");
@@ -75,19 +75,19 @@ export const getPersonalizedRecommendations = (
         }
         break;
 
-      case 2: // Diabetes - CORREGIDO: cambié "HbA1c" por "glicemia"
+      case 2: // Diabetes - usando valores correctos
         if (selectedValue === "controlled") {
           personalFactors.push("diabetes controlada");
-          recommendations.push("👨‍⚕️ Tu diabetes controlada es una gran fortaleza. Mantén ese excelente control de glicemia y coordina con tu médico durante todo el proceso.");
+          recommendations.push("👨‍⚕️ Tu diabetes controlada es una gran fortaleza. Mantén ese excelente control de glucemia (HbA1c < 7%) y coordina con tu médico durante todo el proceso.");
         } else if (selectedValue === "uncontrolled") {
           personalFactors.push("diabetes no controlada");
-          recommendations.push("⚠️ Es fundamental estabilizar tu diabetes antes del implante. Trabaja con tu médico para optimizar el control de glicemia - esto será clave para tu éxito.");
+          recommendations.push("⚠️ Es fundamental estabilizar tu diabetes antes del implante. Trabaja con tu médico para optimizar el control glucémico - esto será clave para tu éxito.");
         } else if (selectedValue === "no") {
           recommendations.push("✅ Sin diabetes, tu proceso de cicatrización será más predecible y exitoso.");
         }
         break;
 
-      case 3: // Bruxismo
+      case 3: // Bruxismo - usando valores correctos
         if (selectedValue === "treated") {
           personalFactors.push("bruxismo controlado");
           recommendations.push("😴 ¡Perfecto! Ya usas placa de protección. Continúa con este hábito durante y después del tratamiento para proteger tu inversión.");
@@ -99,18 +99,18 @@ export const getPersonalizedRecommendations = (
         }
         break;
 
-      case 4: // Tiempo de pérdida dental - CORREGIDO: más preciso sobre injertos
+      case 4: // Tiempo de pérdida dental - usando valores correctos
         if (selectedValue === "recent") {
-          recommendations.push("⚡ ¡Timing perfecto! Al haber perdido el diente recientemente, tu hueso está en excelentes condiciones para recibir el implante sin procedimientos adicionales.");
+          recommendations.push("⚡ ¡Timing perfecto! Al haber perdido el diente recientemente, tu hueso está en excelentes condiciones para recibir el implante.");
         } else if (selectedValue === "medium") {
-          recommendations.push("👍 Buen momento para actuar. En la mayoría de casos, el hueso aún mantiene suficiente calidad para el implante, aunque podría requerirse evaluación 3D.");
+          recommendations.push("👍 Buen momento para actuar. Tu hueso aún mantiene buena calidad y cantidad para un tratamiento exitoso.");
         } else if (selectedValue === "old") {
           personalFactors.push("pérdida dental antigua");
-          recommendations.push("🔍 Aunque ha pasado tiempo, muchos casos de pérdida antigua pueden resolverse sin injerto óseo. Una tomografía 3D determinará si tu hueso remanente es suficiente o si necesitas regeneración.");
+          recommendations.push("🔧 Aunque ha pasado tiempo, existen técnicas avanzadas de regeneración ósea que pueden restaurar las condiciones ideales para tu implante.");
         }
         break;
 
-      case 5: // Cantidad de dientes
+      case 5: // Cantidad de dientes - usando valores correctos
         if (selectedValue === "one") {
           recommendations.push("🎯 Un implante individual es el tratamiento más predecible y conservador. Excelente opción para mantener tus dientes naturales intactos.");
         } else if (selectedValue === "several") {
@@ -139,7 +139,7 @@ export const getPersonalizedRecommendations = (
         }
         break;
 
-      case 8: // Causa de pérdida dental
+      case 8: // Causa de pérdida dental - usando valores correctos
         if (selectedValue === "trauma") {
           recommendations.push("💥 La pérdida por trauma tiene buen pronóstico ya que el hueso circundante suele estar sano.");
         } else if (selectedValue === "cavities") {
@@ -149,7 +149,7 @@ export const getPersonalizedRecommendations = (
         }
         break;
 
-      case 9: // Higiene oral
+      case 9: // Higiene oral - usando valores correctos
         if (selectedValue === "complete") {
           recommendations.push("🪥 ¡Excelente higiene! Esto es el factor más importante para el éxito a largo plazo de los implantes.");
         } else if (selectedValue === "multiple") {

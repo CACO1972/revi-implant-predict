@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import NewToothSelector from "../dental/NewToothSelector";
+import ToothSelector from "../dental/ToothSelector";
 
 interface MissingTooth {
   number: number;
@@ -65,7 +65,13 @@ export default function DentalQuestionSelector({ selectedValues, onSelectionChan
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <NewToothSelector 
+      <div className="text-center mb-4">
+        <p className="text-white/70 text-sm">
+          Selecciona los dientes que te faltan en la imagen interactiva
+        </p>
+      </div>
+      
+      <ToothSelector 
         selectedTeeth={selectedTeeth}
         onSelectionChange={handleToothSelection}
       />
@@ -88,7 +94,7 @@ export default function DentalQuestionSelector({ selectedValues, onSelectionChan
       {selectedTeeth.length === 0 && (
         <div className="text-center">
           <p className="text-white/50 text-sm">
-            👆 Selecciona los dientes faltantes en el diagrama o la lista
+            👆 Toca en la imagen para seleccionar los dientes faltantes
           </p>
         </div>
       )}

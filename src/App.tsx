@@ -13,7 +13,6 @@ import Assessment from "./pages/Assessment";
 import TreatmentComparison from "./pages/TreatmentComparison";
 import ContactForm from "./pages/ContactForm";
 import QuienesSomos from "./pages/QuienesSomos";
-import Demo from "./pages/Demo";
 
 const queryClient = new QueryClient();
 
@@ -26,7 +25,6 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/demo" element={<Demo />} />
             <Route path="/evaluacion" element={<Assessment />} />
             <Route path="/comparador" element={<TreatmentComparison />} />
             <Route path="/calculadora" element={<PriceCalculator />} />
