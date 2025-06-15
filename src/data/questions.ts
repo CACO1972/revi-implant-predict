@@ -4,131 +4,116 @@ import { Question } from "@/types/implant";
 export const questions: Question[] = [
   {
     id: 1,
-    title: "¿Cuántos años tiene?",
-    explanation: "La densidad ósea disminuye con la edad y puede influir en la cicatrización del implante.",
+    title: "¿Fumas actualmente?",
+    explanation: "El tabaco reduce el flujo sanguíneo y afecta la cicatrización.",
     options: [
-      { value: "<50", label: "Menos de 50", score: 0 },
-      { value: "50-60", label: "50-60", score: 1 },
-      { value: ">60", label: "Más de 60", score: 2 }
+      { value: "no", label: "No", score: 0 },
+      { value: "light", label: "Sí, menos de 10 cig/día", score: 1 },
+      { value: "heavy", label: "Sí, más de 10 cig/día o hace más de 5 años", score: 2 }
     ],
-    recommendation: "Si tiene más de 60 años, hable con su dentista sobre protocolos de carga diferida y suplementación de vitamina D.",
+    recommendation: "Dejar o reducir el consumo mejora significativamente el pronóstico."
+  },
+  {
+    id: 1.5, // Pregunta condicional
+    title: "¿Estarías dispuesto/a a dejar de fumar?",
+    explanation: "Dejar de fumar mejorará tus posibilidades de éxito en un 40-60%.",
+    options: [
+      { value: "yes_already", label: "Sí, ya estoy en proceso", score: -1 },
+      { value: "yes_willing", label: "Sí, estoy dispuesto/a", score: -0.5 },
+      { value: "maybe", label: "Tal vez, necesito más información", score: 0 },
+      { value: "no", label: "No, por ahora no", score: 1 }
+    ],
+    recommendation: "Cada día sin fumar mejora tu cicatrización y el pronóstico de tus implantes.",
+    isConditional: true,
+    showWhenQuestionHasValues: { questionId: 1, values: ["light", "heavy"] }
   },
   {
     id: 2,
-    title: "¿Con cuál género se identifica?",
-    explanation: "Las mujeres postmenopáusicas presentan mayor riesgo de baja densidad ósea.",
+    title: "¿Eres diabético/a?",
+    explanation: "La diabetes no controlada aumenta el riesgo de infecciones.",
     options: [
-      { value: "masculino", label: "Masculino", score: 0 },
-      { value: "femenino", label: "Femenino", score: 1 }
+      { value: "no", label: "No", score: 0 },
+      { value: "controlled", label: "Sí, bien controlada", score: 1 },
+      { value: "uncontrolled", label: "Sí, no controlada", score: 2 }
     ],
-    recommendation: "Si es mujer y mayor de 50 años, considere una evaluación de osteoporosis con su médico.",
+    recommendation: "Controla tu glicemia antes de iniciar el tratamiento."
   },
   {
     id: 3,
-    title: "¿Ha dejado de tener menstruaciones por más de un año?",
-    explanation: "La menopausia acelera la pérdida de densidad ósea, afectando la estabilidad del implante.",
+    title: "¿Tienes bruxismo?",
+    explanation: "Puede sobrecargar los implantes.",
     options: [
-      { value: "si", label: "Sí", score: 1 },
-      { value: "no", label: "No", score: 0 }
+      { value: "no", label: "No", score: 0 },
+      { value: "treated", label: "Sí, uso plano", score: 1 },
+      { value: "untreated", label: "Sí, sin tratamiento", score: 2 }
     ],
-    recommendation: "Solicite un estudio de densidad ósea y refuerce calcio y vitamina D si corresponde.",
+    recommendation: "El uso de un plano de relajación mejora el pronóstico."
   },
   {
     id: 4,
-    title: "¿Dónde se ubicará el implante?",
-    explanation: "La densidad varía por región; el maxilar posterior suele ser menos denso.",
+    title: "¿Hace cuánto perdiste el diente o dientes?",
+    explanation: "A mayor tiempo, mayor pérdida de hueso.",
     options: [
-      { value: "mand_ant", label: "Mandíbula anterior", score: 0 },
-      { value: "mand_post", label: "Mandíbula posterior", score: 1 },
-      { value: "max_ant", label: "Maxilar superior anterior", score: 1 },
-      { value: "max_post", label: "Maxilar superior posterior", score: 2 }
+      { value: "recent", label: "Un año o menos", score: 0 },
+      { value: "medium", label: "Entre 1 y 3 años", score: 1 },
+      { value: "old", label: "Más de 3 años", score: 2 }
     ],
-    recommendation: "En maxilar posterior podrían requerirse técnicas de aumento o implantes de mayor diámetro.",
+    recommendation: "Mientras antes reemplaces tus dientes, mejor."
   },
   {
     id: 5,
-    title: "¿Le han diagnosticado osteoporosis?",
-    explanation: "La osteoporosis reduce la calidad ósea y eleva el riesgo de complicaciones.",
+    title: "¿Cuántos dientes necesitas reemplazar?",
+    explanation: "La cantidad de dientes afecta el tipo de tratamiento.",
     options: [
-      { value: "si", label: "Sí", score: 2 },
-      { value: "no", label: "No", score: 0 }
+      { value: "one", label: "Uno", score: 0 },
+      { value: "several", label: "Varios", score: 1 },
+      { value: "all", label: "Todos", score: 2 }
     ],
-    recommendation: "Informe a su dentista; puede ser necesario modificar el plan quirúrgico o solicitar CBCT.",
+    recommendation: "Esto define el tipo de rehabilitación a planificar."
   },
   {
     id: 6,
-    title: "¿Fuma actualmente?",
-    explanation: "Fumar dificulta la cicatrización ósea y aumenta el riesgo de fracaso del implante.",
-    options: [
-      { value: "no", label: "No", score: 0 },
-      { value: "<10", label: "Sí, <10 cig/día", score: 1 },
-      { value: "10-20", label: "Sí, 10-20 cig/día", score: 2 },
-      { value: ">20", label: "Sí, >20 cig/día", score: 3 }
-    ],
-    recommendation: "Deje de fumar al menos 6 semanas antes y después de la cirugía para mejorar el pronóstico.",
+    title: "¿Cuáles son exactamente los dientes que te faltan?",
+    explanation: "Selecciona en la imagen los dientes específicos que has perdido. Esto nos permitirá crear un plan de tratamiento completamente personalizado.",
+    options: [], // Se maneja con el selector dental interactivo
+    multiSelect: true,
+    recommendation: "La selección precisa de dientes nos permite calcular el pronóstico específico para cada zona y planificar la oclusión ideal."
   },
   {
     id: 7,
-    title: "¿Tiene diagnóstico de diabetes?",
-    explanation: "La diabetes mal controlada enlentece la cicatrización y eleva el riesgo de infección.",
+    title: "¿Tienes alguna de estas condiciones actuales?",
+    explanation: "Estas condiciones pueden afectar el éxito del implante.",
     options: [
-      { value: "no", label: "No", score: 0 },
-      { value: "controlada", label: "Sí, bien controlada", score: 1 },
-      { value: "n_controlada", label: "Sí, no controlada", score: 2 }
+      { value: "caries", label: "Caries", score: 0.5 },
+      { value: "loose_teeth", label: "Dientes sueltos", score: 0.5 },
+      { value: "bleeding_gums", label: "Sangrado de encías", score: 0.5 },
+      { value: "pain", label: "Dolor", score: 0.5 },
+      { value: "none", label: "Ninguna", score: 0 }
     ],
-    recommendation: "Mantenga su HbA1c en rango controlado antes y después del procedimiento.",
+    multiSelect: true,
+    recommendation: "Tratar estas condiciones antes de colocar implantes."
   },
   {
     id: 8,
-    title: "¿Aprieta o rechina los dientes?",
-    explanation: "El bruxismo genera fuerzas excesivas que pueden comprometer el implante.",
+    title: "¿Cuál fue la causa de la pérdida dental?",
+    explanation: "La causa original puede afectar el tratamiento.",
     options: [
-      { value: "no", label: "No", score: 0 },
-      { value: "ocasional", label: "Sí, ocasionalmente", score: 1 },
-      { value: "frecuente", label: "Sí, frecuentemente", score: 2 }
+      { value: "trauma", label: "Trauma", score: 0 },
+      { value: "cavities", label: "Caries", score: 1 },
+      { value: "periodontitis", label: "Periodontitis (por dientes sueltos)", score: 2 },
+      { value: "other", label: "Otra", score: 2 }
     ],
-    recommendation: "Comente el bruxismo con su dentista; puede recomendarle una férula de descarga.",
+    recommendation: "Conocer la causa ayuda a prevenir futuras pérdidas."
   },
   {
     id: 9,
-    title: "¿Con qué frecuencia se cepilla los dientes?",
-    explanation: "Una higiene deficiente incrementa el riesgo de periimplantitis e infección.",
+    title: "¿Cuáles son tus hábitos diarios de higiene oral?",
+    explanation: "La higiene es crucial para el mantenimiento de implantes.",
     options: [
-      { value: ">2", label: "Más de dos veces al día", score: 0 },
-      { value: "2", label: "Dos veces al día", score: 1 },
-      { value: "<2", label: "Una vez al día o menos", score: 2 }
+      { value: "once", label: "Me cepillo 1 vez/día", score: 2 },
+      { value: "multiple", label: "Me cepillo más de 1 vez/día sin hilo ni enjuague", score: 1 },
+      { value: "complete", label: "Me cepillo 2–3 veces/día y uso hilo y/o enjuague", score: 0 }
     ],
-    recommendation: "Refuerce higiene y programe limpiezas profesionales cada 6 meses.",
-  },
-  {
-    id: 10,
-    title: "¿Le han dicho que tiene enfermedad de las encías o nota sangrado frecuente?",
-    explanation: "La periodontitis previa incrementa el riesgo de pérdida ósea alrededor del implante.",
-    options: [
-      { value: "si", label: "Sí", score: 2 },
-      { value: "no", label: "No", score: 0 }
-    ],
-    recommendation: "Trate la enfermedad de encías antes del implante para reducir complicaciones.",
-  },
-  {
-    id: 11,
-    title: "¿Ha recibido radioterapia en cabeza o cuello?",
-    explanation: "La radioterapia puede reducir la vascularización y complicar la cicatrización ósea.",
-    options: [
-      { value: "si", label: "Sí", score: 2 },
-      { value: "no", label: "No", score: 0 }
-    ],
-    recommendation: "Su dentista evaluará la necesidad de protocolos avanzados y medicación preventiva.",
-  },
-  {
-    id: 12,
-    title: "¿Cuánto tiempo ha pasado desde que perdió el diente?",
-    explanation: "El hueso se reabsorbe progresivamente tras la extracción; esto puede reducir su volumen y densidad.",
-    options: [
-      { value: "<6m", label: "Menos de 6 meses", score: 0 },
-      { value: "6m-2a", label: "Entre 6 meses y 2 años", score: 1 },
-      { value: ">2a", label: "Más de 2 años", score: 2 }
-    ],
-    recommendation: "Si han pasado más de 2 años, podría requerirse regeneración ósea antes del implante.",
-  },
+    recommendation: "Mejorar la higiene bucal refuerza la estabilidad de los implantes."
+  }
 ];

@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -25,9 +26,9 @@ export default {
         background: "#0A1828", // Azul oscuro clínico principal
         foreground: "#FFFFFF",
         primary: {
-          DEFAULT: "#5BCBFF", // Nuevo azul neón como color primario
-          dark: "#309ABB",
-          light: "#97E9FF",
+          DEFAULT: "#178582", // Turquesa IA
+          dark: "#126E6B",
+          light: "#1C9C98",
           foreground: "#FFFFFF"
         },
         gold: {
@@ -46,11 +47,6 @@ export default {
         starry: {
           DEFAULT: "#0A1828", // Azul oscuro principal
           darker: "#071320",
-        },
-        neonblue: {
-          DEFAULT: "#5BCBFF", // Azul neón (inspirado en la X del logo)
-          light: "#97E9FF",
-          dark: "#309ABB"
         }
       },
       fontFamily: {
