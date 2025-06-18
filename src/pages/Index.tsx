@@ -52,42 +52,84 @@ export default function Index() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Evaluación Dental <span className="text-[#BFA181]">Inteligente</span>
+            Evaluación de <span className="text-[#5BCBFF]">Implantes Dentales</span>
           </motion.h1>
 
-          {/* Subtítulo minimalista */}
+          {/* Subtítulo explicativo */}
           <motion.p 
-            className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-light"
+            className="text-xl md:text-2xl text-[#5BCBFF] max-w-3xl mx-auto font-light"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            Análisis predictivo con IA. <span className="text-[#BFA181] font-medium">Gratis</span> y en 2 minutos.
+            Análisis predictivo con IA para determinar tu candidatura a implantes dentales
           </motion.p>
+
+          {/* Cómo funciona */}
+          <motion.div 
+            className="bg-gradient-to-r from-[#BFA181] to-[#D4BC9A] rounded-2xl p-6 max-w-2xl mx-auto my-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.8 }}
+          >
+            <h2 className="text-2xl font-bold text-[#061524] mb-3 font-montserrat">¿Cómo funciona?</h2>
+            <p className="text-[#061524] text-lg leading-relaxed">
+              Responde 9 preguntas clínicas • Nuestro algoritmo analiza tu caso • 
+              Recibes tu nivel de éxito estimado y plan personalizado
+            </p>
+          </motion.div>
 
           {/* Beneficios clave con iconos */}
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-12 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
+            transition={{ delay: 0.9, duration: 0.8 }}
           >
             <div className="glass-panel p-6 text-center">
               <Brain className="w-8 h-8 text-[#BFA181] mx-auto mb-3" />
-              <h3 className="text-white font-semibold mb-2">IA Avanzada</h3>
-              <p className="text-white/70 text-sm">Algoritmos entrenados con miles de casos clínicos</p>
+              <h3 className="text-white font-semibold mb-2">IA Especializada</h3>
+              <p className="text-[#5BCBFF] text-sm">Algoritmos entrenados específicamente para implantología</p>
             </div>
             
             <div className="glass-panel p-6 text-center">
               <Target className="w-8 h-8 text-[#BFA181] mx-auto mb-3" />
-              <h3 className="text-white font-semibold mb-2">Personalizado</h3>
-              <p className="text-white/70 text-sm">Plan específico para tu caso y presupuesto</p>
+              <h3 className="text-white font-semibold mb-2">Plan Personalizado</h3>
+              <p className="text-[#5BCBFF] text-sm">Opciones de tratamiento adaptadas a tu caso específico</p>
             </div>
             
             <div className="glass-panel p-6 text-center">
               <Clock className="w-8 h-8 text-[#BFA181] mx-auto mb-3" />
-              <h3 className="text-white font-semibold mb-2">Inmediato</h3>
-              <p className="text-white/70 text-sm">Resultados al instante, sin esperas</p>
+              <h3 className="text-white font-semibold mb-2">Resultados Inmediatos</h3>
+              <p className="text-[#5BCBFF] text-sm">Evaluación completa en menos de 2 minutos</p>
+            </div>
+          </motion.div>
+
+          {/* Beneficios para pacientes */}
+          <motion.div 
+            className="bg-gradient-to-r from-[#BFA181]/20 to-[#D4BC9A]/20 backdrop-blur-sm border border-[#BFA181]/30 rounded-xl p-6 max-w-3xl mx-auto"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.1, duration: 0.6 }}
+          >
+            <h3 className="text-xl font-bold text-white mb-4 font-montserrat">Beneficios para ti:</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#BFA181] rounded-full mt-2 flex-shrink-0"></div>
+                <p className="text-[#5BCBFF] text-sm">Ahorra tiempo en consultas preliminares</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#BFA181] rounded-full mt-2 flex-shrink-0"></div>
+                <p className="text-[#5BCBFF] text-sm">Conoce tu nivel de éxito antes del tratamiento</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#BFA181] rounded-full mt-2 flex-shrink-0"></div>
+                <p className="text-[#5BCBFF] text-sm">Estimación de costos personalizada</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#BFA181] rounded-full mt-2 flex-shrink-0"></div>
+                <p className="text-[#5BCBFF] text-sm">Plan de tratamiento adaptado a tu presupuesto</p>
+              </div>
             </div>
           </motion.div>
 
@@ -95,7 +137,7 @@ export default function Index() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
+            transition={{ delay: 1.3, duration: 0.6 }}
           >
             <Button
               onClick={() => navigate('/evaluacion')}
@@ -120,7 +162,7 @@ export default function Index() {
             </Button>
           </motion.div>
 
-          <div className="mt-6 text-sm text-white/60">
+          <div className="mt-6 text-sm text-[#5BCBFF]/70">
             Sin registro • 100% confidencial • Resultados inmediatos
           </div>
         </motion.div>
@@ -131,7 +173,7 @@ export default function Index() {
         className="fixed bottom-6 right-6 z-20"
         initial={{ opacity: 0, scale: 0.8, x: 50, y: 50 }}
         animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
       >
         <div className="scale-75">
           <RioAvatar />
@@ -160,7 +202,7 @@ export default function Index() {
           </a>
         </div>
         <p className="text-white/30 text-xs font-montserrat">
-          © 2025 ImplantDX — Democratizando el acceso a la evaluación clínica
+          © 2025 ImplantDX — Democratizando el acceso a la evaluación de implantes dentales
         </p>
       </footer>
     </div>
