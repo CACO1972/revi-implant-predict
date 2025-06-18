@@ -9,7 +9,7 @@ export default function HeroSection() {
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 1, ease: "easeOut" }}
     >
-      {/* Logo ImplantX más grande */}
+      {/* Logo ImplantX mucho más grande */}
       <motion.div 
         className="mb-8"
         animate={{ 
@@ -27,7 +27,7 @@ export default function HeroSection() {
         <img 
           src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png"
           alt="ImplantX Logo"
-          className="h-60 md:h-80 w-auto mx-auto"
+          className="h-80 md:h-96 lg:h-[500px] w-auto mx-auto"
         />
       </motion.div>
 
@@ -38,13 +38,13 @@ export default function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
       >
-        <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-2xl leading-tight font-montserrat">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl leading-tight font-montserrat">
           <span className="text-[#5BCBFF]">IA</span> que evalúa tu sonrisa,
         </h1>
-        <h2 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl leading-tight font-montserrat">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-2xl leading-tight font-montserrat">
           predice el <span className="text-[#5BCBFF]">éxito</span> de tus implantes
         </h2>
-        <p className="text-xl md:text-2xl text-[#5BCBFF] font-light mt-4">
+        <p className="text-xl md:text-2xl lg:text-3xl text-[#5BCBFF] font-light mt-4">
           y crea tu plan personalizado en <span className="text-white font-semibold">2 minutos</span>
         </p>
       </motion.div>
