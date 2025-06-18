@@ -58,12 +58,12 @@ export default function Index() {
           </div>
 
           <h1 className={`text-3xl md:text-5xl font-bold ${accentColorClass} drop-shadow-lg leading-tight font-montserrat`}>
-            ¿Puedes hacerte Implantes Dentales?
+            ¿Necesitas implantes dentales?
           </h1>
-          <div className={`mt-3 mb-6 text-white/85 text-lg md:text-xl font-light max-w-md mx-auto`}>
-            Descúbrelo <span className={`${accentColorClass} font-semibold`}>gratis</span> en 2 minutos.<br />
-            Evaluación predictiva potenciada por IA.<br />
-            Sin salir de casa.
+          <div className={`mt-3 mb-6 text-white/85 text-lg md:text-xl font-light max-w-md mx-auto leading-relaxed`}>
+            ¿Pero no sabes si puedes o por dónde empezar?<br />
+            <span className={`${accentColorClass} font-semibold`}>ImplantX</span> te provee de un <span className={`${accentColorClass} font-semibold`}>análisis clínico predictivo gratis</span><br />
+            basado en evidencia científica y <span className={`${accentColorClass} font-semibold`}>potenciado por IA</span>.
           </div>
           <Button
             onClick={() => navigate('/evaluacion')}
@@ -77,7 +77,7 @@ export default function Index() {
               >
                 <Play className={COLOR_MODE === "white" ? "text-white" : "text-neonblue"} />
               </motion.div>
-              <span className={COLOR_MODE === "neon" ? "text-white" : "text-[#0A1828]"}>Probar demo gratis</span>
+              <span className={COLOR_MODE === "neon" ? "text-white" : "text-[#0A1828]"}>Comenzar evaluación gratis</span>
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 1, repeat: Infinity }}
@@ -87,7 +87,7 @@ export default function Index() {
             </div>
           </Button>
           <div className="mt-4 text-xs text-white/50">
-            Demo clínica predictiva. Gratis y sin registro.
+            Análisis clínico predictivo. Gratis y sin registro.
           </div>
         </motion.div>
       </section>
