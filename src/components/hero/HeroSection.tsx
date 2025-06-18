@@ -31,7 +31,7 @@ export default function HeroSection() {
         />
       </motion.div>
 
-      {/* Slogan principal - todo en una frase potente */}
+      {/* Slogan principal */}
       <motion.div 
         className="text-center space-y-6"
         initial={{ opacity: 0, y: 20 }}

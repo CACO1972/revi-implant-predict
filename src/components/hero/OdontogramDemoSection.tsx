@@ -15,15 +15,15 @@ export default function OdontogramDemoSection({ onOpenDemo }: OdontogramDemoSect
       transition={{ delay: 0.6, duration: 0.8 }}
       className="w-full max-w-2xl mx-auto"
     >
-      <div className="glass-panel p-8 border border-[#BFA181]/30 bg-gradient-to-b from-[#BFA181]/5 to-transparent">
+      <div className="glass-panel p-8 border border-[#FF8C42]/30 bg-gradient-to-b from-[#FF8C42]/5 to-transparent">
         <div className="flex items-center justify-center gap-3 mb-4">
           <motion.div
             animate={{ rotate: [0, 15, -15, 0] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            <MousePointer className="w-8 h-8 text-[#BFA181]" />
+            <MousePointer className="w-8 h-8 text-[#FF8C42]" />
           </motion.div>
-          <h3 className="text-2xl font-bold text-[#BFA181] font-montserrat">
+          <h3 className="text-2xl font-bold text-[#FF8C42] font-montserrat">
             Prueba el Odontograma Interactivo
           </h3>
         </div>
@@ -35,13 +35,13 @@ export default function OdontogramDemoSection({ onOpenDemo }: OdontogramDemoSect
         <Button
           onClick={onOpenDemo}
           size="lg"
-          className="bg-gradient-to-r from-[#BFA181] to-[#D4BC9A] hover:from-[#D4BC9A] hover:to-[#BFA181] text-[#040D18] font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-[0_0_25px_rgba(191,161,129,0.4)] border-2 border-[#BFA181]/30 transform hover:scale-105 transition-all duration-300"
+          className="bg-gradient-to-r from-[#FF8C42] to-[#FFB033] hover:from-[#FFB033] hover:to-[#FF8C42] text-[#040D18] font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-[0_0_25px_rgba(255,140,66,0.4)] border-2 border-[#FF8C42]/30 transform hover:scale-105 transition-all duration-300"
         >
           <MousePointer className="w-5 h-5 mr-2" />
           Probar Demo Interactiva
         </Button>
         
-        <p className="text-[#BFA181]/60 text-xs mt-3">
+        <p className="text-[#FF8C42]/60 text-xs mt-3">
           ✨ Solo toma 30 segundos probar
         </p>
       </div>

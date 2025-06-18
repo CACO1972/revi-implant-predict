@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -22,33 +23,33 @@ export default {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        background: "#0A1828", // Azul oscuro clínico principal
+        background: "#040D18", // Azul oscuro principal
         foreground: "#FFFFFF",
         primary: {
-          DEFAULT: "#5BCBFF", // Nuevo azul neón como color primario
+          DEFAULT: "#5BCBFF", // Azul neón principal
           dark: "#309ABB",
           light: "#97E9FF",
           foreground: "#FFFFFF"
         },
-        gold: {
-          DEFAULT: "#BFA181", // Dorado refinado
-          50: "#F8F5F0",
-          100: "#F1EAE2",
-          200: "#E7DBC9",
-          300: "#DBCAAD",
-          400: "#CAB595",
-          500: "#BFA181", // Our main gold color
-          600: "#A68A6B",
-          700: "#8C7357",
-          800: "#725C44",
-          900: "#594831",
+        orange: {
+          DEFAULT: "#FF8C42", // Naranja principal
+          50: "#FFF4E6",
+          100: "#FFE8CC",
+          200: "#FFD699",
+          300: "#FFC366",
+          400: "#FFB033",
+          500: "#FF8C42", // Our main orange color
+          600: "#E6672A",
+          700: "#CC4812",
+          800: "#B32900",
+          900: "#990A00",
         },
         starry: {
-          DEFAULT: "#0A1828", // Azul oscuro principal
-          darker: "#071320",
+          DEFAULT: "#040D18", // Azul oscuro principal
+          darker: "#020509",
         },
         neonblue: {
-          DEFAULT: "#5BCBFF", // Azul neón (inspirado en la X del logo)
+          DEFAULT: "#5BCBFF", // Azul neón (igual que primary)
           light: "#97E9FF",
           dark: "#309ABB"
         }
@@ -64,8 +65,8 @@ export default {
       },
       boxShadow: {
         soft: "0 8px 30px rgba(0, 0, 0, 0.12)",
-        glow: "0 0 15px rgba(23, 133, 130, 0.2)",
-        'gold-glow': "0 0 15px rgba(191, 161, 129, 0.25)",
+        glow: "0 0 15px rgba(91, 203, 255, 0.2)",
+        'orange-glow': "0 0 15px rgba(255, 140, 66, 0.25)",
       },
       animation: {
         "float": "float 6s ease-in-out infinite",

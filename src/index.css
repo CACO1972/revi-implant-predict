@@ -111,7 +111,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(23, 133, 130, 0.2), transparent 70%);
+  background: radial-gradient(circle at center, rgba(91, 203, 255, 0.2), transparent 70%);
   animation: pulse 8s ease-in-out infinite alternate;
   mix-blend-mode: screen;
 }
@@ -145,17 +145,17 @@
 
 /* Estilos para la sombra del botón principal */
 .shadow-glow {
-  box-shadow: 0 0 15px rgba(23, 133, 130, 0.5);
+  box-shadow: 0 0 15px rgba(91, 203, 255, 0.5);
   transition: box-shadow 0.3s ease;
 }
 
 .shadow-glow:hover {
-  box-shadow: 0 0 25px rgba(23, 133, 130, 0.7);
+  box-shadow: 0 0 25px rgba(91, 203, 255, 0.7);
 }
 
 /* Nuevos estilos para una apariencia más futurista de IA */
-.gold-gradient-text {
-  @apply bg-gradient-to-r from-[#BFA181] to-[#E6D5B8] bg-clip-text text-transparent;
+.orange-gradient-text {
+  @apply bg-gradient-to-r from-[#FF8C42] to-[#FFB033] bg-clip-text text-transparent;
 }
 
 .ai-pulse {
@@ -175,16 +175,16 @@
   @apply bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md border border-white/10 rounded-xl relative overflow-hidden;
 }
 
-.shadow-gold-glow {
-  box-shadow: 0 0 15px rgba(191, 161, 129, 0.3);
+.shadow-orange-glow {
+  box-shadow: 0 0 15px rgba(255, 140, 66, 0.3);
 }
 
-.shadow-gold-glow:hover {
-  box-shadow: 0 0 25px rgba(191, 161, 129, 0.5);
+.shadow-orange-glow:hover {
+  box-shadow: 0 0 25px rgba(255, 140, 66, 0.5);
 }
 
 .bg-starry {
-  @apply bg-[#0A1828];
+  @apply bg-[#040D18];
 }
 
 @keyframes float {
