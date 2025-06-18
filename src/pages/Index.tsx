@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Sparkles, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import RioAvatar from "@/components/question/RioAvatar";
+import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 
 // Cambia entre "#5BCBFF" (azul neón) y "#fff" (blanco puro) para comparar
 const COLOR_MODE: "neon" | "white" = "neon"; // Cambia a "white" para ver la otra opción
@@ -18,6 +19,9 @@ export default function Index() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative bg-[#0A1828] overflow-hidden">
+      {/* Fondo animado con efectos de IA */}
+      <AnimatedStarryBackground />
+
       {/* HERO/BANNER PRINCIPAL */}
       <section className="w-full max-w-xl mx-auto flex flex-col items-center py-24 md:py-36 z-10">
         <motion.div
@@ -26,9 +30,33 @@ export default function Index() {
           transition={{ duration: 0.9, ease: "easeOut" }}
           className="flex flex-col items-center space-y-7"
         >
+          {/* Logo de ImplantX */}
+          <motion.div 
+            className="mb-6"
+            animate={{ 
+              y: [0, -10, 0],
+              filter: ["drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))", 
+                       "drop-shadow(0 0 25px rgba(23, 133, 130, 0.5))", 
+                       "drop-shadow(0 0 15px rgba(23, 133, 130, 0.3))"]
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <img 
+              src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png"
+              alt="ImplantX Logo"
+              className="h-32 md:h-40 w-auto mx-auto"
+            />
+          </motion.div>
+
+          {/* Avatar de Río */}
           <div className="mb-4">
             <RioAvatar />
           </div>
+
           <h1 className={`text-3xl md:text-5xl font-bold ${accentColorClass} drop-shadow-lg leading-tight font-montserrat`}>
             ¿Puedes hacerte Implantes Dentales?
           </h1>
