@@ -1,8 +1,8 @@
 
 import React, { useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame, ThreeElements } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Text } from '@react-three/drei';
-import { Mesh, Vector3 } from 'three';
+import { Mesh } from 'three';
 import { motion } from 'framer-motion';
 
 interface ToothData {
@@ -12,14 +12,14 @@ interface ToothData {
   isMissing: boolean;
 }
 
-interface ToothProps extends ThreeElements['mesh'] {
+interface ToothProps {
   toothData: ToothData;
   onClick: (tooth: ToothData) => void;
   isHovered: boolean;
   onHover: (tooth: ToothData | null) => void;
 }
 
-function Tooth({ toothData, onClick, isHovered, onHover, ...props }: ToothProps) {
+function Tooth({ toothData, onClick, isHovered, onHover }: ToothProps) {
   const meshRef = useRef<Mesh>(null);
   
   useFrame((state) => {
@@ -30,7 +30,6 @@ function Tooth({ toothData, onClick, isHovered, onHover, ...props }: ToothProps)
 
   return (
     <mesh
-      {...props}
       ref={meshRef}
       position={toothData.position}
       onClick={() => onClick(toothData)}

@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Cube, MousePointer } from "lucide-react";
+import { Box, MousePointer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface OdontogramDemoSectionProps {
@@ -52,7 +52,7 @@ export default function OdontogramDemoSection({ onOpenDemo }: OdontogramDemoSect
               rotateX: { duration: 4, repeat: Infinity }
             }}
           >
-            <Cube className="w-10 h-10 text-[#5BCBFF]" />
+            <Box className="w-10 h-10 text-[#5BCBFF]" />
           </motion.div>
           
           <div className="text-center">
@@ -88,7 +88,7 @@ export default function OdontogramDemoSection({ onOpenDemo }: OdontogramDemoSect
             className="bg-gradient-to-r from-[#5BCBFF] to-[#178582] hover:from-[#178582] hover:to-[#5BCBFF] text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-[0_0_30px_rgba(91,203,255,0.4)] border-2 border-[#5BCBFF]/30 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group"
           >
             <div className="flex items-center gap-3 relative z-10">
-              <Cube className="w-5 h-5" />
+              <Box className="w-5 h-5" />
               <span className="font-montserrat">Probar Odontograma 3D</span>
               <MousePointer className="w-5 h-5" />
             </div>
