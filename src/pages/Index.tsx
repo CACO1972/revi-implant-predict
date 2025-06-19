@@ -14,17 +14,17 @@ export default function Index() {
   const [showOdontogramDemo, setShowOdontogramDemo] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative bg-[#040D18] overflow-hidden">
-      {/* Fondo animado con luces doradas */}
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative bg-[#0A1828] overflow-hidden">
+      {/* Fondo animado */}
       <AnimatedStarryBackground />
 
-      {/* HERO PRINCIPAL */}
-      <section className="w-full max-w-4xl mx-auto flex flex-col items-center py-16 md:py-24 z-10">
+      {/* HERO PRINCIPAL - Espaciado reducido */}
+      <section className="w-full max-w-4xl mx-auto flex flex-col items-center py-4 md:py-8 z-10">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 30 }}
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="flex flex-col items-center space-y-12"
+          className="flex flex-col items-center space-y-8"
         >
           <HeroSection />
           <FeatureCards />
@@ -33,14 +33,14 @@ export default function Index() {
         </motion.div>
       </section>
 
-      {/* Río en esquina inferior derecha, más pequeño */}
+      {/* Río en esquina - menos intrusivo */}
       <motion.div 
-        className="fixed bottom-6 right-6 z-20"
-        initial={{ opacity: 0, scale: 0.8, x: 50, y: 50 }}
-        animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-        transition={{ delay: 1.4, duration: 0.8 }}
+        className="fixed bottom-4 right-4 z-20"
+        initial={{ opacity: 0, scale: 0.7, x: 30, y: 30 }}
+        animate={{ opacity: 0.8, scale: 0.8, x: 0, y: 0 }}
+        transition={{ delay: 2, duration: 0.6 }}
       >
-        <div className="scale-75">
+        <div className="scale-50 opacity-60">
           <RioAvatar />
         </div>
       </motion.div>
