@@ -6,8 +6,6 @@ import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import InteractiveOdontogramDemo from "@/components/demo/InteractiveOdontogramDemo";
 import ImplantXOrbitalTimeline from "@/components/demo/implantx-orbital-timeline";
 import BenefitsSection from "@/components/hero/BenefitsSection";
-import FeatureCards from "@/components/hero/FeatureCards";
-import OdontogramDemoSection from "@/components/hero/OdontogramDemoSection";
 import CtaSection from "@/components/hero/CtaSection";
 import FooterSection from "@/components/hero/FooterSection";
 
@@ -19,23 +17,21 @@ export default function Index() {
       {/* Fondo animado con luces doradas */}
       <AnimatedStarryBackground />
 
-      {/* HERO CON TIMELINE ORBITAL OPTIMIZADO */}
+      {/* HERO SIMPLIFICADO */}
       <section className="w-full max-w-6xl mx-auto flex flex-col items-center py-6 md:py-12 z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="flex flex-col items-center space-y-6 md:space-y-8"
+          className="flex flex-col items-center space-y-8 md:space-y-12"
         >
           <ImplantXOrbitalTimeline />
           <BenefitsSection />
-          <FeatureCards />
-          <OdontogramDemoSection onOpenDemo={() => setShowOdontogramDemo(true)} />
           <CtaSection />
         </motion.div>
       </section>
 
-      {/* Río en esquina inferior derecha, más pequeño */}
+      {/* Río en esquina inferior derecha */}
       <motion.div 
         className="fixed bottom-6 right-6 z-20"
         initial={{ opacity: 0, scale: 0.8, x: 50, y: 50 }}
