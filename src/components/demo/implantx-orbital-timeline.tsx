@@ -90,7 +90,7 @@ export default function ImplantXOrbitalTimeline() {
             IMPLANTES
           </motion.span>
           ?
-        </h1>
+        </motion.h1>
 
         {/* Subtitle Hook con Efecto Typing */}
         <motion.div 
