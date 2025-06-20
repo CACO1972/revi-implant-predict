@@ -2,6 +2,7 @@
 "use client";
 
 import { Scan, Bot, Brain, ClipboardCheck, Trophy } from "lucide-react";
+import { motion } from "framer-motion";
 import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
 
 const implantXTimelineData = [
@@ -65,21 +66,104 @@ const implantXTimelineData = [
 export default function ImplantXOrbitalTimeline() {
   return (
     <div className="w-full">
-      <div className="text-center mb-8 px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-          Proceso de Evaluación con IA
-        </h2>
-        <p className="text-lg text-[#5BCBFF]/80 max-w-2xl mx-auto">
-          Descubre si eres candidato ideal para implantes dentales con nuestra tecnología predictiva
-        </p>
+      {/* Hero Section con Nueva Estructura */}
+      <div className="text-center mb-8 px-4 space-y-6">
+        {/* Título Principal */}
+        <motion.h1 
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white font-montserrat leading-tight"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          ¿NECESITAS{" "}
+          <motion.span 
+            className="text-[#5BCBFF] inline-block"
+            animate={{ 
+              textShadow: [
+                "0 0 10px rgba(91, 203, 255, 0.5)",
+                "0 0 20px rgba(91, 203, 255, 0.8)",
+                "0 0 10px rgba(91, 203, 255, 0.5)"
+              ]
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            IMPLANTES
+          </motion.span>
+          ?
+        </h1>
+
+        {/* Subtitle Hook con Efecto Typing */}
+        <motion.div 
+          className="text-xl md:text-2xl lg:text-3xl text-[#FF8C42] font-medium leading-tight max-w-4xl mx-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          <motion.span
+            initial={{ width: 0 }}
+            animate={{ width: "auto" }}
+            transition={{ delay: 1, duration: 2, ease: "easeOut" }}
+            className="overflow-hidden inline-block whitespace-nowrap"
+          >
+            ...PERO NO SABES SI PUEDES HACERLO NI POR DÓNDE EMPEZAR?
+          </motion.span>
+        </motion.div>
+
+        {/* Badges Informativos */}
+        <motion.div 
+          className="flex flex-wrap justify-center gap-3 mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+        >
+          <div className="px-4 py-2 bg-gradient-to-r from-[#5BCBFF]/20 to-[#178582]/20 border border-[#5BCBFF]/40 rounded-full text-[#5BCBFF] text-sm font-semibold backdrop-blur-sm">
+            🆓 DEMO GRATUITA
+          </div>
+          <div className="px-4 py-2 bg-gradient-to-r from-[#FF8C42]/20 to-[#BFA181]/20 border border-[#FF8C42]/40 rounded-full text-[#FF8C42] text-sm font-semibold backdrop-blur-sm">
+            ⚡ 2 MINUTOS
+          </div>
+          <div className="px-4 py-2 bg-gradient-to-r from-[#178582]/20 to-[#5BCBFF]/20 border border-[#178582]/40 rounded-full text-[#178582] text-sm font-semibold backdrop-blur-sm">
+            🏠 SIN SALIR DE CASA
+          </div>
+        </motion.div>
+
+        {/* Texto Explicativo */}
+        <motion.div 
+          className="text-lg md:text-xl text-white/90 max-w-5xl mx-auto leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+        >
+          <span className="text-[#5BCBFF] font-bold">IMPLANTX</span> es inteligencia artificial aplicada 
+          para ayudarte en el primer paso para recuperar tu sonrisa.{" "}
+          <motion.span 
+            className="text-[#FF8C42] font-semibold"
+            animate={{ opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            GRATIS, SIN SALIR DE CASA, SIN EXÁMENES
+          </motion.span>
+          , antes de sentarte en el sillón del dentista.
+          <br />
+          <br />
+          Conoce cómo, en{" "}
+          <span className="text-[#5BCBFF] font-bold">2 minutos</span>, además te entrega{" "}
+          <span className="text-[#BFA181] font-semibold">odontograma 3D, personalización de tratamiento, calculadora de valores</span>.
+        </motion.div>
       </div>
       
+      {/* Timeline Orbital */}
       <RadialOrbitalTimeline timelineData={implantXTimelineData} />
       
       <div className="text-center mt-8 px-4">
-        <p className="text-sm text-white/60">
+        <motion.p 
+          className="text-sm text-white/60"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 0.6 }}
+        >
           🚀 Toca cada nodo para explorar el proceso • ⚡ Precisión basada en evidencia científica
-        </p>
+        </motion.p>
       </div>
     </div>
   );
