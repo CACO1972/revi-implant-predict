@@ -25,17 +25,10 @@ interface RadialOrbitalTimelineProps {
 export default function RadialOrbitalTimeline({
   timelineData,
 }: RadialOrbitalTimelineProps) {
-  const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>(
-    {}
-  );
-  const [viewMode, setViewMode] = useState<"orbital">("orbital");
+  const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>({});
   const [rotationAngle, setRotationAngle] = useState<number>(0);
   const [autoRotate, setAutoRotate] = useState<boolean>(true);
   const [pulseEffect, setPulseEffect] = useState<Record<number, boolean>>({});
-  const [centerOffset, setCenterOffset] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
   const [activeNodeId, setActiveNodeId] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const orbitRef = useRef<HTMLDivElement>(null);
@@ -71,8 +64,6 @@ export default function RadialOrbitalTimeline({
           newPulseEffect[relId] = true;
         });
         setPulseEffect(newPulseEffect);
-
-        centerViewOnNode(id);
       } else {
         setActiveNodeId(null);
         setAutoRotate(true);
@@ -86,7 +77,7 @@ export default function RadialOrbitalTimeline({
   useEffect(() => {
     let rotationTimer: NodeJS.Timeout;
 
-    if (autoRotate && viewMode === "orbital") {
+    if (autoRotate) {
       rotationTimer = setInterval(() => {
         setRotationAngle((prev) => {
           const newAngle = (prev + 0.3) % 360;
@@ -100,31 +91,18 @@ export default function RadialOrbitalTimeline({
         clearInterval(rotationTimer);
       }
     };
-  }, [autoRotate, viewMode]);
-
-  const centerViewOnNode = (nodeId: number) => {
-    if (viewMode !== "orbital" || !nodeRefs.current[nodeId]) return;
-
-    const nodeIndex = timelineData.findIndex((item) => item.id === nodeId);
-    const totalNodes = timelineData.length;
-    const targetAngle = (nodeIndex / totalNodes) * 360;
-
-    setRotationAngle(270 - targetAngle);
-  };
+  }, [autoRotate]);
 
   const calculateNodePosition = (index: number, total: number) => {
     const angle = ((index / total) * 360 + rotationAngle) % 360;
     const radius = 200;
     const radian = (angle * Math.PI) / 180;
 
-    const x = radius * Math.cos(radian) + centerOffset.x;
-    const y = radius * Math.sin(radian) + centerOffset.y;
+    const x = radius * Math.cos(radian);
+    const y = radius * Math.sin(radian);
 
     const zIndex = Math.round(100 + 50 * Math.cos(radian));
-    const opacity = Math.max(
-      0.4,
-      Math.min(1, 0.4 + 0.6 * ((1 + Math.sin(radian)) / 2))
-    );
+    const opacity = Math.max(0.4, Math.min(1, 0.4 + 0.6 * ((1 + Math.sin(radian)) / 2)));
 
     return { x, y, angle, zIndex, opacity };
   };
@@ -153,6 +131,14 @@ export default function RadialOrbitalTimeline({
     }
   };
 
+  if (!timelineData || timelineData.length === 0) {
+    return (
+      <div className="w-full h-[80vh] flex items-center justify-center bg-gradient-to-b from-[#040D18] to-[#0A1828]">
+        <div className="text-white">Cargando timeline...</div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="w-full h-[80vh] flex flex-col items-center justify-center bg-gradient-to-b from-[#040D18] to-[#0A1828] overflow-hidden"
@@ -163,10 +149,7 @@ export default function RadialOrbitalTimeline({
         <div
           className="absolute w-full h-full flex items-center justify-center"
           ref={orbitRef}
-          style={{
-            perspective: "1000px",
-            transform: `translate(${centerOffset.x}px, ${centerOffset.y}px)`,
-          }}
+          style={{ perspective: "1000px" }}
         >
           {/* Centro - Logo ImplantX */}
           <div className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-[#5BCBFF] via-[#178582] to-[#FF8C42] animate-pulse flex items-center justify-center z-10">
