@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import RioAvatar from "@/components/question/RioAvatar";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 import InteractiveOdontogramDemo from "@/components/demo/InteractiveOdontogramDemo";
-import HeroSection from "@/components/hero/HeroSection";
+import ImplantXOrbitalTimeline from "@/components/demo/implantx-orbital-timeline";
 import FeatureCards from "@/components/hero/FeatureCards";
 import OdontogramDemoSection from "@/components/hero/OdontogramDemoSection";
 import CtaSection from "@/components/hero/CtaSection";
@@ -18,15 +18,15 @@ export default function Index() {
       {/* Fondo animado con luces doradas */}
       <AnimatedStarryBackground />
 
-      {/* HERO PRINCIPAL */}
-      <section className="w-full max-w-4xl mx-auto flex flex-col items-center py-16 md:py-24 z-10">
+      {/* NUEVO HERO CON TIMELINE ORBITAL */}
+      <section className="w-full max-w-6xl mx-auto flex flex-col items-center py-8 md:py-12 z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="flex flex-col items-center space-y-12"
+          className="flex flex-col items-center space-y-8"
         >
-          <HeroSection />
+          <ImplantXOrbitalTimeline />
           <FeatureCards />
           <OdontogramDemoSection onOpenDemo={() => setShowOdontogramDemo(true)} />
           <CtaSection />

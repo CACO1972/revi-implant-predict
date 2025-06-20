@@ -77,7 +77,7 @@
   }
 }
 
-/* Estilos para AnimatedStarryBackground */
+/* Estilos existentes para AnimatedStarryBackground */
 .star {
   position: absolute;
   border-radius: 50%;
@@ -143,6 +143,54 @@
   }
 }
 
+/* Nuevas animaciones para el timeline orbital */
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Transiciones mejoradas */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.duration-700 {
+  transition-duration: 700ms;
+}
+
+.duration-1000 {
+  transition-duration: 1000ms;
+}
+
+/* Backdrop blur */
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+}
+
+/* Transformaciones personalizadas */
+.scale-125 {
+  transform: scale(1.25);
+}
+
+.scale-150 {
+  transform: scale(1.5);
+}
+
 /* Estilos para la sombra del botón principal */
 .shadow-glow {
   box-shadow: 0 0 15px rgba(91, 203, 255, 0.5);
@@ -153,7 +201,7 @@
   box-shadow: 0 0 25px rgba(91, 203, 255, 0.7);
 }
 
-/* Nuevos estilos para una apariencia más futurista de IA */
+/* Estilos existentes para una apariencia más futurista de IA */
 .orange-gradient-text {
   @apply bg-gradient-to-r from-[#FF8C42] to-[#FFB033] bg-clip-text text-transparent;
 }
