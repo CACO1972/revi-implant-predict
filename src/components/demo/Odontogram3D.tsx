@@ -6,17 +6,23 @@ import { OrbitControls, Html } from "@react-three/drei";
 // Utilidades para generar el odontograma FDI
 const getTeethData = () => [
   // Superior derecho (11-18)
-  ...Array(8).fill().map((_, i) => ({ fdi: `1${i+1}`, x: -4 + i, y: 1.8, z: 0 })),
+  ...Array(8).fill(null).map((_, i) => ({ fdi: `1${i+1}`, x: -4 + i, y: 1.8, z: 0 })),
   // Superior izquierdo (21-28)
-  ...Array(8).fill().map((_, i) => ({ fdi: `2${i+1}`, x: 4 - i, y: 1.8, z: 0 })),
+  ...Array(8).fill(null).map((_, i) => ({ fdi: `2${i+1}`, x: 4 - i, y: 1.8, z: 0 })),
   // Inferior izquierdo (31-38)
-  ...Array(8).fill().map((_, i) => ({ fdi: `3${i+1}`, x: 4 - i, y: -1.8, z: 0 })),
+  ...Array(8).fill(null).map((_, i) => ({ fdi: `3${i+1}`, x: 4 - i, y: -1.8, z: 0 })),
   // Inferior derecho (41-48)
-  ...Array(8).fill().map((_, i) => ({ fdi: `4${i+1}`, x: -4 + i, y: -1.8, z: 0 })),
+  ...Array(8).fill(null).map((_, i) => ({ fdi: `4${i+1}`, x: -4 + i, y: -1.8, z: 0 })),
 ];
 
 // Geometría básica para diferentes tipos de dientes
-function Tooth({ idx, position, fdi, isMissing, onToggle }) {
+function Tooth({ idx, position, fdi, isMissing, onToggle }: {
+  idx: number;
+  position: [number, number, number];
+  fdi: string;
+  isMissing: boolean;
+  onToggle: () => void;
+}) {
   let geometry;
   if ([0, 7, 8, 15, 16, 23, 24, 31].includes(idx))
     geometry = <cylinderGeometry args={[0.28, 0.28, 1.2, 24]} />;
@@ -65,12 +71,12 @@ function Tooth({ idx, position, fdi, isMissing, onToggle }) {
 }
 
 // Componente principal
-export default function Odontogram3D({ onChange }) {
-  const [missing, setMissing] = useState([]);
+export default function Odontogram3D({ onChange }: { onChange?: (missing: string[]) => void }) {
+  const [missing, setMissing] = useState<string[]>([]);
   const teeth = getTeethData();
 
   const handleToggle = useCallback(
-    (fdi) => {
+    (fdi: string) => {
       setMissing((prev) => {
         const nuevo = prev.includes(fdi)
           ? prev.filter((v) => v !== fdi)

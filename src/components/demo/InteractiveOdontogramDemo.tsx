@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/button";
 import Odontogram3D from "./Odontogram3D";
 
 export default function InteractiveOdontogramDemo() {
-  const [missingTeeth, setMissingTeeth] = useState<number[]>([]);
+  const [missingTeeth, setMissingTeeth] = useState<string[]>([]);
   const [rioMessage, setRioMessage] = useState("¡Hola! Soy Río. Este es nuestro odontograma 3D interactivo. Rota la vista y toca los dientes que te falten para marcarlos. ¡Es súper fácil!");
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleSelectionChange = (selectedTeeth: number[]) => {
+  const handleSelectionChange = (selectedTeeth: string[]) => {
     setMissingTeeth(selectedTeeth);
     
     const count = selectedTeeth.length;
@@ -59,7 +59,7 @@ export default function InteractiveOdontogramDemo() {
         {/* Contenido principal */}
         <div className="p-6 space-y-6">
           {/* Odontograma 3D */}
-          <Odontogram3D onSelectionChange={handleSelectionChange} />
+          <Odontogram3D onChange={handleSelectionChange} />
 
           {/* Mensaje de Río */}
           <motion.div
@@ -89,7 +89,7 @@ export default function InteractiveOdontogramDemo() {
                   {missingTeeth.length} diente{missingTeeth.length !== 1 ? 's' : ''} seleccionado{missingTeeth.length !== 1 ? 's' : ''}
                 </p>
                 <div className="text-xs text-white/70 mt-2 max-h-16 overflow-y-auto">
-                  Dientes: {missingTeeth.sort((a, b) => a - b).join(', ')}
+                  Dientes: {missingTeeth.sort().join(', ')}
                 </div>
               </motion.div>
             )}
