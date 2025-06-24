@@ -41,9 +41,9 @@ export default function DentalQuestionSelector({ selectedValues, onSelectionChan
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-center"
+          className="bg-[#178582]/10 border border-[#178582]/20 rounded-lg p-4 text-center"
         >
-          <p className="text-green-400 text-sm">
+          <p className="text-[#178582] text-sm font-medium">
             ✅ {selectedTeeth.length} diente{selectedTeeth.length !== 1 ? 's' : ''} seleccionado{selectedTeeth.length !== 1 ? 's' : ''}
           </p>
           <div className="mt-2 text-xs text-white/60">
