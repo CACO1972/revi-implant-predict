@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 type Option = {
@@ -178,45 +177,49 @@ export default function PredictiveQuestionnaire() {
     setAnswers({ ...answers, [id]: value });
 
   return (
-    <form className="space-y-8 max-w-xl mx-auto p-6 text-gray-800 bg-white/90 rounded-2xl mt-10 shadow-lg">
-      <h1 className="text-2xl font-bold mb-4 text-neonblue font-montserrat tracking-tight text-center">
+    <form className="space-y-8 max-w-xl mx-auto p-6 bg-[#0A1828]/95 backdrop-blur-sm border border-[#178582]/20 rounded-2xl mt-10 shadow-lg">
+      <h1 className="text-2xl font-bold mb-4 text-[#178582] font-montserrat tracking-tight text-center">
         Cuestionario Predictivo ImplantX™
       </h1>
 
       {QUESTIONS.map((q) => (
-        <div key={q.id} className="border-b pb-6">
-          <p className="font-medium text-background">{q.text}</p>
+        <div key={q.id} className="border-b border-[#178582]/20 pb-6">
+          <p className="font-medium text-white mb-3">{q.text}</p>
 
-          <div className="mt-2 space-y-1">
+          <div className="mt-2 space-y-2">
             {q.options.map((opt) => (
-              <label key={opt.value} className="block cursor-pointer">
+              <label key={opt.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-[#178582]/10 transition-colors">
                 <input
                   type="radio"
                   name={q.id}
                   value={opt.value}
-                  className="mr-2 accent-neonblue"
+                  className="mr-3 accent-[#178582] w-4 h-4"
                   onChange={() => handleChange(q.id, opt.value)}
                   checked={answers[q.id] === opt.value}
                 />
-                <span className="text-background">{opt.label}</span>
+                <span className="text-white/90">{opt.label}</span>
               </label>
             ))}
           </div>
 
-          <p className="mt-3 text-sm text-neonblue">
-            <strong>¿Por qué importa?</strong> {q.explanation}
-          </p>
-          <p className="mt-1 text-sm text-gold-500">
-            <strong>Sugerencia clínica:</strong> {q.advice}
-          </p>
+          <div className="mt-4 p-3 bg-[#178582]/10 rounded-lg border-l-4 border-[#178582]">
+            <p className="text-sm text-[#178582] mb-2">
+              <strong>¿Por qué importa?</strong> {q.explanation}
+            </p>
+            <p className="text-sm text-[#BFA181]">
+              <strong>Sugerencia clínica:</strong> {q.advice}
+            </p>
+          </div>
         </div>
       ))}
 
-      <p className="text-xs text-gray-600 mt-8 text-center">
-        Esta evaluación es preliminar y no reemplaza la revisión clínica ni la
-        imagenología. Comparta los resultados con su dentista para un plan de
-        tratamiento definitivo.
-      </p>
+      <div className="mt-8 p-4 bg-[#BFA181]/10 rounded-lg border border-[#BFA181]/30">
+        <p className="text-xs text-white/70 text-center leading-relaxed">
+          Esta evaluación es preliminar y no reemplaza la revisión clínica ni la
+          imagenología. Comparta los resultados con su dentista para un plan de
+          tratamiento definitivo.
+        </p>
+      </div>
     </form>
   );
 }
