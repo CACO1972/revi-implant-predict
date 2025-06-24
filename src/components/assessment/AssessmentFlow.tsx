@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { PatientInfo, Question, Answer } from "@/types/implant";
@@ -12,7 +11,6 @@ import AdvancedAIProcessor from "@/components/ai/AdvancedAIProcessor";
 import IntelligentResultsDisplay from "@/components/ai/IntelligentResultsDisplay";
 import PatientInfoForm from "./PatientInfoForm";
 import AssessmentResults from "./AssessmentResults";
-import RioAssistant from "@/components/RioAssistant";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 
 export default function AssessmentFlow() {
@@ -23,7 +21,6 @@ export default function AssessmentFlow() {
   const [showAIResults, setShowAIResults] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [assessmentResult, setAssessmentResult] = useState<any>(null);
-  const [showRio, setShowRio] = useState(true);
   const [availableQuestions, setAvailableQuestions] = useState<Question[]>([]);
 
   // Función para determinar qué preguntas mostrar basado en las respuestas
@@ -96,7 +93,6 @@ export default function AssessmentFlow() {
         } else {
           // Iniciar procesamiento con IA
           setIsProcessing(true);
-          setShowRio(false);
         }
       }, 100);
     }
@@ -145,7 +141,6 @@ export default function AssessmentFlow() {
     setIsProcessing(false);
     setIsCompleted(false);
     setAssessmentResult(null);
-    setShowRio(true);
     setAvailableQuestions([]);
   };
 
@@ -218,22 +213,6 @@ export default function AssessmentFlow() {
           />
         ) : null}
       </AnimatePresence>
-      
-      {showRio && (
-        <RioAssistant 
-          isVisible={true} 
-          message={
-            currentStep === 0 
-              ? `¡Hola! Soy Río, tu asistente virtual. Vamos a hacer una evaluación personalizada para saber si eres candidato a implantes dentales.`
-              : currentQuestion
-              ? currentStep === 1 
-                ? `${patientInfo.name}, comenzamos con la evaluación. Recuerda responder con total sinceridad para obtener el mejor resultado.`
-                : `Pregunta ${currentStep} de ${availableQuestions.length}. Tómate tu tiempo para responder con sinceridad.`
-              : "¡Genial! Hemos terminado la evaluación."
-          }
-          onDismiss={() => setShowRio(false)}
-        />
-      )}
       
       <Toaster />
     </div>
