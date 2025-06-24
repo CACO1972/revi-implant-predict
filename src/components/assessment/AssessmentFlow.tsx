@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { PatientInfo, Question, Answer } from "@/types/implant";
@@ -181,12 +182,12 @@ export default function AssessmentFlow() {
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 relative overflow-hidden">
       <AnimatedStarryBackground />
       
-      {/* Logo pequeño */}
-      <div className="mb-6">
+      {/* Logo más grande */}
+      <div className="mb-8">
         <img 
           src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png"
           alt="ImplantX Logo"
-          className="h-16 w-auto"
+          className="h-24 w-auto md:h-28"
         />
       </div>
       
