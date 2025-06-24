@@ -32,18 +32,19 @@ export const questions: Question[] = [
       { value: "no", label: "No", score: 0 }
     ],
     recommendation: "Solicite un estudio de densidad ósea y refuerce calcio y vitamina D si corresponde.",
+    isConditional: true,
+    showWhenQuestionHasValues: {
+      questionId: 2,
+      values: ["femenino"]
+    }
   },
   {
     id: 4,
-    title: "¿Dónde se ubicará el implante?",
-    explanation: "La densidad varía por región; el maxilar posterior suele ser menos denso.",
-    options: [
-      { value: "mand_ant", label: "Mandíbula anterior", score: 0 },
-      { value: "mand_post", label: "Mandíbula posterior", score: 1 },
-      { value: "max_ant", label: "Maxilar superior anterior", score: 1 },
-      { value: "max_post", label: "Maxilar superior posterior", score: 2 }
-    ],
-    recommendation: "En maxilar posterior podrían requerirse técnicas de aumento o implantes de mayor diámetro.",
+    title: "¿Qué dientes te faltan?",
+    explanation: "La ubicación de los dientes faltantes determina el tipo de implante y técnica quirúrgica más adecuada.",
+    options: [], // Este será manejado por el componente especial
+    recommendation: "Cada zona de la boca tiene características óseas diferentes que influyen en el éxito del tratamiento.",
+    multiSelect: true
   },
   {
     id: 5,
@@ -99,36 +100,5 @@ export const questions: Question[] = [
       { value: "<2", label: "Una vez al día o menos", score: 2 }
     ],
     recommendation: "Refuerce higiene y programe limpiezas profesionales cada 6 meses.",
-  },
-  {
-    id: 10,
-    title: "¿Le han dicho que tiene enfermedad de las encías o nota sangrado frecuente?",
-    explanation: "La periodontitis previa incrementa el riesgo de pérdida ósea alrededor del implante.",
-    options: [
-      { value: "si", label: "Sí", score: 2 },
-      { value: "no", label: "No", score: 0 }
-    ],
-    recommendation: "Trate la enfermedad de encías antes del implante para reducir complicaciones.",
-  },
-  {
-    id: 11,
-    title: "¿Ha recibido radioterapia en cabeza o cuello?",
-    explanation: "La radioterapia puede reducir la vascularización y complicar la cicatrización ósea.",
-    options: [
-      { value: "si", label: "Sí", score: 2 },
-      { value: "no", label: "No", score: 0 }
-    ],
-    recommendation: "Su dentista evaluará la necesidad de protocolos avanzados y medicación preventiva.",
-  },
-  {
-    id: 12,
-    title: "¿Cuánto tiempo ha pasado desde que perdió el diente?",
-    explanation: "El hueso se reabsorbe progresivamente tras la extracción; esto puede reducir su volumen y densidad.",
-    options: [
-      { value: "<6m", label: "Menos de 6 meses", score: 0 },
-      { value: "6m-2a", label: "Entre 6 meses y 2 años", score: 1 },
-      { value: ">2a", label: "Más de 2 años", score: 2 }
-    ],
-    recommendation: "Si han pasado más de 2 años, podría requerirse regeneración ósea antes del implante.",
-  },
+  }
 ];
