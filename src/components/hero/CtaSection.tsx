@@ -1,4 +1,5 @@
 
+
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Sparkles, Zap, BookOpen, Download } from "lucide-react";
@@ -27,7 +28,7 @@ export default function CtaSection() {
         <div className="relative z-10 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
             <Zap className="w-5 h-5 text-[#040D18]" />
-            <h2 className="text-xl font-bold text-[#040D18] font-montserrat">OBTÉN PLAN DE TRATAMIENTO PERSONALIZADO Y UNA ESTIMACIÓN DEL COSTO</h2>
+            <h2 className="text-xl font-bold text-[#040D18] font-montserrat">VERSIÓN DEMO GRATUITA</h2>
             <Sparkles className="w-5 h-5 text-[#040D18]" />
           </div>
           <p className="text-[#040D18]/80 text-base font-medium">
@@ -46,9 +47,9 @@ export default function CtaSection() {
           <Button
             onClick={() => navigate('/evaluacion')}
             size="lg"
-            className="w-full transition-all duration-500 text-xl font-bold px-12 py-8 rounded-2xl bg-gradient-to-r from-[#5BCBFF] to-[#FF8C42] hover:from-[#FF8C42] hover:to-[#5BCBFF] text-white shadow-lg hover:shadow-[0_0_40px_rgba(91,203,255,0.6)] border-2 border-[#5BCBFF]/30 relative overflow-hidden group"
+            className="w-full transition-all duration-500 text-lg font-bold px-12 py-8 rounded-2xl bg-gradient-to-r from-[#5BCBFF] to-[#FF8C42] hover:from-[#FF8C42] hover:to-[#5BCBFF] text-white shadow-lg hover:shadow-[0_0_40px_rgba(91,203,255,0.6)] border-2 border-[#5BCBFF]/30 relative overflow-hidden group"
           >
-            <div className="flex items-center justify-center gap-4 relative z-10">
+            <div className="flex items-center justify-center gap-3 relative z-10">
               <motion.div
                 animate={{ 
                   rotate: [0, 360],
@@ -59,10 +60,12 @@ export default function CtaSection() {
                   scale: { duration: 2, repeat: Infinity }
                 }}
               >
-                <Sparkles className="w-6 h-6" />
+                <Sparkles className="w-5 h-5" />
               </motion.div>
               
-              <span className="font-montserrat font-bold">Probar Evaluación Demo</span>
+              <span className="font-montserrat font-bold text-center leading-tight">
+                OBTÉN PLAN DE TRATAMIENTO PERSONALIZADO Y UNA ESTIMACIÓN DEL COSTO
+              </span>
               
               <motion.div
                 animate={{ 
@@ -74,7 +77,7 @@ export default function CtaSection() {
                   repeat: Infinity 
                 }}
               >
-                <Zap className="w-6 h-6" />
+                <Zap className="w-5 h-5" />
               </motion.div>
             </div>
             
@@ -138,3 +141,4 @@ export default function CtaSection() {
     </motion.div>
   );
 }
+
