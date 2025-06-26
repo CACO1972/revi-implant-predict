@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Sparkles, Zap, FileText, HelpCircle, BookOpen, Download } from "lucide-react";
+import { Sparkles, Zap, BookOpen, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function CtaSection() {
@@ -27,7 +27,7 @@ export default function CtaSection() {
         <div className="relative z-10 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
             <Zap className="w-5 h-5 text-[#040D18]" />
-            <h2 className="text-xl font-bold text-[#040D18] font-montserrat">VERSIÓN DEMO GRATUITA</h2>
+            <h2 className="text-xl font-bold text-[#040D18] font-montserrat">OBTÉN PLAN DE TRATAMIENTO PERSONALIZADO Y UNA ESTIMACIÓN DEL COSTO</h2>
             <Sparkles className="w-5 h-5 text-[#040D18]" />
           </div>
           <p className="text-[#040D18]/80 text-base font-medium">
