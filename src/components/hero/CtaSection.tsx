@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Play, Sparkles, Zap, FileText, HelpCircle } from "lucide-react";
+import { Sparkles, Zap, FileText, HelpCircle, BookOpen, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function CtaSection() {
@@ -14,9 +14,9 @@ export default function CtaSection() {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 1, duration: 0.6 }}
     >
-      {/* Banner compacto */}
+      {/* Banner de versión demo */}
       <motion.div 
-        className="bg-gradient-to-r from-[#FF8C42]/90 to-[#5BCBFF]/90 backdrop-blur-sm rounded-2xl p-4 relative overflow-hidden border border-[#FF8C42]/30"
+        className="bg-gradient-to-r from-[#FF8C42]/90 to-[#5BCBFF]/90 backdrop-blur-sm rounded-2xl p-6 relative overflow-hidden border border-[#FF8C42]/30"
         whileHover={{ scale: 1.02 }}
       >
         <motion.div 
@@ -25,19 +25,20 @@ export default function CtaSection() {
           transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
         />
         <div className="relative z-10 text-center">
-          <div className="flex items-center justify-center gap-2 mb-1">
-            <Zap className="w-4 h-4 text-[#040D18]" />
-            <h2 className="text-lg font-bold text-[#040D18] font-montserrat">VERSIÓN DEMO GRATUITA</h2>
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Zap className="w-5 h-5 text-[#040D18]" />
+            <h2 className="text-xl font-bold text-[#040D18] font-montserrat">VERSIÓN DEMO GRATUITA</h2>
+            <Sparkles className="w-5 h-5 text-[#040D18]" />
           </div>
-          <p className="text-[#040D18]/80 text-sm font-medium">
-            Sin registro • Confidencial • Plan incluido
+          <p className="text-[#040D18]/80 text-base font-medium">
+            Sin registro • Confidencial • eBook educativo incluido
           </p>
         </div>
       </motion.div>
 
       {/* Botones principales */}
       <div className="space-y-4">
-        {/* Botón del cuestionario */}
+        {/* Botón del cuestionario demo */}
         <motion.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
@@ -58,10 +59,10 @@ export default function CtaSection() {
                   scale: { duration: 2, repeat: Infinity }
                 }}
               >
-                <Play className="w-6 h-6" />
+                <Sparkles className="w-6 h-6" />
               </motion.div>
               
-              <span className="font-montserrat font-bold">Probar Demo del Cuestionario</span>
+              <span className="font-montserrat font-bold">Probar Evaluación Demo</span>
               
               <motion.div
                 animate={{ 
@@ -73,7 +74,7 @@ export default function CtaSection() {
                   repeat: Infinity 
                 }}
               >
-                <Sparkles className="w-6 h-6" />
+                <Zap className="w-6 h-6" />
               </motion.div>
             </div>
             
@@ -87,7 +88,7 @@ export default function CtaSection() {
           </Button>
         </motion.div>
 
-        {/* Botón de ebook y FAQ */}
+        {/* Botón de ebook y FAQ mejorado */}
         <motion.div
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.98 }}
@@ -99,9 +100,9 @@ export default function CtaSection() {
             className="w-full text-lg font-bold px-8 py-6 rounded-2xl border-2 border-[#BFA181]/50 text-[#BFA181] hover:bg-[#BFA181]/10 hover:border-[#BFA181] transition-all duration-300 relative overflow-hidden group"
           >
             <div className="flex items-center justify-center gap-3 relative z-10">
-              <FileText className="w-5 h-5" />
-              <span className="font-montserrat">eBook Gratuito + FAQ</span>
-              <HelpCircle className="w-5 h-5" />
+              <BookOpen className="w-5 h-5" />
+              <span className="font-montserrat">Guía Completa + FAQ</span>
+              <Download className="w-5 h-5" />
             </div>
             
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#BFA181]/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
@@ -109,7 +110,7 @@ export default function CtaSection() {
         </motion.div>
       </div>
 
-      {/* Indicadores de confianza compactos */}
+      {/* Indicadores de confianza */}
       <motion.div
         className="flex items-center justify-center gap-6 text-xs"
         initial={{ opacity: 0 }}
@@ -122,7 +123,7 @@ export default function CtaSection() {
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
-          <span className="text-[#5BCBFF]/80">1,247+ evaluaciones</span>
+          <span className="text-[#5BCBFF]/80">Demo gratuita disponible</span>
         </div>
         
         <div className="flex items-center gap-1">
@@ -131,7 +132,7 @@ export default function CtaSection() {
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 2, repeat: Infinity, delay: 1 }}
           />
-          <span className="text-[#FF8C42]/80">Ebook educativo incluido</span>
+          <span className="text-[#FF8C42]/80">eBook + guía incluida</span>
         </div>
       </motion.div>
     </motion.div>
