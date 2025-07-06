@@ -9,7 +9,7 @@ interface QuestionHeaderProps {
 export default function QuestionHeader({ question }: QuestionHeaderProps) {
   return (
     <>
-      <h2 className="text-lg font-bold text-[#FF8C42] mb-4">
+      <h2 className="text-lg font-bold text-gold mb-4">
         {question.title}
       </h2>
       

@@ -1,7 +1,14 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import SimpleDentalSelector from "../dental/SimpleDentalSelector";
+import NewToothSelector from "../dental/NewToothSelector";
+
+interface MissingTooth {
+  number: number;
+  name: string;
+  dateLost?: string;
+  cause?: string;
+}
 
 interface DentalQuestionSelectorProps {
   selectedValues: (string | number)[];
@@ -9,30 +16,56 @@ interface DentalQuestionSelectorProps {
 }
 
 export default function DentalQuestionSelector({ selectedValues, onSelectionChange }: DentalQuestionSelectorProps) {
-  const [selectedTeeth, setSelectedTeeth] = useState<number[]>([]);
+  const [selectedTeeth, setSelectedTeeth] = useState<MissingTooth[]>([]);
 
   useEffect(() => {
-    // Convertir selectedValues a números
-    const teethNumbers = selectedValues
-      .map(val => parseInt(val.toString()))
-      .filter(num => !isNaN(num));
+    console.log("DEBUG - DentalQuestionSelector recibió selectedValues:", selectedValues);
     
-    setSelectedTeeth(teethNumbers);
+    // Convertir selectedValues a MissingTooth array si viene de sessionStorage
+    if (selectedValues.length > 0) {
+      try {
+        const parsed = selectedValues.map(val => {
+          if (typeof val === 'string' && val.startsWith('{')) {
+            const tooth = JSON.parse(val);
+            console.log("DEBUG - Diente parseado:", tooth);
+            return tooth;
+          }
+          // Fallback para valores simples
+          const toothNumber = parseInt(val.toString());
+          return { 
+            number: toothNumber, 
+            name: `Diente ${toothNumber}` 
+          };
+        });
+        
+        console.log("DEBUG - Dientes parseados totales:", parsed);
+        setSelectedTeeth(parsed);
+      } catch (error) {
+        console.warn('Error parsing selected teeth:', error);
+        setSelectedTeeth([]);
+      }
+    } else {
+      setSelectedTeeth([]);
+    }
   }, [selectedValues]);
 
-  const handleToothSelection = (teeth: number[]) => {
+  const handleToothSelection = (teeth: MissingTooth[]) => {
+    console.log("DEBUG - Selección de dientes actualizada:", teeth);
     setSelectedTeeth(teeth);
-    // Convertir números a strings para compatibilidad con el sistema existente
-    onSelectionChange(teeth.map(tooth => tooth.toString()));
+    
+    // Convertir a formato que puede manejar el sistema existente
+    const values = teeth.map(tooth => JSON.stringify(tooth));
+    console.log("DEBUG - Valores enviados al parent:", values);
+    onSelectionChange(values);
   };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="space-y-4"
+      className="space-y-6"
     >
-      <SimpleDentalSelector 
+      <NewToothSelector 
         selectedTeeth={selectedTeeth}
         onSelectionChange={handleToothSelection}
       />
@@ -41,15 +74,23 @@ export default function DentalQuestionSelector({ selectedValues, onSelectionChan
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="bg-[#178582]/10 border border-[#178582]/20 rounded-lg p-4 text-center"
+          className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-center"
         >
-          <p className="text-[#178582] text-sm font-medium">
+          <p className="text-green-400 text-sm">
             ✅ {selectedTeeth.length} diente{selectedTeeth.length !== 1 ? 's' : ''} seleccionado{selectedTeeth.length !== 1 ? 's' : ''}
           </p>
           <div className="mt-2 text-xs text-white/60">
-            Números: {selectedTeeth.sort((a, b) => a - b).join(', ')}
+            {selectedTeeth.map(tooth => `#${tooth.number}`).join(', ')}
           </div>
         </motion.div>
+      )}
+      
+      {selectedTeeth.length === 0 && (
+        <div className="text-center">
+          <p className="text-white/50 text-sm">
+            👆 Selecciona los dientes faltantes en el diagrama o la lista
+          </p>
+        </div>
       )}
     </motion.div>
   );

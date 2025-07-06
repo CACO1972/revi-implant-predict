@@ -38,8 +38,8 @@ export default function QuestionOptions({ question, selectedValues, onSelectionC
     onSelectionChange(newValues);
   };
 
-  // Pregunta 4 - Selector dental interactivo (nueva ubicación)
-  if (question.id === 4) {
+  // Pregunta 6 - Selector dental interactivo
+  if (question.id === 6) {
     return (
       <div className="space-y-4">
         <DentalQuestionSelector 
@@ -59,7 +59,7 @@ export default function QuestionOptions({ question, selectedValues, onSelectionC
     );
   }
 
-  // Para preguntas multi-select (excepto la 4)
+  // Para preguntas multi-select (excepto la 6)
   if (question.multiSelect) {
     return (
       <div className="space-y-3">

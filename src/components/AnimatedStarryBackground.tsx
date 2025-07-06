@@ -10,80 +10,62 @@ export default function AnimatedStarryBackground() {
     
     const container = containerRef.current;
     const starsContainer = starsRef.current;
-    const starCount = 200;
+    const starCount = 200; // Aumentamos la cantidad de estrellas
     
-    // Limpiar contenido existente
+    // Limpiar estrellas existentes
     starsContainer.innerHTML = '';
     
-    // Crear luces doradas en movimiento (estrellas diminutas)
+    // Crear estrellas
     for (let i = 0; i < starCount; i++) {
       const star = document.createElement('div');
       const size = Math.random();
       
-      // Diferentes tamaños de estrellas doradas
+      // Determinar tamaño y brillo
       if (size > 0.95) {
-        star.className = 'golden-star large bright';
+        star.className = 'star large bright';
       } else if (size > 0.8) {
-        star.className = 'golden-star medium glow';
+        star.className = 'star large';
+      } else if (size > 0.5) {
+        star.className = 'star medium';
       } else {
-        star.className = 'golden-star small';
+        star.className = 'star small';
       }
       
-      // Color dorado principal con variaciones
-      const goldVariations = [
-        '#BFA181', // Dorado principal
-        '#D4BC9A', // Dorado claro
-        '#A68A6B', // Dorado oscuro
-        '#E6D5B8', // Dorado muy claro
-        '#8C7357'  // Dorado profundo
-      ];
-      
-      const randomGold = goldVariations[Math.floor(Math.random() * goldVariations.length)];
-      star.style.backgroundColor = randomGold;
-      star.style.boxShadow = `0 0 ${2 + Math.random() * 6}px 1px ${randomGold}66`;
-      
-      // Posición aleatoria
+      // Posicionar aleatoriamente
       star.style.left = `${Math.random() * 100}%`;
       star.style.top = `${Math.random() * 100}%`;
       
-      // Animación con delays aleatorios para efecto orgánico
-      star.style.animationDelay = `${Math.random() * 8}s`;
-      star.style.animationDuration = `${3 + Math.random() * 8}s`;
+      // Animar con delays aleatorios
+      star.style.animationDelay = `${Math.random() * 5}s`;
+      star.style.animationDuration = `${3 + Math.random() * 7}s`; // Duración más larga para un efecto más suave
       
       starsContainer.appendChild(star);
     }
     
-    // Crear algunas estrellas fugaces ocasionales
-    for (let i = 0; i < 3; i++) {
-      const shootingStar = document.createElement('div');
-      shootingStar.className = 'shooting-star';
-      
-      shootingStar.style.left = `${Math.random() * 100}%`;
-      shootingStar.style.top = `${Math.random() * 50}%`;
-      shootingStar.style.animationDelay = `${Math.random() * 15}s`;
-      
-      starsContainer.appendChild(shootingStar);
-    }
-    
-    // Crear nebulosas doradas sutiles
-    for (let i = 0; i < 4; i++) {
+    // Crear nebulosas o cúmulos estelares (grupos de estrellas)
+    for (let i = 0; i < 5; i++) {
       const nebula = document.createElement('div');
-      nebula.className = 'golden-nebula';
+      nebula.className = 'nebula';
       
+      // Posicionar aleatoriamente
       nebula.style.left = `${Math.random() * 100}%`;
       nebula.style.top = `${Math.random() * 100}%`;
-      nebula.style.animationDelay = `${Math.random() * 10}s`;
+      nebula.style.opacity = `${0.2 + Math.random() * 0.3}`;
+      nebula.style.transform = `scale(${0.5 + Math.random() * 1.5})`;
       
-      starsContainer.appendChild(nebula);
+      // Animar con delays aleatorios
+      nebula.style.animationDelay = `${Math.random() * 5}s`;
+      
+      container.appendChild(nebula);
     }
     
-    // Movimiento suave con el cursor (parallax sutil)
+    // Mover estrellas suavemente al mover el cursor o al hacer scroll
     const handleMouseMove = (e: MouseEvent) => {
       const x = e.clientX / window.innerWidth;
       const y = e.clientY / window.innerHeight;
       
-      starsContainer.style.transform = `translate(${x * -20}px, ${y * -20}px)`;
-      container.style.backgroundPosition = `${x * 15}px ${y * 15}px`;
+      starsContainer.style.transform = `translate(${x * -10}px, ${y * -10}px)`;
+      container.style.backgroundPosition = `${x * 5}px ${y * 5}px`;
     };
     
     window.addEventListener('mousemove', handleMouseMove);
@@ -95,17 +77,13 @@ export default function AnimatedStarryBackground() {
   
   return (
     <>
-      {/* Fondo azul oscuro como cielo nocturno */}
       <div 
         ref={containerRef} 
-        className="fixed inset-0 z-[-3] pointer-events-none bg-gradient-to-br from-[#061524] via-[#040D18] to-[#061524]"
+        className="fixed inset-0 z-[-2] pointer-events-none bg-gradient-to-br from-[#0A1828] to-[#06111E]"
       >
-        {/* Patrón de fondo sutil */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(191,161,129,0.08)_0%,transparent_30%),radial-gradient(circle_at_80%_70%,rgba(191,161,129,0.06)_0%,transparent_25%)] opacity-40"></div>
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/dcc0db4b-004a-4bd8-824f-557417aa8a9c.png')] bg-cover opacity-40 mix-blend-soft-light"></div>
       </div>
-      
-      {/* Estrellas doradas en movimiento */}
-      <div ref={starsRef} className="fixed inset-0 z-[-2] pointer-events-none"></div>
+      <div ref={starsRef} className="fixed inset-0 z-[-1] pointer-events-none"></div>
     </>
   );
 }

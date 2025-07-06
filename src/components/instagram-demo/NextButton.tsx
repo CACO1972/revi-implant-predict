@@ -19,7 +19,7 @@ export default function NextButton({ handleNext, disabled }: NextButtonProps) {
         <Button
           onClick={handleNext}
           disabled={disabled}
-          className="w-full bg-gradient-to-r from-[#5BCBFF] to-[#FF8C42] hover:from-[#5BCBFF]/90 hover:to-[#FF8C42]/90 text-white py-4 rounded-xl shadow-glow transition-all duration-300 disabled:opacity-50 relative overflow-hidden group"
+          className="w-full bg-gradient-to-r from-primary to-gold hover:from-primary/90 hover:to-gold/90 text-white py-4 rounded-xl shadow-glow transition-all duration-300 disabled:opacity-50 relative overflow-hidden group"
         >
           <span className="mr-2">Siguiente</span>
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
