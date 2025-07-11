@@ -11,14 +11,14 @@ interface CompletedPanelProps {
 
 export default function CompletedPanel({ name, result }: CompletedPanelProps) {
   const getColorByLevel = () => {
-    if (!result) return "text-[#1EAEDB]";
+    if (!result) return "text-[#5BCBFF]";
     
     switch (result.level) {
       case 1: return "text-emerald-400";
-      case 2: return "text-[#1EAEDB]";
-      case 3: return "text-gold";
+      case 2: return "text-[#5BCBFF]";
+      case 3: return "text-[#FF8C42]";
       case 4: return "text-red-400";
-      default: return "text-[#1EAEDB]";
+      default: return "text-[#5BCBFF]";
     }
   };
 
@@ -33,16 +33,16 @@ export default function CompletedPanel({ name, result }: CompletedPanelProps) {
       <motion.div 
         animate={{ 
           scale: [1, 1.1, 1],
-          filter: ["drop-shadow(0 0 15px rgba(30, 174, 219, 0.4))", 
-                  "drop-shadow(0 0 25px rgba(30, 174, 219, 0.6))", 
-                  "drop-shadow(0 0 15px rgba(30, 174, 219, 0.4))"]
+          filter: ["drop-shadow(0 0 15px rgba(91, 203, 255, 0.4))", 
+                  "drop-shadow(0 0 25px rgba(91, 203, 255, 0.6))", 
+                  "drop-shadow(0 0 15px rgba(91, 203, 255, 0.4))"]
         }}
         transition={{
           duration: 3,
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#1EAEDB]/30 to-[#1EAEDB]/20 flex items-center justify-center"
+        className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#5BCBFF]/30 to-[#5BCBFF]/20 flex items-center justify-center"
       >
         <img 
           src="/lovable-uploads/9befb1bc-2faa-4657-a0d8-af2ef945c433.png"
@@ -51,7 +51,7 @@ export default function CompletedPanel({ name, result }: CompletedPanelProps) {
         />
       </motion.div>
       
-      <h2 className="text-2xl font-bold gold-gradient-text mb-4">
+      <h2 className="text-2xl font-bold orange-gradient-text mb-4">
         ¡Gracias, {name}!
       </h2>
 
@@ -83,7 +83,7 @@ export default function CompletedPanel({ name, result }: CompletedPanelProps) {
           href="https://implantdx.cl"
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full bg-[#1EAEDB] hover:bg-[#33C3F0] text-starry py-3 px-4 rounded-xl shadow-glow transition-all duration-300 border border-[#1EAEDB]/30"
+          className="block w-full bg-[#5BCBFF] hover:bg-[#309ABB] text-starry py-3 px-4 rounded-xl shadow-glow transition-all duration-300 border border-[#5BCBFF]/30"
         >
           Obtener evaluación profesional
         </a>

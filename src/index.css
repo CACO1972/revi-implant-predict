@@ -5,65 +5,65 @@
  
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 210 60% 8%; /* #0A1828 */
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 210 60% 8%;
+    --card-foreground: 0 0% 100%;
  
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 210 60% 8%;
+    --popover-foreground: 0 0% 100%;
  
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 183 69% 49%; /* #178582 */
+    --primary-foreground: 0 0% 100%;
  
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 35 33% 63%; /* #BFA181 */
+    --secondary-foreground: 0 0% 100%;
  
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 40% 20%;
+    --muted-foreground: 0 0% 70%;
  
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 183 69% 49%; /* #178582 */
+    --accent-foreground: 0 0% 100%;
  
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 40% 20%;
+    --input: 210 40% 20%;
+    --ring: 183 69% 49%;
  
     --radius: 0.5rem;
   }
  
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 210 60% 8%;
+    --foreground: 0 0% 100%;
  
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 210 60% 8%;
+    --card-foreground: 0 0% 100%;
  
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 210 60% 8%;
+    --popover-foreground: 0 0% 100%;
  
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 183 69% 49%;
+    --primary-foreground: 0 0% 100%;
  
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 35 33% 63%;
+    --secondary-foreground: 0 0% 100%;
  
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 210 40% 20%;
+    --muted-foreground: 0 0% 70%;
  
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 183 69% 49%;
+    --accent-foreground: 0 0% 100%;
  
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
  
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 210 40% 20%;
+    --input: 210 40% 20%;
+    --ring: 183 69% 49%;
   }
 }
  
@@ -77,7 +77,7 @@
   }
 }
 
-/* Estilos para AnimatedStarryBackground */
+/* Estilos existentes para AnimatedStarryBackground */
 .star {
   position: absolute;
   border-radius: 50%;
@@ -143,6 +143,54 @@
   }
 }
 
+/* Nuevas animaciones para el timeline orbital */
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Transiciones mejoradas */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.duration-700 {
+  transition-duration: 700ms;
+}
+
+.duration-1000 {
+  transition-duration: 1000ms;
+}
+
+/* Backdrop blur */
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+}
+
+/* Transformaciones personalizadas */
+.scale-125 {
+  transform: scale(1.25);
+}
+
+.scale-150 {
+  transform: scale(1.5);
+}
+
 /* Estilos para la sombra del botón principal */
 .shadow-glow {
   box-shadow: 0 0 15px rgba(23, 133, 130, 0.5);
@@ -153,9 +201,9 @@
   box-shadow: 0 0 25px rgba(23, 133, 130, 0.7);
 }
 
-/* Nuevos estilos para una apariencia más futurista de IA */
-.gold-gradient-text {
-  @apply bg-gradient-to-r from-[#BFA181] to-[#E6D5B8] bg-clip-text text-transparent;
+/* Estilos consistentes con la paleta del proyecto */
+.orange-gradient-text {
+  @apply bg-gradient-to-r from-[#BFA181] to-[#178582] bg-clip-text text-transparent;
 }
 
 .ai-pulse {
@@ -175,11 +223,11 @@
   @apply bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md border border-white/10 rounded-xl relative overflow-hidden;
 }
 
-.shadow-gold-glow {
+.shadow-orange-glow {
   box-shadow: 0 0 15px rgba(191, 161, 129, 0.3);
 }
 
-.shadow-gold-glow:hover {
+.shadow-orange-glow:hover {
   box-shadow: 0 0 25px rgba(191, 161, 129, 0.5);
 }
 

@@ -13,7 +13,7 @@ import Assessment from "./pages/Assessment";
 import TreatmentComparison from "./pages/TreatmentComparison";
 import ContactForm from "./pages/ContactForm";
 import QuienesSomos from "./pages/QuienesSomos";
-import Demo from "./pages/Demo";
+import RecursosEducativos from "./pages/RecursosEducativos";
 
 const queryClient = new QueryClient();
 
@@ -26,12 +26,12 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/demo" element={<Demo />} />
             <Route path="/evaluacion" element={<Assessment />} />
             <Route path="/comparador" element={<TreatmentComparison />} />
             <Route path="/calculadora" element={<PriceCalculator />} />
             <Route path="/contacto" element={<ContactForm />} />
             <Route path="/quienes-somos" element={<QuienesSomos />} />
+            <Route path="/recursos-educativos" element={<RecursosEducativos />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -24,9 +24,9 @@ export default function WelcomePanel({ name, setName, handleStart }: WelcomePane
       <motion.div 
         animate={{ 
           scale: [1, 1.05, 1],
-          filter: ["drop-shadow(0 0 15px rgba(30, 174, 219, 0.3))", 
-                  "drop-shadow(0 0 25px rgba(30, 174, 219, 0.5))", 
-                  "drop-shadow(0 0 15px rgba(30, 174, 219, 0.3))"]
+          filter: ["drop-shadow(0 0 15px rgba(91, 203, 255, 0.3))", 
+                  "drop-shadow(0 0 25px rgba(91, 203, 255, 0.5))", 
+                  "drop-shadow(0 0 15px rgba(91, 203, 255, 0.3))"]
         }}
         transition={{
           duration: 4,
@@ -42,7 +42,7 @@ export default function WelcomePanel({ name, setName, handleStart }: WelcomePane
         />
       </motion.div>
       
-      <h1 className="text-3xl font-bold gold-gradient-text mb-2">
+      <h1 className="text-3xl font-bold orange-gradient-text mb-2">
         ImplantDX
       </h1>
       
@@ -57,7 +57,7 @@ export default function WelcomePanel({ name, setName, handleStart }: WelcomePane
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Ingresa tu nombre"
-          className="bg-white/10 border-[#1EAEDB]/30 text-white placeholder:text-white/50"
+          className="bg-white/10 border-[#5BCBFF]/30 text-white placeholder:text-white/50"
         />
       </div>
       
@@ -70,7 +70,7 @@ export default function WelcomePanel({ name, setName, handleStart }: WelcomePane
         <Button 
           onClick={handleStart} 
           disabled={!name.trim()} 
-          className="w-full bg-[#1EAEDB] hover:bg-[#33C3F0] text-white shadow-glow transition-all duration-300 disabled:bg-neutral-600 disabled:text-white/50"
+          className="w-full bg-[#5BCBFF] hover:bg-[#309ABB] text-white shadow-glow transition-all duration-300 disabled:bg-neutral-600 disabled:text-white/50"
         >
           Comenzar evaluación
         </Button>
@@ -80,10 +80,10 @@ export default function WelcomePanel({ name, setName, handleStart }: WelcomePane
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
         transition={{ delay: 0.5 }}
-        className="p-4 rounded-lg bg-gradient-to-r from-[#1EAEDB]/10 to-transparent border border-[#1EAEDB]/20"
+        className="p-4 rounded-lg bg-gradient-to-r from-[#5BCBFF]/10 to-transparent border border-[#5BCBFF]/20"
       >
         <p className="text-white/70 text-sm">
-          <span className="text-[#1EAEDB] font-medium block mb-1">Democratizando el acceso a tratamientos dentales</span>
+          <span className="text-[#5BCBFF] font-medium block mb-1">Democratizando el acceso a tratamientos dentales</span>
           Esta herramienta está diseñada para ayudar a personas con acceso limitado a servicios 
           odontológicos especializados, ya sea por ubicación geográfica o recursos económicos, 
           empoderándolas a través del conocimiento personalizado.
