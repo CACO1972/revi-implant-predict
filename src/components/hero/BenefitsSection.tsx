@@ -52,11 +52,11 @@ export default function BenefitsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="bg-gradient-to-br from-[#5BCBFF]/10 to-[#178582]/10 border border-[#5BCBFF]/20 rounded-2xl p-6 backdrop-blur-sm hover:border-[#5BCBFF]/40 transition-all duration-300"
+              className="bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 rounded-2xl p-6 backdrop-blur-sm hover:border-primary/40 transition-all duration-300"
             >
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-[#5BCBFF] to-[#178582] rounded-xl flex items-center justify-center">
-                  <benefit.icon className="w-6 h-6 text-white" />
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
+                  <benefit.icon className="w-6 h-6 text-primary-foreground" />
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-lg font-semibold text-white">

@@ -37,7 +37,7 @@ export default function ModernHeroSection() {
             <Button
               size="lg"
               onClick={() => navigate("/auth")}
-              className="group relative px-8 py-6 text-lg font-semibold bg-primary hover:bg-primary-glow text-primary-foreground shadow-glow hover:shadow-glow-strong transition-all duration-300"
+              className="group relative px-8 py-6 text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground shadow-glow-strong transition-all duration-300"
             >
               Comenzar Evaluación
               <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -50,7 +50,7 @@ export default function ModernHeroSection() {
                 const element = document.getElementById('features');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-8 py-6 text-lg font-semibold border-primary/30 hover:border-primary hover:bg-primary/5"
+              className="px-8 py-6 text-lg font-semibold border-accent/40 text-accent hover:border-accent hover:bg-accent/5"
             >
               Conocer Más
             </Button>
