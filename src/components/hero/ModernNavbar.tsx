@@ -45,8 +45,8 @@ export default function ModernNavbar() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Button
-              onClick={() => navigate("/auth")}
-              className="bg-primary hover:bg-primary-glow text-primary-foreground font-semibold shadow-glow"
+              onClick={() => navigate("/evaluacion")}
+              variant="gold"
             >
               Comenzar
             </Button>
@@ -79,10 +79,11 @@ export default function ModernNavbar() {
             <div className="px-4 pt-2">
               <Button
                 onClick={() => {
-                  navigate("/auth");
+                  navigate("/evaluacion");
                   setMobileMenuOpen(false);
                 }}
-                className="w-full bg-primary hover:bg-primary-glow text-primary-foreground"
+                variant="gold"
+                className="w-full"
               >
                 Comenzar Evaluación
               </Button>

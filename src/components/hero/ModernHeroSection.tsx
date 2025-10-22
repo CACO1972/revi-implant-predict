@@ -6,38 +6,36 @@ export default function ModernHeroSection() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Geometric background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(91,204,204,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(91,204,204,0.03)_1px,transparent_1px)] bg-[size:72px_72px]" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-subtle" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse-subtle" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-4xl mx-auto text-center space-y-8">
 
           {/* Main heading */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-            <span className="block text-foreground">Evaluación de</span>
-            <span className="block bg-gradient-to-r from-primary via-primary-glow to-primary bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-tight">
+            <span className="block text-foreground mb-2">Evaluación de</span>
+            <span className="block bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
               Implantes Dentales
             </span>
           </h1>
 
           {/* Description */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Sistema predictivo basado en IA para determinar el nivel de éxito en tratamientos con implantes dentales. Análisis personalizado en minutos.
+            Sistema predictivo basado en IA para determinar el nivel de éxito en tratamientos con implantes dentales.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Button
               size="lg"
-              onClick={() => navigate("/auth")}
-              className="group relative px-8 py-6 text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground shadow-glow-strong transition-all duration-300"
+              variant="gold"
+              onClick={() => navigate("/evaluacion")}
+              className="group relative"
             >
               Comenzar Evaluación
               <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -50,7 +48,6 @@ export default function ModernHeroSection() {
                 const element = document.getElementById('features');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-8 py-6 text-lg font-semibold border-accent/40 text-accent hover:border-accent hover:bg-accent/5"
             >
               Conocer Más
             </Button>
@@ -58,9 +55,6 @@ export default function ModernHeroSection() {
 
         </div>
       </div>
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 }

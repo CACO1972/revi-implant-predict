@@ -60,18 +60,10 @@ export default {
         },
       },
       boxShadow: {
+        'soft': '0 8px 30px rgba(0, 0, 0, 0.12)',
         'glow': 'var(--glow-primary)',
-        'glow-strong': 'var(--glow-strong)',
-      },
-      borderRadius: {
-        xl: "1rem",
-        "2xl": "1.5rem",
-        "3xl": "2rem",
-      },
-      boxShadow: {
-        soft: "0 8px 30px rgba(0, 0, 0, 0.12)",
-        glow: "0 0 15px rgba(91, 203, 255, 0.2)",
-        'orange-glow': "0 0 15px rgba(255, 140, 66, 0.25)",
+        'glow-strong': 'var(--glow-gold)',
+        'glass': 'var(--shadow-glass)',
       },
       animation: {
         "float": "float 6s ease-in-out infinite",
