@@ -18,11 +18,6 @@ export default function ModernHeroSection() {
 
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium backdrop-blur-sm">
-            <Sparkles className="w-4 h-4" />
-            <span>Análisis con Inteligencia Artificial</span>
-          </div>
 
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
@@ -61,21 +56,6 @@ export default function ModernHeroSection() {
             </Button>
           </div>
 
-          {/* Stats */}
-          <div className="pt-12 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-            <div className="space-y-2">
-              <div className="text-3xl md:text-4xl font-bold text-primary">AI</div>
-              <div className="text-sm text-muted-foreground">Análisis Inteligente</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-3xl md:text-4xl font-bold text-primary">&lt;5min</div>
-              <div className="text-sm text-muted-foreground">Resultados Rápidos</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-3xl md:text-4xl font-bold text-primary">100%</div>
-              <div className="text-sm text-muted-foreground">Personalizado</div>
-            </div>
-          </div>
         </div>
       </div>
 

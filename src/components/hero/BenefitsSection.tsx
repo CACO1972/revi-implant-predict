@@ -36,12 +36,11 @@ export default function BenefitsSection() {
         className="text-center space-y-8"
       >
         <div className="space-y-4">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
-            ¿Por qué <span className="text-[#5BCBFF]">IMPLANTX</span>?
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            Evaluación Profesional
           </h2>
-          <p className="text-white/80 text-base md:text-lg max-w-3xl mx-auto">
-            La primera herramienta de evaluación dental con inteligencia artificial 
-            diseñada para democratizar el acceso a orientación clínica profesional
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Sistema predictivo avanzado para tratamientos de implantes dentales
           </p>
         </div>
 
@@ -72,22 +71,6 @@ export default function BenefitsSection() {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="bg-gradient-to-r from-[#BFA181]/10 to-[#FF8C42]/10 border border-[#BFA181]/20 rounded-2xl p-6 mt-8"
-        >
-          <p className="text-[#BFA181] text-sm font-medium mb-2">
-            🎯 Especialmente diseñado para
-          </p>
-          <p className="text-white/80 text-sm leading-relaxed">
-            Personas con <span className="text-[#FF8C42] font-semibold">recursos limitados</span> o en 
-            <span className="text-[#5BCBFF] font-semibold"> zonas geográficamente aisladas</span> que 
-            necesitan orientación clínica antes de invertir en consultas presenciales
-          </p>
-        </motion.div>
       </motion.div>
     </section>
   );
