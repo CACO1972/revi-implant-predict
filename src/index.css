@@ -5,65 +5,83 @@
  
 @layer base {
   :root {
-    --background: 210 60% 8%; /* #0A1828 */
-    --foreground: 0 0% 100%;
-
-    --card: 210 60% 8%;
-    --card-foreground: 0 0% 100%;
- 
-    --popover: 210 60% 8%;
-    --popover-foreground: 0 0% 100%;
- 
-    --primary: 183 69% 49%; /* #178582 */
-    --primary-foreground: 0 0% 100%;
- 
-    --secondary: 35 33% 63%; /* #BFA181 */
-    --secondary-foreground: 0 0% 100%;
- 
-    --muted: 210 40% 20%;
-    --muted-foreground: 0 0% 70%;
- 
-    --accent: 183 69% 49%; /* #178582 */
-    --accent-foreground: 0 0% 100%;
- 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 210 40% 20%;
-    --input: 210 40% 20%;
-    --ring: 183 69% 49%;
- 
+    /* Base colors - Dark theme inspired by Trust Machines */
+    --background: 0 0% 3%;
+    --foreground: 180 10% 95%;
+    
+    --card: 0 0% 5%;
+    --card-foreground: 180 10% 95%;
+    
+    --popover: 0 0% 5%;
+    --popover-foreground: 180 10% 95%;
+    
+    /* Turquoise/Cyan accent - main brand color */
+    --primary: 180 65% 60%;
+    --primary-foreground: 0 0% 10%;
+    --primary-glow: 180 80% 70%;
+    
+    --secondary: 180 20% 15%;
+    --secondary-foreground: 180 10% 95%;
+    
+    --muted: 180 10% 12%;
+    --muted-foreground: 180 5% 60%;
+    
+    --accent: 180 65% 60%;
+    --accent-foreground: 0 0% 10%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 180 20% 15%;
+    --input: 180 20% 15%;
+    --ring: 180 65% 60%;
+    
+    --chart-1: 180 65% 60%;
+    --chart-2: 200 70% 55%;
+    --chart-3: 160 60% 55%;
+    --chart-4: 190 75% 50%;
+    --chart-5: 170 68% 58%;
+    
     --radius: 0.5rem;
+    
+    /* Custom gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(180 65% 50%), hsl(180 80% 65%));
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 3%), hsl(180 30% 8%));
+    
+    /* Glow effects */
+    --glow-primary: 0 0 30px hsla(180 65% 60% / 0.3);
+    --glow-strong: 0 0 50px hsla(180 80% 70% / 0.4);
   }
- 
+  
   .dark {
-    --background: 210 60% 8%;
-    --foreground: 0 0% 100%;
- 
-    --card: 210 60% 8%;
-    --card-foreground: 0 0% 100%;
- 
-    --popover: 210 60% 8%;
-    --popover-foreground: 0 0% 100%;
- 
-    --primary: 183 69% 49%;
-    --primary-foreground: 0 0% 100%;
- 
-    --secondary: 35 33% 63%;
-    --secondary-foreground: 0 0% 100%;
- 
-    --muted: 210 40% 20%;
-    --muted-foreground: 0 0% 70%;
- 
-    --accent: 183 69% 49%;
-    --accent-foreground: 0 0% 100%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 210 40% 20%;
-    --input: 210 40% 20%;
-    --ring: 183 69% 49%;
+    --background: 0 0% 3%;
+    --foreground: 180 10% 95%;
+    
+    --card: 0 0% 5%;
+    --card-foreground: 180 10% 95%;
+    
+    --popover: 0 0% 5%;
+    --popover-foreground: 180 10% 95%;
+    
+    --primary: 180 65% 60%;
+    --primary-foreground: 0 0% 10%;
+    --primary-glow: 180 80% 70%;
+    
+    --secondary: 180 20% 15%;
+    --secondary-foreground: 180 10% 95%;
+    
+    --muted: 180 10% 12%;
+    --muted-foreground: 180 5% 60%;
+    
+    --accent: 180 65% 60%;
+    --accent-foreground: 0 0% 10%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 180 20% 15%;
+    --input: 180 20% 15%;
+    --ring: 180 65% 60%;
   }
 }
  
@@ -72,8 +90,13 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
   }
 }
 

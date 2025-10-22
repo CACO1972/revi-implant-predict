@@ -19,44 +19,49 @@ export default {
       },
     },
     extend: {
-      colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: "#040D18", // Azul oscuro principal
-        foreground: "#FFFFFF",
-        primary: {
-          DEFAULT: "#5BCBFF", // Azul neón principal
-          dark: "#309ABB",
-          light: "#97E9FF",
-          foreground: "#FFFFFF"
-        },
-        orange: {
-          DEFAULT: "#FF8C42", // Naranja principal
-          50: "#FFF4E6",
-          100: "#FFE8CC",
-          200: "#FFD699",
-          300: "#FFC366",
-          400: "#FFB033",
-          500: "#FF8C42", // Our main orange color
-          600: "#E6672A",
-          700: "#CC4812",
-          800: "#B32900",
-          900: "#990A00",
-        },
-        starry: {
-          DEFAULT: "#040D18", // Azul oscuro principal
-          darker: "#020509",
-        },
-        neonblue: {
-          DEFAULT: "#5BCBFF", // Azul neón (igual que primary)
-          light: "#97E9FF",
-          dark: "#309ABB"
-        }
-      },
       fontFamily: {
-        'montserrat': ['Montserrat', 'sans-serif'],
-        'playfair': ['Playfair Display', 'serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      boxShadow: {
+        'glow': 'var(--glow-primary)',
+        'glow-strong': 'var(--glow-strong)',
       },
       borderRadius: {
         xl: "1rem",
