@@ -1,1 +1,10 @@
 project_id = "lvewzkjdmytlhzjlmltj"
+
+[functions.analyze-assessment]
+verify_jwt = true
+
+[functions.generate-treatment-plan]
+verify_jwt = true
+
+[functions.estimate-costs]
+verify_jwt = true

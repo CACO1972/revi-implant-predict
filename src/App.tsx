@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PriceCalculator from "./pages/PriceCalculator";
 import Assessment from "./pages/Assessment";
+import Auth from "./pages/Auth";
 import TreatmentComparison from "./pages/TreatmentComparison";
 import ContactForm from "./pages/ContactForm";
 import QuienesSomos from "./pages/QuienesSomos";
@@ -26,6 +27,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/evaluacion" element={<Assessment />} />
             <Route path="/comparador" element={<TreatmentComparison />} />
             <Route path="/calculadora" element={<PriceCalculator />} />
