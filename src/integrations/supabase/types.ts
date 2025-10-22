@@ -14,7 +14,280 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ai_analysis: {
+        Row: {
+          analysis_text: string
+          assessment_id: string
+          clinical_recommendations: Json | null
+          created_at: string | null
+          id: string
+          personalized_explanation: string | null
+          positive_factors: Json | null
+          risk_factors: Json | null
+        }
+        Insert: {
+          analysis_text: string
+          assessment_id: string
+          clinical_recommendations?: Json | null
+          created_at?: string | null
+          id?: string
+          personalized_explanation?: string | null
+          positive_factors?: Json | null
+          risk_factors?: Json | null
+        }
+        Update: {
+          analysis_text?: string
+          assessment_id?: string
+          clinical_recommendations?: Json | null
+          created_at?: string | null
+          id?: string
+          personalized_explanation?: string | null
+          positive_factors?: Json | null
+          risk_factors?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_analysis_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: true
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assessment_answers: {
+        Row: {
+          assessment_id: string
+          created_at: string | null
+          id: string
+          question_id: number
+          score: number
+          selected_values: Json
+        }
+        Insert: {
+          assessment_id: string
+          created_at?: string | null
+          id?: string
+          question_id: number
+          score: number
+          selected_values: Json
+        }
+        Update: {
+          assessment_id?: string
+          created_at?: string | null
+          id?: string
+          question_id?: number
+          score?: number
+          selected_values?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_answers_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assessments: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          patient_age: number
+          patient_name: string
+          status: string | null
+          success_level: number | null
+          total_score: number | null
+          user_id: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          patient_age: number
+          patient_name: string
+          status?: string | null
+          success_level?: number | null
+          total_score?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          patient_age?: number
+          patient_name?: string
+          status?: string | null
+          success_level?: number | null
+          total_score?: number | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      cost_estimates: {
+        Row: {
+          assessment_id: string
+          breakdown: Json
+          created_at: string | null
+          currency: string | null
+          financing_options: Json | null
+          id: string
+          total_max: number | null
+          total_min: number | null
+        }
+        Insert: {
+          assessment_id: string
+          breakdown: Json
+          created_at?: string | null
+          currency?: string | null
+          financing_options?: Json | null
+          id?: string
+          total_max?: number | null
+          total_min?: number | null
+        }
+        Update: {
+          assessment_id?: string
+          breakdown?: Json
+          created_at?: string | null
+          currency?: string | null
+          financing_options?: Json | null
+          id?: string
+          total_max?: number | null
+          total_min?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cost_estimates_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      email_subscriptions: {
+        Row: {
+          email: string
+          full_name: string | null
+          id: string
+          is_active: boolean | null
+          subscribed_at: string | null
+        }
+        Insert: {
+          email: string
+          full_name?: string | null
+          id?: string
+          is_active?: boolean | null
+          subscribed_at?: string | null
+        }
+        Update: {
+          email?: string
+          full_name?: string | null
+          id?: string
+          is_active?: boolean | null
+          subscribed_at?: string | null
+        }
+        Relationships: []
+      }
+      pdf_reports: {
+        Row: {
+          assessment_id: string
+          file_name: string
+          file_url: string
+          generated_at: string | null
+          id: string
+        }
+        Insert: {
+          assessment_id: string
+          file_name: string
+          file_url: string
+          generated_at?: string | null
+          id?: string
+        }
+        Update: {
+          assessment_id?: string
+          file_name?: string
+          file_url?: string
+          generated_at?: string | null
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pdf_reports_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      treatment_plans: {
+        Row: {
+          assessment_id: string
+          created_at: string | null
+          estimated_timeline: string | null
+          id: string
+          implant_type: string | null
+          phases: Json
+          pre_post_care: Json | null
+          preparatory_procedures: Json | null
+        }
+        Insert: {
+          assessment_id: string
+          created_at?: string | null
+          estimated_timeline?: string | null
+          id?: string
+          implant_type?: string | null
+          phases: Json
+          pre_post_care?: Json | null
+          preparatory_procedures?: Json | null
+        }
+        Update: {
+          assessment_id?: string
+          created_at?: string | null
+          estimated_timeline?: string | null
+          id?: string
+          implant_type?: string | null
+          phases?: Json
+          pre_post_care?: Json | null
+          preparatory_procedures?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "treatment_plans_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
