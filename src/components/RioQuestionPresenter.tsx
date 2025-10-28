@@ -27,15 +27,15 @@ interface RioQuestionPresenterProps {
 }
 
 const questionIcons = {
-  1: Clock, // Edad
-  2: Heart, // Género
-  3: Moon, // Menopausia
-  4: MapPin, // Dientes faltantes
-  5: Shield, // Osteoporosis
-  6: Cigarette, // Fumar
-  7: Heart, // Diabetes
-  8: AlertTriangle, // Bruxismo
-  9: Sparkles // Higiene
+  1: Cigarette,
+  2: Heart,
+  3: Moon,
+  4: Clock,
+  5: Smile,
+  6: MapPin,
+  7: Shield,
+  8: AlertTriangle,
+  9: Sparkles
 };
 
 const getRioMessages = (patientName: string = "paciente") => {
@@ -43,15 +43,16 @@ const getRioMessages = (patientName: string = "paciente") => {
   const firstName = patientName.split(' ')[0];
   
   return {
-    1: `${firstName}, ¿cuántos años tienes?`,
-    2: `${firstName}, ¿con qué género te identificas?`,
-    3: `${firstName}, ¿has dejado de menstruar hace más de un año?`,
-    4: `${firstName}, selecciona qué dientes te faltan`,
-    5: `${firstName}, ¿te han diagnosticado osteoporosis?`,
-    6: `${firstName}, ¿fumas actualmente?`,
-    7: `${firstName}, ¿tienes diagnóstico de diabetes?`,
-    8: `${firstName}, ¿aprietas o rechinas los dientes?`,
-    9: `${firstName}, ¿con qué frecuencia te cepillas?`
+    1: `${firstName}, ¿fumas o has fumado?`,
+    1.5: `${firstName}, ¿estarías dispuesto/a a dejar de fumar?`,
+    2: `${firstName}, ¿tienes diabetes?`,
+    3: `${firstName}, ¿rechinas los dientes por la noche?`,
+    4: `${firstName}, ¿cuánto tiempo llevas sin estos dientes?`,
+    5: `${firstName}, ¿cuántos dientes necesitas reemplazar?`,
+    6: `${firstName}, selecciona exactamente qué dientes te faltan`,
+    7: `${firstName}, ¿tienes alguna condición bucal actual?`,
+    8: `${firstName}, ¿cómo perdiste estos dientes?`,
+    9: `${firstName}, ¿cómo calificas tu higiene dental?`
   };
 };
 

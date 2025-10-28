@@ -36,11 +36,12 @@ export default function BenefitsSection() {
         className="text-center space-y-8"
       >
         <div className="space-y-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            Evaluación Profesional
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+            ¿Por qué <span className="text-[#5BCBFF]">IMPLANTX</span>?
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Sistema predictivo avanzado para tratamientos de implantes dentales
+          <p className="text-white/80 text-base md:text-lg max-w-3xl mx-auto">
+            La primera herramienta de evaluación dental con inteligencia artificial 
+            diseñada para democratizar el acceso a orientación clínica profesional
           </p>
         </div>
 
@@ -52,17 +53,17 @@ export default function BenefitsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="bg-gradient-to-br from-card/40 to-card/20 border border-primary/20 rounded-2xl p-6 backdrop-blur-sm hover:border-primary/40 hover:shadow-glow transition-all duration-300"
+              className="bg-gradient-to-br from-[#5BCBFF]/10 to-[#178582]/10 border border-[#5BCBFF]/20 rounded-2xl p-6 backdrop-blur-sm hover:border-[#5BCBFF]/40 transition-all duration-300"
             >
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center border border-primary/30">
-                  <benefit.icon className="w-6 h-6 text-primary" />
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-[#5BCBFF] to-[#178582] rounded-xl flex items-center justify-center">
+                  <benefit.icon className="w-6 h-6 text-white" />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-lg font-semibold text-foreground">
+                  <h3 className="text-lg font-semibold text-white">
                     {benefit.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  <p className="text-white/70 text-sm leading-relaxed">
                     {benefit.description}
                   </p>
                 </div>
@@ -71,6 +72,22 @@ export default function BenefitsSection() {
           ))}
         </div>
 
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="bg-gradient-to-r from-[#BFA181]/10 to-[#FF8C42]/10 border border-[#BFA181]/20 rounded-2xl p-6 mt-8"
+        >
+          <p className="text-[#BFA181] text-sm font-medium mb-2">
+            🎯 Especialmente diseñado para
+          </p>
+          <p className="text-white/80 text-sm leading-relaxed">
+            Personas con <span className="text-[#FF8C42] font-semibold">recursos limitados</span> o en 
+            <span className="text-[#5BCBFF] font-semibold"> zonas geográficamente aisladas</span> que 
+            necesitan orientación clínica antes de invertir en consultas presenciales
+          </p>
+        </motion.div>
       </motion.div>
     </section>
   );

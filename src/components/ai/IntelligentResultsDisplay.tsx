@@ -30,19 +30,19 @@ export default function IntelligentResultsDisplay({
       title: "Análisis IA Completado",
       description: "Procesamiento de algoritmos finalizado exitosamente",
       icon: Brain,
-      color: "text-primary"
+      color: "text-[#178582]"
     },
     {
       title: "Patrón Identificado",
       description: "Tu perfil ha sido correlacionado con casos similares",
       icon: Target,
-      color: "text-accent"
+      color: "text-[#BFA181]"
     },
     {
       title: "Predicción Generada",
       description: "Modelo personalizado calibrado para tu caso específico",
       icon: TrendingUp,
-      color: "text-primary"
+      color: "text-green-400"
     }
   ];
 
@@ -87,21 +87,21 @@ export default function IntelligentResultsDisplay({
 
   const getLevelColor = () => {
     switch (result.level) {
-      case 1: return "text-primary";
-      case 2: return "text-primary";
-      case 3: return "text-accent";
-      case 4: return "text-destructive";
-      default: return "text-destructive";
+      case 1: return "text-emerald-400";
+      case 2: return "text-[#178582]";
+      case 3: return "text-[#BFA181]";
+      case 4: return "text-orange-400";
+      default: return "text-red-400";
     }
   };
 
   const getLevelBg = () => {
     switch (result.level) {
-      case 1: return "bg-primary/10";
-      case 2: return "bg-primary/10";
-      case 3: return "bg-accent/10";
-      case 4: return "bg-destructive/10";
-      default: return "bg-destructive/10";
+      case 1: return "bg-emerald-400/10";
+      case 2: return "bg-[#178582]/10";
+      case 3: return "bg-[#BFA181]/10";
+      case 4: return "bg-orange-400/10";
+      default: return "bg-red-400/10";
     }
   };
 
@@ -127,7 +127,7 @@ export default function IntelligentResultsDisplay({
         {[...Array(25)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-primary/40 rounded-full"
+            className="absolute w-1 h-1 bg-[#178582]/40 rounded-full"
             animate={{
               x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
               y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
@@ -158,18 +158,18 @@ export default function IntelligentResultsDisplay({
         >
           <div className="relative mx-auto w-24 h-24 mb-6">
             <motion.div
-              className="w-full h-full rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center"
+              className="w-full h-full rounded-full bg-gradient-to-r from-[#178582] to-[#BFA181] flex items-center justify-center"
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
             >
-              <Brain className="w-12 h-12 text-primary-foreground" />
+              <Brain className="w-12 h-12 text-white" />
             </motion.div>
             
             {/* Pulsing rings */}
             {[0, 1, 2].map(i => (
               <motion.div
                 key={i}
-                className="absolute inset-0 rounded-full border-2 border-primary/30"
+                className="absolute inset-0 rounded-full border-2 border-[#178582]/30"
                 style={{ margin: `${i * 6}px` }}
                 animate={{ 
                   scale: [1, 1.2, 1],
@@ -184,10 +184,10 @@ export default function IntelligentResultsDisplay({
             ))}
           </div>
           
-          <h2 className="text-3xl font-bold text-foreground mb-2">
+          <h2 className="text-3xl font-bold text-white mb-2">
             Análisis IA Finalizado
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-white/70">
             Inteligencia artificial médica - Resultados personalizados
           </p>
         </motion.div>
@@ -199,13 +199,13 @@ export default function IntelligentResultsDisplay({
           transition={{ delay: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"
         >
-          <div className="bg-card/30 rounded-xl p-4 border border-primary/30">
+          <div className="bg-white/5 rounded-xl p-4 border border-[#178582]/30">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-muted-foreground text-sm">Casos Analizados</span>
-              <Activity className="w-4 h-4 text-primary" />
+              <span className="text-white/70 text-sm">Casos Analizados</span>
+              <Activity className="w-4 h-4 text-[#178582]" />
             </div>
             <motion.div 
-              className="text-2xl font-bold text-primary"
+              className="text-2xl font-bold text-[#178582]"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -213,13 +213,13 @@ export default function IntelligentResultsDisplay({
             </motion.div>
           </div>
           
-          <div className="bg-card/30 rounded-xl p-4 border border-accent/30">
+          <div className="bg-white/5 rounded-xl p-4 border border-[#BFA181]/30">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-muted-foreground text-sm">Correlación IA</span>
-              <Target className="w-4 h-4 text-accent" />
+              <span className="text-white/70 text-sm">Correlación IA</span>
+              <Target className="w-4 h-4 text-[#BFA181]" />
             </div>
             <motion.div 
-              className="text-2xl font-bold text-accent"
+              className="text-2xl font-bold text-[#BFA181]"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
             >
@@ -227,13 +227,13 @@ export default function IntelligentResultsDisplay({
             </motion.div>
           </div>
           
-          <div className="bg-card/30 rounded-xl p-4 border border-primary/30">
+          <div className="bg-white/5 rounded-xl p-4 border border-green-500/30">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-muted-foreground text-sm">Confianza IA</span>
-              <Zap className="w-4 h-4 text-primary" />
+              <span className="text-white/70 text-sm">Confianza IA</span>
+              <Zap className="w-4 h-4 text-green-400" />
             </div>
             <motion.div 
-              className="text-2xl font-bold text-primary"
+              className="text-2xl font-bold text-green-400"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity, delay: 1 }}
             >
@@ -260,26 +260,26 @@ export default function IntelligentResultsDisplay({
                 transition={{ delay: index * 0.5 }}
                 className={`p-4 rounded-xl border transition-all ${
                   isActive 
-                    ? "bg-card/40 border-primary/50" 
-                    : "bg-card/20 border-border/30"
+                    ? "bg-white/10 border-[#178582]/50" 
+                    : "bg-white/5 border-white/10"
                 }`}
               >
                 <div className="flex items-center gap-4">
                   <div className={`p-3 rounded-full ${
-                    isActive ? "bg-primary/20" : "bg-muted/20"
+                    isActive ? "bg-[#178582]/20" : "bg-white/10"
                   }`}>
                     <PhaseIcon className={`w-6 h-6 ${
-                      isActive ? phase.color : "text-muted-foreground"
+                      isActive ? phase.color : "text-white/40"
                     }`} />
                   </div>
                   <div>
                     <h3 className={`font-semibold ${
-                      isActive ? "text-foreground" : "text-muted-foreground"
+                      isActive ? "text-white" : "text-white/50"
                     }`}>
                       {phase.title}
                     </h3>
                     <p className={`text-sm ${
-                      isActive ? "text-muted-foreground" : "text-muted-foreground/50"
+                      isActive ? "text-white/80" : "text-white/40"
                     }`}>
                       {phase.description}
                     </p>
@@ -291,7 +291,7 @@ export default function IntelligentResultsDisplay({
                       transition={{ duration: 1, repeat: Infinity }}
                       className="ml-auto"
                     >
-                      <Zap className="w-5 h-5 text-primary" />
+                      <Zap className="w-5 h-5 text-[#178582]" />
                     </motion.div>
                   )}
                 </div>
@@ -305,7 +305,7 @@ export default function IntelligentResultsDisplay({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2 }}
-          className={`${getLevelBg()} rounded-2xl p-6 border border-border/30 text-center`}
+          className={`${getLevelBg()} rounded-2xl p-6 border border-white/10 text-center`}
         >
           <div className="flex items-center justify-center mb-4">
             <Brain className={`w-8 h-8 ${getLevelColor()} mr-3`} />
@@ -315,7 +315,7 @@ export default function IntelligentResultsDisplay({
           </div>
           
           <motion.p 
-            className="text-foreground/90 text-lg leading-relaxed"
+            className="text-white/90 text-lg leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2.5 }}
@@ -324,7 +324,7 @@ export default function IntelligentResultsDisplay({
           </motion.p>
           
           <motion.div 
-            className="mt-4 pt-4 border-t border-border/30"
+            className="mt-4 pt-4 border-t border-white/10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 3 }}
@@ -332,7 +332,7 @@ export default function IntelligentResultsDisplay({
             <div className={`text-3xl font-bold ${getLevelColor()} mb-2`}>
               Nivel {result.level}: {result.prediction}
             </div>
-            <div className="text-muted-foreground">
+            <div className="text-white/70">
               Puntuación del modelo: <span className={`font-bold ${getLevelColor()}`}>
                 {result.totalScore}/16
               </span>
@@ -352,9 +352,9 @@ export default function IntelligentResultsDisplay({
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
             className="inline-block"
           >
-            <Zap className="w-6 h-6 text-primary" />
+            <Zap className="w-6 h-6 text-[#178582]" />
           </motion.div>
-          <p className="text-muted-foreground mt-2">
+          <p className="text-white/60 mt-2">
             Preparando recomendaciones personalizadas...
           </p>
         </motion.div>

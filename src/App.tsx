@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { ThemeProvider } from "next-themes";
 
-import Index from "./pages/ModernIndex";
+import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PriceCalculator from "./pages/PriceCalculator";
 import Assessment from "./pages/Assessment";
@@ -27,7 +27,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            
+            <Route path="/auth" element={<Auth />} />
             <Route path="/evaluacion" element={<Assessment />} />
             <Route path="/comparador" element={<TreatmentComparison />} />
             <Route path="/calculadora" element={<PriceCalculator />} />

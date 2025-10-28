@@ -19,51 +19,54 @@ export default {
       },
     },
     extend: {
-      fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['Inter', 'system-ui', 'sans-serif'],
-      },
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: "#040D18", // Azul oscuro principal
+        foreground: "#FFFFFF",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-          glow: "hsl(var(--primary-glow))",
+          DEFAULT: "#5BCBFF", // Azul neón principal
+          dark: "#309ABB",
+          light: "#97E9FF",
+          foreground: "#FFFFFF"
         },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+        orange: {
+          DEFAULT: "#FF8C42", // Naranja principal
+          50: "#FFF4E6",
+          100: "#FFE8CC",
+          200: "#FFD699",
+          300: "#FFC366",
+          400: "#FFB033",
+          500: "#FF8C42", // Our main orange color
+          600: "#E6672A",
+          700: "#CC4812",
+          800: "#B32900",
+          900: "#990A00",
         },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+        starry: {
+          DEFAULT: "#040D18", // Azul oscuro principal
+          darker: "#020509",
         },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
+        neonblue: {
+          DEFAULT: "#5BCBFF", // Azul neón (igual que primary)
+          light: "#97E9FF",
+          dark: "#309ABB"
+        }
+      },
+      fontFamily: {
+        'montserrat': ['Montserrat', 'sans-serif'],
+        'playfair': ['Playfair Display', 'serif'],
+      },
+      borderRadius: {
+        xl: "1rem",
+        "2xl": "1.5rem",
+        "3xl": "2rem",
       },
       boxShadow: {
-        'soft': '0 8px 30px rgba(0, 0, 0, 0.12)',
-        'glow': 'var(--glow-primary)',
-        'glow-strong': 'var(--glow-gold)',
-        'glass': 'var(--shadow-glass)',
+        soft: "0 8px 30px rgba(0, 0, 0, 0.12)",
+        glow: "0 0 15px rgba(91, 203, 255, 0.2)",
+        'orange-glow': "0 0 15px rgba(255, 140, 66, 0.25)",
       },
       animation: {
         "float": "float 6s ease-in-out infinite",
