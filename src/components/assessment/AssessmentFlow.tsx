@@ -11,7 +11,6 @@ import { calculateScore, evaluateResult, getPersonalizedRecommendations } from "
 import AdvancedAIProcessor from "@/components/ai/AdvancedAIProcessor";
 import IntelligentResultsDisplay from "@/components/ai/IntelligentResultsDisplay";
 import PatientInfoForm from "./PatientInfoForm";
-import AssessmentResults from "./AssessmentResults";
 import AnimatedStarryBackground from "@/components/AnimatedStarryBackground";
 
 export default function AssessmentFlow() {
@@ -167,14 +166,22 @@ export default function AssessmentFlow() {
     );
   }
 
-  // Mostrar resultados finales
+  // Mostrar resultados finales (HUD)
   if (isCompleted && assessmentResult) {
+    const ImplantXHudScreen = React.lazy(() => import("@/components/results/ImplantXHudScreen"));
     return (
-      <AssessmentResults
-        patientInfo={patientInfo}
-        assessmentResult={assessmentResult}
-        onRestart={handleRestart}
-      />
+      <React.Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center">Cargando...</div>}>
+        <ImplantXHudScreen
+          patientInfo={patientInfo}
+          answers={answers}
+          onContactRio={() => {
+            toast({
+              title: "Contacto con Río",
+              description: "Esta función estará disponible próximamente",
+            });
+          }}
+        />
+      </React.Suspense>
     );
   }
 
