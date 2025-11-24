@@ -109,6 +109,7 @@ export default {
       },
       backgroundImage: {
         "stars": "url('/lovable-uploads/19481b4c-abe4-45b5-849c-180b7603e111.png')",
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
     },
   },
