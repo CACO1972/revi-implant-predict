@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -5,65 +6,87 @@
  
 @layer base {
   :root {
-    --background: 210 60% 8%; /* #0A1828 */
-    --foreground: 0 0% 100%;
+    /* Minimalista Clínico - Tema Claro Profesional */
+    --background: 210 20% 98%; /* Blanco suave #F8FAFB */
+    --foreground: 210 25% 15%; /* Gris oscuro profesional */
 
-    --card: 210 60% 8%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%; /* Blanco puro */
+    --card-foreground: 210 25% 15%;
  
-    --popover: 210 60% 8%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 25% 15%;
  
-    --primary: 183 69% 49%; /* #178582 */
+    --primary: 183 50% 35%; /* Turquesa médico profesional #2D8A87 */
     --primary-foreground: 0 0% 100%;
  
-    --secondary: 35 33% 63%; /* #BFA181 */
+    --secondary: 35 25% 55%; /* Dorado suave profesional #A69070 */
     --secondary-foreground: 0 0% 100%;
  
-    --muted: 210 40% 20%;
-    --muted-foreground: 0 0% 70%;
+    --muted: 210 15% 92%;
+    --muted-foreground: 210 15% 45%;
  
-    --accent: 183 69% 49%; /* #178582 */
+    --accent: 183 45% 40%;
     --accent-foreground: 0 0% 100%;
  
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 210 40% 20%;
-    --input: 210 40% 20%;
-    --ring: 183 69% 49%;
+    --success: 145 55% 42%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 210 15% 88%;
+    --input: 210 15% 88%;
+    --ring: 183 50% 35%;
  
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom clinical colors */
+    --clinical-bg: 210 25% 97%;
+    --clinical-border: 210 15% 85%;
+    --clinical-accent: 183 50% 35%;
   }
  
   .dark {
-    --background: 210 60% 8%;
-    --foreground: 0 0% 100%;
+    --background: 210 35% 8%;
+    --foreground: 210 15% 95%;
  
-    --card: 210 60% 8%;
-    --card-foreground: 0 0% 100%;
+    --card: 210 30% 12%;
+    --card-foreground: 210 15% 95%;
  
-    --popover: 210 60% 8%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 210 30% 12%;
+    --popover-foreground: 210 15% 95%;
  
-    --primary: 183 69% 49%;
+    --primary: 183 50% 45%;
     --primary-foreground: 0 0% 100%;
  
-    --secondary: 35 33% 63%;
+    --secondary: 35 30% 60%;
     --secondary-foreground: 0 0% 100%;
  
-    --muted: 210 40% 20%;
-    --muted-foreground: 0 0% 70%;
+    --muted: 210 25% 20%;
+    --muted-foreground: 210 15% 65%;
  
-    --accent: 183 69% 49%;
+    --accent: 183 50% 45%;
     --accent-foreground: 0 0% 100%;
  
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 50% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 85% 55%;
+    --warning-foreground: 0 0% 100%;
  
-    --border: 210 40% 20%;
-    --input: 210 40% 20%;
-    --ring: 183 69% 49%;
+    --border: 210 25% 22%;
+    --input: 210 25% 22%;
+    --ring: 183 50% 45%;
+
+    --clinical-bg: 210 30% 10%;
+    --clinical-border: 210 25% 20%;
+    --clinical-accent: 183 50% 45%;
   }
 }
  
@@ -72,219 +95,128 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-/* Estilos existentes para AnimatedStarryBackground */
-.star {
-  position: absolute;
-  border-radius: 50%;
-  background-color: #fff;
-  opacity: 0.5;
-  animation: twinkle linear infinite;
+/* Clinical Card Styles */
+.clinical-card {
+  @apply bg-card border border-border rounded-2xl p-6 shadow-sm transition-all duration-300;
 }
 
-.star.small {
-  width: 1px;
-  height: 1px;
+.clinical-card:hover {
+  @apply shadow-md border-primary/30;
 }
 
-.star.medium {
-  width: 2px;
-  height: 2px;
+/* Clean Button Styles */
+.btn-primary {
+  @apply bg-primary text-primary-foreground font-medium px-6 py-3 rounded-xl transition-all duration-200 hover:bg-primary/90 hover:shadow-lg;
 }
 
-.star.large {
-  width: 3px;
-  height: 3px;
+.btn-secondary {
+  @apply bg-secondary/10 text-secondary border border-secondary/30 font-medium px-6 py-3 rounded-xl transition-all duration-200 hover:bg-secondary/20;
 }
 
-.star.bright {
-  box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.3);
-  opacity: 0.9;
+.btn-outline {
+  @apply bg-transparent text-foreground border border-border font-medium px-6 py-3 rounded-xl transition-all duration-200 hover:bg-muted hover:border-primary/30;
 }
 
-.nebula {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(23, 133, 130, 0.2), transparent 70%);
-  animation: pulse 8s ease-in-out infinite alternate;
-  mix-blend-mode: screen;
+/* Professional Badge */
+.badge {
+  @apply inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full;
 }
 
-@keyframes twinkle {
-  0% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 0.2;
-  }
+.badge-primary {
+  @apply bg-primary/10 text-primary border border-primary/20;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.2;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.2;
-  }
+.badge-secondary {
+  @apply bg-secondary/10 text-secondary border border-secondary/20;
 }
 
-/* Nuevas animaciones para el timeline orbital */
-@keyframes ping {
-  75%, 100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+.badge-success {
+  @apply bg-success/10 text-success border border-success/20;
 }
 
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.badge-warning {
+  @apply bg-warning/10 text-warning border border-warning/20;
 }
 
-.animate-ping {
-  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+/* Section Headers */
+.section-title {
+  @apply text-2xl md:text-3xl font-semibold tracking-tight text-foreground;
 }
 
-/* Transiciones mejoradas */
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+.section-subtitle {
+  @apply text-base md:text-lg text-muted-foreground leading-relaxed;
 }
 
-.duration-300 {
-  transition-duration: 300ms;
+/* Form Styles */
+.input-clinical {
+  @apply w-full px-4 py-3 bg-background border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200;
 }
 
-.duration-700 {
-  transition-duration: 700ms;
+/* Progress indicator */
+.progress-bar {
+  @apply h-1.5 bg-muted rounded-full overflow-hidden;
 }
 
-.duration-1000 {
-  transition-duration: 1000ms;
+.progress-bar-fill {
+  @apply h-full bg-primary rounded-full transition-all duration-500 ease-out;
 }
 
-/* Backdrop blur */
-.backdrop-blur-lg {
-  backdrop-filter: blur(16px);
+/* Subtle animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Transformaciones personalizadas */
-.scale-125 {
-  transform: scale(1.25);
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.scale-150 {
-  transform: scale(1.5);
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
 }
 
-/* Estilos para la sombra del botón principal */
-.shadow-glow {
-  box-shadow: 0 0 15px rgba(23, 133, 130, 0.5);
-  transition: box-shadow 0.3s ease;
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
 }
 
-.shadow-glow:hover {
-  box-shadow: 0 0 25px rgba(23, 133, 130, 0.7);
+/* Stagger children animation */
+.stagger-children > * {
+  opacity: 0;
+  animation: fade-in 0.4s ease-out forwards;
 }
 
-/* Estilos consistentes con la paleta del proyecto */
-.orange-gradient-text {
-  @apply bg-gradient-to-r from-[#BFA181] to-[#178582] bg-clip-text text-transparent;
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+
+/* Clean gradient backgrounds */
+.gradient-subtle {
+  @apply bg-gradient-to-br from-background via-background to-muted/50;
 }
 
-.ai-pulse {
-  animation: ai-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.gradient-clinical {
+  @apply bg-gradient-to-br from-primary/5 via-background to-secondary/5;
 }
 
-@keyframes ai-pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
+/* Shadow utilities */
+.shadow-clinical {
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.08);
 }
 
-.glass-panel {
-  @apply bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md border border-white/10 rounded-xl relative overflow-hidden;
+.shadow-clinical-lg {
+  box-shadow: 0 8px 40px -8px rgba(0, 0, 0, 0.12);
 }
 
-.shadow-orange-glow {
-  box-shadow: 0 0 15px rgba(191, 161, 129, 0.3);
-}
-
-.shadow-orange-glow:hover {
-  box-shadow: 0 0 25px rgba(191, 161, 129, 0.5);
-}
-
-.bg-starry {
-  @apply bg-[#0A1828];
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float {
-  animation: float 5s ease-in-out infinite;
-}
-
-@keyframes sparkle {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.7;
-  }
-}
-
-.animate-sparkle {
-  animation: sparkle 1.5s ease-in-out infinite;
-}
-
-.hologram-effect {
-  position: relative;
-  overflow: hidden;
-}
-
-.hologram-effect::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transform: skewX(-25deg);
-  animation: hologram-shine 6s ease-in-out infinite;
-}
-
-@keyframes hologram-shine {
-  0% {
-    left: -100%;
-  }
-  20%, 100% {
-    left: 150%;
-  }
+/* Glass effect for cards */
+.glass-clinical {
+  @apply bg-card/80 backdrop-blur-sm border border-border/50;
 }

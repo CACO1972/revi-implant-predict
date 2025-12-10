@@ -1,43 +1,47 @@
-
+import { ArrowLeft, ArrowRight, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 
 interface NavigationButtonsProps {
-  onPrevious: () => void;
   onNext: () => void;
+  onPrevious: () => void;
   isFirst: boolean;
   isLast: boolean;
 }
 
-export default function NavigationButtons({ 
-  onPrevious, 
-  onNext, 
-  isFirst, 
-  isLast 
+export default function NavigationButtons({
+  onNext,
+  onPrevious,
+  isFirst,
+  isLast
 }: NavigationButtonsProps) {
   return (
-    <motion.div 
-      className="flex justify-between gap-4"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.6 }}
-    >
+    <div className="flex justify-between items-center gap-4 pt-4">
       <Button
-        type="button"
         variant="outline"
         onClick={onPrevious}
         disabled={isFirst}
-        className="flex-1 border-white/10 text-white hover:bg-white/5 disabled:opacity-30"
+        className="border-border text-foreground hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed"
       >
+        <ArrowLeft className="w-4 h-4 mr-2" />
         Anterior
       </Button>
+      
       <Button
-        type="button"
         onClick={onNext}
-        className="flex-1 bg-gradient-to-r from-[#1EAEDB] to-gold hover:from-[#1EAEDB]/90 hover:to-gold/90 text-white shadow-glow transition-all duration-300"
+        className="bg-primary text-primary-foreground hover:bg-primary/90 flex-1 max-w-[200px]"
       >
-        {isLast ? "Ver resultados" : "Siguiente"}
+        {isLast ? (
+          <>
+            Finalizar
+            <Send className="w-4 h-4 ml-2" />
+          </>
+        ) : (
+          <>
+            Siguiente
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </>
+        )}
       </Button>
-    </motion.div>
+    </div>
   );
 }

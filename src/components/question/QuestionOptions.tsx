@@ -1,12 +1,7 @@
-
-import React, { useState } from "react";
+import { useState } from "react";
 import { Question } from "@/types/implant";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import RioResponseReaction from "../RioResponseReaction";
+import { Check } from "lucide-react";
 import DentalQuestionSelector from "./DentalQuestionSelector";
 
 interface QuestionOptionsProps {
@@ -16,120 +11,64 @@ interface QuestionOptionsProps {
 }
 
 export default function QuestionOptions({ question, selectedValues, onSelectionChange }: QuestionOptionsProps) {
-  const [showReaction, setShowReaction] = useState(false);
-  const [lastSelectedAnswer, setLastSelectedAnswer] = useState<string>("");
-
-  const handleSingleSelect = (value: string) => {
-    onSelectionChange([value]);
-    setLastSelectedAnswer(value);
-    setShowReaction(true);
-    
-    // Ocultar reacción después de un tiempo
-    setTimeout(() => setShowReaction(false), 4000);
-  };
-
-  const handleMultiSelect = (value: string, checked: boolean) => {
-    let newValues: (string | number)[];
-    if (checked) {
-      newValues = [...selectedValues, value];
-    } else {
-      newValues = selectedValues.filter(v => v !== value);
-    }
-    onSelectionChange(newValues);
-  };
-
-  // Pregunta 4 - Selector dental interactivo (nueva ubicación)
+  // Pregunta 4 - Selector dental interactivo
   if (question.id === 4) {
     return (
-      <div className="space-y-4">
-        <DentalQuestionSelector 
-          selectedValues={selectedValues}
-          onSelectionChange={onSelectionChange}
-        />
-        
-        {/* Reacción de Río cuando se selecciona */}
-        {showReaction && (
-          <RioResponseReaction 
-            questionId={question.id}
-            selectedAnswer={lastSelectedAnswer}
-            isVisible={showReaction}
-          />
-        )}
-      </div>
+      <DentalQuestionSelector 
+        selectedValues={selectedValues}
+        onSelectionChange={onSelectionChange}
+      />
     );
   }
 
-  // Para preguntas multi-select (excepto la 4)
-  if (question.multiSelect) {
-    return (
-      <div className="space-y-3">
-        {question.options.map((option, index) => (
-          <motion.div
-            key={option.value}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="flex items-center space-x-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
-          >
-            <Checkbox
-              id={`option-${option.value}`}
-              checked={selectedValues.includes(option.value)}
-              onCheckedChange={(checked) => handleMultiSelect(option.value.toString(), checked as boolean)}
-              className="border-[#178582] data-[state=checked]:bg-[#178582]"
-            />
-            <Label
-              htmlFor={`option-${option.value}`}
-              className="text-white/90 cursor-pointer flex-1"
-            >
-              {option.label}
-            </Label>
-          </motion.div>
-        ))}
-      </div>
-    );
-  }
+  const handleOptionClick = (value: string | number) => {
+    if (question.multiSelect) {
+      if (selectedValues.includes(value)) {
+        onSelectionChange(selectedValues.filter(v => v !== value));
+      } else {
+        onSelectionChange([...selectedValues, value]);
+      }
+    } else {
+      onSelectionChange([value]);
+    }
+  };
 
-  // Para preguntas de selección única
   return (
-    <div className="space-y-4">
-      <RadioGroup
-        value={selectedValues[0]?.toString() || ""}
-        onValueChange={handleSingleSelect}
-        className="space-y-3"
-      >
-        {question.options.map((option, index) => (
-          <motion.div
+    <div className="space-y-3">
+      {question.options.map((option, index) => {
+        const isSelected = selectedValues.includes(option.value);
+        
+        return (
+          <motion.button
             key={option.value}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="relative"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.05 }}
+            onClick={() => handleOptionClick(option.value)}
+            className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 ${
+              isSelected 
+                ? 'border-primary bg-primary/5 shadow-sm' 
+                : 'border-border hover:border-primary/40 hover:bg-muted/50'
+            }`}
           >
-            <div className="flex items-center space-x-3 p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-200 border border-white/10 hover:border-[#178582]/30">
-              <RadioGroupItem
-                value={option.value.toString()}
-                id={`option-${option.value}`}
-                className="border-[#178582] text-[#178582]"
-              />
-              <Label
-                htmlFor={`option-${option.value}`}
-                className="text-white/90 cursor-pointer flex-1 font-medium"
-              >
+            <div className="flex items-center gap-3">
+              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+                isSelected 
+                  ? 'border-primary bg-primary' 
+                  : 'border-muted-foreground/40'
+              }`}>
+                {isSelected && <Check className="w-3 h-3 text-primary-foreground" />}
+              </div>
+              
+              <span className={`font-medium transition-colors ${
+                isSelected ? 'text-foreground' : 'text-foreground/80'
+              }`}>
                 {option.label}
-              </Label>
+              </span>
             </div>
-          </motion.div>
-        ))}
-      </RadioGroup>
-      
-      {/* Reacción de Río cuando se selecciona una opción */}
-      {showReaction && (
-        <RioResponseReaction 
-          questionId={question.id}
-          selectedAnswer={lastSelectedAnswer}
-          isVisible={showReaction}
-        />
-      )}
+          </motion.button>
+        );
+      })}
     </div>
   );
 }
